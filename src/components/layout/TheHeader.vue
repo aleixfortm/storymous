@@ -7,8 +7,13 @@
             </div>
             <search-bar></search-bar>
             <ul v-if="loggedIn">
-                <h5><router-link to="/singup">Sign Up</router-link></h5>
+              <li>
+                <h5><router-link to="/signup">Sign Up</router-link></h5>
+              </li>
+              <li>
                 <h5><router-link to="/login">Log In</router-link></h5>
+              </li>
+                
             </ul>
             <ul v-else>
               <img src="../../assets/img/default_blue.png" alt="astronaut">
@@ -61,7 +66,7 @@ header {
   margin: 0;
   width: 100%;
   height: 3.5rem;
-  background-color: #363444;
+  background-color: #444050;
 }
 
 header a {
@@ -110,8 +115,8 @@ header ul {
 }
 
 h5 {
-  margin: auto 0px auto 0px;
-  width: 100px;
+  margin: auto 0px auto 10px;
+  width: 60px;
 }
 
 li {

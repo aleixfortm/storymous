@@ -1,14 +1,18 @@
 <template>
   <the-header></the-header>
-  <router-view></router-view>
+  <the-block>
+    <router-view></router-view>
+  </the-block>
 </template>
 
 <script>
 import TheHeader from "./components/layout/TheHeader.vue";
+import TheBlock from "./components/layout/TheBlock.vue";
 
 export default {
   components: {
-    TheHeader
+    TheHeader,
+    TheBlock
   }
 }
 </script>
@@ -18,8 +22,6 @@ export default {
 
 #app {
   font-family: 'IBM Plex Mono', monospace;
-  margin: auto;
-  text-align: center;
 }
 
 * {
@@ -27,10 +29,12 @@ export default {
 }
 
 html {
-  font-family: "Roboto", sans-serif;
+  font-family: "IBM Plex Mono", monospace;
 }
 
 body {
   margin: 0;
+  position: relative;
 }
+
 </style>
