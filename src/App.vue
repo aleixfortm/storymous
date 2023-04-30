@@ -14,10 +14,23 @@ export default {
 </script>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&display=swap');
+
 #app {
-  width: 1000px;
+  font-family: 'IBM Plex Mono', monospace;
   margin: auto;
-  font-family: Avenir, Helvetica, Arial, sans-serif;
   text-align: center;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: "Roboto", sans-serif;
+}
+
+body {
+  margin: 0;
 }
 </style>
