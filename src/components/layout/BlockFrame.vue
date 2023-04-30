@@ -11,14 +11,13 @@
 <style scoped>
 
 .lower-body {
-    padding: 3.5rem 0;
+    padding: 3.5rem 0 0 0;
 }
 
 section {
     height: 3000px;
-    max-width: 800px;
+    max-width: 700px;
     border: 1px solid yellow;
-    padding: 3.5rem 0;
     margin: auto;
 }
 

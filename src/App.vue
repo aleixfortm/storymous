@@ -1,18 +1,18 @@
 <template>
   <the-header></the-header>
-  <the-block>
+  <block-frame>
     <router-view></router-view>
-  </the-block>
+  </block-frame>
 </template>
 
 <script>
 import TheHeader from "./components/layout/TheHeader.vue";
-import TheBlock from "./components/layout/TheBlock.vue";
+import BlockFrame from "./components/layout/BlockFrame.vue";
 
 export default {
   components: {
     TheHeader,
-    TheBlock
+    BlockFrame
   }
 }
 </script>
