@@ -15,7 +15,7 @@
 }
 
 .section {
-    height: 3000px;
+    height: fit-content;
     max-width: 700px;
     margin: auto;
 }

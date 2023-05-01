@@ -18,7 +18,10 @@
         v-for="post in posts"
         :key="post.id"
         :title="post.title"
-        :content="post.content">
+        :content="post.content"
+        :username="post.username"
+        :postComment="post.postComment"
+        :date="post.date">
     </post-container>
 
 </template>
@@ -38,8 +41,31 @@ export default {
     data() {
         return {
             posts: [
-                { id: '1', title: 'Pollancret petit', content: 'Lorem ipsum fsdfsadf dsfdsafdsf dsfdsaf dsfdasf dsfsadfdsafdsf dsfdsa fdsaf dsf sda' },
-                { id: '2', title: 'Ato mar porc ulo', content: 'sdfsdfsdfdsfds fdsf dsafd sfdsf dsfsd fds fsdf sdfds fdsa afsdf dsf sdaf dfadsfdsafdsfds fdsf asdfdas f' },
+                { 
+                    id: '1', 
+                    title: 'Pollancret petit', 
+                    content: 'Lorem ipsum fsdfsadf dsfdsafdsf dsfdsaf dsfdasf dsfsadfdsafdsf dsfdsa fdsaf dsf sda',
+                    username: "pollancre",
+                    postComment: "Long live CSGO boys!!!",
+                    date: "2 days ago",
+                },
+                { 
+                    id: '1', 
+                    title: 'Pollancret petit', 
+                    content: 'Lorem ipsum fsdfsadf dsfdsafdsf dsfdsaf dsfdasf dsfsadfdsafdsf dsfdsa fdsaf dsf sda',
+                    username: "pollancre",
+                    postComment: "Long live CSGO boys!!!",
+                    date: "2 days ago",
+                },
+                { 
+                    id: '1', 
+                    title: 'Pollancret petit', 
+                    content: 'Lorem ipsum fsdfsadf dsfdsafdsf dsfdsaf dsfdasf dsfsadfdsafdsf dsfdsa fdsaf dsf sda',
+                    username: "pollancre",
+                    postComment: "Long live CSGO boys!!!",
+                    date: "2 days ago",
+                },
+
             ],
             selectedTab: 'latest',
         }

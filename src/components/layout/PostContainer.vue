@@ -8,12 +8,12 @@
                     </a>
                 </div> 
                 <div class="story__user-info-container">
-                    <div class="story__user-comment-container"><div class="story__user-comment cur-def"> Viva españa viva el rey viva el orden y la ley </div></div>
+                    <div class="story__user-comment-container"><div class="story__user-comment cur-def"> {{ postComment }} </div></div>
                     <div class="story__username cur-pnt"> 
                         <a href="" style="color: inherit; text-decoration: none;">
-                            <span class="lower" style="color: whitesmoke;"><b>@</b></span><b class="story__user-name">username</b>
+                            <span class="lower" style="color: whitesmoke;"><b>@</b></span><b class="story__user-name">{{ username }}</b>
                         </a>
-                            <span class="story__username-date lower cur-def">4h ago</span>
+                            <span class="story__username-date lower cur-def">{{ date }}</span>
                         
                     </div>
                 </div>
@@ -22,21 +22,17 @@
                 <article class="story__article">    
                     <div class="story__upper">
                         <div class="story__title-container">
-                            <h2 class="story__title"> this is a long title to test </h2>
+                            <h2 class="story__title">{{ title }}</h2>
                         </div>
                     </div>
                     <p class="story__content">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab provident fugiat accusantium dolorum mollitia distinctio inventore perferendis, alias voluptatem reprehenderit adipisci molestias maiores dolor ratione qui aspernatur quisquam? Officia, quos!
+                        {{ content }}
                         <b class="readmore-button"><em>Read more</em></b>
 
                     </p>
                 </article>
             </a>
         </div>
-        <!--
-        <span class="title">{{ title }}</span>
-        <p class="content">{{ content }}</p>
-        -->
     </feed-container>
 
 </template>
@@ -51,7 +47,7 @@ export default {
     components: {
         FeedContainer
     },
-    props: ["title", "content"]
+    props: ["title", "content", "username", "postComment", "date"]
 }
 
 </script>
@@ -229,7 +225,7 @@ export default {
     margin: 0 0 0 20px;
     font-size: 14px;
     color: whitesmoke;
-    font-weight: bolder;
+    font-weight: normal;
 }
 
 .story__user-name {
