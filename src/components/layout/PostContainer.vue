@@ -4,11 +4,11 @@
             <div class="story__user-container">
                 <div class="story__user-img-container">
                     <a href="" style="color: inherit; text-decoration: none;">
-                        <img src="" alt="pic" class="story__user-img">
+                        <img src="../../assets/img/default_blue.png" alt="pic" class="story__user-img">
                     </a>
                 </div> 
                 <div class="story__user-info-container">
-                    <div class="story__user-comment-container"><div class="story__user-comment cur-def"> Comment </div></div>
+                    <div class="story__user-comment-container"><div class="story__user-comment cur-def"> Viva españa viva el rey viva el orden y la ley </div></div>
                     <div class="story__username cur-pnt"> 
                         <a href="" style="color: inherit; text-decoration: none;">
                             <span class="lower"><b>@</b></span><b class="story__user-name">username</b>
@@ -22,11 +22,11 @@
                 <article class="story__article">    
                     <div class="story__upper">
                         <div class="story__title-container">
-                            <h2 class="story__title"> title </h2>
+                            <h2 class="story__title"> this is a long title to test </h2>
                         </div>
                     </div>
                     <p class="story__content">
-                        preview
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ab provident fugiat accusantium dolorum mollitia distinctio inventore perferendis, alias voluptatem reprehenderit adipisci molestias maiores dolor ratione qui aspernatur quisquam? Officia, quos!
                         <b class="readmore-button"><em>Read more</em></b>
 
                     </p>
@@ -58,7 +58,7 @@ export default {
 
 <style scoped>
 .story__user-container {
-    padding: 6px 0px;
+    padding: 10px 10px;
     display: flex;
     flex-direction: row;
 }
@@ -147,6 +147,110 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
+}
+
+.story__user-comment-container {
+    max-width: fit-content;
+    word-wrap: break-word;
+}
+
+.story__user-comment {
+    margin-top: 0px;
+    font-weight: bold;
+    color: black;
+    background-color: #faf8f8;
+    padding: 5px 10px;
+    border-radius: 15px 15px 15px 0;
+    text-align: left;
+    word-wrap: break-word;
+    hyphens: auto;
+    width: auto;
+}
+
+.story__user-info-container {
+    display: flex;
+    flex-direction: column;
+    margin: 0 0 0 5px;
+    width: fit-content;
+    hyphens: auto;
+    justify-content: space-between;
+}
+
+.story__article {
+    padding: 10px 15px;
+    border: 2px dashed #313d4d;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0s;
+}
+
+.story__upper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 0px;
+    width: 100%;
+}
+
+.story__title-container {
+    background-color: bisque;
+    padding: 2px;
+    justify-content: left;
+    border-radius: 5px;
+    margin-bottom: 8px;
+    width: 100%;
+    word-wrap: break-word;
+    hyphens: auto;
+}
+
+.story__title {
+    padding: 2px 8px;
+    border-radius: 5px;
+    color: #2d3441;
+    margin: 0px 0px;
+    font-size: large;
+    word-wrap: break-word;
+    hyphens: auto;
+}
+
+.story__content {
+    text-align: left;
+    margin: 2px 0;
+}
+
+.readmore-button {
+    white-space: nowrap;
+    font-weight: bolder;
+    color: rgb(197, 190, 207);
+}
+
+.story__username-date {
+    margin: 0 0 0 0px;
+    font-size: 14px;
+}
+
+.story__user-name {
+    color: whitesmoke;
+    text-decoration: none;
+}
+
+.story__username {
+    margin: 5px 0px;
+}
+
+.story__user-img {
+    width: 55px;
+    height: auto;
+    border-radius: 100%;
+    border: 2px solid whitesmoke;
+    margin-bottom: 2px;
+}
+
+.story__user-img-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
 }
 
 .post__story {

@@ -9,9 +9,10 @@
 
 div {
     margin-top: 20px;
-    height: 100px;
+    padding: 5px 10px 10px 10px;
+    height: fit-content;
     width: 100%;
-    border: 2px dashed #435055;
+    background-color: rgb(0, 138, 172);
     border-radius: 5px;
 }
 
