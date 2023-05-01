@@ -1,12 +1,14 @@
 <template>
-    <section>
-        <ul>
-            <li>Global</li>
-            <li>Following</li>
-        </ul>
-    </section>
+
+        <div class="selector">
+            <ul>
+                <li>New</li>
+                <li>Following</li>
+            </ul>
+        </div>
+
     <feed-container></feed-container>
-    <feed-container class="selector"></feed-container>
+    <feed-container></feed-container>
     <feed-container class="posts"></feed-container>
     <feed-container></feed-container>
 </template>
@@ -27,23 +29,20 @@ export default {
 
 <style scoped>
 
-section {
-    margin: auto;
-    width: 50%;
-    height: 40px;
-    margin-top: 20px;
+.selector {
+    height: 100px;
 }
 
 ul {
-    padding: 0;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    padding: 10px 100px;
 }
 
 li {
     list-style: none;
-    margin: auto 10px;
+    width: 50%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
 }
 
 
