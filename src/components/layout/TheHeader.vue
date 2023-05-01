@@ -1,44 +1,45 @@
 <template>
-    <header>
-        <nav>
-            <div>
-                <router-link to="/"><img src="../../assets/img/tree2.jpeg" alt="treelogo"></router-link>
-                <h1><router-link to="/">Storymous</router-link></h1>
-            </div>
-            <search-bar></search-bar>
-            <ul v-if="loggedIn">
-              <li>
-                <h5><router-link to="/signup">Sign Up</router-link></h5>
-              </li>
-              <li>
-                <h5><router-link to="/login">Log In</router-link></h5>
-              </li>
-                
-            </ul>
-            <ul v-else>
-              <img src="../../assets/img/default_blue.png" alt="astronaut">
-            </ul>
-        </nav>
-    </header>
+  <header>
+      <nav>
+          <div>
+              <router-link to="/"><img src="../../assets/img/tree2.jpeg" alt="treelogo"></router-link>
+              <h1><router-link to="/">Storymous</router-link></h1>
+          </div>
+          <search-bar></search-bar>
+          <ul v-if="loggedIn">
+            <h5><button @click="showDialog">Log In</button></h5>
+          </ul>
+          <ul v-else>
+            <img src="../../assets/img/default_blue.png" alt="astronaut">
+          </ul>
+      </nav>
+  </header>
+  <signin-dialog v-if="shownDialog"></signin-dialog>
 </template>
 
 
 <script>
-import SearchBar from "../SearchBar.vue"
+import SearchBar from "../SearchBar.vue";
+import SigninDialog from "@/components/SigninDialog.vue";
 
 export default {
   data() {
     return {
       loggedIn: true,
+      dialogShown: false
     }
   },
   components: {
-    SearchBar
+    SearchBar,
+    SigninDialog
   },
   methods: {
     performSearch(query) {
       // Perform search action here, using the query parameter
       query.indexOf(3);
+    },
+    showDialog() {
+      this.dialogShown = true;
     }
   }
 }

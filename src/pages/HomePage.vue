@@ -1,5 +1,4 @@
 <template>
-
     <div class="block">
         <div class="rectangle">
             <select-button @click="setSelectedTab('latest-feed')" :mode="selectedTab === 'following-feed' ? null : 'flat'">
@@ -60,6 +59,7 @@ export default {
 
             ],
             selectedTab: 'latest-feed',
+            openDialog: true
         }
     },
     methods: {
