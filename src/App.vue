@@ -9,6 +9,7 @@
 import TheHeader from "./components/layout/TheHeader.vue";
 import BlockFrame from "./components/layout/BlockFrame.vue";
 
+
 export default {
   components: {
     TheHeader,

@@ -16,7 +16,7 @@ methods: {
     // Emit a custom event to notify the parent component of the search action
     this.$emit('search', this.searchQuery)
     }
-}
+  }
 }
 </script>
 
@@ -27,7 +27,7 @@ img {
 
 form {
 display: block;
-width: 100%;
+width: 50%;
 }
 
 input[type="text"] {
@@ -35,7 +35,6 @@ input[type="text"] {
   background-color: #f5f6f7;
   border: none;
   border-radius: 50px;
-  color: #1a1a1b;
   font-size: 14px;
   font-weight: 500;
   height: 36px;
@@ -43,6 +42,8 @@ input[type="text"] {
   padding: 8px 8px 8px 20px; /* add left padding */
   width: 100%;
 }
+
+
 
 input[type="text"]::placeholder {
   color: #ffffff;

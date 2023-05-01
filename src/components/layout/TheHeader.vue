@@ -2,7 +2,7 @@
     <header>
         <nav>
             <div>
-                <img src="../../assets/img/tree2.jpeg" alt="treelogo">
+                <router-link to="/"><img src="../../assets/img/tree2.jpeg" alt="treelogo"></router-link>
                 <h1><router-link to="/">Storymous</router-link></h1>
             </div>
             <search-bar></search-bar>
@@ -66,7 +66,7 @@ header {
   margin: 0;
   width: 100%;
   height: 3.5rem;
-  background-color: #444050;
+  background-color: #435055;
 }
 
 header a {
@@ -79,7 +79,7 @@ header a {
 a:active,
 a:hover,
 a.router-link-active {
-  border: 1px solid #ffdf2c;
+  text-decoration: underline;
 }
 
 h1 {
@@ -87,7 +87,7 @@ h1 {
 }
 
 h1 a {
-  color: rgb(150, 241, 44);
+  color: rgb(182, 42, 0);
   margin: 0 0 0 5px;
 }
 
@@ -122,4 +122,11 @@ h5 {
 li {
   margin: 0 0.5rem;
 }
+
+@media (max-width: 700px) {
+  h1 {
+    display: none;
+  }
+}
+
 </style>
