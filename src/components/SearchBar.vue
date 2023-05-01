@@ -32,7 +32,7 @@ width: 50%;
 
 input[type="text"] {
   display: block;
-  background-color: #f5f6f7;
+  background-color: #333c46;
   border: none;
   border-radius: 50px;
   font-size: 14px;
@@ -46,12 +46,13 @@ input[type="text"] {
 
 
 input[type="text"]::placeholder {
-  color: #ffffff;
+  color: #8d8d8da1;
   font-weight: 400;
 }
 
 input[type="text"]:focus {
-  background-color: #ffffff;
+  color: #e2e2e2;
+  background-color: #21272e;
   box-shadow: 0 0 0 2px #a1abbb;
 }
 </style>
