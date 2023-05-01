@@ -2,41 +2,33 @@
 
     <div class="block">
         <div class="rectangle">
-            <select-button @click="setSelectedTab('latest')" :mode="selectedTab === 'following' ? null : 'flat'">
+            <select-button @click="setSelectedTab('latest-feed')" :mode="selectedTab === 'following-feed' ? null : 'flat'">
                 <div>Latest</div>
             </select-button>
         </div>
-
         <div class="rectangle">
-            <select-button @click="setSelectedTab('following')" :mode="selectedTab === 'following' ? 'flat' : null">
+            <select-button @click="setSelectedTab('following-feed')" :mode="selectedTab === 'following-feed' ? 'flat' : null">
                 <div>Following</div>
             </select-button>
         </div>
     </div>
 
-    <post-container
-        v-for="post in posts"
-        :key="post.id"
-        :title="post.title"
-        :content="post.content"
-        :username="post.username"
-        :postComment="post.postComment"
-        :date="post.date">
-    </post-container>
+    <component :is="selectedTab" :posts="posts"></component>
 
 </template>
 
 
 <script>
-//import FeedContainer from "../components/layout/FeedContainer.vue";
-import PostContainer from "../components/layout/PostContainer.vue";
 import SelectButton from "../components/SelectButton.vue";
+import LatestFeed from "../pages/subpages/LatestFeed.vue";
+import FollowingFeed from "../pages/subpages/FollowingFeed.vue";
 
 export default {
     components: {
         //FeedContainer,
-        PostContainer,
-        SelectButton
+        SelectButton,
+        LatestFeed,
+        FollowingFeed
     },
     data() {
         return {
@@ -67,12 +59,17 @@ export default {
                 },
 
             ],
-            selectedTab: 'latest',
+            selectedTab: 'latest-feed',
         }
     },
     methods: {
         setSelectedTab(tab) {
             this.selectedTab = tab;
+        }
+    },
+    provide() {
+        return {
+            posts: this.posts
         }
     }
 }
