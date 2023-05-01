@@ -14,7 +14,7 @@
           </ul>
       </nav>
   </header>
-  <signin-dialog v-if="shownDialog"></signin-dialog>
+  <signin-dialog v-if="dialogShown"></signin-dialog>
 </template>
 
 
