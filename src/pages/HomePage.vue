@@ -6,20 +6,32 @@
                 <li>Following</li>
             </ul>
         </div>
+        <post-container
+            v-for="post in posts"
+            :key="post.id"
+            :title="post.title"
+            :content="post.content">
+        </post-container>
 
-    <feed-container></feed-container>
-    <feed-container></feed-container>
-    <feed-container class="posts"></feed-container>
-    <feed-container></feed-container>
 </template>
 
 
 <script>
-import FeedContainer from "../components/layout/FeedContainer.vue"
+//import FeedContainer from "../components/layout/FeedContainer.vue";
+import PostContainer from "../components/layout/PostContainer.vue";
 
 export default {
     components: {
-        FeedContainer
+        //FeedContainer,
+        PostContainer
+    },
+    data() {
+        return {
+            posts: [
+                { id: '1', title: 'Pollancret petit', content: 'Lorem ipsum fsdfsadf dsfdsafdsf dsfdsaf dsfdasf dsfsadfdsafdsf dsfdsa fdsaf dsf sda' },
+                { id: '2', title: 'Ato mar porc ulo', content: 'sdfsdfsdfdsfds fdsf dsafd sfdsf dsfsd fds fsdf sdfds fdsa afsdf dsf sdaf dfadsfdsafdsfds fdsf asdfdas f' },
+            ],
+        }
     }
 }
 
