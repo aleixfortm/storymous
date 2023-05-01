@@ -71,7 +71,7 @@ header {
 
 header a {
   text-decoration: none;
-  color: #ffdf2c;
+  color: rgb(100, 207, 0);
   display: inline-block;
   border: 1px solid transparent;
 }
@@ -87,7 +87,7 @@ h1 {
 }
 
 h1 a {
-  color: rgb(182, 42, 0);
+  color: rgb(100, 207, 0);
   margin: 0 0 0 5px;
 }
 
