@@ -2,13 +2,13 @@
 
     <div class="block">
         <div class="rectangle">
-            <select-button>
+            <select-button @click="setSelectedTab('latest')" :mode="selectedTab === 'following' ? null : 'flat'">
                 <div>Latest</div>
             </select-button>
         </div>
 
         <div class="rectangle">
-            <select-button>
+            <select-button @click="setSelectedTab('following')" :mode="selectedTab === 'following' ? 'flat' : null">
                 <div>Following</div>
             </select-button>
         </div>
@@ -41,6 +41,12 @@ export default {
                 { id: '1', title: 'Pollancret petit', content: 'Lorem ipsum fsdfsadf dsfdsafdsf dsfdsaf dsfdasf dsfsadfdsafdsf dsfdsa fdsaf dsf sda' },
                 { id: '2', title: 'Ato mar porc ulo', content: 'sdfsdfsdfdsfds fdsf dsafd sfdsf dsfsd fds fsdf sdfds fdsa afsdf dsf sdaf dfadsfdsafdsfds fdsf asdfdas f' },
             ],
+            selectedTab: 'latest',
+        }
+    },
+    methods: {
+        setSelectedTab(tab) {
+            this.selectedTab = tab;
         }
     }
 }

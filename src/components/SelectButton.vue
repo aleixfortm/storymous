@@ -34,13 +34,12 @@ button:active {
 }
 
 .flat {
-  background-color: transparent;
-  color: #3a0061;
-  border: none;
+    border-bottom: 2px solid #407be9;
 }
 
 .flat:hover,
 .flat:active {
-  background-color: #edd2ff;
+    background-color: #7b89a11e;
+    color: #407be9;
 }
 </style>
