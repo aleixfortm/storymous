@@ -11,9 +11,9 @@
                     <div class="story__user-comment-container"><div class="story__user-comment cur-def"> Viva españa viva el rey viva el orden y la ley </div></div>
                     <div class="story__username cur-pnt"> 
                         <a href="" style="color: inherit; text-decoration: none;">
-                            <span class="lower"><b>@</b></span><b class="story__user-name">username</b>
+                            <span class="lower" style="color: whitesmoke;"><b>@</b></span><b class="story__user-name">username</b>
                         </a>
-                            <span class="story__username-date lower cur-def">date</span>
+                            <span class="story__username-date lower cur-def">4h ago</span>
                         
                     </div>
                 </div>
@@ -226,8 +226,10 @@ export default {
 }
 
 .story__username-date {
-    margin: 0 0 0 0px;
+    margin: 0 0 0 20px;
     font-size: 14px;
+    color: whitesmoke;
+    font-weight: bolder;
 }
 
 .story__user-name {

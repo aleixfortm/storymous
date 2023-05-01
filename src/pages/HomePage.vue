@@ -1,17 +1,25 @@
 <template>
 
-        <div class="selector">
-            <ul>
-                <li>New</li>
-                <li>Following</li>
-            </ul>
+    <div class="block">
+        <div class="rectangle">
+            <select-button>
+                <div>Latest</div>
+            </select-button>
         </div>
-        <post-container
-            v-for="post in posts"
-            :key="post.id"
-            :title="post.title"
-            :content="post.content">
-        </post-container>
+
+        <div class="rectangle">
+            <select-button>
+                <div>Following</div>
+            </select-button>
+        </div>
+    </div>
+
+    <post-container
+        v-for="post in posts"
+        :key="post.id"
+        :title="post.title"
+        :content="post.content">
+    </post-container>
 
 </template>
 
@@ -19,11 +27,13 @@
 <script>
 //import FeedContainer from "../components/layout/FeedContainer.vue";
 import PostContainer from "../components/layout/PostContainer.vue";
+import SelectButton from "../components/SelectButton.vue";
 
 export default {
     components: {
         //FeedContainer,
-        PostContainer
+        PostContainer,
+        SelectButton
     },
     data() {
         return {
@@ -45,17 +55,25 @@ export default {
     height: 100px;
 }
 
-ul {
-    padding: 10px 100px;
+.block {
+  margin: 20px 0 0 0;
+  width: 100%;
+  height: 50px;
+  display: flex;
 }
 
-li {
-    list-style: none;
-    width: 50%;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
+.rectangle {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
 }
 
+.rectangle p {
+  font-size: 24px;
+  color: white;
+}
 
 </style>
