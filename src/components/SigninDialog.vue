@@ -108,6 +108,8 @@ button:hover {
 
 .dialog-div {
   text-align: start;
+  padding: 0 0 0 4px;
+  font-size: 24px;
 }
 
 dialog {

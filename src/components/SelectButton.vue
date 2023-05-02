@@ -1,6 +1,6 @@
 <template>
     <button :type="type" :class="mode">
-      <slot></slot>
+        <slot></slot>
     </button>
 </template>
 
@@ -13,6 +13,15 @@ export default {
 
 
 <style scoped>
+div {
+  width: 60%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 0 0 0;
+  margin: 0 auto;
+}
+
 button {
   width: 100%;
   height: 100%;
@@ -26,20 +35,20 @@ button {
 
 button:hover {
     background-color: #7b89a11e;
-    color: #407be9;
+    color: rgb(4, 255, 150);
 }
 
 button:active {
-    border-bottom: 2px solid #407be9;
+    border-bottom: 2px solid rgb(4, 255, 150);
 }
 
 .flat {
-    border-bottom: 2px solid #407be9;
+    border-bottom: 2px solid rgb(4, 255, 150);
 }
 
 .flat:hover,
 .flat:active {
     background-color: #7b89a11e;
-    color: #407be9;
+    color: rgb(4, 255, 150);
 }
 </style>

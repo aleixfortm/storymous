@@ -53,8 +53,9 @@ export default {
 
 <style scoped>
 img {
-  width: 45px;
+  width: 50px;
   border-radius: 100px;
+  padding: 2px 0 0 0;
 }
 
 div {
@@ -78,7 +79,7 @@ header {
 
 header a {
   text-decoration: none;
-  color: rgb(100, 207, 0);
+  color: rgb(4, 255, 171);
   display: inline-block;
   border: 1px solid transparent;
 }
@@ -86,7 +87,7 @@ header a {
 a:active,
 a:hover,
 a.router-link-active {
-  color: rgb(109, 226, 0);
+  color: rgb(4, 255, 171);
 }
 
 h1 {
@@ -94,7 +95,7 @@ h1 {
 }
 
 h1 a {
-  color: rgb(0, 255, 85);
+  color: rgb(4, 255, 150);
   margin: 0 0 0 5px;
 }
 
