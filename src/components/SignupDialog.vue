@@ -4,16 +4,40 @@
     <div class="dialog-div"> <b>Sign up</b> </div>
     <form @submit.prevent="submitDataFunc()">
         <div class="form-control">
-            <input id="username" name="username" type="text" ref="usernameInput" placeholder="Choose a username">
+            <input 
+            v-model="usernameValue" 
+            @focus="usernameFocused = true" 
+            @blur="usernameFocused = false" 
+            id="username" 
+            name="username" 
+            type="text" 
+            ref="usernameInput" 
+            placeholder="Choose a username">
+            <span v-if="usernameFocused" class="requirements">Contains between 3-20 characters<br></span> 
+            <span v-if="usernameFocused" class="requirements">No special characters</span>
         </div>
         <div class="form-control">
-            <input id="email" name="email" type="text" ref="emailInput" placeholder="Your e-mail">
+            <input 
+            v-model="emailValue" 
+            @focus="emailFocused = true" 
+            @blur="emailFocused = false"
+            id="email" name="email" type="text" ref="emailInput" placeholder="Your e-mail">
         </div>
         <div class="form-control">
-            <input id="password" name="password" type="text" ref="passwordInput" placeholder="Choose a password">
+            <input 
+            v-model="passOneValue" 
+            @focus="passOneFocused = true" 
+            @blur="passOneFocused = false" 
+            id="password" name="password" type="password" ref="passwordInput" placeholder="Choose a password">
+            <span v-if="passOneFocused" class="requirements">Contains min. 3 characters<br></span> 
         </div>
         <div class="form-control">
-          <input id="repeatPassword" name="repeatPassword" type="text" ref="repeatPasswordInput" placeholder="Repeat password">
+          <input 
+          v-model="passTwoValue" 
+          @focus="passTwoFocused = true" 
+          @blur="passTwoFocused  = false" 
+          id="repeatPassword" name="repeatPassword" type="password" ref="repeatPasswordInput" placeholder="Repeat password">
+          <span v-if="passTwoFocused" class="requirements">Passwords match<br></span> 
         </div>
         <div>
             <button type="submit">Sign Up</button>
@@ -28,12 +52,39 @@ import SelectButton from "./SelectButton.vue";
 
 export default {
   emits: ["close"],
-  components: SelectButton
+  components: SelectButton,
+  data() {
+    return {
+      usernameValue: '',
+      usernameFocused: false,
+      emailValue: '',
+      emailFocused: false,
+      passOneValue: '',
+      passOneFocused: false,
+      passTwoValue: '',
+      passTwoFocused: false,
+    }
+  }
 }
 
 </script>
 
 <style scoped>
+.hidden {
+  display: none;
+  height: 0;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.requirements {
+  font-size: 12px;
+  color: rgb(102, 102, 102);
+  padding: 0 0 0 6px;
+  margin: 0 0 0 5px;
+}
+
 label {
     font-weight: bold;
     display: block;
@@ -42,21 +93,22 @@ label {
 
 input {
     display: block;
-    background-color: whitesmoke;
+    background-color: rgb(243, 243, 243);
     width: 100%;
     font: inherit;
-    padding: 1rem;
-    border: 2px solid whitesmoke;
+    padding: 0.7rem 1rem;
+    border: 2px solid rgb(243, 243, 243);
+    border-radius: 8px;
 }
 
 input:focus {
     outline: none;
-    background-color: whitesmoke;
+    background-color: rgb(243, 243, 243);
     color: rgb(53, 53, 53);
 }
 
 input:active {
-    background-color: whitesmoke;
+    background-color: rgb(243, 243, 243);
     color: rgb(53, 53, 53);
 }
 
@@ -80,6 +132,7 @@ button {
   border: 0;
   background-color: rgb(155, 215, 255);
   font-weight: bolder;
+  cursor: pointer;
 }
 
 button:hover {
@@ -117,6 +170,8 @@ button:hover {
 
 .dialog-div {
   text-align: start;
+  padding: 0 0 0 4px;
+  font-size: 24px;
 }
 
 dialog {

@@ -7,7 +7,7 @@
             <input id="title" name="title" type="text" ref="titleInput" placeholder="Username or e-mail">
         </div>
         <div class="form-control">
-          <input id="password" name="password" type="text" ref="passwordInput" placeholder="Password">
+          <input id="password" name="password" type="password" ref="passwordInput" placeholder="Password">
         </div>
         <div>
             <button type="submit">Log In</button>
@@ -36,14 +36,17 @@ label {
 
 input {
     display: block;
-    background-color: whitesmoke;
+    background-color: rgb(243, 243, 243);
     width: 100%;
     font: inherit;
-    padding: 1rem;
+    padding: 0.7rem 1rem;
+    border: 2px solid rgb(243, 243, 243);
+    border-radius: 8px;
 }
 
 input:focus {
-    background-color: whitesmoke;
+    outline: none;
+    border: 2px solid rgb(243, 243, 243);
     color: rgb(53, 53, 53);
 }
 
@@ -53,6 +56,7 @@ input::placeholder {
 }
 
 form {
+  outline: 0;
   width: fit-content;
 }
 
@@ -64,12 +68,13 @@ button {
   padding: 10px 0;
   border-radius: 10px;
   border: 0;
-  background-color: rgb(155, 215, 255);
+  background-color: rgb(4, 255, 171);
   font-weight: bolder;
+  cursor: pointer;
 }
 
 button:hover {
-  background-color: rgb(103, 194, 255);
+  background-color: rgb(0, 233, 155);
 }
 
 .link {

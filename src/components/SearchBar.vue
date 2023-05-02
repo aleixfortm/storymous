@@ -20,7 +20,7 @@ methods: {
 }
 </script>
 
-<style>
+<style scoped>
 img {
     width: 20px;
 }
@@ -34,7 +34,7 @@ input[type="text"] {
   display: block;
   background-color: #333c46;
   border: none;
-  border-radius: 50px;
+  border-radius: 5px;
   font-size: 14px;
   font-weight: 500;
   height: 36px;
