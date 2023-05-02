@@ -41,7 +41,7 @@ export default {
                     date: "2 days ago",
                 },
                 { 
-                    id: '1', 
+                    id: '2', 
                     title: 'Pollancret petit', 
                     content: 'Lorem ipsum fsdfsadf dsfdsafdsf dsfdsaf dsfdasf dsfsadfdsafdsf dsfdsa fdsaf dsf sda',
                     username: "pollancre",
@@ -49,7 +49,7 @@ export default {
                     date: "2 days ago",
                 },
                 { 
-                    id: '1', 
+                    id: '3', 
                     title: 'Pollancret petit', 
                     content: 'Lorem ipsum fsdfsadf dsfdsafdsf dsfdsaf dsfdasf dsfsadfdsafdsf dsfdsa fdsaf dsf sda',
                     username: "pollancre",

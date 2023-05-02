@@ -1,8 +1,0 @@
-<template>
-    
-</template>
-
-
-<style>
-
-</style>

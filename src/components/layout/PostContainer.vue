@@ -41,9 +41,6 @@
 import FeedContainer from "./FeedContainer.vue";
 
 export default {
-    data() {
-
-    },
     components: {
         FeedContainer
     },

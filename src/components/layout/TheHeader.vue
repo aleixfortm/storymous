@@ -8,7 +8,9 @@
           </div>
           <search-bar></search-bar>
           <ul v-if="loggedIn">
-            <button @click="toggleDialog"><h5>Log In</h5></button>
+            <li>
+              <button class="loginButton" @click="toggleDialog">Log In</button>
+            </li>       
           </ul>
           <ul v-else>
             <img src="../../assets/img/default_blue.png" alt="astronaut">
@@ -81,7 +83,7 @@ header a {
 a:active,
 a:hover,
 a.router-link-active {
-  text-decoration: underline;
+  color: rgb(109, 226, 0);
 }
 
 h1 {
@@ -89,7 +91,7 @@ h1 {
 }
 
 h1 a {
-  color: rgb(100, 207, 0);
+  color: rgb(0, 255, 85);
   margin: 0 0 0 5px;
 }
 
@@ -114,15 +116,35 @@ header ul {
   display: flex;
   justify-content: center;
   align-items: center;
+  width: fit-content;
+  height: fit-content;
 }
 
-h5 {
-  margin: auto 40px auto 10px;
-  width: 70px;
+li {
+  width: fit-content;
+  height: fit-content;
+}
+
+.loginButton {
+  padding: 0;
+  width: fit-content;
+  height: fit-content;
+  font-family: inherit;
+  background-color: #5130ad00;
+  border: 0px solid #e5e3ff;
+  color: white;
+  cursor: pointer;
   font-size: 15px;
 }
 
-button {
+.loginButton:hover {
+    background-color: #7b89a11e;
+    color: rgb(0, 255, 85);
+    border-radius: 10px;
+}
+
+
+.loginButton {
   width: 80px;
   margin: 0 20px 0 20px;
 }
