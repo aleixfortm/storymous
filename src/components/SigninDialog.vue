@@ -40,14 +40,11 @@ input {
     width: 100%;
     font: inherit;
     padding: 1rem;
-    border: 0px solid #ffffff;
 }
 
 input:focus {
-    border: 0px solid rgb(0, 102, 255);
     background-color: whitesmoke;
     color: rgb(53, 53, 53);
-    outline: none;
 }
 
 input::placeholder {

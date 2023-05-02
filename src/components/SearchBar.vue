@@ -51,6 +51,7 @@ input[type="text"]::placeholder {
 }
 
 input[type="text"]:focus {
+  outline: none;
   color: #e2e2e2;
   background-color: #21272e;
   box-shadow: 0 0 0 2px #a1abbb;

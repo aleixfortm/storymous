@@ -46,14 +46,18 @@ input {
     width: 100%;
     font: inherit;
     padding: 1rem;
-    border: 0px solid #ffffff;
+    border: 2px solid whitesmoke;
 }
 
 input:focus {
-    border: 0px solid rgb(0, 102, 255);
+    outline: none;
     background-color: whitesmoke;
     color: rgb(53, 53, 53);
-    outline: none;
+}
+
+input:active {
+    background-color: whitesmoke;
+    color: rgb(53, 53, 53);
 }
 
 input::placeholder {
@@ -62,6 +66,7 @@ input::placeholder {
 }
 
 form {
+  outline: 0;
   width: fit-content;
 }
 

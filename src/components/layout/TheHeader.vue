@@ -10,7 +10,7 @@
           <search-bar></search-bar>
           <ul v-if="loggedIn">
             <li>
-              <button class="loginButton" @click="toggleDialog">Log In</button>
+              <button class="loginButton" @click="toggleDialog(); changeDialog('signin')">Log In</button>
             </li>       
           </ul>
           <ul v-else>
