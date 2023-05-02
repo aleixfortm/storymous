@@ -51,7 +51,7 @@ export default {
 
 <style scoped>
 .story__user-container {
-    padding: 10px 10px;
+    padding: 10px 10px 2px 2px;
     display: flex;
     flex-direction: row;
 }
@@ -171,10 +171,12 @@ export default {
 
 .story__article {
     padding: 10px 15px;
-    border: 2px dashed #313d4d;
+    border: 2px solid rgb(182, 182, 182);
     border-radius: 5px;
     cursor: pointer;
     transition: all 0s;
+    background-color: rgb(69, 75, 78);
+    color: white;
 }
 
 .story__upper {
