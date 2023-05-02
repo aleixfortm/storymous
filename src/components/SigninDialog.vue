@@ -1,11 +1,16 @@
 <template>
-  <div></div>
+  <div @click="$emit('close')"></div>
   <dialog open>
     <p>POLLANCRE LOL</p>
   </dialog>
 </template>
 
+<script>
+export default {
+  emits: ["close"]
+}
 
+</script>
 
 <style scoped>
   div {
@@ -20,16 +25,14 @@
 
 dialog {
   position: fixed;
+  display: flex;
   top: 20vh;
-  left: 10%;
-  width: 80%;
+  margin: auto;
   z-index: 100;
   border-radius: 12px;
   border: none;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
   padding: 0;
-  margin: 0;
-  overflow: hidden;
 }
 
 </style>

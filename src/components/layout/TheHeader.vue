@@ -1,4 +1,5 @@
 <template>
+  <signin-dialog v-if="dialogShown" @close="toggleDialog"></signin-dialog>
   <header>
       <nav>
           <div>
@@ -7,14 +8,14 @@
           </div>
           <search-bar></search-bar>
           <ul v-if="loggedIn">
-            <h5><button @click="showDialog">Log In</button></h5>
+            <button @click="toggleDialog"><h5>Log In</h5></button>
           </ul>
           <ul v-else>
             <img src="../../assets/img/default_blue.png" alt="astronaut">
           </ul>
       </nav>
   </header>
-  <signin-dialog v-if="dialogShown"></signin-dialog>
+
 </template>
 
 
@@ -38,11 +39,11 @@ export default {
       // Perform search action here, using the query parameter
       query.indexOf(3);
     },
-    showDialog() {
-      this.dialogShown = true;
+    toggleDialog() {
+      this.dialogShown = !this.dialogShown;
     }
   }
-}
+};
 </script>
 
 <style scoped>
@@ -116,12 +117,14 @@ header ul {
 }
 
 h5 {
-  margin: auto 0px auto 10px;
-  width: 60px;
+  margin: auto 40px auto 10px;
+  width: 70px;
+  font-size: 15px;
 }
 
-li {
-  margin: 0 0.5rem;
+button {
+  width: 80px;
+  margin: 0 20px 0 20px;
 }
 
 @media (max-width: 700px) {
