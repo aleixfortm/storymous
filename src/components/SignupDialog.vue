@@ -1,18 +1,24 @@
 <template>
   <div class="bg" @click="$emit('close')"></div>
   <dialog open>
-    <div class="dialog-div"> <b>Log In</b> </div>
+    <div class="dialog-div"> <b>Sign up</b> </div>
     <form @submit.prevent="submitDataFunc()">
         <div class="form-control">
-            <input id="title" name="title" type="text" ref="titleInput" placeholder="Username or e-mail">
+            <input id="username" name="username" type="text" ref="usernameInput" placeholder="Choose a username">
         </div>
         <div class="form-control">
-          <input id="password" name="password" type="text" ref="passwordInput" placeholder="Password">
+            <input id="email" name="email" type="text" ref="emailInput" placeholder="Your e-mail">
+        </div>
+        <div class="form-control">
+            <input id="password" name="password" type="text" ref="passwordInput" placeholder="Choose a password">
+        </div>
+        <div class="form-control">
+          <input id="repeatPassword" name="repeatPassword" type="text" ref="repeatPasswordInput" placeholder="Repeat password">
         </div>
         <div>
-            <button type="submit">Log In</button>
+            <button type="submit">Sign Up</button>
         </div>
-        <div class="signup-message">New to storymous? <a href="" @click.prevent="$emit('signup')" class="link">Sign Up</a></div>
+        <div class="signup-message">Have an account already? <a href="" class="link" @click.prevent="$emit('signin')">Log In</a></div>
       </form>
   </dialog>
 </template>

@@ -85,7 +85,7 @@ export default {
 #comment_content:focus {
     background-color: #4b5461;
     color: whitesmoke;
-    border: 2px solid #313d4d;
+    border: 2px solid #4d3131;
     box-shadow: 0 0 10px 0 #37414e;
 }
 
@@ -249,7 +249,7 @@ export default {
 }
 
 .post__story {
-    border: 2px solid #29313b;
+
     box-shadow: 0 0 10px 0 #3c4755;
     margin-bottom: 10px;
 }

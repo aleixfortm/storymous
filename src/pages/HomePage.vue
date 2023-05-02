@@ -56,6 +56,14 @@ export default {
                     postComment: "Long live CSGO boys!!!",
                     date: "2 days ago",
                 },
+                { 
+                    id: '4', 
+                    title: 'Pollancret petit', 
+                    content: 'Lorem ipsum fsdfsadf dsfdsafdsf dsfdsaf dsfdasf dsfsadfdsafdsf dsfdsa fdsaf dsf sda',
+                    username: "pollancre",
+                    postComment: "Long live CSGO boys!!!",
+                    date: "2 days ago",
+                },
 
             ],
             selectedTab: 'latest-feed',

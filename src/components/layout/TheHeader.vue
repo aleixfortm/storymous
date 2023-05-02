@@ -1,5 +1,6 @@
 <template>
-  <signin-dialog v-if="dialogShown" @close="toggleDialog"></signin-dialog>
+  <signin-dialog v-if="dialogShown === true && dialog === 'signin'" @close="toggleDialog" @signup="changeDialog('signup')" :key="'signin'"></signin-dialog>
+  <signup-dialog v-else-if="dialogShown === true && dialog === 'signup'" @close="toggleDialog" @signin="changeDialog('signin')" :key="'signup'"></signup-dialog>
   <header>
       <nav>
           <div>
@@ -24,25 +25,27 @@
 <script>
 import SearchBar from "../SearchBar.vue";
 import SigninDialog from "@/components/SigninDialog.vue";
+import SignupDialog from "@/components/SignupDialog.vue";
 
 export default {
   data() {
     return {
       loggedIn: true,
-      dialogShown: false
+      dialogShown: false,
+      dialog: 'signin'
     }
   },
   components: {
     SearchBar,
-    SigninDialog
+    SigninDialog,
+    SignupDialog
   },
   methods: {
-    performSearch(query) {
-      // Perform search action here, using the query parameter
-      query.indexOf(3);
-    },
     toggleDialog() {
       this.dialogShown = !this.dialogShown;
+    },
+    changeDialog(dialog) {
+      this.dialog = dialog;
     }
   }
 };
