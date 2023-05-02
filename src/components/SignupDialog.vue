@@ -5,7 +5,8 @@
     <form @submit.prevent="submitDataFunc()">
         <div class="form-control">
             <input 
-            v-model="usernameValue" 
+            v-model="usernameValue"
+            :class="usernameClass" 
             @focus="usernameFocused = true" 
             @blur="usernameFocused = false" 
             id="username" 
@@ -13,19 +14,22 @@
             type="text" 
             ref="usernameInput" 
             placeholder="Choose a username">
-            <span v-if="usernameFocused" class="requirements">Contains between 3-20 characters<br></span> 
-            <span v-if="usernameFocused" class="requirements">No special characters</span>
+            <span v-if="usernameFocused" class="requirements" :class="requirementsCharcount">Contains between 3-20 characters<br></span> 
+            <span v-if="usernameFocused" class="requirements" :class="requirementsSpecial">No special characters</span>
         </div>
         <div class="form-control">
             <input 
             v-model="emailValue" 
+            :class="emailClass" 
             @focus="emailFocused = true" 
             @blur="emailFocused = false"
             id="email" name="email" type="text" ref="emailInput" placeholder="Your e-mail">
+            <span v-if="emailFocused" class="requirements">Valid e-mail format</span>
         </div>
         <div class="form-control">
             <input 
             v-model="passOneValue" 
+            :class="passOneClass" 
             @focus="passOneFocused = true" 
             @blur="passOneFocused = false" 
             id="password" name="password" type="password" ref="passwordInput" placeholder="Choose a password">
@@ -34,6 +38,7 @@
         <div class="form-control">
           <input 
           v-model="passTwoValue" 
+          :class="passTwoClass"
           @focus="passTwoFocused = true" 
           @blur="passTwoFocused  = false" 
           id="repeatPassword" name="repeatPassword" type="password" ref="repeatPasswordInput" placeholder="Repeat password">
@@ -64,12 +69,51 @@ export default {
       passTwoValue: '',
       passTwoFocused: false,
     }
+  },
+  computed: {
+    usernameClass() {
+      var usernameLength = this.usernameValue.length;
+      if (usernameLength === 0) {
+        return "neutral-input";
+      } else if (usernameLength >= 3 && usernameLength <= 20) {
+        return "valid-input";
+      } else {
+        return "invalid-input";
+      }
+    },
+    requirementsCharcount() {
+      if (this.usernameValue.length >= 3 && this.usernameValue.length <= 20) {
+        return "valid-requirement";
+      } else {
+        return "invalid-requirement";
+      }
+    }
   }
 }
 
 </script>
 
 <style scoped>
+.valid-input {
+  border: 2px solid rgb(0, 214, 82);
+}
+
+.invalid-input {
+  border: 2px solid red;
+}
+
+.neutral-input {
+  border: 2px solid rgb(214, 214, 214);
+}
+
+.valid-requirement {
+  color: rgb(0, 177, 68);
+}
+
+.invalid-requirement {
+  color: red;
+}
+
 .hidden {
   display: none;
   height: 0;
@@ -80,7 +124,6 @@ export default {
 
 .requirements {
   font-size: 12px;
-  color: rgb(102, 102, 102);
   padding: 0 0 0 6px;
   margin: 0 0 0 5px;
 }
