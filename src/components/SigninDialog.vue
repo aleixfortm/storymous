@@ -2,7 +2,7 @@
   <div class="bg" @click="$emit('close')"></div>
   <dialog open>
     <div class="dialog-div"> <b>Log In</b> </div>
-    <form @submit.prevent="submitDataFunc()">
+    <form @submit.prevent="submitForm">
         <div class="form-control">
             <input v-model="usernameValue" id="title" name="title" type="text" ref="titleInput" placeholder="Username or e-mail">
         </div>

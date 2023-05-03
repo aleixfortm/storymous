@@ -15,7 +15,7 @@
 import PostContainer from "../../components/layout/PostContainer.vue";
 
 export default {
-    inject: ["posts"],
+    props: ["posts"],
     components: {
         PostContainer
     }

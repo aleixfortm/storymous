@@ -8,14 +8,12 @@
               <h1><router-link to="/">Storymous</router-link></h1>
           </div>
           <search-bar></search-bar>
-          <ul v-if="loggedIn">
-            <li>
-              <button class="loginButton" @click="toggleDialog(); changeDialog('signin')">Log In</button>
-            </li>       
-          </ul>
-          <ul v-else>
+          <div class="login-div" v-if="!loggedIn">
+            <button class="loginButton" @click="toggleDialog(); changeDialog('signin')">Log In</button>
+          </div>
+          <div v-else>
             <img src="../../assets/img/default_blue.png" alt="astronaut">
-          </ul>
+          </div>
       </nav>
   </header>
 
@@ -30,7 +28,7 @@ import SignupDialog from "@/components/SignupDialog.vue";
 export default {
   data() {
     return {
-      loggedIn: true,
+      loggedIn: false,
       dialogShown: false,
       dialog: 'signin'
     }
@@ -118,12 +116,10 @@ header nav {
 header ul {
   list-style: none;
   margin: 0;
-  padding: 0;
-  display: flex;
+  padding: 5px 0;
   justify-content: center;
   align-items: center;
   width: fit-content;
-  height: fit-content;
 }
 
 li {
@@ -134,25 +130,26 @@ li {
 .loginButton {
   padding: 0;
   width: fit-content;
-  height: fit-content;
+  height: 65%;
   font-family: inherit;
-  background-color: #5130ad00;
   border: 0px solid #e5e3ff;
-  color: white;
+  color: rgb(255, 255, 255);
   cursor: pointer;
   font-size: 15px;
+  width: 80px;
+  margin: 0 20px 0 20px;
+  background-color: rgba(16, 156, 70, 0.795);
+  border-radius: 4px;
 }
 
 .loginButton:hover {
-    background-color: #7b89a11e;
-    color: rgb(0, 255, 85);
-    border-radius: 10px;
+    background-color: #ffffff1e;
+    color: rgb(0, 255, 98);
+
 }
 
-
-.loginButton {
-  width: 80px;
-  margin: 0 20px 0 20px;
+.login-div {
+  height: 100%;
 }
 
 @media (max-width: 500px) {

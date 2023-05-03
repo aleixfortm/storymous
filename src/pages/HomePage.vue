@@ -18,6 +18,8 @@
 
 
 <script>
+import axios from 'axios';
+
 import SelectButton from "../components/SelectButton.vue";
 import LatestFeed from "../pages/subpages/LatestFeed.vue";
 import FollowingFeed from "../pages/subpages/FollowingFeed.vue";
@@ -31,7 +33,8 @@ export default {
     },
     data() {
         return {
-            posts: [
+            posts: [],
+                /*
                 { 
                     id: '1', 
                     title: 'Pollancret petit', 
@@ -56,52 +59,25 @@ export default {
                     postComment: "Long live CSGO boys!!!",
                     date: "2 days ago",
                 },
-                { 
-                    id: '4', 
-                    title: 'Pollancret petit', 
-                    content: 'Lorem ipsum fsdfsadf dsfdsafdsf dsfdsaf dsfdasf dsfsadfdsafdsf dsfdsa fdsaf dsf sda',
-                    username: "pollancre",
-                    postComment: "Long live CSGO boys!!!",
-                    date: "2 days ago",
-                },
-                { 
-                    id: '5', 
-                    title: 'Pollancret petit', 
-                    content: 'Lorem ipsum fsdfsadf dsfdsafdsf dsfdsaf dsfdasf dsfsadfdsafdsf dsfdsa fdsaf dsf sda',
-                    username: "pollancre",
-                    postComment: "Long live CSGO boys!!!",
-                    date: "2 days ago",
-                },
-                { 
-                    id: '6', 
-                    title: 'Pollancret petit', 
-                    content: 'Lorem ipsum fsdfsadf dsfdsafdsf dsfdsaf dsfdasf dsfsadfdsafdsf dsfdsa fdsaf dsf sda',
-                    username: "pollancre",
-                    postComment: "Long live CSGO boys!!!",
-                    date: "2 days ago",
-                },
-                { 
-                    id: '7', 
-                    title: 'Pollancret petit', 
-                    content: 'Lorem ipsum fsdfsadf dsfdsafdsf dsfdsaf dsfdasf dsfsadfdsafdsf dsfdsa fdsaf dsf sda',
-                    username: "pollancre",
-                    postComment: "Long live CSGO boys!!!",
-                    date: "2 days ago",
-                },
-
-            ],
+                */
             selectedTab: 'latest-feed',
             openDialog: true
         }
     },
+    mounted() {
+    axios
+        .get('https://api.npoint.io/786a14060decfb7e66d9')
+        .then(response => {
+            this.posts = response.data;
+            console.log(this.posts)
+        })
+        .catch(error => {
+            console.log(error);
+        });
+    },
     methods: {
         setSelectedTab(tab) {
             this.selectedTab = tab;
-        }
-    },
-    provide() {
-        return {
-            posts: this.posts
         }
     }
 }
