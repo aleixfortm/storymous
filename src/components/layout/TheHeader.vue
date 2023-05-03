@@ -52,9 +52,6 @@ export default {
 </script>
 
 <style scoped>
-.logo {
-  height: fit-content;
-}
 
 img {
   width: 50px;
@@ -111,6 +108,7 @@ h1 a.router-link-active {
 
 header nav {
   width: 100%;
+  height: 100%;
   margin: auto;
   display: flex;
   justify-content: space-between;
@@ -157,7 +155,7 @@ li {
   margin: 0 20px 0 20px;
 }
 
-@media (max-width: 700px) {
+@media (max-width: 500px) {
   h1 {
     display: none;
   }
