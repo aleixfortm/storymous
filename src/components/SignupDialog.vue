@@ -24,7 +24,7 @@
             @focus="emailFocused = true" 
             @blur="emailFocused = false"
             id="email" name="email" type="text" ref="emailInput" placeholder="Your e-mail">
-            <span v-if="emailFocused" class="requirements">Valid e-mail format</span>
+            <span v-if="emailFocused" class="requirements" :class="requirementsValidEmail">Valid e-mail format</span>
         </div>
         <div class="form-control">
             <input 
@@ -33,7 +33,7 @@
             @focus="passOneFocused = true" 
             @blur="passOneFocused = false" 
             id="password" name="password" type="password" ref="passwordInput" placeholder="Choose a password">
-            <span v-if="passOneFocused" class="requirements">Contains min. 3 characters<br></span> 
+            <span v-if="passOneFocused" class="requirements" :class="requirementsPassOne">Contains min. 3 characters<br></span> 
         </div>
         <div class="form-control">
           <input 
@@ -42,7 +42,7 @@
           @focus="passTwoFocused = true" 
           @blur="passTwoFocused  = false" 
           id="repeatPassword" name="repeatPassword" type="password" ref="repeatPasswordInput" placeholder="Repeat password">
-          <span v-if="passTwoFocused" class="requirements">Passwords match<br></span> 
+          <span v-if="passTwoFocused" class="requirements" :class="requirementsPassTwo">Passwords match<br></span> 
         </div>
         <div>
             <button type="submit">Sign Up</button>
@@ -96,6 +96,38 @@ export default {
       } else {
         return "invalid-requirement";
       }
+    },
+    emailClass() {
+      var usernameLength = this.usernameValue.length;
+      if (usernameLength === 0) {
+        return "neutral-input";
+      } else if (usernameLength >= 3 && usernameLength <= 20) {
+        return "valid-input";
+      } else {
+        return "invalid-input";
+      }
+    },
+    requirementsValidEmail() {
+      const pattern = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,})+$/;
+      if (pattern.test(this.emailValue) === true) {
+        return "valid-requirement";
+      } else {
+        return "invalid-requirement";
+      }
+    },
+    requirementsPassOne() {
+      if (this.passOneValue.length >= 3) {
+        return "valid-requirement";
+      } else {
+        return "invalid-requirement";
+      }
+    },
+    requirementsPassTwo() {
+      if (this.passTwoValue === this.passOneValue) {
+        return "valid-requirement";
+      } else {
+        return "invalid-requirement";
+      }
     }
   }
 }
@@ -121,14 +153,6 @@ export default {
 
 .invalid-requirement {
   color: red;
-}
-
-.hidden {
-  display: none;
-  height: 0;
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
 }
 
 .requirements {
