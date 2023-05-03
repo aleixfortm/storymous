@@ -15,7 +15,7 @@
             ref="usernameInput" 
             placeholder="Choose a username">
             <span v-if="usernameFocused" class="requirements" :class="requirementsCharcount">Contains between 3-20 characters<br></span> 
-            <span v-if="usernameFocused" class="requirements" :class="requirementsSpecial">No special characters</span>
+            <span v-if="usernameFocused" class="requirements" :class="requirementsSpecial">No special characters (_ allowed)</span>
         </div>
         <div class="form-control">
             <input 
@@ -82,7 +82,16 @@ export default {
       }
     },
     requirementsCharcount() {
-      if (this.usernameValue.length >= 3 && this.usernameValue.length <= 20) {
+      var usernameLength = this.usernameValue.length;
+      if (usernameLength >= 3 && usernameLength <= 20) {
+        return "valid-requirement";
+      } else {
+        return "invalid-requirement";
+      }
+    },
+    requirementsSpecial() {
+      const pattern = /^[A-Za-z0-9_]+$/;
+      if ((pattern.test(this.usernameValue) || this.usernameValue === '') === true) {
         return "valid-requirement";
       } else {
         return "invalid-requirement";
@@ -126,6 +135,7 @@ export default {
   font-size: 12px;
   padding: 0 0 0 6px;
   margin: 0 0 0 5px;
+  font-weight: bold;
 }
 
 label {
