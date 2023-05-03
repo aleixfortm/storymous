@@ -150,6 +150,7 @@ li {
 
 .login-div {
   height: 100%;
+  margin: 0;
 }
 
 @media (max-width: 500px) {
