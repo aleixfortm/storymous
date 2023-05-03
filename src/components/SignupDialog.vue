@@ -71,6 +71,11 @@ export default {
     }
   },
   computed: {
+    /*
+    MUST CHANGE xClass such as the usernameClass here to light up the box border with the color.
+    Last thoughts: maybe add a isValid data for each input, so
+    it is not necessary to check the full requirement once again
+    */
     usernameClass() {
       var usernameLength = this.usernameValue.length;
       if (usernameLength === 0) {
