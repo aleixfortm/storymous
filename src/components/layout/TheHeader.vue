@@ -3,7 +3,7 @@
   <signup-dialog v-else-if="dialogShown === true && dialog === 'signup'" @close="toggleDialog" @signin="changeDialog('signin')" :key="'signup'"></signup-dialog>
   <header>
       <nav>
-          <div>
+          <div class="logo">
               <router-link to="/"><img src="../../assets/img/tree2.jpeg" alt="treelogo"></router-link>
               <h1><router-link to="/">Storymous</router-link></h1>
           </div>
@@ -52,6 +52,10 @@ export default {
 </script>
 
 <style scoped>
+.logo {
+  height: fit-content;
+}
+
 img {
   width: 50px;
   border-radius: 100px;

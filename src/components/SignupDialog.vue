@@ -95,15 +95,15 @@ export default {
 
 <style scoped>
 .valid-input {
-  border: 2px solid rgb(0, 214, 82);
+  border: 1px solid rgb(0, 214, 82);
 }
 
 .invalid-input {
-  border: 2px solid red;
+  border: 1px solid red;
 }
 
 .neutral-input {
-  border: 2px solid rgb(214, 214, 214);
+  border: 1px solid rgb(243, 243, 243);
 }
 
 .valid-requirement {
