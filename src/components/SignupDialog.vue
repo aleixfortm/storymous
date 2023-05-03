@@ -1,8 +1,8 @@
 <template>
   <div class="bg" @click="$emit('close')"></div>
   <dialog open>
-    <div class="dialog-div"> <b>Sign up</b> </div>
-    <form @submit.prevent="submitDataFunc()">
+    <div class="dialog-div"> <b>Sign Up</b> </div>
+    <form @submit.prevent="submitForm">
         <div class="form-control">
             <input 
             v-model="usernameValue"
@@ -42,10 +42,11 @@
           @focus="passTwoFocused = true" 
           @blur="passTwoFocused  = false" 
           id="repeatPassword" name="repeatPassword" type="password" ref="repeatPasswordInput" placeholder="Repeat password">
-          <span v-if="passTwoFocused" class="requirements" :class="requirementsPassTwo">Passwords match<br></span> 
+          <span v-if="passTwoFocused" class="requirements" :class="requirementsPassTwo">Passwords match</span>
+          <span v-else class="requirements" :class="requirementsPassTwo"></span> 
         </div>
         <div>
-            <button type="submit">Sign Up</button>
+            <button type="submit" class="button" :disabled="!validateForm()">Sign Up</button>
         </div>
         <div class="signup-message">Have an account already? <a href="" class="link" @click.prevent="$emit('signin')">Log In</a></div>
       </form>
@@ -68,14 +69,34 @@ export default {
       passOneFocused: false,
       passTwoValue: '',
       passTwoFocused: false,
+      formValid: false
+    }
+  },
+  methods: {
+    validateForm() {
+      const patternUsername = /^[A-Za-z0-9_]+$/;
+      const patternEmail = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,})+$/;
+
+      if ((this.usernameValue.length >= 3) && (this.usernameValue.length <= 20)
+        && patternUsername.test(this.usernameValue) && patternEmail.test(this.emailValue) === true
+        && (this.passOneValue.length >= 3) && (this.passTwoValue === this.passOneValue)) {
+          this.formValid = true;
+          return true;
+      } else {
+          this.formValid = false;
+          return false;
+      }
+    },
+    submitForm() {
+      this.validateForm();
+      if (this.formValid) {
+        alert("pollancre!!!!")
+      } else {
+        alert("poll")
+      }
     }
   },
   computed: {
-    /*
-    MUST CHANGE xClass such as the usernameClass here to light up the box border with the color.
-    Last thoughts: maybe add a isValid data for each input, so
-    it is not necessary to check the full requirement once again
-    */
     usernameClass() {
       var usernameLength = this.usernameValue.length;
       if (usernameLength === 0) {
@@ -103,13 +124,15 @@ export default {
       }
     },
     emailClass() {
-      var usernameLength = this.usernameValue.length;
-      if (usernameLength === 0) {
-        return "neutral-input";
-      } else if (usernameLength >= 3 && usernameLength <= 20) {
-        return "valid-input";
+      const pattern = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,})+$/;
+      if (this.emailValue.length === 0) {
+        return "neutral-input"
       } else {
-        return "invalid-input";
+        if (pattern.test(this.emailValue) === true) {
+          return "valid-input";
+        } else {
+          return "invalid-input";
+        }
       }
     },
     requirementsValidEmail() {
@@ -120,11 +143,33 @@ export default {
         return "invalid-requirement";
       }
     },
+    passOneClass() {
+      if (this.passOneValue.length === 0) {
+        return "neutral-input"
+      } else {
+        if (this.passOneValue.length >= 3) {
+          return "valid-input";
+        } else {
+          return "invalid-input";
+        }
+      }
+    },
     requirementsPassOne() {
       if (this.passOneValue.length >= 3) {
         return "valid-requirement";
       } else {
         return "invalid-requirement";
+      }
+    },
+    passTwoClass() {
+      if (this.passTwoValue.length === 0) {
+        return "neutral-input"
+      } else {
+        if (this.passTwoValue === this.passOneValue) {
+          return "valid-input";
+        } else {
+          return "invalid-input";
+        }
       }
     },
     requirementsPassTwo() {
@@ -162,9 +207,8 @@ export default {
 
 .requirements {
   font-size: 12px;
-  padding: 0 0 0 6px;
-  margin: 0 0 0 5px;
-  font-weight: bold;
+  padding: 0 0 0 2px;
+  margin: 0 0 0 0px;
 }
 
 label {
@@ -204,7 +248,7 @@ form {
   width: fit-content;
 }
 
-button {
+.button {
   width: 100%;
   margin: auto;
   justify-content: center;
@@ -212,13 +256,26 @@ button {
   padding: 10px 0;
   border-radius: 10px;
   border: 0;
-  background-color: rgb(155, 215, 255);
+  background-color: rgb(255, 174, 0);
   font-weight: bolder;
+}
+.button:hover {
+  background-color: rgb(235, 160, 0);
   cursor: pointer;
 }
 
-button:hover {
-  background-color: rgb(103, 194, 255);
+.button[disabled] {
+  width: 100%;
+  margin: auto;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 0;
+  border-radius: 10px;
+  border: 0;
+  background-color: rgb(255, 153, 0);
+  font-weight: bolder;
+  opacity: 0.6;
+  cursor: default;
 }
 
 .link {
