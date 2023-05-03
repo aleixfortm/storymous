@@ -4,13 +4,13 @@
     <div class="dialog-div"> <b>Log In</b> </div>
     <form @submit.prevent="submitDataFunc()">
         <div class="form-control">
-            <input id="title" name="title" type="text" ref="titleInput" placeholder="Username or e-mail">
+            <input v-model="usernameValue" id="title" name="title" type="text" ref="titleInput" placeholder="Username or e-mail">
         </div>
         <div class="form-control">
-          <input id="password" name="password" type="password" ref="passwordInput" placeholder="Password">
+          <input v-model="passwordValue" id="password" name="password" type="password" ref="passwordInput" placeholder="Password">
         </div>
         <div>
-            <button type="submit">Log In</button>
+            <button class="button" :disabled="!validateForm()" type="submit">Log In</button>
         </div>
         <div class="signup-message">New to storymous? <a href="" @click.prevent="$emit('signup')" class="link">Sign Up</a></div>
       </form>
@@ -22,7 +22,41 @@ import SelectButton from "./SelectButton.vue";
 
 export default {
   emits: ["close"],
-  components: SelectButton
+  components: SelectButton,
+  data() {
+    return {
+      formValid: false,
+      usernameValue: "",
+      passwordValue: ""
+    }
+  },
+  methods: {
+    validateForm() {
+      if ((this.usernameValue.length >= 3) && (this.passwordValue.length >= 3)) {
+          this.formValid = true;
+          return true;
+      } else {
+          this.formValid = false;
+          return false;
+      }
+    },
+    submitForm() {
+      this.validateForm();
+      if (this.formValid) {
+        alert("pollancre!!!!")
+      } else {
+        alert("poll")
+      }
+    }
+  },
+  computed: {
+    usernameChange() {
+      return this.usernameValue;
+    },
+    passwordChange() {
+      return this.passwordValue;
+    }
+  }
 }
 
 </script>
@@ -60,7 +94,7 @@ form {
   width: fit-content;
 }
 
-button {
+.button {
   width: 100%;
   margin: auto;
   justify-content: center;
@@ -70,12 +104,28 @@ button {
   border: 0;
   background-color: rgb(4, 255, 171);
   font-weight: bolder;
+}
+
+.button:hover {
+  background-color: rgb(0, 233, 155);
   cursor: pointer;
 }
 
-button:hover {
-  background-color: rgb(0, 233, 155);
+.button[disabled] {
+  width: 100%;
+  margin: auto;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 0;
+  border-radius: 10px;
+  border: 0;
+  background-color: rgb(4, 255, 171);
+  font-weight: bolder;
+  opacity: 0.6;
+  cursor: default;
 }
+
+
 
 .link {
   color: rgb(0, 81, 255);
