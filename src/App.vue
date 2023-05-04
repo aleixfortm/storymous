@@ -40,4 +40,12 @@ body {
 
 }
 
+.cur-def {
+  cursor: default;
+}
+
+.cur-pnt {
+  cursor: pointer;
+}
+
 </style>

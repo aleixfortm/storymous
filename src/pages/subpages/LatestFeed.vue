@@ -1,12 +1,13 @@
 <template>
     <post-container
     v-for="post in posts"
-    :key="post.id"
+    :key="post._id"
     :title="post.title"
-    :content="post.content"
+    :content="post.preview"
     :username="post.username"
-    :postComment="post.postComment"
-    :date="post.date">
+    :postComment="post.post_comment"
+    :date="post.date"
+    :extendedLength="post.extended_length">
     </post-container>
 </template>
 
@@ -18,6 +19,11 @@ export default {
     props: ["posts"],
     components: {
         PostContainer
+    },
+    methods: {
+        formatContent(text) {
+            return text.replace(/<br>/g, '\n');
+        }
     }
 }
 

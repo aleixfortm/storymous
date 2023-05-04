@@ -1,6 +1,6 @@
 <template>
     <form>
-      <input type="text" placeholder="Search users, posts ..." v-model="searchQuery" @input="search">
+      <input type="text" placeholder="Search by username, story title, comment ..." v-model="searchQuery" @input="search">
     </form>
 </template>
 
@@ -41,6 +41,7 @@ input[type="text"] {
   outline: none;
   padding: 8px 8px 8px 20px; /* add left padding */
   width: 100%;
+  font: inherit;
 }
 
 

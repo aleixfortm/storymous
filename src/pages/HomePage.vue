@@ -1,5 +1,5 @@
 <template>
-    <div class="block">
+    <div v-if="userLogged" class="block">
         <div class="rectangle">
             <select-button @click="setSelectedTab('latest-feed')" :mode="selectedTab === 'following-feed' ? null : 'flat'">
                 <div>Latest</div>
@@ -8,6 +8,13 @@
         <div class="rectangle">
             <select-button @click="setSelectedTab('following-feed')" :mode="selectedTab === 'following-feed' ? 'flat' : null">
                 <div>Following</div>
+            </select-button>
+        </div>
+    </div>
+    <div v-else class="block">
+        <div class="rectangle">
+            <select-button @click="setSelectedTab('latest-feed')" :mode="selectedTab === 'following-feed' ? null : 'flat'">
+                <div>Explore</div>
             </select-button>
         </div>
     </div>
@@ -34,40 +41,16 @@ export default {
     data() {
         return {
             posts: [],
-                /*
-                { 
-                    id: '1', 
-                    title: 'Pollancret petit', 
-                    content: 'Lorem ipsum fsdfsadf dsfdsafdsf dsfdsaf dsfdasf dsfsadfdsafdsf dsfdsa fdsaf dsf sda',
-                    username: "pollancre",
-                    postComment: "Long live CSGO boys!!!",
-                    date: "2 days ago",
-                },
-                { 
-                    id: '2', 
-                    title: 'Pollancret petit', 
-                    content: 'Lorem ipsum fsdfsadf dsfdsafdsf dsfdsaf dsfdasf dsfsadfdsafdsf dsfdsa fdsaf dsf sda',
-                    username: "pollancre",
-                    postComment: "Long live CSGO boys!!!",
-                    date: "2 days ago",
-                },
-                { 
-                    id: '3', 
-                    title: 'Pollancret petit', 
-                    content: 'Lorem ipsum fsdfsadf dsfdsafdsf dsfdsaf dsfdasf dsfsadfdsafdsf dsfdsa fdsaf dsf sda',
-                    username: "pollancre",
-                    postComment: "Long live CSGO boys!!!",
-                    date: "2 days ago",
-                },
-                */
             selectedTab: 'latest-feed',
-            openDialog: true
+            openDialog: true,
+            userLogged: false
         }
     },
     mounted() {
     axios
-        .get('https://api.npoint.io/786a14060decfb7e66d9')
+        .get('http://192.168.1.44:5000/posts')
         .then(response => {
+            console.log(response)
             this.posts = response.data;
             console.log(this.posts)
         })
@@ -81,8 +64,6 @@ export default {
         }
     }
 }
-
-
 </script>
 
 
@@ -100,7 +81,7 @@ export default {
 }
 
 .rectangle {
-  width: 50%;
+  width: 100%;
   height: 100%;
   display: flex;
   justify-content: center;

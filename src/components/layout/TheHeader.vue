@@ -133,19 +133,18 @@ li {
   height: 65%;
   font-family: inherit;
   border: 0px solid #e5e3ff;
-  color: rgb(255, 255, 255);
+  color: rgb(0, 255, 98);
   cursor: pointer;
   font-size: 15px;
   width: 80px;
   margin: 0 20px 0 20px;
-  background-color: rgba(16, 156, 70, 0.795);
+  background-color: #ffffff1e;
   border-radius: 4px;
 }
 
 .loginButton:hover {
-    background-color: #ffffff1e;
-    color: rgb(0, 255, 98);
-
+    background-color: #a5a5a51e;
+    color: rgb(0, 255, 55);
 }
 
 .login-div {

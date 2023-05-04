@@ -13,8 +13,7 @@
                         <a href="" style="color: inherit; text-decoration: none;">
                             <span class="lower" style="color: whitesmoke;"><b>@</b></span><b class="story__user-name">{{ username }}</b>
                         </a>
-                            <span class="story__username-date lower cur-def">{{ date }}</span>
-                        
+                            <span class="story__username-date lower cur-def">· {{ date }}</span>
                     </div>
                 </div>
             </div>
@@ -26,9 +25,8 @@
                         </div>
                     </div>
                     <p class="story__content">
-                        {{ content }}
-                        <b class="readmore-button"><em>Read more</em></b>
-
+                        {{ formatStory(content) }}
+                        <b v-if="extendedLength" class="readmore-button"><em>Read more</em></b>
                     </p>
                 </article>
             </a>
@@ -44,7 +42,12 @@ export default {
     components: {
         FeedContainer
     },
-    props: ["title", "content", "username", "postComment", "date"]
+    props: ["title", "content", "username", "postComment", "date", "extendedLength"],
+    methods: {
+        formatStory(story) {
+            return story.replace(/<br>/g, '\n');
+        }
+    }
 }
 
 </script>
@@ -212,6 +215,7 @@ export default {
 .story__content {
     text-align: left;
     margin: 2px 0;
+    white-space: pre-wrap;
 }
 
 .readmore-button {
@@ -221,7 +225,7 @@ export default {
 }
 
 .story__username-date {
-    margin: 0 0 0 20px;
+    margin: 0 0 0 5px;
     font-size: 14px;
     color: whitesmoke;
     font-weight: normal;
@@ -230,6 +234,11 @@ export default {
 .story__user-name {
     color: whitesmoke;
     text-decoration: none;
+    margin: 0 4px 0 0;
+}
+
+.story__user-name:hover {
+    color: rgb(212, 212, 212);
 }
 
 .story__username {

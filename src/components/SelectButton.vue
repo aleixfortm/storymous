@@ -31,16 +31,13 @@ button {
   color: white;
   cursor: pointer;
   font-size: 25px;
+  transition: 0.1s all;
 }
 
 button:hover {
     background-color: #7b89a11e;
-    color: rgb(4, 255, 150);
 }
 
-button:active {
-    border-bottom: 2px solid rgb(4, 255, 150);
-}
 
 .flat {
     border-bottom: 2px solid rgb(4, 255, 150);
@@ -49,6 +46,5 @@ button:active {
 .flat:hover,
 .flat:active {
     background-color: #7b89a11e;
-    color: rgb(4, 255, 150);
 }
 </style>
