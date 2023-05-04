@@ -4,7 +4,7 @@
             <div class="story__user-container">
                 <div class="story__user-img-container">
                     <a href="" style="color: inherit; text-decoration: none;">
-                        <img src="../../assets/img/default_blue.png" alt="pic" class="story__user-img">
+                        <img :src="imgSource" alt="pic" class="story__user-img">
                     </a>
                 </div> 
                 <div class="story__user-info-container">
@@ -42,10 +42,16 @@ export default {
     components: {
         FeedContainer
     },
-    props: ["title", "content", "username", "postComment", "date", "extendedLength"],
+    props: ["title", "content", "username", "postComment", "date", "extendedLength", "imgName"],
     methods: {
         formatStory(story) {
             return story.replace(/<br>/g, '\n');
+        },
+    },
+    computed: {
+        imgSource() {
+            console.log(this.imgName)
+            return require('../../assets/img/' + this.imgName);
         }
     }
 }
@@ -174,11 +180,10 @@ export default {
 
 .story__article {
     padding: 10px 15px;
-    border: 2px solid rgb(182, 182, 182);
     border-radius: 5px;
     cursor: pointer;
     transition: all 0s;
-    background-color: rgb(69, 75, 78);
+    background-color: rgb(52, 65, 94);
     color: white;
 }
 
@@ -221,7 +226,11 @@ export default {
 .readmore-button {
     white-space: nowrap;
     font-weight: bolder;
-    color: rgb(197, 190, 207);
+    color: whitesmoke;
+}
+
+.readmore-button:hover {
+    text-decoration: underline 2px;
 }
 
 .story__username-date {
@@ -238,7 +247,7 @@ export default {
 }
 
 .story__user-name:hover {
-    color: rgb(212, 212, 212);
+    text-decoration: underline 2px;
 }
 
 .story__username {
@@ -260,7 +269,6 @@ export default {
 }
 
 .post__story {
-
     box-shadow: 0 0 10px 0 #3c4755;
     margin-bottom: 10px;
 }
