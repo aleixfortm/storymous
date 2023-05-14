@@ -22,7 +22,15 @@ div {
     background-color: rgb(64, 167, 98);
     background-color: rgba(64, 167, 98, 0);
     border-radius: 5px;
+
+    transition: all 0.5s;
 }
+
+div:hover {
+    cursor: pointer;
+    border: 2px whitesmoke solid;
+}
+
 
 
 </style>

@@ -50,7 +50,6 @@ export default {
     },
     computed: {
         imgSource() {
-            console.log(this.imgName)
             return require('../../assets/img/' + this.imgName);
         }
     }
@@ -279,6 +278,10 @@ export default {
     border-radius: 100%;
     border: 2px solid whitesmoke;
     margin-bottom: 2px;
+}
+
+.story__user-img:hover {
+    border: 2px solid rgb(209, 209, 209);
 }
 
 .comment__user-img {
