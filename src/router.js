@@ -6,7 +6,7 @@ import UserPage from "./pages/UserPage.vue";
 import NotfoundPage from "./pages/NotfoundPage.vue";
 
 const router = createRouter({
-    history: createWebHistory(),
+    history: createWebHashHistory(),
     routes: [
         { path: "/", redirect: "/home" },
         { path: "/home", component: HomePage },
