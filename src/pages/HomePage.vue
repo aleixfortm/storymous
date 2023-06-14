@@ -48,7 +48,7 @@ export default {
     },
     mounted() {
     axios
-        .get('https://www.npoint.io/docs/786a14060decfb7e66d9')
+        .get('https://api.npoint.io/786a14060decfb7e66d9')
         .then(response => {
             console.log(response)
             this.posts = response.data;
