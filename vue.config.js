@@ -1,4 +1,4 @@
 const { defineConfig } = require('@vue/cli-service')
 module.exports = defineConfig({
-  publicPath: '/storymous-migration/'
+  publicPath: '/storymous-m/'
 })
