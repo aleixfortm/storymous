@@ -43,7 +43,7 @@ export default {
             posts: [],
             selectedTab: 'latest-feed',
             openDialog: true,
-            userLogged: false
+            userLogged: true
         }
     },
     mounted() {

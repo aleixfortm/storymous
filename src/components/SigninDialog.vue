@@ -19,6 +19,7 @@
 
 <script>
 import SelectButton from "./SelectButton.vue";
+import { mapActions } from 'vuex';
 
 export default {
   emits: ["close"],
@@ -31,6 +32,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions('auth', ['login', 'logout']), // Map the login action from the auth module
     validateForm() {
       if ((this.usernameValue.length >= 3) && (this.passwordValue.length >= 3)) {
           this.formValid = true;
@@ -43,9 +45,14 @@ export default {
     submitForm() {
       this.validateForm();
       if (this.formValid) {
-        alert("pollancre!!!!")
+        const credentials = {
+        // Obtain the entered credentials from the form
+          _username: this.usernameValue,
+          _password: this.passwordValue
+        };
+        this.login(credentials);
       } else {
-        alert("poll")
+        alert("Invalid credentials")
       }
     }
   },
