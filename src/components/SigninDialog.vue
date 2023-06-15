@@ -51,9 +51,10 @@ export default {
           _password: this.passwordValue
         };
         this.login(credentials)
+        /*
           .then(data => {
             if (data.status == "valid!"){
-              alert("Login successful!");
+              none
             } else {
               alert("Invalid credentials")
             }
@@ -61,7 +62,9 @@ export default {
       } else {
         alert("Invalid credentials")
       }
+          */
     }
+  }
   },
   computed: {
     ...mapGetters('auth', ['isLoggedIn', 'currentUser']),

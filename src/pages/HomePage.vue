@@ -2,10 +2,8 @@
     <feed-container v-if="isLoggedIn">
         <div class="create_newstory">
             <img class="postimage" src="../assets/img/default_blue.png" alt="profilepic">
-            <router-link to="/newpost" class="story_form">
-
-                    <input type="text" placeholder="Write new story" @click="navigateToNewPost">
-
+            <router-link to="/storymous-migration/newpost" class="story_form">
+                <input type="text" placeholder="Write new story" @click="navigateToNewPost">
             </router-link>
         </div>
     </feed-container>
@@ -51,9 +49,9 @@ export default {
         FollowingFeed
     },
     setup() {
-    const router = useRouter();
-    return { $router: router };
-  },
+        const router = useRouter();
+        return { $router: router };
+    },
     data() {
         return {
             posts: [],
