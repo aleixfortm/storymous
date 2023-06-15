@@ -1,5 +1,5 @@
 <template>
-    <div v-if="userLogged" class="block">
+    <div v-if="isLoggedIn" class="block">
         <div class="rectangle">
             <select-button @click="setSelectedTab('latest-feed')" :mode="selectedTab === 'following-feed' ? null : 'flat'">
                 <div>Latest</div>
@@ -25,6 +25,7 @@
 
 
 <script>
+import { mapGetters } from 'vuex';
 import axios from 'axios';
 
 import SelectButton from "../components/SelectButton.vue";
@@ -60,9 +61,14 @@ export default {
     },
     methods: {
         setSelectedTab(tab) {
+            console.log(this.currentUser)
             this.selectedTab = tab;
         }
+    },
+    computed: {
+        ...mapGetters('auth', ['isLoggedIn', 'currentUser']),
     }
+
 }
 </script>
 

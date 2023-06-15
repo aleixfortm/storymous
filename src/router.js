@@ -8,11 +8,12 @@ import UserPage from "./pages/UserPage.vue";
 const router = createRouter({
     history: createWebHistory(),
     routes: [
+        { path: "/", redirect: "/storymous-migration/home" },
         { path: "/storymous-migration", redirect: "/storymous-migration/home" },
         { path: "/storymous-migration/home", component: HomePage },
         { path: "/storymous-migration/user/:id", component: UserPage },
         { path: "/storymous-migration/post/:id", component: PostPage },
-        { path: "/storymous-migration/:notFound(.*)", component: HomePage } // regular expression for anything entered
+        { path: "/:notFound(.*)", redirect: "/" } // regular expression for anything entered
     ],
 });
 

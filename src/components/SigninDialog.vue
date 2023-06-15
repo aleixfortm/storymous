@@ -19,7 +19,7 @@
 
 <script>
 import SelectButton from "./SelectButton.vue";
-import { mapActions } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 
 export default {
   emits: ["close"],
@@ -50,13 +50,19 @@ export default {
           _username: this.usernameValue,
           _password: this.passwordValue
         };
-        this.login(credentials);
+        this.login(credentials)
+          .then(data => {
+            if (data.status == "valid!"){
+              alert("Login successful!");
+            }
+          })
       } else {
         alert("Invalid credentials")
       }
     }
   },
   computed: {
+    ...mapGetters('auth', ['isLoggedIn', 'currentUser']),
     usernameChange() {
       return this.usernameValue;
     },
