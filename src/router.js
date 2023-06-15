@@ -6,7 +6,7 @@ import UserPage from "./pages/UserPage.vue";
 //import NotfoundPage from "./pages/NotfoundPage.vue";
 
 const router = createRouter({
-    history: createWebHistory(),
+    history: createWebHistory(process.env.BASE_URL),
     routes: [
         { path: "/", redirect: "/storymous-migration/home" },
         { path: "/storymous-migration", redirect: "/storymous-migration/home" },
