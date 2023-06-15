@@ -8,7 +8,7 @@
 export default {
 data() {
     return {
-    searchQuery: ''
+      searchQuery: ''
     }
 },
 methods: {
@@ -31,20 +31,19 @@ width: 50%;
 }
 
 input[type="text"] {
-  display: block;
-  background-color: #333c46;
+  background-color: #2c343d;
   border: none;
   border-radius: 5px;
   font-size: 14px;
   font-weight: 500;
-  height: 36px;
+  height: 40px;
   outline: none;
   padding: 8px 8px 8px 20px; /* add left padding */
-  width: 100%;
+  width: 95%;
   font: inherit;
+  outline: rgb(100, 100, 100) 1px solid;
+  color: whitesmoke;
 }
-
-
 
 input[type="text"]::placeholder {
   color: #8d8d8da1;
@@ -52,7 +51,6 @@ input[type="text"]::placeholder {
 }
 
 input[type="text"]:focus {
-  outline: none;
   color: #e2e2e2;
   background-color: #21272e;
   box-shadow: 0 0 0 2px #a1abbb;

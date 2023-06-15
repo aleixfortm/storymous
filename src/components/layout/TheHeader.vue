@@ -4,7 +4,7 @@
   <header>
       <nav>
           <div class="logo">
-              <router-link to="/storymous-migration/home"><img src="../../assets/img/tree2.jpeg" alt="treelogo"></router-link>
+              <router-link class="logoimgcontainer" to="/storymous-migration/home"><img class="logoimg" src="../../assets/img/logo.png" alt="treelogo"></router-link>
               <h1><router-link to="/">Storymous</router-link></h1>
           </div>
           <search-bar></search-bar>
@@ -55,11 +55,21 @@ export default {
 </script>
 
 <style scoped>
-img {
-  width: 50px;
+.logo {
+  align-items: center;
+}
+
+.logoimgcontainer {
+  align-items: center;
+  justify-content: center;
+  margin: auto;
   height: auto;
-  border-radius: 100px;
-  padding: 2px 0 0 0;
+}
+
+.logoimg {
+  height: 45px;
+  border-radius: 10px;
+  margin: 7px 0px 0 0;
 }
 
 .userdata {
@@ -89,6 +99,7 @@ img {
 .userimg {
   height: 85%;
   width: auto;
+  border-radius: 100%;
 }
 
 div {
@@ -136,6 +147,7 @@ h1 a:hover,
 h1 a:active,
 h1 a.router-link-active {
   border-color: transparent;
+  text-decoration: underline;
 }
 
 header nav {

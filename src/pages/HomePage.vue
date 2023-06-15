@@ -2,9 +2,9 @@
     <feed-container v-if="isLoggedIn">
         <div class="create_newstory">
             <img class="postimage" src="../assets/img/default_blue.png" alt="profilepic">
-            <form>
-                <input type="text" placeholder="Write new story" @input="search">
-            </form>
+            <router-link to="/newpost" class="story_form">
+                <input type="text" placeholder="Write new story" @click="navigateToNewPost">
+            </router-link>
         </div>
     </feed-container>
     <div v-if="isLoggedIn" class="block">
@@ -34,6 +34,7 @@
 
 <script>
 import { mapGetters } from 'vuex';
+import { useRouter } from 'vue-router';
 import axios from 'axios';
 
 import SelectButton from "../components/SelectButton.vue";
@@ -47,6 +48,10 @@ export default {
         LatestFeed,
         FollowingFeed
     },
+    setup() {
+    const router = useRouter();
+    return { $router: router };
+  },
     data() {
         return {
             posts: [],
@@ -71,6 +76,9 @@ export default {
         setSelectedTab(tab) {
             console.log(this.currentUser)
             this.selectedTab = tab;
+        },
+        navigateToNewPost() {
+            this.$router.push('/newpost');
         }
     },
     computed: {
@@ -82,10 +90,14 @@ export default {
 
 
 <style scoped>
+.story_form {
+    width: 100%;
+}
+
 form {
-display: block;
-width: 100%;
-margin: 0 20px 0 0;
+    display: block;
+    width: 90%;
+    margin: 0 20px 0 0;
 }
 
 input[type="text"] {
@@ -97,12 +109,14 @@ input[type="text"] {
   height: 40px;
   outline: none;
   padding: 8px 8px 8px 20px; /* add left padding */
-  width: 100%;
+  width: 95%;
   font: inherit;
+  outline: rgb(100, 100, 100) 1px solid;
+  color: whitesmoke;
 }
 
 input[type="text"]:hover {
-    outline: white;
+    outline: rgb(168, 168, 168) 1px solid;
 }
 
 input[type="text"]::placeholder {
@@ -110,12 +124,6 @@ input[type="text"]::placeholder {
   font-weight: 400;
 }
 
-input[type="text"]:focus {
-  outline: none;
-  color: #e2e2e2;
-  background-color: #2d343b;
-  box-shadow: 0 0 0 2px #a1abbb;
-}
 
 .create_newstory {
     display: flex;
@@ -126,21 +134,8 @@ input[type="text"]:focus {
     display: flex;
     align-items: center;
     justify-content: left;
-    border: 2px rgb(216, 255, 161) solid;
-    border-radius: 20px;
-}
-
-.create_newstory:hover {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    height: 100%;
-    margin: 20px 0 0 0;
-    display: flex;
-    align-items: center;
-    justify-content: left;
-    border: 2px rgb(188, 255, 88) solid;
-    border-radius: 20px;
+    border: 2px rgb(232, 255, 199) solid;
+    border-radius: 10px;
 }
 
 .postimage {
