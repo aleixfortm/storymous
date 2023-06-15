@@ -13,7 +13,7 @@ const router = createRouter({
         { path: "/storymous-migration/home", component: HomePage },
         { path: "/storymous-migration/user/:id", component: UserPage },
         { path: "/storymous-migration/post/:id", component: PostPage },
-        { path: "/:notFound(.*)", redirect: "/" } // regular expression for anything entered
+        { path: "/:notFound(.*)", redirect: "/storymous-migration/home" } // regular expression for anything entered
     ],
 });
 

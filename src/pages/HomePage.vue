@@ -89,7 +89,7 @@ margin: 0 20px 0 0;
 }
 
 input[type="text"] {
-  background-color: #333c46;
+  background-color: #1d252e;
   border: none;
   border-radius: 5px;
   font-size: 14px;
@@ -113,7 +113,7 @@ input[type="text"]::placeholder {
 input[type="text"]:focus {
   outline: none;
   color: #e2e2e2;
-  background-color: #21272e;
+  background-color: #2d343b;
   box-shadow: 0 0 0 2px #a1abbb;
 }
 
