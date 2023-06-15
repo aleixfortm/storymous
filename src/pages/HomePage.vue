@@ -3,7 +3,9 @@
         <div class="create_newstory">
             <img class="postimage" src="../assets/img/default_blue.png" alt="profilepic">
             <router-link to="/newpost" class="story_form">
-                <input type="text" placeholder="Write new story" @click="navigateToNewPost">
+
+                    <input type="text" placeholder="Write new story" @click="navigateToNewPost">
+
             </router-link>
         </div>
     </feed-container>
@@ -78,7 +80,7 @@ export default {
             this.selectedTab = tab;
         },
         navigateToNewPost() {
-            this.$router.push('/newpost');
+            this.$router.push('/storymous-migration/newpost');
         }
     },
     computed: {

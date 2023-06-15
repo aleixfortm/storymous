@@ -1,6 +1,6 @@
 <template>
 <div>
-    <slot></slot>
+    POLLANCRE AHAHHAHAHAHAHAHAHAHAHA
 </div>
 
 </template>
@@ -16,5 +16,7 @@ export default {
 
 
 <style scoped>
-
+div {
+    font-size: xx-large;
+}
 </style>
