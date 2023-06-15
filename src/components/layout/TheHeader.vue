@@ -4,15 +4,16 @@
   <header>
       <nav>
           <div class="logo">
-              <router-link to="/"><img src="../../assets/img/tree2.jpeg" alt="treelogo"></router-link>
+              <router-link to="/storymous-migration/home"><img src="../../assets/img/tree2.jpeg" alt="treelogo"></router-link>
               <h1><router-link to="/">Storymous</router-link></h1>
           </div>
           <search-bar></search-bar>
-          <div class="login-div" v-if="!loggedIn">
+          <div v-if="isLoggedIn === false" class="login-div">
             <button class="loginButton" @click="toggleDialog(); changeDialog('signin')">Log In</button>
           </div>
-          <div v-else>
-            <img src="../../assets/img/default_blue.png" alt="astronaut">
+          <div v-else class="userdata">
+              <div class="username">@{{ currentUser }}</div>
+              <img class="userimg" src="../../assets/img/default_blue.png" alt="astronaut">
           </div>
       </nav>
   </header>
@@ -21,6 +22,8 @@
 
 
 <script>
+import { mapGetters } from 'vuex';
+
 import SearchBar from "../SearchBar.vue";
 import SigninDialog from "@/components/SigninDialog.vue";
 import SignupDialog from "@/components/SignupDialog.vue";
@@ -28,7 +31,6 @@ import SignupDialog from "@/components/SignupDialog.vue";
 export default {
   data() {
     return {
-      loggedIn: false,
       dialogShown: false,
       dialog: 'signin'
     }
@@ -45,16 +47,48 @@ export default {
     changeDialog(dialog) {
       this.dialog = dialog;
     }
+  },
+  computed: {
+      ...mapGetters('auth', ['isLoggedIn', 'currentUser']),
   }
 };
 </script>
 
 <style scoped>
-
 img {
   width: 50px;
+  height: auto;
   border-radius: 100px;
   padding: 2px 0 0 0;
+}
+
+.userdata {
+  padding: 0 5px 0 5px;
+  height: 50px;
+  font-family: inherit;
+  color: rgb(0, 255, 98);
+  cursor: pointer;
+  font-size: 15px;
+  width: fit-content;
+  margin: 0 5px 0 20px;
+  background-color: #ffffff1e;
+  border-radius: 4px;
+}
+
+.username {
+  height: 50px;
+  margin: 0 10px 0 10px;
+  color: rgb(185, 221, 255);
+  font-weight: bold;
+}
+
+.username:hover {
+  text-decoration: underline;
+}
+
+.userimg {
+  height: 85%;
+  width: auto;
 }
 
 div {

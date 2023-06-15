@@ -1,4 +1,12 @@
 <template>
+    <feed-container v-if="isLoggedIn">
+        <div class="create_newstory">
+            <img class="postimage" src="../assets/img/default_blue.png" alt="profilepic">
+            <form>
+                <input type="text" placeholder="Write new story" @input="search">
+            </form>
+        </div>
+    </feed-container>
     <div v-if="isLoggedIn" class="block">
         <div class="rectangle">
             <select-button @click="setSelectedTab('latest-feed')" :mode="selectedTab === 'following-feed' ? null : 'flat'">
@@ -74,6 +82,78 @@ export default {
 
 
 <style scoped>
+form {
+display: block;
+width: 100%;
+margin: 0 20px 0 0;
+}
+
+input[type="text"] {
+  background-color: #333c46;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: 500;
+  height: 40px;
+  outline: none;
+  padding: 8px 8px 8px 20px; /* add left padding */
+  width: 100%;
+  font: inherit;
+}
+
+input[type="text"]:hover {
+    outline: white;
+}
+
+input[type="text"]::placeholder {
+  color: #b3b3b3a1;
+  font-weight: 400;
+}
+
+input[type="text"]:focus {
+  outline: none;
+  color: #e2e2e2;
+  background-color: #21272e;
+  box-shadow: 0 0 0 2px #a1abbb;
+}
+
+.create_newstory {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+    margin: 20px 0 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    border: 2px rgb(216, 255, 161) solid;
+    border-radius: 20px;
+}
+
+.create_newstory:hover {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+    margin: 20px 0 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    border: 2px rgb(188, 255, 88) solid;
+    border-radius: 20px;
+}
+
+.postimage {
+    height: 55px;
+    border-radius: 100%;
+    margin: 10px 10px;
+    border: 2px whitesmoke solid;
+}
+
+.postimage:hover {
+    cursor: pointer;
+    border: 2px rgb(201, 201, 201) solid;
+}
 
 .selector {
     height: 100px;
