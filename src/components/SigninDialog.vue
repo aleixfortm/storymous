@@ -54,6 +54,8 @@ export default {
           .then(data => {
             if (data.status == "valid!"){
               alert("Login successful!");
+            } else {
+              alert("Invalid credentials")
             }
           })
       } else {
