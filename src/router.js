@@ -10,7 +10,6 @@ const router = createRouter({
     history: createWebHistory(),
     routes: [
         { path: "/", redirect: "/storymous-migration/" },
-        //{ path: "/storymous-migration", redirect: "/storymous-migration/home" },
         { path: "/storymous-migration/", component: HomePage },
         { path: "/storymous-migration/newpost", component: NewPost },
         { path: "/storymous-migration/user/:id", component: UserPage },
