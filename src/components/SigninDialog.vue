@@ -51,6 +51,7 @@ export default {
           _password: this.passwordValue
         };
         this.login(credentials)
+        this.$emit("close")
         /*
           .then(data => {
             if (data.status == "valid!"){

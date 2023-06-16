@@ -3,7 +3,7 @@
       <section class="section_title">
         Write new story
       </section>
-        <div>
+        <div class="pollancre">
             <form @submit.prevent="submitForm">
                 <div class="newstory_comment">
                     <div class="image_box">
@@ -78,11 +78,22 @@
   </script>
 
 <style scoped>
+.section_title {
+  padding-bottom: 2px;
+  margin: 30px 10px 20px 10px;
+  border-bottom: 2px solid rgb(180, 255, 233);
+}
+
+.pollancre {
+  padding: 1px 0 0 0;
+  background-color: rgb(119 119 119 / 19%);
+  border-radius: 10px;
+}
 section {
   margin: 35px 0 20px 10px;
   font-size: larger;
   font-weight: bold;
-  color: rgb(0, 211, 248);
+  color: rgb(0, 248, 174);
 }
 
 .image_box {

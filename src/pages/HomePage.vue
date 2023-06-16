@@ -134,8 +134,9 @@ input[type="text"]::placeholder {
     display: flex;
     align-items: center;
     justify-content: left;
-    border: 2px rgb(232, 255, 199) solid;
+    border: 0px rgb(232, 255, 199) solid;
     border-radius: 10px;
+    background-color: rgb(119 119 119 / 19%);
 }
 
 .postimage {
