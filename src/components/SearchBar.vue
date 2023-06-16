@@ -1,6 +1,6 @@
 <template>
     <form>
-      <input type="text" placeholder="Search by username, story title, comment ..." v-model="searchQuery" @input="search">
+      <input type="text" placeholder="Search" v-model="searchQuery" @input="search">
     </form>
 </template>
 
