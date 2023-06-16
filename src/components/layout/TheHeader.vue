@@ -85,6 +85,10 @@ export default {
   border-radius: 4px;
 }
 
+.userdata:hover {
+  background-color: #adadad1e;
+}
+
 .username {
   height: 50px;
   margin: 0 10px 0 10px;
