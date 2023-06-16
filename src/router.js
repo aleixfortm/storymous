@@ -4,17 +4,16 @@ import HomePage from "./pages/HomePage.vue";
 import PostPage from "./pages/PostPage.vue";
 import UserPage from "./pages/UserPage.vue";
 import NewPost from "./pages/NewPost.vue";
-//import NotfoundPage from "./pages/NotfoundPage.vue";
 
 const router = createRouter({
     history: createWebHistory(),
     routes: [
-        { path: "/", redirect: "/storymous-migration/" },
-        { path: "/storymous-migration/", component: HomePage },
-        { path: "/storymous-migration/newpost", component: NewPost },
-        { path: "/storymous-migration/user/:id", component: UserPage },
-        { path: "/storymous-migration/post/:id", component: PostPage },
-        { path: "/:notFound(.*)", redirect: "/storymous-migration/" } // regular expression for anything entered
+        { path: "/", redirect: "/home" },
+        { path: "/home", component: HomePage },
+        { path: "/newpost", component: NewPost },
+        { path: "/:id", component: UserPage },
+        { path: "/post/:id", component: PostPage },
+        { path: "/:notFound(.*)", redirect: "/" } // regular expression for anything entered
     ],
 });
 

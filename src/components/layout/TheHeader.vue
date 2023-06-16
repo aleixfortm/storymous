@@ -4,7 +4,7 @@
   <header>
       <nav>
           <div class="logo">
-              <router-link class="logoimgcontainer" to="/storymous-migration/home"><img class="logoimg" src="../../assets/img/logo.png" alt="treelogo"></router-link>
+              <router-link class="logoimgcontainer" to="/"><img class="logoimg" src="../../assets/img/logo.png" alt="treelogo"></router-link>
               <h1><router-link to="/">Storymous</router-link></h1>
           </div>
           <search-bar></search-bar>
@@ -145,6 +145,7 @@ h1 {
 h1 a {
   color: rgb(4, 255, 150);
   margin: 0 0 0 5px;
+  text-decoration: none;
 }
 
 h1 a:hover,

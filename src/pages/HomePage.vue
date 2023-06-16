@@ -2,7 +2,7 @@
     <feed-container v-if="isLoggedIn">
         <div class="create_newstory">
             <img class="postimage" src="../assets/img/default_blue.png" alt="profilepic">
-            <router-link to="/storymous-migration/newpost" class="story_form">
+            <router-link to="/newpost" class="story_form">
                 <input type="text" placeholder="Write new story" @click="navigateToNewPost">
             </router-link>
         </div>
@@ -78,7 +78,7 @@ export default {
             this.selectedTab = tab;
         },
         navigateToNewPost() {
-            this.$router.push('/storymous-migration/newpost');
+            this.$router.push('/newpost');
         }
     },
     computed: {
