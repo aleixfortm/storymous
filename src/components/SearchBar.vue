@@ -31,7 +31,7 @@ width: 50%;
 }
 
 input[type="text"] {
-  background-color: #2c343d;
+  background-color: #1d252e;
   border: none;
   border-radius: 5px;
   font-size: 14px;
@@ -45,14 +45,17 @@ input[type="text"] {
   color: whitesmoke;
 }
 
+input[type="text"]:hover {
+    outline: rgb(168, 168, 168) 1px solid;
+}
+
 input[type="text"]::placeholder {
-  color: #8d8d8da1;
+  color: #b3b3b3a1;
   font-weight: 400;
 }
 
 input[type="text"]:focus {
-  color: #e2e2e2;
-  background-color: #21272e;
-  box-shadow: 0 0 0 2px #a1abbb;
+  outline: rgb(168, 168, 168) 1px solid;
 }
+
 </style>

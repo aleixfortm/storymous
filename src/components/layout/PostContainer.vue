@@ -41,7 +41,7 @@ import FeedContainer from "./FeedContainer.vue";
 export default {
     data() {
         return {
-            outlineColors: ["red", "blue", "green", "yellow"]
+            outlineColors: ["red", "blue", "green", "yellow", "white", "purple", "pink", "orange", "salmon"]
         }
     },
     components: {
@@ -76,27 +76,52 @@ export default {
     /*border: 2px whitesmoke dashed;*/
     border-radius: 5px;
     border: 2px rgb(55, 182, 97) solid;
-    background-color: rgba(60, 134, 85, 0.164);
+    background-color: rgba(60, 134, 85, 0.103);
+}
+
+.outline.salmon {
+    border: 2px rgb(255, 109, 93) solid;
+    background-color: rgba(255, 109, 93, 0.123);
 }
 
 .outline.red {
-    border: 2px rgb(255, 95, 78) solid;
-    background-color: rgba(255, 96, 78, 0.137);
+    border: 2px rgb(255, 25, 0) solid;
+    background-color: rgba(255, 25, 0, 0.11);
 }
 
 .outline.blue {
-    border: 2px rgb(0, 138, 172) solid;
-    background-color: rgba(0, 138, 172, 0.151);
+    border: 2px rgb(0, 153, 255) solid;
+    background-color: rgba(0, 153, 255, 0.103);
 }
 
 .outline.green {
     border: 2px rgb(55, 182, 97) solid;
-    background-color: rgba(60, 134, 85, 0.158);
+    background-color: rgba(60, 134, 85, 0.103);
 }
 
 .outline.yellow {
-    border: 2px rgb(224, 146, 0) solid;
-    background-color: rgba(224, 146, 0, 0.158);
+    border: 2px rgb(255, 217, 0) solid;
+    background-color: rgba(255, 217, 0, 0.116);
+}
+
+.outline.white {
+    border: 2px rgb(255, 255, 255) solid;
+    background-color: rgba(255, 255, 255, 0.11);
+}
+
+.outline.purple {
+    border: 2px rgb(183, 0, 255) solid;
+    background-color: rgba(183, 0, 255, 0.11);
+}
+
+.outline.pink {
+    border: 2px rgb(255, 0, 179) solid;
+    background-color: rgba(255, 0, 179, 0.096);
+}
+
+.outline.orange {
+    border: 2px rgb(255, 145, 0) solid;
+    background-color: rgba(255, 145, 0, 0.116);
 }
 
 .story__article {
