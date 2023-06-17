@@ -110,7 +110,6 @@ export default {
 .miscbuttons {
     display: flex;
     flex-direction: row;
-    justify-content: ;
     margin: 20px 0 0 0;
     height: 30px;
     align-items: center;
@@ -154,8 +153,6 @@ export default {
 .settingsbutton:hover {
     background-color: #349ee436;
 }
-
-
 
 .section_title {
   padding-bottom: 2px;
@@ -202,7 +199,7 @@ export default {
 .username {
     color: whitesmoke;
     font-weight: bold;
-    font-size: larger;
+    font-size: x-large;
 }
 
 .stats {
