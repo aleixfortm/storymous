@@ -7,6 +7,19 @@
             </router-link>
         </div>
     </feed-container>
+    <feed-container v-else class="homepage-top">
+        <div class="welcome-message">
+            <div class="messagecontainer">
+                <div class="innermessagecontainer">
+                    Welcome to Storymous! <br>
+                    Amazing stories await{{ modifiedText }}
+                </div>
+            </div>
+            <div class="imagecontainer">
+                <img class="welcomeimage" src="../assets/img/astronaut_reading.jpeg" alt="astronaut reading under tree">
+            </div>
+        </div>
+    </feed-container>
     <div v-if="isLoggedIn" class="block">
         <div class="rectangle">
             <select-button @click="setSelectedTab('latest-feed')" :mode="selectedTab === 'following-feed' ? null : 'flat'">
@@ -20,6 +33,7 @@
         </div>
     </div>
     <div v-else class="block">
+
         <div class="rectangle">
             <select-button @click="setSelectedTab('latest-feed')" :mode="selectedTab === 'following-feed' ? null : 'flat'">
                 <div>Explore</div>
@@ -58,7 +72,9 @@ export default {
             posts: {},
             selectedTab: 'latest-feed',
             openDialog: true,
-            userLogged: true
+            userLogged: true,
+            text: " ",
+            showCharacter: true
         }
     },
     mounted() {
@@ -70,7 +86,12 @@ export default {
         })
         .catch(error => {
             console.log(error);
-        });
+        }),
+
+        setInterval(() => {
+            this.showCharacter = !this.showCharacter; // Toggle showCharacter value every second
+        }, 750);
+        
     },
     methods: {
         setSelectedTab(tab) {
@@ -83,6 +104,15 @@ export default {
     },
     computed: {
         ...mapGetters('auth', ['isLoggedIn', 'currentUser']),
+
+        modifiedText() {
+            if (this.showCharacter) {
+                return ""; // Replace character with underscore when showCharacter is false
+            } else {
+                return ""
+            }
+
+        }
     }
 
 }
@@ -90,6 +120,117 @@ export default {
 
 
 <style scoped>
+.homepage-top {
+    background-color: rgba(90, 90, 90, 0.301);
+    padding: 20px 10px;
+    border-radius: 10px;
+}
+
+.homepage-top:hover {
+    background-color: rgba(90, 90, 90, 0.13);
+}
+
+.messagecontainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: left;
+}
+
+.innermessagecontainer {
+    width: auto; /*360px*/
+    margin: 0 20px 100px 0;
+    background-color: white;
+    padding: 10px 20px 10px 20px;
+    border-radius: 20px 20px 0 20px;
+    font-size: x-large;
+    font-weight: bold;
+    cursor: default;
+    animation: floatAnimation 4s ease-in infinite;
+}
+
+.welcome-message {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    margin: 0 10px 0 0;
+}
+
+.welcomeimage {
+    height: auto;
+    width: 100%;
+    border-radius: 300px;
+    max-width: 300px;
+    align-self: flex-end;
+}
+
+.imagecontainer {
+    width: fit-content;
+    display: flex
+}
+
+@media (max-width: 690px) {
+  .responsive-text {
+    font-size: 16px; /* Adjusted font size for smaller screens */
+  }
+
+  .innermessagecontainer {
+    margin: 0 10px 100px 10px;
+    width: auto; /*360px*/
+    background-color: white;
+    padding: 10px 20px 10px 20px;
+    border-radius: 20px 20px 0 20px;
+    font-size: large;
+    font-weight: bold;
+    cursor: default;
+
+}
+
+.welcome-message {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+}
+
+
+
+@media (max-width: 480px) {
+  .responsive-text {
+    font-size: 14px; /* Further adjusted font size for even smaller screens */
+  }
+
+  .innermessagecontainer {
+    margin: 0 10px 100px 10px;
+    width: auto; /*360px*/
+    background-color: white;
+    padding: 10px 20px 10px 20px;
+    border-radius: 20px 20px 0 20px;
+    font-size: medium;
+    font-weight: bold;
+    cursor: default;
+}
+
+.welcome-message {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+}
+/*
+@keyframes floatAnimation {
+  0% {
+    transform: translateY(-10);
+  }
+  50% {
+    transform: translateY(10);
+  }
+  100% {
+    transform: translateY(-10);
+  }
+}
+*/
+
 .story_form {
     width: 100%;
     cursor: default;
