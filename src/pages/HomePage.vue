@@ -1,5 +1,18 @@
 <template>
     <feed-container v-if="isLoggedIn">
+        <div class="loggedintop">
+            <div class="loggedimagecontainer">
+                <img src="../assets/img/tree2.jpeg" alt="storymous tree" class="treeimg">
+            </div>
+            <div class="statstop">
+                <div class="statstop1">
+                    The <b style="color: greenyellow;">story tree</b> holds a total of <b>122</b> <b><span style="color: rgb(240, 150, 15);">stories</span></b> from <b>21</b><b> <span style="color: rgb(30, 153, 210);"> authors</span></b>
+                </div>
+                <div class="statstop2">
+                    <b>2</b> new  <b><span style="color: rgb(240, 150, 15);">stories</span></b> published today
+                </div>
+            </div>
+        </div>
         <div class="create_newstory">
             <img class="postimage" src="../assets/img/default_blue.png" alt="profilepic">
             <router-link to="/storymous-migration/newpost" class="story_form">
@@ -120,14 +133,67 @@ export default {
 
 
 <style scoped>
-.homepage-top {
-    background-color: rgba(90, 90, 90, 0.301);
-    padding: 20px 10px;
+.statstop {
+    color: whitesmoke;
+    padding: 10px;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 0px 0 0 20px;
+    
+}
+
+.statstop1{
+    margin: 0 0 10px 0;
+    background-color: rgba(153, 153, 153, 0.19);
+    padding: 5px;
     border-radius: 10px;
 }
 
-.homepage-top:hover {
+.statstop2 {
+    background-color: rgba(153, 153, 153, 0.19);
+    padding: 5px;
+    border-radius: 10px;
+}
+
+.loggedintop {
+    background-color: rgb(119 119 119 / 19%);
+    padding: 5px;
+    border-radius: 10px;
+    display: flex;
+}
+
+.loggedimagecontainer {
+    width: 300px;
+    height: auto;
+}
+
+.treeimg {
+    width: 100%;
+    border-radius: 40px;
+}
+
+@media (max-width: 450px) {
+    .statstop {
+        color: whitesmoke;
+        padding: 10px;
+        width: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin: 0px 0 0 5px;
+    }
+    .loggedimagecontainer {
+    width: 200px;
+    height: auto;
+}
+}
+
+.homepage-top {
     background-color: rgba(90, 90, 90, 0.13);
+    padding: 20px 10px;
+    border-radius: 10px;
 }
 
 .messagecontainer {
