@@ -125,7 +125,7 @@ export default {
     color: rgb(255, 255, 255);
     cursor: pointer;
     font-size: 15px;
-    width: 100px;
+    width: 85px;
     margin: 10px 10px 10px 20px;
     background-color: #ff00007e;
     border-radius: 4px;
@@ -143,7 +143,7 @@ export default {
     color: rgb(255, 255, 255);
     cursor: pointer;
     font-size: 15px;
-    width: 110px;
+    width: 95px;
     margin: 10px 10px 10px 0;
     background-color: #349ee469;
     border-radius: 4px;
