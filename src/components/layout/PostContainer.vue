@@ -1,5 +1,5 @@
 <template>
-    <feed-container class="outline">
+    <feed-container :class="outlineClass">
         <div>
             <div class="story__user-container">
                 <div class="story__user-img-container">
@@ -13,7 +13,7 @@
                         <a href="" style="color: inherit; text-decoration: none;">
                             <span class="lower" style="color: whitesmoke;"><b>@</b></span><b class="story__user-name">{{ username }}</b>
                         </a>
-                            <span class="story__username-date lower cur-def">· {{ date }}</span>
+                            <span class="story__username-date lower cur-def">· {{ date }} </span>
                     </div>
                 </div>
             </div>
@@ -39,6 +39,11 @@
 import FeedContainer from "./FeedContainer.vue";
 
 export default {
+    data() {
+        return {
+            outlineColors: ["red", "blue", "green", "yellow"]
+        }
+    },
     components: {
         FeedContainer
     },
@@ -51,11 +56,16 @@ export default {
     computed: {
         imgSource() {
             return require('../../assets/img/' + this.imgName);
+        },
+        outlineClass() {
+            const randomIndex = Math.floor(Math.random() * this.outlineColors.length);
+            return `outline ${this.outlineColors[randomIndex]}`;
         }
     }
-}
+};
 
 </script>
+
 
 <style scoped>
 .outline {
@@ -63,23 +73,45 @@ export default {
     padding: 5px 10px 10px 10px;
     height: fit-content;
     width: 100%;
-
-    border: 2px whitesmoke dashed;
-
-    background-color: rgb(0, 138, 172);
-
-    background-color: rgb(185, 121, 0);
-    background-color: rgb(226, 87, 71);
-    background-color: rgb(64, 167, 98);
-    background-color: rgba(64, 167, 98, 0);
+    /*border: 2px whitesmoke dashed;*/
     border-radius: 5px;
+    border: 2px rgb(55, 182, 97) solid;
+    background-color: rgba(60, 134, 85, 0.164);
+}
 
-    transition: all 0.5s;
+.outline.red {
+    border: 2px rgb(255, 95, 78) solid;
+    background-color: rgba(255, 96, 78, 0.137);
+}
+
+.outline.blue {
+    border: 2px rgb(0, 138, 172) solid;
+    background-color: rgba(0, 138, 172, 0.151);
+}
+
+.outline.green {
+    border: 2px rgb(55, 182, 97) solid;
+    background-color: rgba(60, 134, 85, 0.158);
+}
+
+.outline.yellow {
+    border: 2px rgb(224, 146, 0) solid;
+    background-color: rgba(224, 146, 0, 0.158);
+}
+
+.story__article {
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0s;
+    background-color: rgb(46, 46, 53);
+    color: rgb(223, 223, 223);
+    font-weight: 400;
 }
 
 .outline:hover {
     cursor: pointer;
-    border: 2px whitesmoke solid;
+    /*border: 2px whitesmoke solid;*/
 }
 
 .story__user-container {
@@ -201,14 +233,6 @@ export default {
     justify-content: space-between;
 }
 
-.story__article {
-    padding: 10px 15px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: all 0s;
-    background-color: rgb(52, 65, 94);
-    color: white;
-}
 
 .story__upper {
     display: flex;
