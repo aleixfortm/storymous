@@ -52,20 +52,8 @@ export default {
         };
         this.login(credentials)
         this.$emit("close")
-        /*
-          .then(data => {
-            if (data.status == "valid!"){
-              none
-            } else {
-              alert("Invalid credentials")
-            }
-          })
-      } else {
-        alert("Invalid credentials")
       }
-          */
     }
-  }
   },
   computed: {
     ...mapGetters('auth', ['isLoggedIn', 'currentUser']),
