@@ -8,7 +8,21 @@
                 <img class="postimage" src="../assets/img/default_blue.png" alt="profilepic">
             </div>
             <div class="statsblock">
-
+                <div class="username">@{{ currentUser }}</div>
+                <div class="stats">
+                    <div class="count-block">
+                        <b>Stories</b>
+                        <div class="count-block__num">3</div>
+                    </div>
+                    <div class="count-block">
+                        <b>Followers</b>
+                        <div class="count-block__num">10</div>
+                    </div>
+                    <div class="count-block">
+                        <b>Following</b>
+                        <div class="count-block__num">24</div>
+                    </div>
+                </div>
             </div>
         </section>
     </feed-container>
@@ -59,10 +73,39 @@ export default {
 
 .statsblock {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
     height: 340px;
     width: 340px;
+}
+
+.username {
+    color: whitesmoke;
+    font-weight: bold;
+    font-size: larger;
+    margin: 25px 0 0 0;
+}
+
+.stats {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin: 20px 0 0 0;
+    width: 100%;
+    color: whitesmoke;
+}
+
+.count-block {
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(151, 151, 151, 0.192);
+    padding: 5px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.count-block:hover {
+    background-color: rgba(192, 192, 192, 0.192);
 }
 
 .postimage {
