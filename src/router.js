@@ -9,12 +9,11 @@ const router = createRouter({
     history: createWebHistory(),
     routes: [
         { path: "/", redirect: "/storymous-migration/" },
-        { path: "/storymous-migration/", redirect: "/storymous-migration/home" },
-        { path: "/storymous-migration/home", component: HomePage },
+        { path: "/storymous-migration/", component: HomePage },
         { path: "/storymous-migration/newpost", component: NewPost },
-        { path: "/storymous-migration/:id", component: UserPage },
+        { path: "/storymous-migration/user/:id", component: UserPage },
         { path: "/storymous-migration/post/:id", component: PostPage },
-        { path: "/storymous-migration/:notFound(.*)", redirect: "/" } // regular expression for anything entered
+        { path: "/storymous-migration/:catchAll(.*)", redirect: "/storymous-migration/" } // named redirect route for any undefined route
     ],
 });
 
