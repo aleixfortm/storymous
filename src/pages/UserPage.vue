@@ -8,7 +8,10 @@
                 <img class="postimage" src="../assets/img/default_blue.png" alt="profilepic">
             </div>
             <div class="statsblock">
-                <div class="username">@{{ currentUser }}</div>
+                <div class="topblock">
+                    <div class="username">@{{ currentUser }}</div>
+                    <button>Follow</button>
+                </div>
                 <div class="stats">
                     <div class="count-block">
                         <b>Stories</b>
@@ -63,6 +66,15 @@ export default {
     border-radius: 10px;
 }
 
+.topblock {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 25px 0 0 0;
+}
+
 .imageblock {
     display: flex;
     justify-content: center;
@@ -83,7 +95,6 @@ export default {
     color: whitesmoke;
     font-weight: bold;
     font-size: larger;
-    margin: 25px 0 0 0;
 }
 
 .stats {
