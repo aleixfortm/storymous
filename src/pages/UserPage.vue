@@ -30,28 +30,61 @@
                     <b>Bio</b>
                     <div class="bio-content">yo! My name's pollancre and I love Storymous! Follow me to be up to date with my content</div>
                 </div>
+                <div class="miscbuttons">
+                    <button class="settingsbutton">Settings</button>
+                    <button class="logoutbutton">Log out</button>
+                </div>
             </div>
         </section>
         <br><br>
         <section class="section_title">
             My posts
         </section>
+        <post-container
+            v-for="post in posts"
+            :key="post._id"
+            :title="post.title"
+            :content="post.preview"
+            :username="post.username"
+            :postComment="post.post_comment"
+            :date="post.date"
+            :extendedLength="post.extended_length"
+            :imgName="post.random_img">
+        </post-container>
     </feed-container>
 </template>
 
 <script>
 import { mapGetters } from 'vuex';
-//import { useRouter } from 'vue-router';
+import axios from 'axios';
 
-import FeedContainer from "../components/layout/FeedContainer.vue"
+import FeedContainer from "../components/layout/FeedContainer.vue";
+import PostContainer from "../components/layout/PostContainer.vue";
 
 export default {
+    data() {
+        return {
+            posts: []
+        }
+    },
     components: {
         FeedContainer,
+        PostContainer
     },
     computed: {
         ...mapGetters('auth', ['isLoggedIn', 'currentUser']),
-    }
+    },
+    mounted() {
+    axios
+        .get('https://api.npoint.io/786a14060decfb7e66d9')
+        .then(response => {
+            this.posts = response.data.latest;
+            console.log(this.posts)
+        })
+        .catch(error => {
+            console.log(error);
+        });
+    },
 }
 
 </script>
@@ -73,6 +106,56 @@ export default {
 .followbutton:hover {
     background-color: #41bb6a38;
 }
+
+.miscbuttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: ;
+    margin: 20px 0 0 0;
+    height: 30px;
+    align-items: center;
+    justify-content: flex-end;
+    width: 80%;
+    align-self: end;
+}
+
+.logoutbutton {
+    height: 30px;
+    font-family: inherit;
+    border: 0px solid #e5e3ff;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    font-size: 15px;
+    width: 100px;
+    margin: 10px 10px 10px 20px;
+    background-color: #ff00007e;
+    border-radius: 4px;
+    align-items: center;
+}
+
+.logoutbutton:hover {
+    background-color: #ff00004f;
+}
+
+.settingsbutton {
+    height: 30px;
+    font-family: inherit;
+    border: 0px solid #ffffff;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    font-size: 15px;
+    width: 110px;
+    margin: 10px 10px 10px 0;
+    background-color: #349ee469;
+    border-radius: 4px;
+    align-items: center;
+}
+
+.settingsbutton:hover {
+    background-color: #349ee436;
+}
+
+
 
 .section_title {
   padding-bottom: 2px;
