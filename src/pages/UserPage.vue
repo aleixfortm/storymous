@@ -10,7 +10,7 @@
             <div class="statsblock">
                 <div class="topblock">
                     <div class="username">@{{ currentUser }}</div>
-                    <button>Follow</button>
+                    <button class="followbutton">Follow</button>
                 </div>
                 <div class="stats">
                     <div class="count-block">
@@ -25,6 +25,10 @@
                         <b>Following</b>
                         <div class="count-block__num">24</div>
                     </div>
+                </div>
+                <div class="stats-bio">
+                    <b>Bio</b>
+                    <div class="bio-content">yo! My name's pollancre and I love Storymous! Follow me to be up to date with my content</div>
                 </div>
             </div>
         </section>
@@ -49,6 +53,23 @@ export default {
 </script>
 
 <style scoped>
+.followbutton {
+    height: 30px;
+    font-family: inherit;
+    border: 0px solid #e5e3ff;
+    color: rgb(0, 255, 98);
+    cursor: pointer;
+    font-size: 15px;
+    width: 80px;
+    margin: 10px 10px 10px 0;
+    background-color: #59ff9138;
+    border-radius: 4px;
+}
+
+.followbutton:hover {
+    background-color: #41bb6a38;
+}
+
 .section_title {
   padding-bottom: 2px;
   margin: 35px 10px 20px 10px;
@@ -119,9 +140,33 @@ export default {
     background-color: rgba(192, 192, 192, 0.192);
 }
 
+.stats-bio {
+    background-color: rgba(151, 151, 151, 0.192);
+    border-radius: 8px;
+    padding: 5px;
+    margin: 30px 10px 5px 10px;
+    color: whitesmoke;
+}
+
 .postimage {
     height: 275px;
     border-radius: 500%;
+}
+
+@media screen and (max-width: 650px) {
+    .profile-box {
+        flex-direction: column;
+        width: fit-content;
+        margin: auto;
+    }
+
+    .topblock {
+        margin: 0px 0 0 0;
+    }
+
+    .statsblock {
+        height: fit-content;
+    }
 }
 
 </style>
