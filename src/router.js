@@ -10,6 +10,7 @@ const router = createRouter({
     routes: [
         { path: "/", redirect: "/storymous-migration/" },
         { path: "/storymous-migration/", component: HomePage },
+        { path: "/storymous-migration/home", redirect: "/storymous-migration/" },
         { path: "/storymous-migration/newpost", component: NewPost },
         { path: "/storymous-migration/user/:id", component: UserPage },
         { path: "/storymous-migration/post/:id", component: PostPage },
