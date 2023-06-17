@@ -80,7 +80,10 @@
 <style scoped>
 .section_title {
   padding-bottom: 2px;
-  margin: 30px 10px 20px 10px;
+  margin: 35px 0 20px 10px;
+  font-size: larger;
+  font-weight: bold;
+  color: rgb(0, 248, 174);
   border-bottom: 2px solid rgb(180, 255, 233);
 }
 
@@ -88,12 +91,6 @@
   padding: 1px 0 0 0;
   background-color: rgb(119 119 119 / 19%);
   border-radius: 10px;
-}
-section {
-  margin: 35px 0 20px 10px;
-  font-size: larger;
-  font-weight: bold;
-  color: rgb(0, 248, 174);
 }
 
 .image_box {
