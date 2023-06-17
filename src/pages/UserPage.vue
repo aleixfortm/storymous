@@ -28,7 +28,7 @@
                 </div>
                 <div class="stats-bio">
                     <b>Bio</b>
-                    <div class="bio-content">yo! My name's pollancre and I love Storymous! Follow me to be up to date with my content</div>
+                    <div class="bio-content">yo! My name's <b>{{ currentUser }}</b> and I love Storymous! Follow me to be up to date with my content :)</div>
                 </div>
                 <div class="miscbuttons">
                     <button class="settingsbutton">Settings</button>
