@@ -80,7 +80,7 @@
 <style scoped>
 .section_title {
   padding-bottom: 2px;
-  margin: 35px 0 20px 10px;
+  margin: 35px 10px 20px 10px;
   font-size: larger;
   font-weight: bold;
   color: rgb(0, 248, 174);
