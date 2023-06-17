@@ -5,7 +5,7 @@
       <nav>
           <div class="logo">
               <router-link class="logoimgcontainer" to="/"><img class="logoimg" src="../../assets/img/logo.png" alt="treelogo"></router-link>
-              <h1><router-link to="/">Storymous</router-link></h1>
+              <h1><router-link to="/storymous-migration/">Storymous</router-link></h1>
           </div>
           <search-bar></search-bar>
           <div v-if="isLoggedIn === false" class="login-div">
