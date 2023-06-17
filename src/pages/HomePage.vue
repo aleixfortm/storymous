@@ -37,13 +37,14 @@ import { mapGetters } from 'vuex';
 import { useRouter } from 'vue-router';
 import axios from 'axios';
 
+import FeedContainer from "../components/layout/FeedContainer.vue"
 import SelectButton from "../components/SelectButton.vue";
 import LatestFeed from "../pages/subpages/LatestFeed.vue";
 import FollowingFeed from "../pages/subpages/FollowingFeed.vue";
 
 export default {
     components: {
-        //FeedContainer,
+        FeedContainer,
         SelectButton,
         LatestFeed,
         FollowingFeed
@@ -54,7 +55,7 @@ export default {
     },
     data() {
         return {
-            posts: [],
+            posts: {},
             selectedTab: 'latest-feed',
             openDialog: true,
             userLogged: true
@@ -66,7 +67,6 @@ export default {
         .then(response => {
             console.log(response)
             this.posts = response.data;
-            console.log(this.posts)
         })
         .catch(error => {
             console.log(error);
@@ -92,6 +92,7 @@ export default {
 <style scoped>
 .story_form {
     width: 100%;
+    cursor: default;
 }
 
 form {

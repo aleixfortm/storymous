@@ -1,5 +1,5 @@
 <template>
-    <feed-container>
+    <feed-container class="outline">
         <div>
             <div class="story__user-container">
                 <div class="story__user-img-container">
@@ -58,6 +58,30 @@ export default {
 </script>
 
 <style scoped>
+.outline {
+    margin-top: 20px;
+    padding: 5px 10px 10px 10px;
+    height: fit-content;
+    width: 100%;
+
+    border: 2px whitesmoke dashed;
+
+    background-color: rgb(0, 138, 172);
+
+    background-color: rgb(185, 121, 0);
+    background-color: rgb(226, 87, 71);
+    background-color: rgb(64, 167, 98);
+    background-color: rgba(64, 167, 98, 0);
+    border-radius: 5px;
+
+    transition: all 0.5s;
+}
+
+.outline:hover {
+    cursor: pointer;
+    border: 2px whitesmoke solid;
+}
+
 .story__user-container {
     padding: 10px 10px 2px 2px;
     display: flex;

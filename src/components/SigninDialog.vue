@@ -10,7 +10,7 @@
           <input v-model="passwordValue" id="password" name="password" type="password" ref="passwordInput" placeholder="Password">
         </div>
         <div>
-            <button class="button" :disabled="!validateForm()" type="submit">Log In</button>
+            <button class="button" :disabled="!validateForm()" type="submit" @click="scrollToTop">Log In</button>
         </div>
         <div class="signup-message">New to storymous? <a href="" @click.prevent="$emit('signup')" class="link">Sign Up</a></div>
       </form>
@@ -50,10 +50,14 @@ export default {
           _username: this.usernameValue,
           _password: this.passwordValue
         };
-        this.login(credentials)
-        this.$emit("close")
+        this.login(credentials);
+        this.$emit("close");
+        window.scrollTo({
+          top: 0,
+          behavior: 'auto' // Use 'smooth' for smooth scrolling, or 'auto' for instant scrolling
+        });
       }
-    }
+    },
   },
   computed: {
     ...mapGetters('auth', ['isLoggedIn', 'currentUser']),

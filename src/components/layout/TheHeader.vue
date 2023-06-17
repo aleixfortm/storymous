@@ -11,13 +11,12 @@
           <div v-if="isLoggedIn === false" class="login-div">
             <button class="loginButton" @click="toggleDialog(); changeDialog('signin')">Log In</button>
           </div>
-          <div v-else class="userdata">
-              <div class="username">@{{ currentUser }}</div>
-              <img class="userimg" src="../../assets/img/default_blue.png" alt="astronaut">
-          </div>
+          <router-link :to="getProfileLink" v-else class="userdata">
+                <div class="username">@{{ currentUser }}</div>
+                <img class="userimg" src="../../assets/img/default_blue.png" alt="astronaut">
+          </router-link>
       </nav>
   </header>
-
 </template>
 
 
@@ -50,6 +49,9 @@ export default {
   },
   computed: {
       ...mapGetters('auth', ['isLoggedIn', 'currentUser']),
+      getProfileLink() {
+        return '/storymous-migration/user/' + this.currentUser;
+      }
   }
 };
 </script>
@@ -77,6 +79,7 @@ export default {
 }
 
 .userdata {
+  display: flex;
   padding: 0 5px 0 5px;
   height: 50px;
   font-family: inherit;
@@ -87,6 +90,7 @@ export default {
   margin: 0 5px 0 20px;
   background-color: #ffffff1e;
   border-radius: 4px;
+  align-items: center;
 }
 
 .userdata:hover {
