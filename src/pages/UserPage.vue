@@ -9,7 +9,7 @@
             </div>
             <div class="statsblock">
                 <div class="topblock">
-                    <div class="username">@pollancre</div>
+                    <div class="username">@{{ currentUser }}</div>
                     <button class="followbutton">Follow</button>
                 </div>
                 <div class="stats">
