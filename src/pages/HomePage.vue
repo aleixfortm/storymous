@@ -152,6 +152,11 @@ export default {
     background-color: rgba(153, 153, 153, 0.19);
     padding: 5px;
     border-radius: 10px;
+    cursor: pointer;
+}
+
+.statstop1:hover {
+    background-color: rgba(134, 134, 134, 0.151);
 }
 
 .statstop2 {
@@ -159,6 +164,11 @@ export default {
     background-color: rgba(153, 153, 153, 0.19);
     padding: 5px;
     border-radius: 10px;
+    cursor: pointer;
+}
+
+.statstop2:hover {
+    background-color: rgba(134, 134, 134, 0.151);
 }
 
 .loggedintop {
@@ -205,7 +215,7 @@ export default {
 }
 
 .homepage-top {
-    background-color: rgba(90, 90, 90, 0.13);
+    /*background-color: rgba(90, 90, 90, 0.13);*/
     padding: 20px 10px;
     border-radius: 10px;
 }

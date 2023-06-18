@@ -31,7 +31,7 @@
                     <div class="bio-content">yo! My name's <b>{{ currentUser }}</b> and I love Storymous! Follow me to be up to date with my content :)</div>
                 </div>
                 <div class="miscbuttons">
-                    <button class="settingsbutton">Settings</button>
+                    <button class="settingsbutton">Edit profile</button>
                     <button class="logoutbutton">Log out</button>
                 </div>
             </div>
@@ -143,15 +143,15 @@ export default {
     color: rgb(255, 255, 255);
     cursor: pointer;
     font-size: 15px;
-    width: 95px;
+    width: 125px;
     margin: 10px 10px 10px 0;
-    background-color: #349ee469;
+    background-color: #00aeff83;
     border-radius: 4px;
     align-items: center;
 }
 
 .settingsbutton:hover {
-    background-color: #349ee436;
+    background-color: #00aeff56;
 }
 
 .section_title {
