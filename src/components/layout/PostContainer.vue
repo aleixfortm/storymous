@@ -1,23 +1,23 @@
 <template>
     <feed-container :class="outlineClass">
         <div>
-            <div class="story__user-container">
-                <div class="story__user-img-container">
-                    <a href="" style="color: inherit; text-decoration: none;">
-                        <img :src="imgSource" alt="pic" class="story__user-img">
-                    </a>
-                </div> 
-                <div class="story__user-info-container">
-                    <div class="story__user-comment-container"><div class="story__user-comment cur-def"> {{ postComment }} </div></div>
-                    <div class="story__username cur-pnt"> 
+            <router-link :to="`/post/${_id.$oid}`" style="text-decoration: none;">
+                <div class="story__user-container">
+                    <div class="story__user-img-container">
                         <a href="" style="color: inherit; text-decoration: none;">
-                            <span class="lower" style="color: whitesmoke;"><b>@</b></span><b class="story__user-name">{{ username }}</b>
+                            <img :src="imgSource" alt="pic" class="story__user-img">
                         </a>
-                            <span class="story__username-date lower cur-def">· {{ date }} </span>
+                    </div> 
+                    <div class="story__user-info-container">
+                        <div class="story__user-comment-container"><div class="story__user-comment cur-def"> {{ postComment }} </div></div>
+                        <div class="story__username cur-pnt"> 
+                            <a href="" style="color: inherit; text-decoration: none;">
+                                <span class="lower" style="color: whitesmoke;"><b>@</b></span><b class="story__user-name">{{ username }}</b>
+                            </a>
+                                <span class="story__username-date lower cur-def">· {{ date }} </span>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <a href="" style="color: inherit; text-decoration: none;">
                 <article class="story__article">    
                     <div class="story__upper">
                         <div class="story__title-container">
@@ -29,7 +29,7 @@
                         <b v-if="extendedLength" class="readmore-button"><em>Read more</em></b>
                     </p>
                 </article>
-            </a>
+            </router-link>
         </div>
     </feed-container>
 
@@ -47,7 +47,7 @@ export default {
     components: {
         FeedContainer
     },
-    props: ["title", "content", "username", "postComment", "date", "extendedLength", "imgName"],
+    props: ["_id", "title", "content", "username", "postComment", "date", "extendedLength", "imgName"],
     methods: {
         formatStory(story) {
             return story.replace(/<br>/g, '\n');
