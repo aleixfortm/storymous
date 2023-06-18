@@ -97,7 +97,7 @@ export default {
     axios
         .get('https://api.npoint.io/786a14060decfb7e66d9')
         .then(response => {
-            console.log(response)
+            //console.log(response)
             this.posts = response.data;
         })
         .catch(error => {
@@ -115,7 +115,7 @@ export default {
             this.selectedTab = tab;
         },
         navigateToNewPost() {
-            this.$router.push('/newpost');
+            this.$router.push('/storymous-migration/newpost');
         }
     },
     computed: {

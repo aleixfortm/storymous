@@ -1,27 +1,30 @@
 <template>
-    <feed-container>
-        POLLANCRERA <br><br><br><br>LOLOLOLOLOLO
-        <post-container
+    POLLANCRERA <br><br>LOLOLOLOLOLO
+    <post-container
+        :key="post._id"
+        :_id="post._id"
+        :title="post.title"
+        :username="post.username"
+        :postComment="post.post_comment"
+        :date="post.date"
+        :imgName="post.random_img"
+        @post-selected="handleSelectedPost()">
+    </post-container>
 
-            @post-selected="handleSelectedPost()">
-        </post-container>
-    </feed-container>
 </template>
 
 <script>
 import PostContainer from "../components/layout/PostContainer.vue";
-import FeedContainer from "../components/layout/FeedContainer.vue"
 
 export default {
     data() {
         return {
-            PostContainer,
-            FeedContainer
+            PostContainer
         }
     },
     methods: {
-        handleSelectedPost(post) {
-            console.log(post)
+        handleSelectedPost() {
+            console.log("pollancre")
         }
     },
 }
