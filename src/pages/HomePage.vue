@@ -8,6 +8,9 @@
                 <div class="statstop1">
                     The <b style="color: greenyellow;">story tree</b> holds a total of <b>122</b> <b><span style="color: rgb(240, 150, 15);">stories</span></b> from <b>21</b><b> <span style="color: rgb(30, 153, 210);"> authors</span></b>
                 </div>
+                <div class="statstop1">
+                    <b>84</b><b><span style="color: rgb(255, 0, 106);"> readers</span></b> have been spotted nearby
+                </div>
                 <div class="statstop2">
                     <b>2</b> new  <b><span style="color: rgb(240, 150, 15);">stories</span></b> published today
                 </div>
@@ -24,8 +27,8 @@
         <div class="welcome-message">
             <div class="messagecontainer">
                 <div class="innermessagecontainer">
-                    Welcome to Storymous! <br>
-                    Amazing stories await{{ modifiedText }}
+                    Welcome to  <b>Storymous</b>! <br>
+                    <span class="innermessagecontainer2">Amazing stories await...</span>
                 </div>
             </div>
             <div class="imagecontainer">
@@ -152,6 +155,7 @@ export default {
 }
 
 .statstop2 {
+    margin: 0 0 0 0;
     background-color: rgba(153, 153, 153, 0.19);
     padding: 5px;
     border-radius: 10px;
@@ -174,7 +178,7 @@ export default {
     border-radius: 40px;
 }
 
-@media (max-width: 450px) {
+@media (max-width: 500px) {
     .statstop {
         color: whitesmoke;
         padding: 10px;
@@ -187,6 +191,16 @@ export default {
     .loggedimagecontainer {
     width: 200px;
     height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.loggedintop {
+    background-color: rgb(119 119 119 / 19%);
+    padding: 5px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
 }
 }
 
@@ -201,25 +215,45 @@ export default {
     flex-direction: column;
     justify-content: center;
     align-items: left;
+    position: absolute;
+    margin: 95px 140px 0 0;
 }
+
+
 
 .innermessagecontainer {
     width: auto; /*360px*/
     margin: 0 20px 100px 0;
     background-color: white;
-    padding: 10px 20px 10px 20px;
-    border-radius: 20px 20px 0 20px;
+    padding: 10px 20px 10px 25px;
+    border-radius: 40px 40px 0 40px;
     font-size: x-large;
     font-weight: bold;
     cursor: default;
-    animation: floatAnimation 4s ease-in infinite;
+    animation: floatAnimation 5s ease-in-out infinite;
+}
+
+.innermessagecontainer2 {
+    font-size: large;
+}
+
+@keyframes floatAnimation {
+  0% {
+    transform: translateY(-5px);
+  }
+  50% {
+    transform: translateY(5px);
+  }
+  100% {
+    transform: translateY(-5px);
+  }
 }
 
 .welcome-message {
     display: flex;
     flex-direction: row;
     justify-content: flex-end;
-    margin: 0 10px 0 0;
+    margin: 0 80px 0 0;
 }
 
 .welcomeimage {
@@ -241,7 +275,7 @@ export default {
   }
 
   .innermessagecontainer {
-    margin: 0 10px 100px 10px;
+    margin: 0 120px -86px 10px;
     width: auto; /*360px*/
     background-color: white;
     padding: 10px 20px 10px 20px;
@@ -252,22 +286,26 @@ export default {
 
 }
 
+.innermessagecontainer2 {
+    font-size: medium;
+}
+
 .welcome-message {
     display: flex;
     flex-direction: row;
-    justify-content: flex-end;
+    justify-content: center;
+    margin: auto;
 }
 }
 
 
 
-@media (max-width: 480px) {
+@media (max-width: 565px) {
   .responsive-text {
     font-size: 14px; /* Further adjusted font size for even smaller screens */
   }
 
   .innermessagecontainer {
-    margin: 0 10px 100px 10px;
     width: auto; /*360px*/
     background-color: white;
     padding: 10px 20px 10px 20px;
@@ -277,24 +315,38 @@ export default {
     cursor: default;
 }
 
+.innermessagecontainer2 {
+    font-size: small;
+}
+
 .welcome-message {
     display: flex;
     flex-direction: row;
-    justify-content: flex-end;
+    justify-content: center;
+}
+}
+
+@media (max-width: 520px) {
+    .messagecontainer {
+        max-width: 180px;
+    }
+  .innermessagecontainer {
+    margin: -10px 10px 50px 10px;
+    width: auto; /*360px*/
+    background-color: white;
+    padding: 10px 20px 10px 20px;
+    border-radius: 20px 20px 0 20px;
+    font-size: medium;
+    font-weight: bold;
+    cursor: default;
+}
+
+.innermessagecontainer2 {
+    font-size: small;
 }
 }
 /*
-@keyframes floatAnimation {
-  0% {
-    transform: translateY(-10);
-  }
-  50% {
-    transform: translateY(10);
-  }
-  100% {
-    transform: translateY(-10);
-  }
-}
+
 */
 
 .story_form {
