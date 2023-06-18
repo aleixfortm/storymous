@@ -153,6 +153,7 @@ export default {
     padding: 5px;
     border-radius: 10px;
     cursor: pointer;
+    font-size: large;
 }
 
 .statstop1:hover {
@@ -165,6 +166,7 @@ export default {
     padding: 5px;
     border-radius: 10px;
     cursor: pointer;
+    font-size: large;
 }
 
 .statstop2:hover {
@@ -176,11 +178,13 @@ export default {
     padding: 5px;
     border-radius: 10px;
     display: flex;
+    align-items: center;
 }
 
 .loggedimagecontainer {
     width: 300px;
     height: auto;
+    align-self: center;
 }
 
 .treeimg {
@@ -198,6 +202,20 @@ export default {
         justify-content: center;
         margin: 0px 0 0 5px;
     }
+
+    .statstop1 {
+    font-size: medium;
+}
+
+.statstop2 {
+    margin: 0 0 10px 0;
+    background-color: rgba(153, 153, 153, 0.19);
+    padding: 5px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: medium;
+}
+    
     .loggedimagecontainer {
     width: 200px;
     height: auto;

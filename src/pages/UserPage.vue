@@ -145,13 +145,13 @@ export default {
     font-size: 15px;
     width: 125px;
     margin: 10px 10px 10px 0;
-    background-color: #00aeff83;
+    background-color: #002fff63;
     border-radius: 4px;
     align-items: center;
 }
 
 .settingsbutton:hover {
-    background-color: #00aeff56;
+    background-color: #0023bd5b;
 }
 
 .section_title {
@@ -224,12 +224,21 @@ export default {
     background-color: rgba(192, 192, 192, 0.192);
 }
 
+/*
 .stats-bio {
     background-color: rgba(151, 151, 151, 0.192);
     border-radius: 8px;
     padding: 5px;
     margin: 30px 10px 5px 10px;
     color: whitesmoke;
+}
+*/
+.stats-bio {
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px 10px 10px 10px;
+    padding: 10px;
+    margin: 30px 10px 5px 10px;
+    color: rgb(0, 0, 0);
 }
 
 .postimage {
