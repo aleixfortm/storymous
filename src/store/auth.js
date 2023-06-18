@@ -1,4 +1,5 @@
 //import axios from 'axios';
+import router from '@/router'; // Import your Vue Router instance
 
 export default {
     namespaced: true,
@@ -38,6 +39,9 @@ export default {
           // If logout is successful, commit the mutations
           commit('SET_LOGGED_IN', false);
           commit('SET_USER', null);
+
+          // Redirect the user to a different route
+          router.push('/storymous-migration/'); // or router.replace('/somewhere-else');
         },
     },
 

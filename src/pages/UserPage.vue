@@ -32,7 +32,7 @@
                 </div>
                 <div class="miscbuttons">
                     <button class="settingsbutton">Edit profile</button>
-                    <button class="logoutbutton">Log out</button>
+                    <button class="logoutbutton" @click="logout()">Log out</button>
                 </div>
             </div>
         </section>
@@ -55,7 +55,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapActions, mapGetters } from 'vuex';
 import axios from 'axios';
 
 import FeedContainer from "../components/layout/FeedContainer.vue";
@@ -85,6 +85,9 @@ export default {
             console.log(error);
         });
     },
+    methods: {
+        ...mapActions('auth', ['logout']),
+    }
 }
 
 </script>
@@ -244,6 +247,7 @@ export default {
 .postimage {
     height: 275px;
     border-radius: 500%;
+    border: 6px solid whitesmoke;
 }
 
 @media screen and (max-width: 650px) {
