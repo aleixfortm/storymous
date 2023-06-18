@@ -43,6 +43,7 @@
         <post-container
             v-for="post in posts"
             :key="post._id"
+            :_id="post._id"
             :title="post.title"
             :content="post.preview"
             :username="post.username"

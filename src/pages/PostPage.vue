@@ -1,20 +1,15 @@
 <template>
     <feed-container>
+        POLLANCRERA <br><br><br><br>LOLOLOLOLOLO
         <post-container
-            :key="post._id"
-            :title="post.title"
-            :content="post.preview"
-            :username="post.username"
-            :postComment="post.post_comment"
-            :date="post.date"
-            :extendedLength="post.extended_length"
-            :imgName="post.random_img">
+
+            @post-selected="handleSelectedPost()">
         </post-container>
     </feed-container>
 </template>
 
 <script>
-import PostContainer from "@/components/layout/PostContainer.vue";
+import PostContainer from "../components/layout/PostContainer.vue";
 import FeedContainer from "../components/layout/FeedContainer.vue"
 
 export default {
@@ -23,7 +18,12 @@ export default {
             PostContainer,
             FeedContainer
         }
-    }
+    },
+    methods: {
+        handleSelectedPost(post) {
+            console.log(post)
+        }
+    },
 }
 
 </script>
