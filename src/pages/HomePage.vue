@@ -81,7 +81,7 @@ export default {
     },
     setup() {
         const router = useRouter();
-        return { $router: router };
+        return { router: router };
     },
     data() {
         return {
@@ -115,7 +115,7 @@ export default {
             this.selectedTab = tab;
         },
         navigateToNewPost() {
-            this.$router.push('/storymous-migration/newpost');
+            this.router.push('/storymous-migration/newpost');
         }
     },
     computed: {

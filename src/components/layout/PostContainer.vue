@@ -1,7 +1,7 @@
 <template>
     <feed-container :class="outlineClass">
         <div>
-            <router-link :to="`/storymous-migration/post/${_id.$oid}`" style="text-decoration: none;" @click="selectPost">
+            <router-link :to="postRoute()" style="text-decoration: none;" @click="selectPost">
                 <div class="story__user-container">
                     <div class="story__user-img-container">
                         <a href="" style="color: inherit; text-decoration: none;">
@@ -52,18 +52,8 @@ export default {
         formatStory(story) {
             return story.replace(/<br>/g, '\n');
         },
-        selectPost() {
-            const post = {
-                _id: this._id,
-                title: this.title,
-                content: this.content,
-                username: this.username,
-                postComment: this.postComment,
-                date: this.date,
-                extendedLength: this.extendedLength,
-                imgName: this.imgName
-            };
-            this.$emit("post-selected", post);
+        postRoute() {
+            return `/storymous-migration/post/${this._id.$oid}`
         }
     },
     computed: {
