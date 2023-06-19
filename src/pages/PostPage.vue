@@ -40,29 +40,7 @@ export default {
   data() {
     return {
       post: null,
-      comments: [
-        {
-          _id: "123123",
-          content: "Bro nice stuff! Let's go!",
-          username: "pollancre",
-          date: "2 days ago",
-          random_img: "none"
-        },
-        {
-          _id: "123123",
-          content: "Bro nice stuff! Let's go!",
-          username: "pollancre",
-          date: "2 days ago",
-          random_img: "none"
-        },
-        {
-          _id: "123123",
-          content: "Bro nice stuff! Let's go!",
-          username: "pollancre",
-          date: "2 days ago",
-          random_img: "none"
-        }
-      ]
+      comments: []
     }
   },
   mounted() {
@@ -71,6 +49,7 @@ export default {
       .then(response => {
         //console.log(response.data.latest[4])
         this.post = response.data.latest[0]; // Assuming you want to display the first post
+        this.comments = response.data.comments;
       })
     }
 }

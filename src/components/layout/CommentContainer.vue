@@ -8,11 +8,11 @@
             <div class="story__user-info-container">
                 <div class="comment__username cur-pnt"> 
                     <a href="" style="color: inherit; text-decoration: none;">
-                        <span class="lower"><b>@</b></span><b class="story__user-name">pollancre</b>
+                        <span class="lower"><b>@</b></span><b class="story__user-name">{{ username }}</b>
                     </a>
-                        <span class="comment__username-date lower cur-def">· 2 days ago</span>
+                        <span class="comment__username-date lower cur-def">· {{ date }}</span>
                 </div>
-                <div class="comment__user-comment-container"><div class="comment__user-comment cur-def"> Yo that's a cool story bro, keep it up! Lets us goo!!!!!!!!!!!!!!!!</div></div>
+                <div class="comment__user-comment-container"><div class="comment__user-comment cur-def">{{ content }}</div></div>
             </div>
         </div>
     </div>
@@ -26,6 +26,7 @@ export default {
 
         }
     },
+    props: ["_id", "content", "username", "date", "imgName"],
     components: {
 
     },
