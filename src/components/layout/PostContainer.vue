@@ -58,7 +58,7 @@ export default {
             return story.replace(/<br>/g, '\n');
         },
         navigateToPost() {
-            this.router.push('/storymous-migration/post/21341241');
+            this.router.push('/storymous/post/21341241');
         }
 
     },

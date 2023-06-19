@@ -4,8 +4,8 @@
   <header>
       <nav>
           <div class="logo">
-              <router-link class="logoimgcontainer" to="/storymous-migration/"><img class="logoimg" src="../../assets/img/tree2.jpeg" alt="treelogo"></router-link>
-              <h1><router-link to="/storymous-migration/home">Storymous</router-link></h1>
+              <router-link class="logoimgcontainer" to="/storymous/"><img class="logoimg" src="../../assets/img/tree2.jpeg" alt="treelogo"></router-link>
+              <h1><router-link to="/storymous/home">Storymous</router-link></h1>
           </div>
           <search-bar></search-bar>
           <div v-if="isLoggedIn === false" class="login-div">
@@ -50,7 +50,7 @@ export default {
   computed: {
       ...mapGetters('auth', ['isLoggedIn', 'currentUser']),
       getProfileLink() {
-        return '/storymous-migration/user/' + this.currentUser;
+        return '/storymous/user/' + this.currentUser;
       }
   }
 };

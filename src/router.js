@@ -8,13 +8,13 @@ import NewPost from "./pages/NewPost.vue";
 const router = createRouter({
     history: createWebHistory(),
     routes: [
-        { path: "/", redirect: "/storymous-migration/" },
-        { path: "/storymous-migration/", component: HomePage },
-        { path: "/storymous-migration/home", redirect: "/storymous-migration/" },
-        { path: "/storymous-migration/newpost", component: NewPost },
-        { path: "/storymous-migration/user/:id", component: UserPage },
-        { path: "/storymous-migration/post/:id", component: PostPage },
-        { path: "/storymous-migration/:catchAll(.*)", redirect: "/storymous-migration/" } // named redirect route for any undefined route
+        { path: "/", redirect: "/storymous/" },
+        { path: "/storymous/", component: HomePage },
+        { path: "/storymous/home", redirect: "/storymous/" },
+        { path: "/storymous/newpost", component: NewPost },
+        { path: "/storymous/user/:id", component: UserPage },
+        { path: "/storymous/post/:id", component: PostPage },
+        { path: "/storymous/:catchAll(.*)", redirect: "/storymous/" } // named redirect route for any undefined route
     ],
 });
 
