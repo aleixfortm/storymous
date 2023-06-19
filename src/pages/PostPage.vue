@@ -1,6 +1,5 @@
 <template>
     <feed-container>
-        Pollancre
         <post-container
         v-if="post"
             :key="post._id"
