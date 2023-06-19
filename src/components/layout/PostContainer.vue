@@ -38,6 +38,7 @@
 <script>
 import FeedContainer from "./FeedContainer.vue";
 import { useRouter } from 'vue-router';
+import { mapActions } from "vuex";
 
 export default {
     data() {
@@ -57,8 +58,9 @@ export default {
         formatStory(story) {
             return story.replace(/<br>/g, '\n');
         },
+        ...mapActions("emittedData", ["emitData"]),
         navigateToPost() {
-            this.$emit("props-emitted", {
+            const dataToEmit =  {
                 _id: this._id,
                 title: this.title,
                 content: this.content,
@@ -67,9 +69,10 @@ export default {
                 date: this.date,
                 extendedLength: this.extendedLength,
                 imgName: this.imgName
-            });
+            };
+            this.emitData(dataToEmit);
             this.router.push('/storymous/post/' + this._id.$oid);
-        }
+        },
     },
     computed: {
         imgSource() {
@@ -82,9 +85,7 @@ export default {
     },
     
 };
-
 </script>
-
 
 <style scoped>
 .outline {

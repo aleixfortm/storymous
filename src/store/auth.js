@@ -41,7 +41,7 @@ export default {
           commit('SET_USER', null);
 
           // Redirect the user to a different route
-          router.push('/storymous/'); // or router.replace('/somewhere-else');
+          router.push('/storymous/');
         },
     },
 

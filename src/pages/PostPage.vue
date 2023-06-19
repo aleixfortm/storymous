@@ -1,17 +1,17 @@
 <template>
     <feed-container>
+      <div>{{ emittedDataMethod }}</div>
         <post-container
         v-if="post"
-            :key="post._id"
-            :_id="post._id"
+            :key="post._id.$oid"
+            :_id="post._id.$oid"
             :title="post.title"
             :content="post.preview"
             :username="post.username"
             :postComment="post.post_comment"
             :date="post.date"
             :extendedLength="post.extended_length"
-            :imgName="post.random_img"
-            @props-emitted="handleEmmitedData(emmitedData)">
+            :imgName="post.random_img">
         </post-container>
         <comment-container
           v-for="comment in comments"
@@ -27,6 +27,7 @@
 
 <script>
 import axios from "axios";
+import { mapGetters } from "vuex";
 
 import CommentContainer from "@/components/layout/CommentContainer.vue";
 import FeedContainer from '@/components/layout/FeedContainer.vue';
@@ -42,22 +43,22 @@ export default {
     return {
       post: null,
       comments: [],
-      emmitedData: null
+      emittedData: null
     }
   },
   mounted() {
     axios
       .get('https://api.npoint.io/786a14060decfb7e66d9')
       .then(response => {
-        //console.log(response.data.latest[4])
-        this.post = response.data.latest[0]; // Assuming you want to display the first post
         this.comments = response.data.comments;
+        this.post = this.getEmittedData;
       })
     },
     methods: {
-      handleEmmitedData(emmitedData) {
-        console.log(emmitedData)
-      }
+      ...mapGetters("emittedData", ["getEmittedData"]),
+      emittedDataMethod() {
+        return this.getEmittedData;
+    },
     }
 }
 </script>
