@@ -1,7 +1,7 @@
 <template>
     <feed-container :class="outlineClass">
         <div>
-            <router-link :to="postRoute()" style="text-decoration: none;" @click="selectPost">
+            <router-link to="" @click="navigateToPost" style="text-decoration: none;">
                 <div class="story__user-container">
                     <div class="story__user-img-container">
                         <a href="" style="color: inherit; text-decoration: none;">
@@ -37,12 +37,17 @@
 
 <script>
 import FeedContainer from "./FeedContainer.vue";
+import { useRouter } from 'vue-router';
 
 export default {
     data() {
         return {
             outlineColors: ["red", "blue", "green", "yellow", "white", "purple", "pink", "orange", "salmon"]
         }
+    },
+    setup() {
+        const router = useRouter();
+        return { router: router };
     },
     components: {
         FeedContainer
@@ -52,9 +57,10 @@ export default {
         formatStory(story) {
             return story.replace(/<br>/g, '\n');
         },
-        postRoute() {
-            return `/storymous-migration/post/${this._id.$oid}`
+        navigateToPost() {
+            this.router.push('/storymous-migration/post/21341241');
         }
+
     },
     computed: {
         imgSource() {
@@ -63,8 +69,9 @@ export default {
         outlineClass() {
             const randomIndex = Math.floor(Math.random() * this.outlineColors.length);
             return `outline ${this.outlineColors[randomIndex]}`;
-        }
-    }
+        },
+    },
+    
 };
 
 </script>

@@ -29,15 +29,21 @@
   </template>
   
   <script>
+  import FeedContainer from '@/components/layout/FeedContainer.vue';
   import axios from 'axios';
 
   export default {
     name: "NewPost",
+    components: {
+      FeedContainer
+    },
     data() {
       return {
         formtitle: "",
         formcomment: "",
         formbody: "",
+        textareaHeight: 0,
+        textareaHeight1: 0
       };
     },
     methods: {

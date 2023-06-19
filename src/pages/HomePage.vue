@@ -18,7 +18,7 @@
         </div>
         <div class="create_newstory">
             <img class="postimage" src="../assets/img/default_blue.png" alt="profilepic">
-            <router-link to="/storymous-migration/newpost" class="story_form">
+            <router-link to="" class="story_form">
                 <input type="text" placeholder="Write new story" @click="navigateToNewPost">
             </router-link>
         </div>

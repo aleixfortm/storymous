@@ -4,7 +4,7 @@
   <header>
       <nav>
           <div class="logo">
-              <router-link class="logoimgcontainer" to="/"><img class="logoimg" src="../../assets/img/tree2.jpeg" alt="treelogo"></router-link>
+              <router-link class="logoimgcontainer" to="/storymous-migration/"><img class="logoimg" src="../../assets/img/tree2.jpeg" alt="treelogo"></router-link>
               <h1><router-link to="/storymous-migration/home">Storymous</router-link></h1>
           </div>
           <search-bar></search-bar>
