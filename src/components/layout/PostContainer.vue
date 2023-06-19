@@ -58,9 +58,18 @@ export default {
             return story.replace(/<br>/g, '\n');
         },
         navigateToPost() {
-            this.router.push('/storymous/post/21341241');
+            this.$emit("props-emitted", {
+                _id: this._id,
+                title: this.title,
+                content: this.content,
+                username: this.username,
+                postComment: this.postComment,
+                date: this.date,
+                extendedLength: this.extendedLength,
+                imgName: this.imgName
+            });
+            this.router.push('/storymous/post/' + this._id.$oid);
         }
-
     },
     computed: {
         imgSource() {

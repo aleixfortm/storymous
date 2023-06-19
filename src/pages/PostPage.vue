@@ -10,7 +10,8 @@
             :postComment="post.post_comment"
             :date="post.date"
             :extendedLength="post.extended_length"
-            :imgName="post.random_img">
+            :imgName="post.random_img"
+            @props-emitted="handleEmmitedData(emmitedData)">
         </post-container>
         <comment-container
           v-for="comment in comments"
@@ -40,7 +41,8 @@ export default {
   data() {
     return {
       post: null,
-      comments: []
+      comments: [],
+      emmitedData: null
     }
   },
   mounted() {
@@ -51,6 +53,11 @@ export default {
         this.post = response.data.latest[0]; // Assuming you want to display the first post
         this.comments = response.data.comments;
       })
+    },
+    methods: {
+      handleEmmitedData(emmitedData) {
+        console.log(emmitedData)
+      }
     }
 }
 </script>
