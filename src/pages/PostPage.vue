@@ -1,10 +1,8 @@
 <template>
     <feed-container>
-      <div>{{ emittedDataMethod }}</div>
         <post-container
         v-if="post"
-            :key="post._id.$oid"
-            :_id="post._id.$oid"
+            :_id="post._id"
             :title="post.title"
             :content="post.preview"
             :username="post.username"
@@ -27,7 +25,7 @@
 
 <script>
 import axios from "axios";
-import { mapGetters } from "vuex";
+//import { mapGetters } from "vuex";
 
 import CommentContainer from "@/components/layout/CommentContainer.vue";
 import FeedContainer from '@/components/layout/FeedContainer.vue';
@@ -51,14 +49,9 @@ export default {
       .get('https://api.npoint.io/786a14060decfb7e66d9')
       .then(response => {
         this.comments = response.data.comments;
-        this.post = this.getEmittedData;
+        this.post = response.data.latest[0];
       })
     },
-    methods: {
-      ...mapGetters("emittedData", ["getEmittedData"]),
-      emittedDataMethod() {
-        return this.getEmittedData;
-    },
-    }
+
 }
 </script>

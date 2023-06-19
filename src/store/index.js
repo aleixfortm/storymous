@@ -1,21 +1,25 @@
 import auth from './auth';
-import emittedData from './emittedData';
+import emitdata from './emitdata';
 
 import { createStore } from 'vuex'
 
 
 export default createStore({
   state: {
+
   },
   getters: {
+
   },
   mutations: {
+
   },
   actions: {
+    
   },
   modules: {
     auth,
-    emittedData
+    emitdata
   }
 });
 

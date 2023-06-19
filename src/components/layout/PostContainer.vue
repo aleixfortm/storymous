@@ -46,19 +46,23 @@ export default {
             outlineColors: ["red", "blue", "green", "yellow", "white", "purple", "pink", "orange", "salmon"]
         }
     },
+
     setup() {
         const router = useRouter();
         return { router: router };
     },
+
     components: {
         FeedContainer
     },
+    
     props: ["_id", "title", "content", "username", "postComment", "date", "extendedLength", "imgName"],
     methods: {
         formatStory(story) {
             return story.replace(/<br>/g, '\n');
         },
-        ...mapActions("emittedData", ["emitData"]),
+
+        ...mapActions("emitdata", ["emitData"]),
         navigateToPost() {
             const dataToEmit =  {
                 _id: this._id,
@@ -74,6 +78,7 @@ export default {
             this.router.push('/storymous/post/' + this._id.$oid);
         },
     },
+
     computed: {
         imgSource() {
             return require('../../assets/img/' + this.imgName);

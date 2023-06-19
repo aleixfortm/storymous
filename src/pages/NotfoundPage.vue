@@ -1,8 +1,3 @@
 <template>
-    <div>
-        SELECTOR
-    </div>
-    <div>
-        POSTS LIST
-    </div>
+    404 LOL!
 </template>
