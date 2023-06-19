@@ -155,90 +155,10 @@ export default {
     flex-direction: row;
 }
 
-.comment__user-container {
-    padding: 6px 0px;
-    display: flex;
-    flex-direction: row;
-    margin-left: 0px;
-    margin-top: 5px;
-}
-
-#comment_content {
-    width: 100%;
-    height: 52px;
-    color: whitesmoke;
-    font-size: 14px;
-    font-family: inherit;
-    background-color: #445061;
-    border: 2px dashed #313d4d;
-    border-radius: 5px;
-    padding: 5px 10px 10px 10px;
-    margin: 0;
-    margin-top: 4px;
-    margin-bottom: 5px;
-    transition: all 0.2s;
-    resize: none;
-    box-sizing: border-box;
-}
-
-#comment_content:focus {
-    background-color: #4b5461;
-    color: whitesmoke;
-    border: 2px solid #4d3131;
-    box-shadow: 0 0 10px 0 #37414e;
-}
-
-.comment__username {
-    margin: 6px 0px 7px 0;
-}
-
-.content-form__box {
-    padding: 0 0 0 0;
-    align-items: end;
-    margin: 0;
-}
-
-#comment_submit {
-    max-width: fit-content;
-    text-align: center;
-    padding-right: 10px;
-    margin: 5px 0 0 0;
-}
-
-.comment__user-comment-container {
-    max-width: fit-content;
-    word-wrap: break-word;
-}
-
-.comment__username-date {
-    margin: 0 0 0 5px;
-    font-size: small;
-}
-
-.comment__user-comment {
-    margin-top: 0px;
-    font-weight: bold;
-    font-size: 14px;
-    color: black;
-    background-color: #faf8f8;
-    padding: 5px 10px;
-    border-radius: 0 15px 15px 15px;
-    text-align: left;
-    word-wrap: break-word;
-    hyphens: auto;
-    width: auto;
-}
-
 .story__user-img-container {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-}
-
-.comment__user-img-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
 }
 
 .story__user-comment-container {
@@ -340,8 +260,13 @@ export default {
     width: 55px;
     height: auto;
     border-radius: 100%;
-    border: 2px solid whitesmoke;
     margin-bottom: 2px;
+    cursor: pointer;
+    transition: all 0.1s;
+}
+
+.story__user-img:hover {
+    filter: brightness(85%);
 }
 
 .story__user-img-container {
@@ -353,26 +278,6 @@ export default {
 .post__story {
     box-shadow: 0 0 10px 0 #3c4755;
     margin-bottom: 10px;
-}
-
-.story__user-img {
-    width: 55px;
-    height: auto;
-    border-radius: 100%;
-    border: 2px solid whitesmoke;
-    margin-bottom: 2px;
-}
-
-.story__user-img:hover {
-    border: 2px solid rgb(209, 209, 209);
-}
-
-.comment__user-img {
-    width: 45px;
-    height: auto;
-    border-radius: 100%;
-    border: 1.5px solid whitesmoke;
-    margin-bottom: 2px;
 }
 
 .story__user-info-container {

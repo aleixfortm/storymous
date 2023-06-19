@@ -3,9 +3,7 @@
         <div class="comment__user-container">
             <div><img src="../../assets/img/reply_icon3.png" alt="reply icon" style="max-width: 25px; margin: 0 0px 0 0px; transform: scaleX(-1); "></div>
             <div class="comment__user-img-container">
-
                 <img src="../../assets/img/logo.png" alt="Profile picture" class="comment__user-img">
-
             </div> 
             <div class="story__user-info-container">
                 <div class="comment__username cur-pnt"> 
@@ -61,6 +59,15 @@ export default {
     margin: 8px 0 0 0;
 }
 
+.story__user-name {
+    color: whitesmoke;
+    text-decoration: none;
+}
+
+.story__user-name:hover {
+    text-decoration: underline;
+}
+
 #comment_content {
     width: 100%;
     height: 52px;
@@ -87,7 +94,7 @@ export default {
 }
 
 .comment__username {
-    margin: 6px 0px 7px 0;
+    margin: 0px 0px 5px 0;
     color: whitesmoke;
 }
 
@@ -102,7 +109,6 @@ export default {
 }
 
 .comment__user-comment {
-    margin-top: 0px;
     font-weight: bold;
     font-size: 14px;
     color: black;
@@ -113,6 +119,7 @@ export default {
     word-wrap: break-word;
     hyphens: auto;
     width: auto;
+    margin: 0 5px 0 0;
 }
 
 .comment__user-img-container {
@@ -128,6 +135,12 @@ export default {
     border-radius: 100%;
     border: 0px solid whitesmoke;
     margin-bottom: 2px;
+    cursor: pointer;
+    transition: all 0.1s;
+}
+
+.comment__user-img:hover {
+  filter: brightness(85%);
 }
 
 </style>

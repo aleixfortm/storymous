@@ -431,12 +431,12 @@ input[type="text"]::placeholder {
     height: 55px;
     border-radius: 100%;
     margin: 10px 10px;
-    border: 2px whitesmoke solid;
+    transition: all 0.1s;
 }
 
 .postimage:hover {
     cursor: pointer;
-    border: 2px rgb(201, 201, 201) solid;
+    filter: brightness(85%);
 }
 
 .selector {
