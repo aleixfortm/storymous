@@ -12,22 +12,57 @@
             :extendedLength="post.extended_length"
             :imgName="post.random_img">
         </post-container>
+        <comment-container
+          v-for="comment in comments"
+          :key="comment._id"
+          :_id="comment._id"
+          :content="comment.content"
+          :username="comment.username"
+          :date="comment.date"
+          :imgName="comment.random_img">
+        </comment-container>
     </feed-container>
 </template>
 
 <script>
 import axios from "axios";
+
+import CommentContainer from "@/components/layout/CommentContainer.vue";
 import FeedContainer from '@/components/layout/FeedContainer.vue';
 import PostContainer from '@/components/layout/PostContainer.vue';
 
 export default {
   components: {
     FeedContainer,
-    PostContainer
+    PostContainer,
+    CommentContainer
   },
   data() {
     return {
-      post: null
+      post: null,
+      comments: [
+        {
+          _id: "123123",
+          content: "Bro nice stuff! Let's go!",
+          username: "pollancre",
+          date: "2 days ago",
+          random_img: "none"
+        },
+        {
+          _id: "123123",
+          content: "Bro nice stuff! Let's go!",
+          username: "pollancre",
+          date: "2 days ago",
+          random_img: "none"
+        },
+        {
+          _id: "123123",
+          content: "Bro nice stuff! Let's go!",
+          username: "pollancre",
+          date: "2 days ago",
+          random_img: "none"
+        }
+      ]
     }
   },
   mounted() {
