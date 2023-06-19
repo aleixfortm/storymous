@@ -1,4 +1,4 @@
-# storymous-m
+# storymous
 
 ## Project setup
 ```
