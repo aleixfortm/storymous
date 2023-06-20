@@ -1,4 +1,5 @@
-# storymous
+
+![storymous_tree](https://github.com/aleixfortm/storymous/assets/95043218/0298a2af-3140-4de2-b4b3-1a0ee6262904) # storymous
 
 ## Project setup
 ```
