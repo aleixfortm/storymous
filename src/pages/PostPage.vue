@@ -18,10 +18,11 @@
                         <img class="postimage" src="../assets/img/default_blue.png" alt="profilepic">
                     </div>
                     <textarea id="comment" v-model="formcomment" placeholder="Add a comment..." rows="1" :style="{ height: textareaHeight }" required></textarea>
+                    <div class="buttonbox">
+                      <button class="postbutton" type="submit">Comment</button>
+                    </div>
                 </div>
-                <div class="buttonbox">
-                  <button class="postbutton" type="submit">Comment</button>
-                </div>
+
             </form>
         </div>
         <comment-container
@@ -106,18 +107,21 @@ export default {
 </script>
 
 <style scoped>
+
+
     .postbutton {
-    height: 30px;
+    height: 35px;
     font-family: inherit;
     border: 0px solid #e5e3ff;
     color: rgb(0, 255, 98);
     cursor: pointer;
     font-size: 15px;
     width: 80px;
-    margin: 0px 5px 5px 0;
+    margin: 0px 5px 7px 0;
     background-color: #ffffff1e;
     border-radius: 4px;
-    }
+    align-self: flex-end;
+  }
 
     .postbutton:hover {
       background-color: #94949425;
@@ -126,7 +130,7 @@ export default {
 #comment {
   background-color: #ffffff;
     border: none;
-    border-radius: 10px 10px 10px 0;
+    border-radius: 10px 10px 10px 10px;
     font-size: 14px;
     font-weight: 500;
     outline: none;
@@ -137,8 +141,8 @@ export default {
     resize: none;
     overflow: auto;
     box-sizing: border-box;
-    margin: 0 5px 0 0;
-    height: 50%;
+    margin: 0 5px 0px 0;
+    height: 100%;
 }
 
 #comment:hover {
@@ -156,11 +160,12 @@ export default {
     display: flex;
     flex-direction: row;
     width: 100%;
-    height: 100%;
-    margin: 5px 0 5px 0;
+    height: fit-content;
+    padding: 5px 0 5px 0;
     display: flex;
     justify-content: left;
     border-radius: 10px;
+    align-items: center;
 }
 
 .image_box {
@@ -168,13 +173,12 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    align-self: end;
+    align-self: start;
 }
 
 .buttonbox {
-      display: flex;
-      justify-content: flex-end;
-      flex-direction: row;
+  align-self: stretch;
+  display: flex;
   }
 
   .postimage {

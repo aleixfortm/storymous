@@ -4,7 +4,7 @@
     <div class="dialog-div"> <b>Log In</b> </div>
     <form @submit.prevent="submitForm">
         <div class="form-control">
-            <input v-model="usernameValue" id="title" name="title" type="text" ref="titleInput" placeholder="Username or e-mail">
+            <input v-model="usernameValue" id="title" name="title" type="text" ref="titleInput" placeholder="Username">
         </div>
         <div class="form-control">
           <input v-model="passwordValue" id="password" name="password" type="password" ref="passwordInput" placeholder="Password">
