@@ -18,6 +18,6 @@ export default {
   },
 
   getters: {
-    getEmittedData: (state) => state.emittedData,
+    getEmittedData: state => state.emittedData,
   },
 }

@@ -123,9 +123,9 @@ export default {
     align-self: flex-end;
   }
 
-    .postbutton:hover {
-      background-color: #94949425;
-    }
+  .postbutton:hover {
+    background-color: #94949425;
+  }
 
 #comment {
   background-color: #ffffff;
