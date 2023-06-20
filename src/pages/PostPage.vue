@@ -11,6 +11,19 @@
             :extendedLength="post.extended_length"
             :imgName="post.random_img">
         </post-container>
+        <div class="pollancre">
+            <form @submit.prevent="submitForm">
+                <div class="newstory_comment">
+                    <div class="image_box">
+                        <img class="postimage" src="../assets/img/default_blue.png" alt="profilepic">
+                    </div>
+                    <textarea id="comment" v-model="formcomment" placeholder="Add a comment..." rows="1" :style="{ height: textareaHeight }" required></textarea>
+                </div>
+                <div class="buttonbox">
+                  <button class="postbutton" type="submit">Comment</button>
+                </div>
+            </form>
+        </div>
         <comment-container
           v-for="comment in comments"
           :key="comment._id"
@@ -40,7 +53,8 @@ export default {
   data() {
     return {
       post: null,
-      comments: []
+      comments: [],
+      formcomment: "",
     }
   },
   mounted() {
@@ -72,7 +86,106 @@ export default {
   },
   computed: {
     ...mapGetters("emitdata", ["getEmittedData"])
+  },
+  methods: {
+    adjustTextareaHeight() {
+          const textarea = this.$el.querySelector('#comment');
+          textarea.style.height = 'auto';
+          textarea.style.height = textarea.scrollHeight + 'px';
+          this.textareaHeight = textarea.style.height;
+        },
+  },
+  watch: {
+    formcomment() {
+          this.formcomment = this.formcomment.substring(0, 300);
+          this.adjustTextareaHeight();
+        },
   }
 
 }
 </script>
+
+<style scoped>
+    .postbutton {
+    height: 30px;
+    font-family: inherit;
+    border: 0px solid #e5e3ff;
+    color: rgb(0, 255, 98);
+    cursor: pointer;
+    font-size: 15px;
+    width: 80px;
+    margin: 0px 5px 5px 0;
+    background-color: #ffffff1e;
+    border-radius: 4px;
+    }
+
+    .postbutton:hover {
+      background-color: #94949425;
+    }
+
+#comment {
+  background-color: #ffffff;
+    border: none;
+    border-radius: 10px 10px 10px 0;
+    font-size: 14px;
+    font-weight: 500;
+    outline: none;
+    padding: 8px 8px 8px 20px; /* add left padding */
+    width: 100%;
+    font: inherit;
+    color: rgb(0, 0, 0);
+    resize: none;
+    overflow: auto;
+    box-sizing: border-box;
+    margin: 0 5px 0 0;
+    height: 50%;
+}
+
+#comment:hover {
+  background-color: rgb(224, 224, 224);
+}
+
+.pollancre {
+  padding: 1px 0 0 0;
+  background-color: rgb(119 119 119 / 19%);
+  border-radius: 10px;
+  margin: 5px 0 12px 0;
+}
+
+.newstory_comment {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 100%;
+    margin: 5px 0 5px 0;
+    display: flex;
+    justify-content: left;
+    border-radius: 10px;
+}
+
+.image_box {
+    height: max-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-self: end;
+}
+
+.buttonbox {
+      display: flex;
+      justify-content: flex-end;
+      flex-direction: row;
+  }
+
+  .postimage {
+    height: 50px;
+    border-radius: 100%;
+    margin: 0px 8px 0 10px;
+    cursor: pointer;
+    transition: all 0.1s;
+}
+
+.postimage:hover {  
+  filter: brightness(85%);
+}
+</style>

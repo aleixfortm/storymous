@@ -10,11 +10,9 @@
                         <img class="postimage" src="../assets/img/default_blue.png" alt="profilepic">
                     </div>
                     <textarea id="comment" v-model="formcomment" placeholder="Author comment" rows="1" :style="{ height: textareaHeight }" required></textarea>
-                    
                 </div>
                 <div class="newstory_title">
                     <input id="title" v-model="formtitle" type="text" placeholder="Story title" required>
-                    
                 </div>
                 <div class="newstory_title">
                     <textarea id="body" v-model="formbody" placeholder="Story content" required></textarea>
@@ -22,7 +20,6 @@
                 <div class="buttonbox">
                   <button class="postbutton" type="submit">Submit</button>
                 </div>
-                    
             </form>
         </div>
     </feed-container>
