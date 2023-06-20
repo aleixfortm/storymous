@@ -4,16 +4,16 @@
             <router-link to="" @click="navigateToPost" style="text-decoration: none;">
                 <div class="story__user-container">
                     <div class="story__user-img-container">
-                        <a href="" style="color: inherit; text-decoration: none;">
+                        <router-link to="" @click.stop="navigateToUser" style="color: inherit; text-decoration: none;">
                             <img :src="imgSource" alt="pic" class="story__user-img">
-                        </a>
+                        </router-link>
                     </div> 
                     <div class="story__user-info-container">
                         <div class="story__user-comment-container"><div class="story__user-comment cur-def"> {{ postComment }} </div></div>
                         <div class="story__username cur-pnt"> 
-                            <a href="" style="color: inherit; text-decoration: none;">
+                            <router-link to="" @click.stop="navigateToUser" style="color: inherit; text-decoration: none;">
                                 <span class="lower" style="color: whitesmoke;"><b>@</b></span><b class="story__user-name">{{ username }}</b>
-                            </a>
+                            </router-link>
                                 <span class="story__username-date lower cur-def">· {{ date }} </span>
                         </div>
                     </div>
@@ -77,6 +77,10 @@ export default {
             this.emitData(dataToEmit);
             this.router.push('/storymous/post/' + this._id.$oid);
         },
+        navigateToUser() {
+            console.log("pol")
+            this.router.push('/storymous/user/' + this.username);
+        }
     },
 
     computed: {

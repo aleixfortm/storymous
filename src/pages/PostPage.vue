@@ -25,7 +25,7 @@
 
 <script>
 import axios from "axios";
-//import { mapGetters } from "vuex";
+import { mapGetters } from "vuex";
 
 import CommentContainer from "@/components/layout/CommentContainer.vue";
 import FeedContainer from '@/components/layout/FeedContainer.vue';
@@ -40,8 +40,7 @@ export default {
   data() {
     return {
       post: null,
-      comments: [],
-      emittedData: null
+      comments: []
     }
   },
   mounted() {
@@ -49,9 +48,31 @@ export default {
       .get('https://api.npoint.io/786a14060decfb7e66d9')
       .then(response => {
         this.comments = response.data.comments;
-        this.post = response.data.latest[0];
+        const posts1 = response.data.latest;
+        const posts2 = response.data.following;
+
+        const id = this.$route.params.id;
+        console.log(id)
+
+        const post1 = posts1.find(post => post._id.$oid === id);
+        if (post1) {
+          this.post = post1;
+        } else {
+          console.log('Post not found in latest');
+        }
+
+        const post2 = posts2.find(post => post._id.$oid === id);
+        if (post2) {
+          this.post = post2;
+        } else {
+          console.log('Post not found in following');
+        }
+        
       })
-    },
+  },
+  computed: {
+    ...mapGetters("emitdata", ["getEmittedData"])
+  }
 
 }
 </script>

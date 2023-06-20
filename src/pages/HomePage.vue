@@ -258,7 +258,7 @@ export default {
     font-size: x-large;
     font-weight: bold;
     cursor: default;
-    animation: floatAnimation 5s ease-in-out infinite;
+    animation: floatAnimation 4s ease-in-out infinite;
 }
 
 .innermessagecontainer2 {
@@ -359,7 +359,7 @@ export default {
         max-width: 180px;
     }
   .innermessagecontainer {
-    margin: -10px 10px 50px 10px;
+    margin: -25px 10px 50px 10px;
     width: auto; /*360px*/
     background-color: white;
     padding: 10px 20px 10px 20px;
