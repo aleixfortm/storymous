@@ -111,7 +111,6 @@ export default {
     },
     methods: {
         setSelectedTab(tab) {
-            console.log(this.currentUser)
             this.selectedTab = tab;
         },
         navigateToNewPost() {
