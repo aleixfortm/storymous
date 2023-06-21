@@ -5,16 +5,16 @@
         </section>
         <div class="setting">
             <span class="description">Choose a new profile picture</span>
-            <button class="access-button" @click="selectedSetting = 'PictureSetting'" :class="{ active: selectedSetting === 'PictureSetting' }">Profile picture</button>
+            <button class="access-button" @click="selectedSetting = 'PictureSetting'" :class="{ active: selectedSetting === 'PictureSetting' }">Change picture</button>
         </div>
         <div class="setting">
             <span class="description">Choose a color scheme for your profile</span>
-            <button class="access-button" @click="selectedSetting = 'ColorSetting'" :class="{ active: selectedSetting === 'ColorSetting' }">Profile color</button>
+            <button class="access-button" @click="selectedSetting = 'ColorSetting'" :class="{ active: selectedSetting === 'ColorSetting' }">Change color</button>
             
         </div>
         <div class="setting">
             <span class="description">Change your profile's bio</span>
-            <button class="access-button" @click="selectedSetting = 'BioSetting'" :class="{ active: selectedSetting === 'BioSetting' }">Profile bio</button>
+            <button class="access-button" @click="selectedSetting = 'BioSetting'" :class="{ active: selectedSetting === 'BioSetting' }">Edit bio</button>
 
         </div>
 
