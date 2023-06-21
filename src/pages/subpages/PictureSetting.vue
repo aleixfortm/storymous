@@ -81,9 +81,13 @@ export default {
 
     .grid-item {
     position: relative;
-    border: 1px solid #dddddd88;
+    border: 1px solid #dddddd59;
     cursor: pointer;
-    transition: border-color 0.2s ease;
+    transition: all 0.2s ease;
+    }
+
+    .grid-item:hover {
+    background-color: rgba(107, 107, 107, 0.281);
     }
 
     .grid-item.selected {
