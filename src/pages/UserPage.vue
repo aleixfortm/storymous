@@ -31,7 +31,7 @@
                     <div class="bio-content">yo! My name's <b>{{ profileUsername }}</b> and I love Storymous! Follow me to be up to date with my content :)</div>
                 </div>
                 <div v-if="ownProfile()" class="miscbuttons">
-                    <button class="settingsbutton">Edit profile</button>
+                    <button class="settingsbutton" @click="goToSettings">Edit profile</button>
                     <button class="logoutbutton" @click="logout()">Log out</button>
                 </div>
             </div>
@@ -58,11 +58,16 @@
 <script>
 import { mapActions, mapGetters } from 'vuex';
 import axios from 'axios';
+import { useRouter } from 'vue-router';
 
 import FeedContainer from "../components/layout/FeedContainer.vue";
 import PostContainer from "../components/layout/PostContainer.vue";
 
 export default {
+    setup() {
+        const router = useRouter();
+        return { router: router };
+    },
     data() {
         return {
             posts: [],
@@ -105,6 +110,9 @@ export default {
             } else {
                 return false;
             }
+        },
+        goToSettings() {
+            this.router.push('/storymous/settings');
         }
     }
 }

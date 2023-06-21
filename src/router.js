@@ -4,6 +4,7 @@ import HomePage from "./pages/HomePage.vue";
 import PostPage from "./pages/PostPage.vue";
 import UserPage from "./pages/UserPage.vue";
 import NewPost from "./pages/NewPost.vue";
+import SettingsPage from "./pages/SettingsPage.vue"
 
 const router = createRouter({
     history: createWebHistory(),
@@ -14,6 +15,7 @@ const router = createRouter({
         { path: "/storymous/newpost", component: NewPost },
         { path: "/storymous/user/:id", component: UserPage },
         { path: "/storymous/post/:id", component: PostPage },
+        { path: "/storymous/settings", component: SettingsPage },
         { path: "/storymous/:catchAll(.*)", redirect: "/storymous/" } // named redirect route for any undefined route
     ],
 });
