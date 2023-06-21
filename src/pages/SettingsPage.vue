@@ -83,16 +83,24 @@ export default {
     font-weight: bold;
 }
 
+.access-button:hover {
+    background-color: rgba(0, 153, 255, 0.644);
+}
+
 .orange {
     background-color: rgb(255, 145, 0);
+}
+
+.orange:hover {
+    background-color: rgba(255, 145, 0, 0.616);
 }
 
 .purple {
     background-color: rgb(183, 0, 255);
 }
 
-.access-button:hover {
-    background-color: rgba(0, 153, 255, 0.541);
+.purple:hover {
+    background-color: rgba(183, 0, 255, 0.637);
 }
 
 </style>
