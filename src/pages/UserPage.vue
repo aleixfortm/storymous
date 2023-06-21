@@ -36,7 +36,7 @@
                 </div>
             </div>
         </section>
-        <br><br>
+
         <section class="section_title">
             My posts
         </section>
