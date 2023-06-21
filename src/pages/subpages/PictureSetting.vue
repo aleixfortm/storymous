@@ -51,13 +51,16 @@ export default {
     },
     methods: {
         selectItem(index) {
-        // Clear selection of all items
-        this.gridItems.forEach((item) => {
-            item.selected = false;
-        });
+            // Clear selection of all items
+            this.gridItems.forEach((item) => {
+                item.selected = false;
+            });
 
-        // Select the clicked item
-        this.gridItems[index].selected = true;
+            // Select the clicked item
+            this.gridItems[index].selected = true;
+
+            //emit selected pic
+            this.$emit("image-selected", this.gridItems[index].image);
         },
     },
     };

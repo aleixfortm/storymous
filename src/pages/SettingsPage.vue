@@ -20,11 +20,11 @@
 
         <section class="section_title"></section>
         <div v-if="selectedSetting" class="save-setting">
-            <button class="save-button">Save changes!</button>
+            <button :class="{ 'save-button': true, 'disabled': isSaveButtonDisabled }" :disabled="isSaveButtonDisabled" @click="saveChanges">Save changes!</button>
         </div>
 
 
-        <component :is="selectedSetting"></component>
+        <component :is="selectedSetting" @image-selected="handleImageSelected"></component>
 
     </feed-container>
 </template>
@@ -42,6 +42,8 @@ export default {
     data() {
         return {
             selectedSetting: null,
+            selectedImage: null,
+            isSaveButtonDisabled: false
         }
     },
     setup() {
@@ -59,7 +61,21 @@ export default {
     },
     computed: {
         ...mapGetters('auth', ['isLoggedIn', 'currentUser']),
+    },
+    methods: {
+        handleImageSelected(image) {
+            if (this.selectedImage !== image) {
+                this.selectedImage = image;
+                this.isSaveButtonDisabled = false;
+            }
+            
+        },
+        saveChanges() {
+            this.isSaveButtonDisabled = true;
+            console.log(this.selectedImage);
+        },
     }
+
 }
 
 </script>
@@ -122,6 +138,16 @@ export default {
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.322);
     padding: 5px;
     align-self: center;
+}
+
+.disabled {
+    background-color: rgba(0, 255, 76, 0.342);
+    cursor: default;
+}
+
+.disabled:hover {
+    background-color: rgba(0, 255, 76, 0.342);
+    cursor: default;
 }
 
 .save-button:hover {
