@@ -20,7 +20,7 @@
 
         <section class="section_title"></section>
         <div v-if="selectedSetting" class="save-setting">
-            <button :class="{ 'save-button': true, 'disabled': isSaveButtonDisabled }" :disabled="isSaveButtonDisabled" @click="saveChanges">Save changes!</button>
+            <button :class="{ 'save-button': true, 'disabled': isSaveButtonDisabled }" :disabled="isSaveButtonDisabled" @click="saveChanges">{{ saveButtonText }}</button>
         </div>
 
 
@@ -43,7 +43,7 @@ export default {
         return {
             selectedSetting: null,
             selectedImage: null,
-            isSaveButtonDisabled: false
+            isSaveButtonDisabled: true
         }
     },
     setup() {
@@ -61,6 +61,9 @@ export default {
     },
     computed: {
         ...mapGetters('auth', ['isLoggedIn', 'currentUser']),
+        saveButtonText() {
+            return this.isSaveButtonDisabled ? "Saved!" : "Save changes"
+        }
     },
     methods: {
         handleImageSelected(image) {
