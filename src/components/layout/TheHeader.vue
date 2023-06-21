@@ -22,12 +22,17 @@
 
 <script>
 import { mapGetters } from 'vuex';
+import { useRouter } from 'vue-router';
 
 import SearchBar from "../SearchBar.vue";
 import SigninDialog from "@/components/SigninDialog.vue";
 import SignupDialog from "@/components/SignupDialog.vue";
 
 export default {
+  setup() {
+        const router = useRouter();
+        return { router: router };
+    },
   data() {
     return {
       dialogShown: false,
@@ -45,6 +50,10 @@ export default {
     },
     changeDialog(dialog) {
       this.dialog = dialog;
+    },
+    goToProfile() {
+      const ownUsername = this.currentUser;
+      this.router.push('/storymous/user/' + ownUsername);
     }
   },
   computed: {

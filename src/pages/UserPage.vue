@@ -1,5 +1,5 @@
 <template>
-    <feed-container>
+    <feed-container :key="currentParameter">
         <section class="section_title">
             My profile
         </section>
@@ -9,8 +9,8 @@
             </div>
             <div class="statsblock">
                 <div class="topblock">
-                    <div class="username">@{{ currentUser }}</div>
-                    <button class="followbutton">Follow</button>
+                    <div class="username">@{{ profileUsername }}</div>
+                    <button v-if="!ownProfile()" class="followbutton">Follow</button>
                 </div>
                 <div class="stats">
                     <div class="count-block">
@@ -28,9 +28,9 @@
                 </div>
                 <div class="stats-bio">
                     <b>Bio</b>
-                    <div class="bio-content">yo! My name's <b>{{ currentUser }}</b> and I love Storymous! Follow me to be up to date with my content :)</div>
+                    <div class="bio-content">yo! My name's <b>{{ profileUsername }}</b> and I love Storymous! Follow me to be up to date with my content :)</div>
                 </div>
-                <div class="miscbuttons">
+                <div v-if="ownProfile()" class="miscbuttons">
                     <button class="settingsbutton">Edit profile</button>
                     <button class="logoutbutton" @click="logout()">Log out</button>
                 </div>
@@ -65,7 +65,8 @@ import PostContainer from "../components/layout/PostContainer.vue";
 export default {
     data() {
         return {
-            posts: []
+            posts: [],
+            profileUsername: null
         }
     },
     components: {
@@ -74,8 +75,13 @@ export default {
     },
     computed: {
         ...mapGetters('auth', ['isLoggedIn', 'currentUser']),
+        currentParameter() {
+            return this.$route.params.id; // Replace "parameter" with the actual name of your URL parameter
+        },
     },
     mounted() {
+        this.profileUsername = this.$route.params.id;
+        console.log(this.$route.params.id)
     axios
         .get('https://api.npoint.io/786a14060decfb7e66d9')
         .then(response => {
@@ -86,8 +92,20 @@ export default {
             console.log(error);
         });
     },
+    watch: {
+        currentParameter() {
+            this.profileUsername = this.$route.params.id;
+        },
+    },
     methods: {
         ...mapActions('auth', ['logout']),
+        ownProfile() {
+            if (this.profileUsername === this.currentUser) {
+                return true;
+            } else {
+                return false;
+            }
+        }
     }
 }
 

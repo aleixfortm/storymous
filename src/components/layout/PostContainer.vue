@@ -78,7 +78,6 @@ export default {
             this.router.push('/storymous/post/' + this._id.$oid);
         },
         navigateToUser() {
-            console.log("pol")
             this.router.push('/storymous/user/' + this.username);
         }
     },
