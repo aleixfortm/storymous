@@ -79,6 +79,22 @@ export default {
     grid-gap: 10px;
     }
 
+    @media (max-width: 484px) and (min-width:450px) {
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
+            grid-gap: 10px;
+        }
+    }
+
+    @media (max-width: 460px) {
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(105px, 1fr));
+            grid-gap: 10px;
+        }
+    }
+
     /* Adjust the size of the picture based on the grid item size */
     .picture {
         width: 100%;

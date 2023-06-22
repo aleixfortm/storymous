@@ -26,13 +26,15 @@
         </div>
         <section class="section_title"></section>
 
-        <component :is="selectedSetting" :previousImage="selectedImage" :previousColor="selectedColor" :previous-bio="selectedBio"
-
+        <component 
+            :is="selectedSetting" 
+            :previousImage="selectedImage" 
+            :previousColor="selectedColor" 
+            :previous-bio="selectedBio"
             @image-selected="handleImageSelected" 
             @color-selected="handleColorSelected"
             @bio-selected="handleBioSelected">
         </component>
-
     </feed-container>
 </template>
 
@@ -42,17 +44,18 @@ import { mapGetters } from 'vuex';
 
 import PictureSetting from '../pages/subpages/PictureSetting.vue';
 import ColorSetting from './subpages/ColorSetting.vue';
+import BioSetting from './subpages/BioSetting.vue';
+
 import FeedContainer from '@/components/layout/FeedContainer.vue';
-
-
 
 export default {
     data() {
         return {
             selectedSetting: null,
+            //default values
             selectedImage: "astronaut_reading.jpeg",
             selectedColor: 'rgb(255, 25, 0)',
-            selectedBio: null,
+            selectedBio: "yo! My name's asdf and I love Storymous! Follow me to be up to date with my content :) Let us go lololo lolol lololololo! Yeah boom bam paaam!!! PAPAPPAPA BOOM, pipip pipi fiuuuum...",
             isSaveButtonDisabled: true
         }
     },
@@ -63,7 +66,8 @@ export default {
     components: {
         FeedContainer,
         PictureSetting,
-        ColorSetting
+        ColorSetting,
+        BioSetting
     },
     mounted() {
         if (this.isLoggedIn === false) {
