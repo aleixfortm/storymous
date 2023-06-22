@@ -1,5 +1,7 @@
 <template>
+    
     <div class="stats-bio">
+        BIO
         <textarea
             v-textarea-autosize
             class="custom-textarea"
@@ -61,7 +63,7 @@ export default {
     outline: none;
     border-radius: 10px 10px 10px 10px;
     padding: 10px;
-    margin: 30px auto 5px auto;
+    margin: 10px auto 5px auto;
     color: rgb(0, 0, 0);
     overflow: auto;
     resize: none;
@@ -75,6 +77,9 @@ export default {
 }
 
 .stats-bio {
-    margin: 0 10px;
+    margin: 20px 10px;
+    color: whitesmoke;
+    font-weight: bold;
+
 }
 </style>
