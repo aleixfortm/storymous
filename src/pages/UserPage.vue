@@ -52,7 +52,6 @@
             :username="post.username"
             :postComment="post.post_comment"
             :date="post.date"
-            :extendedLength="post.extended_length"
             :imgName="post.random_img">
         </post-container>
     </feed-container>
@@ -152,7 +151,7 @@ export default {
 }
 
 .followbutton:hover {
-    background-color: #41bb6a59;
+    background-color: #41bb6a2f;
 }
 
 .miscbuttons {

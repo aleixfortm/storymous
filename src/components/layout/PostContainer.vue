@@ -26,7 +26,7 @@
                     </div>
                     <p class="story__content">
                         {{ formatStory(content) }}
-                        <b v-if="extendedLength" class="readmore-button"><em>Read more</em></b>
+                        <b class="readmore-button"><em>Read more</em></b>
                     </p>
                 </article>
             </router-link>
@@ -56,7 +56,7 @@ export default {
         FeedContainer
     },
     
-    props: ["_id", "title", "content", "username", "postComment", "date", "extendedLength", "imgName"],
+    props: ["_id", "title", "content", "username", "postComment", "date", "imgName"],
     methods: {
         formatStory(story) {
             return story.replace(/<br>/g, '\n');
@@ -71,7 +71,6 @@ export default {
                 username: this.username,
                 postComment: this.postComment,
                 date: this.date,
-                extendedLength: this.extendedLength,
                 imgName: this.imgName
             };
             this.emitData(dataToEmit);

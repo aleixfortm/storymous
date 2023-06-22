@@ -40,7 +40,6 @@ export default {
                 username: "your username",
                 postComment: "Looks awesome! Good color choice!",
                 date: "Now",
-                extendedLength: false,
                 imgName: "astronaut_reading.jpeg",
             };
 

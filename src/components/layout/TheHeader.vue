@@ -209,6 +209,7 @@ li {
   margin: 0 20px 0 20px;
   background-color: #ffffff1e;
   border-radius: 4px;
+  transition: all 0.1s;
 }
 
 .loginButton:hover {

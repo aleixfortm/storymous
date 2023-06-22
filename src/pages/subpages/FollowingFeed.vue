@@ -8,7 +8,6 @@
     :username="post.username"
     :postComment="post.post_comment"
     :date="post.date"
-    :extendedLength="post.extended_length"
     :imgName="post.random_img">
     </post-container>
 </template>
