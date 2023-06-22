@@ -71,7 +71,7 @@ export default {
                 _id: "test",
                 content: "This shows how amazing your incredible story will look! Let us begin writing! Oh, and here is extra filler to make it look bigger, since a story is much longer than that hahaha, but never mind this!",
                 username: "your username",
-                postComment: "Looks awesome! Good color choice!",
+                postComment: "Looks awesome! Nice choice of color!",
                 date: "Now",
                 imgName: "astronaut_reading.jpeg",
             },

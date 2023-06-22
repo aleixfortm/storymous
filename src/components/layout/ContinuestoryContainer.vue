@@ -76,7 +76,7 @@ export default {
 
 <style scoped>
 .sum-icon-container2 {
-    margin: 0 5px 0 0;
+    margin: 3px 3px 0 0;
 }
 
 .sum-icon2{
@@ -89,53 +89,6 @@ export default {
     padding: 5px;
     margin: 8px 0 0 0;
     border-radius: 10px;
-}
-
-.origin2 {
-    background-color: rgb(255, 255, 255);
-    color: rgb(0, 0, 0);
-    font-size: 14px;
-    padding: 1px 4px;
-    border-radius: 3px;
-    width: fit-content;
-    box-shadow: 0px 0px 5px rgba(255, 255, 255, 0.568);
-}
-
-.origin-container2 {
-    display: flex;
-    justify-content: flex-start;
-    margin: 2px 0 0 0;
-}
-
-.outline2 {
-    margin-top: 20px;
-    padding: 5px 10px 10px 10px;
-    height: fit-content;
-    width: 100%;
-    /*border: 2px whitesmoke dashed;*/
-    border-radius: 5px;
-    border: 2px rgb(55, 182, 97) solid;
-    background-color: rgba(60, 134, 85, 0.103);
-}
-
-.outline.salmon2 {
-    border: 2px rgb(255, 109, 93) solid;
-    background-color: rgba(255, 109, 93, 0.123);
-}
-
-.outline.red2 {
-    border: 2px rgb(255, 25, 0) solid;
-    background-color: rgba(255, 25, 0, 0.11);
-}
-
-.outline.blue2 {
-    border: 2px rgb(0, 153, 255) solid;
-    background-color: rgba(0, 153, 255, 0.103);
-}
-
-.outline.green2 {
-    border: 2px rgb(55, 182, 97) solid;
-    background-color: rgba(60, 134, 85, 0.103);
 }
 
 
@@ -173,10 +126,8 @@ export default {
     color: black;
     background-color: #faf8f8;
     padding: 5px 10px;
-    border-radius: 15px 15px 15px 15px;
     text-align: left;
     word-wrap: break-word;
-    hyphens: auto;
     width: auto;
 }
 
@@ -184,42 +135,8 @@ export default {
     display: flex;
     flex-direction: column;
     margin: 0 0 0 5px;
-    width: -moz-fit-content;
     width: fit-content;
-    -webkit-hyphens: auto;
-    hyphens: auto;
-    justify-content: space-between;
-}
-
-
-.story__upper2 {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0px 0px;
-    width: 100%;
-}
-
-.story__title-container2 {
-    background-color: rgb(255, 214, 164);
-    padding: 2px;
-    justify-content: left;
-    border-radius: 5px;
-    margin-bottom: 8px;
-    width: 100%;
-    word-wrap: break-word;
-    hyphens: auto;
-}
-
-.story__title2 {
-    padding: 2px 8px;
-    border-radius: 5px;
-    color: #2d3441;
-    margin: 0px 0px;
-    font-size: large;
-    word-wrap: break-word;
-    hyphens: auto;
+    justify-content: flex-start;
 }
 
 .story__content2 {
@@ -260,7 +177,7 @@ export default {
 }
 
 .story__user-img2 {
-    width: 55px;
+    width: 50px;
     height: auto;
     border-radius: 100%;
     margin-bottom: 2px;
@@ -278,17 +195,12 @@ export default {
     justify-content: flex-end;
 }
 
-.post__story2 {
-    box-shadow: 0 0 10px 0 #3c4755;
-    margin-bottom: 10px;
-}
 
 .story__user-info-container2 {
     display: flex;
     flex-direction: column;
     margin: 0 0 0 5px;
     width: fit-content;
-    hyphens: auto;
     justify-content: space-between;
 }
 
@@ -301,63 +213,39 @@ export default {
     border-radius: 15px 15px 15px 0;
     text-align: left;
     word-wrap: break-word;
-    hyphens: auto;
     width: auto;
 }
 
 .story__username2 {
-    margin: 5px 0px;
+    margin: 0px 0px 5px 0;
 }
 
-.story__user-tags2 {
-    margin-top: 8px;
+.story__user-container2 {
+    padding: 0px 5px 5px 0px;
     display: flex;
     flex-direction: row;
 }
 
-.story__tag2 {
-    border-radius: 15px;
-    padding: 1px 8px;
-    color: white;
-    opacity: 0.8;
-    margin-right: 5px;
+.story__user-comment2 {
+    margin-top: 0px;
+    font-weight: bold;
+    font-size: 14px;
+    color: black;
+    background-color: #faf8f8;
+    padding: 5px 10px;
+    border-radius: 0px 15px 15px 15px;
+    text-align: left;
+    word-wrap: break-word;
+    width: auto;
 }
 
-.post-icons-bar2 {
+.story__user-info-container2 {
     display: flex;
-    justify-content: right;
-    font-size: 13px;
-    height: fit-content
-}
-
-.post-icon-bg2 {
-    height: fit-content;
-    padding: 0 4px;
-    display: flex;
-    background-color: rgba(240, 248, 255, 0);
-    border-radius: 10px;
-    opacity: 1;
-}
-
-.post-icon-bg2:hover {
-    cursor: pointer;
-    display: flex;
-    background-color: rgba(240, 248, 255, 0.219);
-    border-radius: 12px;
-}
-
-
-.post-icons2 {
-    background-color: #31394600;
-    margin: 5px 0 0px 0;
-    padding: 2px 4px 0px 5px;
-    /*border-radius: 5px;*/
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
+    flex-direction: column;
+    margin: 0 0 0 5px;
     width: fit-content;
-    height: fit-content;
-    align-items: center;
+    justify-content: flex-start;
 }
+
 
 </style>

@@ -184,7 +184,7 @@ export default {
 }
 
 .story__user-container {
-    padding: 10px 10px 2px 2px;
+    padding: 10px 5px 2px 2px;
     display: flex;
     flex-direction: row;
 }
