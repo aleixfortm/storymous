@@ -1,7 +1,10 @@
 <template>
     <feed-container :key="currentParameter">
-        <section class="section_title">
+        <section v-if="ownProfile()" class="section_title">
             My profile
+        </section>
+        <section v-else class="section_title">
+            {{ profileUsername }}'s profile
         </section>
         <section class="profile-box">
             <div class="imageblock">
@@ -40,8 +43,11 @@
             </div>
         </section>
 
-        <section class="section_title">
+        <section v-if="ownProfile()" class="section_title">
             My posts
+        </section>
+        <section v-else class="section_title">
+            {{ profileUsername }}'s posts
         </section>
         <post-container
             v-for="post in posts"

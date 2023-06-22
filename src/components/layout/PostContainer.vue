@@ -1,7 +1,10 @@
 <template>
-    <feed-container :class="outlineClass">
-        <div>
-            <router-link to="" @click="navigateToPost" style="text-decoration: none;">
+    <div>
+        <div :class="outlineClass">
+            <router-link to="" @click="navigateToPost" style="text-decoration: none;" >
+                <div class="origin-container">
+                    <div class="origin">Started new story</div>
+                </div>
                 <div class="story__user-container">
                     <div class="story__user-img-container">
                         <router-link to="" @click.stop="navigateToUser" style="color: inherit; text-decoration: none;">
@@ -31,12 +34,10 @@
                 </article>
             </router-link>
         </div>
-    </feed-container>
-
+    </div>
 </template>
 
 <script>
-import FeedContainer from "./FeedContainer.vue";
 import { useRouter } from 'vue-router';
 import { mapActions } from "vuex";
 
@@ -53,7 +54,7 @@ export default {
     },
 
     components: {
-        FeedContainer
+
     },
     
     props: ["_id", "title", "content", "username", "postComment", "date", "imgName"],
@@ -95,6 +96,22 @@ export default {
 </script>
 
 <style scoped>
+.origin {
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    font-size: 14px;
+    padding: 1px 4px;
+    border-radius: 3px;
+    width: fit-content;
+    box-shadow: 0px 0px 5px rgba(255, 255, 255, 0.568);
+}
+
+.origin-container {
+    display: flex;
+    justify-content: flex-start;
+    margin: 2px 0 0 0;
+}
+
 .outline {
     margin-top: 20px;
     padding: 5px 10px 10px 10px;
@@ -153,7 +170,7 @@ export default {
 
 .story__article {
     padding: 10px 15px;
-    border-radius: 5px;
+    border-radius: 2px;
     cursor: pointer;
     transition: all 0s;
     background-color: rgb(46, 46, 53);
@@ -216,7 +233,7 @@ export default {
 }
 
 .story__title-container {
-    background-color: bisque;
+    background-color: rgb(255, 214, 164);
     padding: 2px;
     justify-content: left;
     border-radius: 5px;

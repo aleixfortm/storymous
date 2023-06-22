@@ -1,15 +1,17 @@
 <template>
-    <post-container
-    v-for="post in posts.following"
-    :key="post._id"
-    :_id="post._id"
-    :title="post.title"
-    :content="post.preview"
-    :username="post.username"
-    :postComment="post.post_comment"
-    :date="post.date"
-    :imgName="post.random_img">
-    </post-container>
+    <feed-container>
+        <post-container
+            v-for="post in posts.following"
+            :key="post._id"
+            :_id="post._id"
+            :title="post.title"
+            :content="post.preview"
+            :username="post.username"
+            :postComment="post.post_comment"
+            :date="post.date"
+            :imgName="post.random_img">
+        </post-container>
+    </feed-container>
 </template>
 
 <script>
