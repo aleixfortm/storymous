@@ -34,7 +34,7 @@
                 </div>
                 <div class="stats-bio">
                     <b>Bio</b>
-                    <div class="bio-content">yo! My name's <b>{{ profileUsername }}</b> and I love Storymous! Follow me to be up to date with my content :) Let us go lololo lolol lololololo! Yeah boom bam paaam!!! PAPAPPAPA BOOM, pipip pipi fiuuuum...</div>
+                    <div class="bio-content">yo! My name's <b>{{ profileUsername }}</b> and I love Storymous! Follow me to be up to date with my content :) </div>
                 </div>
                 <div v-if="ownProfile()" class="miscbuttons">
                     <button class="settingsbutton" @click="goToSettings">Edit profile</button>
