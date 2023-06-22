@@ -66,7 +66,7 @@ export default {
             this.gridItems[index].selected = true;
 
             //emit selected pic
-            this.$emit("image-selected", this.gridItems[index].image);
+            this.$emit("image-selected", this.gridItems[index].name);
         },
     },
     };
