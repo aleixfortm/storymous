@@ -16,8 +16,7 @@
   <script>
 
 export default {
-    components: {
-    },
+    props: ["previousColor"],
     data() {
         return {
             gridItems2: [
@@ -44,6 +43,10 @@ export default {
                 extendedLength: false,
                 imgName: "astronaut_reading.jpeg",
             };
+
+            //preselect an item (will be the one gathered from API)
+            const i = this.gridItems2.findIndex((item) => item.color === this.previousColor);
+            this.selectItem(i);
     },
     methods: {
         selectItem(index) {
@@ -83,7 +86,8 @@ export default {
 }
 
 .grid-item2.selected {
-  background-color: transparent;
+  background-color: rgba(143, 143, 143, 0.192);
+  border: 2px solid #ddddddc9;
 }
 
 .color {

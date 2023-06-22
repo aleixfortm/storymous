@@ -5,26 +5,33 @@
         </section>
         <div class="setting">
             <span class="description">Choose a new profile picture</span>
-            <button class="access-button" @click="selectedSetting = 'PictureSetting'" :class="{ active: selectedSetting === 'PictureSetting' }">Change picture</button>
+            <button class="access-button" @click="selectedSetting = 'PictureSetting'"
+                :class="{ active: selectedSetting === 'PictureSetting' }">Change picture</button>
         </div>
         <div class="setting">
             <span class="description">Choose a color scheme for your profile</span>
-            <button class="access-button" @click="selectedSetting = 'ColorSetting'" :class="{ active: selectedSetting === 'ColorSetting' }">Choose color</button>
-            
+            <button class="access-button" @click="selectedSetting = 'ColorSetting'"
+                :class="{ active: selectedSetting === 'ColorSetting' }">Choose color</button>
+
         </div>
         <div class="setting">
             <span class="description">Change your profile's bio</span>
-            <button class="access-button" @click="selectedSetting = 'BioSetting'" :class="{ active: selectedSetting === 'BioSetting' }">Edit bio</button>
+            <button class="access-button" @click="selectedSetting = 'BioSetting'"
+                :class="{ active: selectedSetting === 'BioSetting' }">Edit bio</button>
 
         </div>
-
+        <div class="save-setting nomargin">
+            <button :class="{ 'save-button': true, 'disabled': isSaveButtonDisabled }" :disabled="isSaveButtonDisabled"
+                @click="saveChanges">{{ saveButtonText }}</button>
+        </div>
         <section class="section_title"></section>
-        <div v-if="selectedSetting" class="save-setting">
-            <button :class="{ 'save-button': true, 'disabled': isSaveButtonDisabled }" :disabled="isSaveButtonDisabled" @click="saveChanges">{{ saveButtonText }}</button>
-        </div>
 
+        <component :is="selectedSetting" :previousImage="selectedImage" :previousColor="selectedColor" :previous-bio="selectedBio"
 
-        <component :is="selectedSetting" @image-selected="handleImageSelected"></component>
+            @image-selected="handleImageSelected" 
+            @color-selected="handleColorSelected"
+            @bio-selected="handleBioSelected">
+        </component>
 
     </feed-container>
 </template>
@@ -43,7 +50,9 @@ export default {
     data() {
         return {
             selectedSetting: null,
-            selectedImage: null,
+            selectedImage: "astronaut_reading.jpeg",
+            selectedColor: 'rgb(255, 25, 0)',
+            selectedBio: null,
             isSaveButtonDisabled: true
         }
     },
@@ -73,11 +82,27 @@ export default {
                 this.selectedImage = image;
                 this.isSaveButtonDisabled = false;
             }
-            
         },
+        handleColorSelected(color) {
+            if (this.selectedColor !== color) {
+                this.selectedColor = color;
+                this.isSaveButtonDisabled = false;
+            }
+        },
+        /*
+        handleBioSelected(text) {
+            if (this.selectedImage !== image) {
+                this.selectedImage = image;
+                this.isSaveButtonDisabled = false;
+            }
+        },
+        */
         saveChanges() {
             this.isSaveButtonDisabled = true;
+            // Handle saving sequence (API request in the future)
             console.log(this.selectedImage);
+            console.log(this.selectedColor);
+            //console.log(this.selectedBio);
         },
     }
 
@@ -94,12 +119,12 @@ export default {
 }
 
 .section_title {
-  padding-bottom: 2px;
-  margin: 35px 10px 10px 10px;
-  font-size: larger;
-  font-weight: bold;
-  color: rgb(0, 248, 174);
-  border-bottom: 2px solid rgb(180, 255, 233);
+    padding-bottom: 2px;
+    margin: 35px 10px 10px 10px;
+    font-size: larger;
+    font-weight: bold;
+    color: rgb(0, 248, 174);
+    border-bottom: 2px solid rgb(180, 255, 233);
 }
 
 .description {
@@ -124,8 +149,14 @@ export default {
 }
 
 .save-setting {
+    margin: 40px 10px;
     display: flex;
-    justify-content: center;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.nomargin {
+    margin: 40px 10px 0px 0;
 }
 
 .save-button {
@@ -136,13 +167,12 @@ export default {
     cursor: pointer;
     font-size: 15px;
     width: fit-content;
-    margin: 5px 10px 10px 0;
+    margin: 0px 10px 0px 0;
     background-color: rgba(0, 255, 76, 0.514);
     border-radius: 4px;
     font-weight: bold;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.322);
     padding: 5px;
-    align-self: center;
 }
 
 .disabled {
@@ -170,6 +200,4 @@ export default {
 .active {
     outline: rgb(92, 122, 219) solid 2px;
     background-color: rgba(92, 94, 219, 0.603);
-}
-
-</style>
+}</style>

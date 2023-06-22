@@ -29,10 +29,11 @@ import default_purple from "@/assets/img/default_purple.png";
 import default_skyblue from "@/assets/img/default_skyblue.png";
 
 export default {
+    props: ["previousImage"],
     data() {
         return {
             gridItems: [
-                { image: astronaut_reading, selected: false },
+                { image: astronaut_reading, name: "astronaut_reading.jpeg", selected: false },
                 { image: astronaut_earth, selected: false },
                 { image: astronaut_reads, selected: false },
                 { image: logo, selected: false },
@@ -48,6 +49,11 @@ export default {
                 { image: default_skyblue, selected: false },
             ],
         };
+    },
+    mounted() {
+            //preselect an item (will be the one gathered from API)
+            const i = this.gridItems.findIndex((item) => item.name === this.previousImage);
+            this.selectItem(i);
     },
     methods: {
         selectItem(index) {
@@ -66,14 +72,12 @@ export default {
     };
     </script>
 
-<style>
+<style scoped>
     .grid-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     grid-gap: 10px;
     }
-
-
 
     /* Adjust the size of the picture based on the grid item size */
     .picture {
@@ -84,7 +88,7 @@ export default {
 
     .grid-item {
     position: relative;
-    border: 1px solid #dddddd59;
+    border: 2px solid #dddddd3b;
     cursor: pointer;
     transition: all 0.2s ease;
     }
@@ -96,7 +100,6 @@ export default {
     .grid-item.selected {
     border-color: rgb(255, 255, 255);
     }
-
 
     .selector {
     position: absolute;
