@@ -34,13 +34,13 @@
           :imgName="comment.random_img">
         </comment-container>
         <continuestory-container
-        v-if="continuedStory"
-            :_id="post._id"
-            :content="post.preview"
-            :username="post.username"
-            :postComment="post.post_comment"
-            :date="post.date"
-            :imgName="post.random_img">
+        v-if="replyPost"
+            :_id="replyPost._id"
+            :content="replyPost.content"
+            :username="replyPost.username"
+            :postComment="replyPost.postComment"
+            :date="replyPost.date"
+            :imgName="replyPost.imgName">
         </continuestory-container>
     </feed-container>
 </template>
@@ -84,7 +84,7 @@ export default {
         this.comments = response.data.comments;
         const posts1 = response.data.latest;
         const posts2 = response.data.following;
-          
+
         this.continuedStory = this.replyPost;
         
         const id = this.$route.params.id;
