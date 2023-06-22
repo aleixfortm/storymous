@@ -33,6 +33,15 @@
           :date="comment.date"
           :imgName="comment.random_img">
         </comment-container>
+        <continuestory-container
+        v-if="continuedStory"
+            :_id="post._id"
+            :content="post.preview"
+            :username="post.username"
+            :postComment="post.post_comment"
+            :date="post.date"
+            :imgName="post.random_img">
+        </continuestory-container>
     </feed-container>
 </template>
 
@@ -41,6 +50,7 @@ import axios from "axios";
 import { mapGetters } from "vuex";
 
 import CommentContainer from "@/components/layout/CommentContainer.vue";
+import ContinuestoryContainer from "@/components/layout/ContinuestoryContainer.vue";
 import FeedContainer from '@/components/layout/FeedContainer.vue';
 import PostContainer from '@/components/layout/PostContainer.vue';
 
@@ -48,13 +58,23 @@ export default {
   components: {
     FeedContainer,
     PostContainer,
-    CommentContainer
+    CommentContainer,
+    ContinuestoryContainer
   },
   data() {
     return {
       post: null,
       comments: [],
       formcomment: "",
+      continuedStory: null,
+      replyPost: {
+                _id: "test",
+                content: "This shows how amazing your incredible story will look! Let us begin writing! Oh, and here is extra filler to make it look bigger, since a story is much longer than that hahaha, but never mind this!",
+                username: "your username",
+                postComment: "Looks awesome! Good color choice!",
+                date: "Now",
+                imgName: "astronaut_reading.jpeg",
+            },
     }
   },
   mounted() {
@@ -64,9 +84,10 @@ export default {
         this.comments = response.data.comments;
         const posts1 = response.data.latest;
         const posts2 = response.data.following;
-
+          
+        this.continuedStory = this.replyPost;
+        
         const id = this.$route.params.id;
-        console.log(id)
 
         const post1 = posts1.find(post => post._id.$oid === id);
         if (post1) {
