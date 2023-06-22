@@ -153,6 +153,7 @@ export default {
     border-radius: 10px;
     cursor: pointer;
     font-size: large;
+    transition: all 0.1s;
 }
 
 .statstop1:hover {
@@ -166,6 +167,7 @@ export default {
     border-radius: 10px;
     cursor: pointer;
     font-size: large;
+    transition: all 0.1s;
 }
 
 .statstop2:hover {
@@ -400,6 +402,7 @@ input[type="text"] {
   font: inherit;
   outline: rgb(100, 100, 100) 1px solid;
   color: whitesmoke;
+  transition: all 0.1s;
 }
 
 input[type="text"]:hover {
@@ -455,12 +458,13 @@ input[type="text"]::placeholder {
   display: flex;
   justify-content: center;
   align-items: center;
-
+  transition: all 0.1s;
 }
 
 .rectangle p {
   font-size: 24px;
   color: white;
+  transition: all 0.1s;
 }
 
 </style>

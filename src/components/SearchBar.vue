@@ -43,6 +43,7 @@ input[type="text"] {
   font: inherit;
   outline: rgb(100, 100, 100) 1px solid;
   color: whitesmoke;
+  transition: all 0.1s;
 }
 
 input[type="text"]:hover {

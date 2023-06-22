@@ -100,6 +100,7 @@ export default {
   background-color: #ffffff1e;
   border-radius: 4px;
   align-items: center;
+  transition: all 0.1s;
 }
 
 .userdata:hover {

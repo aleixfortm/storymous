@@ -148,16 +148,17 @@ export default {
     margin: 10px 10px 10px 0;
     background-color: #59ff9138;
     border-radius: 4px;
+    transition: all 0.1s;
 }
 
 .followbutton:hover {
-    background-color: #41bb6a38;
+    background-color: #41bb6a59;
 }
 
 .miscbuttons {
     display: flex;
     flex-direction: row;
-    margin: 20px 0 0 0;
+    margin: 10px 0 0px 0;
     height: 30px;
     align-items: center;
     justify-content: flex-end;
@@ -174,13 +175,14 @@ export default {
     font-size: 15px;
     width: 85px;
     margin: 10px 10px 10px 20px;
-    background-color: #ff00007e;
+    background-color: #ff0000cc;
     border-radius: 4px;
     align-items: center;
+    transition: all 0.1s;
 }
 
 .logoutbutton:hover {
-    background-color: #ff00004f;
+    background-color: #ff00006c;
 }
 
 .settingsbutton {
@@ -192,13 +194,14 @@ export default {
     font-size: 15px;
     width: 125px;
     margin: 10px 10px 10px 0;
-    background-color: rgba(255, 255, 255, 0.308);
+    background-color: rgba(0, 0, 0, 0.459);
     border-radius: 4px;
     align-items: center;
+    transition: all 0.1s;
 }
 
 .settingsbutton:hover {
-    background-color: rgba(255, 255, 255, 0.089);
+    background-color: rgba(0, 0, 0, 0.185);
 }
 
 .section_title {
@@ -241,6 +244,7 @@ export default {
     align-items: center;
     height: fit-content;
     width: 340px;
+    
 }
 
 .username {
@@ -256,6 +260,7 @@ export default {
     margin: 20px 0 0 0;
     width: 100%;
     color: whitesmoke;
+    transition: all 0.1s;
 }
 
 .count-block {
