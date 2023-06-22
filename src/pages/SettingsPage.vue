@@ -34,6 +34,7 @@ import { useRouter } from 'vue-router';
 import { mapGetters } from 'vuex';
 
 import PictureSetting from '../pages/subpages/PictureSetting.vue';
+import ColorSetting from './subpages/ColorSetting.vue';
 import FeedContainer from '@/components/layout/FeedContainer.vue';
 
 
@@ -52,7 +53,8 @@ export default {
     },
     components: {
         FeedContainer,
-        PictureSetting
+        PictureSetting,
+        ColorSetting
     },
     mounted() {
         if (this.isLoggedIn === false) {
