@@ -1,5 +1,7 @@
 <template>
-
+    <div class="stats-bio">
+        
+    </div>
 </template>
   
 <script>
@@ -12,7 +14,7 @@ export default {
         };
     },
     mounted() {
-        
+
             /*
             //preselect an item (will be the one gathered from API)
             const i = this.gridItems2.findIndex((item) => item.color === this.previousColor);
@@ -39,59 +41,12 @@ export default {
 };
 </script>
 
-<style>
-.grid-container2 {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); /* Adjust the grid item size here */
-  grid-gap: 10px;
-}
-
-.grid-item2 {
-  position: relative;
-  width: 100%;
-  padding-bottom: 0;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  overflow: hidden;
-}
-
-.grid-item2:hover {
-  background-color: rgba(107, 107, 107, 0.281);
-}
-
-.grid-item2.selected {
-  background-color: rgba(143, 143, 143, 0.192);
-  border: 2px solid #ddddddc9;
-}
-
-.color {
-  width: 100%;
-  height: 0;
-  padding-bottom: 100%; /* Maintain aspect ratio for circles */
-  border-radius: 50%;
-  overflow: hidden;
-}
-
-.color:before {
-  content: "";
-  display: block;
-  width: 100%;
-  height: 100%;
-}
-
-.selector {
-  position: absolute;
-  top: 3px;
-  right: 3px;
-  width: 10px;
-  height: 10px;
-  background-color: rgb(255, 255, 255);
-  border-radius: 50%;
-  opacity: 0.1;
-  transition: opacity 0.2s ease;
-}
-
-.grid-item2.selected .selector {
-  opacity: 1;
+<style scoped>
+.stats-bio {
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px 10px 10px 10px;
+    padding: 10px;
+    margin: 30px 10px 5px 10px;
+    color: rgb(0, 0, 0);
 }
 </style>

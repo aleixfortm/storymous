@@ -9,7 +9,10 @@
             </div>
             <div class="statsblock">
                 <div class="topblock">
-                    <div class="username">@{{ profileUsername }}</div>
+                    <div class="name-color">
+                        <div class="color-scheme"></div>
+                        <div class="username">@{{ profileUsername }}</div>
+                    </div>
                     <button v-if="!ownProfile()" class="followbutton">Follow</button>
                 </div>
                 <div class="stats">
@@ -120,6 +123,20 @@ export default {
 </script>
 
 <style scoped>
+.name-color {
+    display: flex;
+}
+
+.color-scheme {
+    border-radius: 500%;
+    background-color: red;
+    width: 25px;
+    height: 25px;
+    align-self: center;
+    margin: 0 15px 0 0;
+    box-shadow: 0px 0px 10px 2px rgba(255, 0, 0, 0.479);
+}
+
 .followbutton {
     height: 30px;
     font-family: inherit;

@@ -168,7 +168,7 @@ export default {
     font-size: 15px;
     width: fit-content;
     margin: 0px 10px 0px 0;
-    background-color: rgba(0, 255, 76, 0.514);
+    background-color: rgba(0, 255, 76, 0.726);
     border-radius: 4px;
     font-weight: bold;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.322);
@@ -176,7 +176,7 @@ export default {
 }
 
 .disabled {
-    background-color: rgba(0, 255, 76, 0.342);
+    background-color: rgba(0, 194, 58, 0.295);
     cursor: default;
 }
 
