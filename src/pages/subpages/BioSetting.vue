@@ -1,12 +1,11 @@
 <template>
     
     <div class="stats-bio">
-        BIO
+        Bio
         <textarea
-            v-textarea-autosize
             class="custom-textarea"
             v-model="textareaContent"
-            @input="adjustTextareaHeight"
+            @input="handleTextareaInput"
         ></textarea>
     </div>
 </template>
@@ -29,24 +28,14 @@ export default {
           textarea.style.height = textarea.scrollHeight + 'px';
           this.textareaHeight = textarea.style.height;
         },
-        /*
-        selectItem(index) {
-            // Clear selection of all items
-            this.gridItems2.forEach((item) => {
-                item.selected = false;
-            });
-
-            // Select the clicked item
-            this.gridItems2[index].selected = true;
-
-            //emit selected pic
-            this.$emit("color-selected", this.gridItems2[index].color);
+        handleTextareaInput() {
+            this.adjustTextareaHeight();
+            this.$emit("bio-selected", this.textareaContent);
         },
-        */
     },
     watch: {
-        bioTextArea() {
-          this.formcomment = this.formcomment.substring(0, 300);
+        textareaContent() {
+          this.textareaContent = this.textareaContent.substring(0, 200);
           this.adjustTextareaHeight();
         },
     }

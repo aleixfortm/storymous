@@ -52,11 +52,12 @@ export default {
     data() {
         return {
             selectedSetting: null,
+            isSaveButtonDisabled: true,
+
             //default values
             selectedImage: "astronaut_reading.jpeg",
             selectedColor: 'rgb(255, 25, 0)',
             selectedBio: "yo! My name's asdf and I love Storymous! Follow me to be up to date with my content :) Let us go lololo lolol lololololo! Yeah boom bam paaam!!! PAPAPPAPA BOOM, pipip pipi fiuuuum...",
-            isSaveButtonDisabled: true
         }
     },
     setup() {
@@ -93,20 +94,18 @@ export default {
                 this.isSaveButtonDisabled = false;
             }
         },
-        /*
-        handleBioSelected(text) {
-            if (this.selectedImage !== image) {
-                this.selectedImage = image;
+        handleBioSelected(bio) {
+            if (this.selectedBio !== bio) {
+                this.selectedBio = bio;
                 this.isSaveButtonDisabled = false;
             }
         },
-        */
         saveChanges() {
             this.isSaveButtonDisabled = true;
             // Handle saving sequence (API request in the future)
             console.log(this.selectedImage);
             console.log(this.selectedColor);
-            //console.log(this.selectedBio);
+            console.log(this.selectedBio);
         },
     }
 
