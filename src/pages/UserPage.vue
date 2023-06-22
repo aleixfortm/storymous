@@ -169,19 +169,19 @@ export default {
 .settingsbutton {
     height: 30px;
     font-family: inherit;
-    border: 0px solid #ffffff;
+    border: none;
     color: rgb(255, 255, 255);
     cursor: pointer;
     font-size: 15px;
     width: 125px;
     margin: 10px 10px 10px 0;
-    background-color: #002fff63;
+    background-color: rgba(255, 255, 255, 0.308);
     border-radius: 4px;
     align-items: center;
 }
 
 .settingsbutton:hover {
-    background-color: #0023bd5b;
+    background-color: rgba(255, 255, 255, 0.089);
 }
 
 .section_title {
