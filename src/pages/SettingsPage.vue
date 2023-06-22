@@ -9,7 +9,7 @@
         </div>
         <div class="setting">
             <span class="description">Choose a color scheme for your profile</span>
-            <button class="access-button" @click="selectedSetting = 'ColorSetting'" :class="{ active: selectedSetting === 'ColorSetting' }">Change color</button>
+            <button class="access-button" @click="selectedSetting = 'ColorSetting'" :class="{ active: selectedSetting === 'ColorSetting' }">Choose color</button>
             
         </div>
         <div class="setting">
