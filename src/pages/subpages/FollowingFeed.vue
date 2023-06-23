@@ -5,11 +5,11 @@
             :key="post._id"
             :_id="post._id"
             :title="post.title"
-            :content="post.preview"
+            :content="post.content"
             :username="post.username"
             :postComment="post.post_comment"
             :date="post.date"
-            :imgName="post.random_img">
+            :picture="post.picture">
         </post-container>
     </feed-container>
 </template>

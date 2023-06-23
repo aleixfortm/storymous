@@ -57,7 +57,7 @@ export default {
 
     },
     
-    props: ["_id", "title", "content", "username", "postComment", "date", "imgName"],
+    props: ["_id", "title", "content", "username", "postComment", "date", "picture"],
     methods: {
         formatStory(story) {
             return story.replace(/<br>/g, '\n');
@@ -72,7 +72,7 @@ export default {
                 username: this.username,
                 postComment: this.postComment,
                 date: this.date,
-                imgName: this.imgName
+                imgName: this.picture
             };
             this.emitData(dataToEmit);
             this.router.push('/storymous/post/' + this._id.$oid);
@@ -84,7 +84,7 @@ export default {
 
     computed: {
         imgSource() {
-            return require('../../assets/img/' + this.imgName);
+            return require('../../assets/img/' + this.picture);
         },
         outlineClass() {
             const randomIndex = Math.floor(Math.random() * this.outlineColors.length);

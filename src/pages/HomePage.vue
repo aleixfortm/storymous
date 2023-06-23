@@ -95,9 +95,9 @@ export default {
     },
     mounted() {
     axios
-        .get('https://api.npoint.io/786a14060decfb7e66d9')
+        .get('http://127.0.0.1:5000/posts')
         .then(response => {
-            //console.log(response)
+            console.log(response.data)
             this.posts = response.data;
         })
         .catch(error => {
