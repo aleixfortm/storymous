@@ -57,7 +57,7 @@
         </div>
     </div>
 
-    <component :is="selectedTab" :posts="posts"></component>
+    <component :is="selectedTab" :posts="posts" :loading="loading"></component>
 
 </template>
 
@@ -90,7 +90,8 @@ export default {
             openDialog: true,
             userLogged: true,
             text: " ",
-            showCharacter: true
+            showCharacter: true,
+            loading: true
         }
     },
     mounted() {
@@ -99,6 +100,7 @@ export default {
         .then(response => {
             console.log(response.data)
             this.posts = response.data;
+            this.loading = false;
         })
         .catch(error => {
             console.log(error);
@@ -129,7 +131,6 @@ export default {
 
         }
     }
-
 }
 </script>
 

@@ -9,7 +9,8 @@
             :username="post.username"
             :postComment="post.post_comment"
             :date="post.date"
-            :picture="post.picture">
+            :picture="post.picture"
+            :color="post.color">
         </post-container>
     </feed-container>
 </template>

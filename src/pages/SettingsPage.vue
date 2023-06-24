@@ -56,7 +56,7 @@ export default {
 
             //default values
             selectedImage: "astronaut_reading.jpeg",
-            selectedColor: 'rgb(255, 25, 0)',
+            selectedColor: 'blue',
             selectedBio: "yo! My name's asdf and I love Storymous! Follow me to be up to date with my content :) Let us go lololo lolol lololololo! Yeah boom bam paaam!!! PAPAPPAPA BOOM, pipip pipi fiuuuum...",
         }
     },
@@ -102,6 +102,7 @@ export default {
         },
         saveChanges() {
             this.isSaveButtonDisabled = true;
+            
             // Handle saving sequence (API request in the future)
             console.log(this.selectedImage);
             console.log(this.selectedColor);

@@ -54,11 +54,12 @@
             :key="post._id"
             :_id="post._id"
             :title="post.title"
-            :content="post.preview"
+            :content="post.content"
             :username="post.username"
             :postComment="post.post_comment"
             :date="post.date"
-            :imgName="post.random_img">
+            :picture="post.picture"
+            :color="post.color">
         </post-container>
     </feed-container>
 </template>
@@ -96,9 +97,9 @@ export default {
         this.profileUsername = this.$route.params.id;
         console.log(this.$route.params.id)
     axios
-        .get('https://api.npoint.io/786a14060decfb7e66d9')
+        .get(`http://127.0.0.1:5000/posts/${this.profileUsername}`)
         .then(response => {
-            this.posts = response.data.latest;
+            this.posts = response.data;
             console.log(this.posts)
         })
         .catch(error => {

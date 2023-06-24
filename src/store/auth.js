@@ -16,7 +16,7 @@ export default {
             try {
               const response = await axios.post('http://192.168.1.44:5000/login', credentials); // Replace '/api/login' with your actual API endpoint for login
               const data = response.data; // Assuming the API returns the user data upon successful login
-              if (data.status == "valid!") {
+              if (data.status == "success") {
                 commit('SET_LOGGED_IN', true);
                 commit('SET_USER', data.username);
               }

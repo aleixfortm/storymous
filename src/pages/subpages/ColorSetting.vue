@@ -7,7 +7,7 @@
         :class="{ selected: item.selected }"
         @click="selectItem(index)"
       >
-        <div class="color" :style="{ backgroundColor: item.color }"></div>
+        <div class="color" :style="{ backgroundColor: item.color_code }"></div>
         <div class="selector"></div>
       </div>
     </div>
@@ -20,15 +20,15 @@ export default {
     data() {
         return {
             gridItems2: [
-            { color: 'rgb(255, 109, 93)', selected: false }, // Red color
-            { color: 'rgb(255, 25, 0)', selected: false }, // Green color
-            { color: 'rgb(0, 153, 255)', selected: false }, // Blue color
-            { color: 'rgb(55, 182, 97)', selected: false }, // Yellow color
-            { color: 'rgb(255, 217, 0)', selected: false }, // Red color
-            { color: 'rgb(255, 255, 255)', selected: false }, // Green color
-            { color: 'rgb(183, 0, 255)', selected: false }, // Blue color
-            { color: 'rgb(255, 0, 179)', selected: false }, // Yellow color
-            { color: 'rgb(255, 145, 0)', selected: false }, // Red color
+            { color_code: 'rgb(255, 109, 93)', color:"salmon", selected: false }, // Red color
+            { color_code: 'rgb(255, 25, 0)', color:"red", selected: false }, // Green color
+            { color_code: 'rgb(0, 153, 255)', color:"blue", selected: false }, // Blue color
+            { color_code: 'rgb(55, 182, 97)', color:"green", selected: false }, // Yellow color
+            { color_code: 'rgb(255, 217, 0)', color:"yellow", selected: false }, // Red color
+            { color_code: 'rgb(255, 255, 255)', color:"white", selected: false }, // Green color
+            { color_code: 'rgb(183, 0, 255)', color:"purple", selected: false }, // Blue color
+            { color_code: 'rgb(255, 0, 179)', color:"pink", selected: false }, // Yellow color
+            { color_code: 'rgb(255, 145, 0)', color:"orange", selected: false }, // Red color
             ],
         };
     },
@@ -40,7 +40,8 @@ export default {
                 username: "your username",
                 postComment: "Looks awesome! Good color choice!",
                 date: "Now",
-                imgName: "astronaut_reading.jpeg",
+                picture: "astronaut_reading.jpeg",
+                color: "red"
             };
 
             //preselect an item (will be the one gathered from API)

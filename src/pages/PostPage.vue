@@ -4,11 +4,12 @@
         v-if="post"
             :_id="post._id"
             :title="post.title"
-            :content="post.preview"
+            :content="post.content"
             :username="post.username"
             :postComment="post.post_comment"
             :date="post.date"
-            :imgName="post.random_img">
+            :picture="post.picture"
+            :color="post.color">
         </post-container>
         <div class="pollancre">
             <form @submit.prevent="submitForm">
@@ -31,7 +32,7 @@
           :content="comment.content"
           :username="comment.username"
           :date="comment.date"
-          :imgName="comment.random_img">
+          :picture="comment.random_img">
         </comment-container>
         <continuestory-container
         v-if="replyPost"
@@ -40,7 +41,7 @@
             :username="replyPost.username"
             :postComment="replyPost.postComment"
             :date="replyPost.date"
-            :imgName="replyPost.imgName">
+            :picture="replyPost.imgName">
         </continuestory-container>
     </feed-container>
 </template>
@@ -73,7 +74,7 @@ export default {
                 username: "your username",
                 postComment: "Looks awesome! Nice choice of color!",
                 date: "Now",
-                imgName: "astronaut_reading.jpeg",
+                picture: "astronaut_reading.jpeg",
             },
     }
   },

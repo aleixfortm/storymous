@@ -53,11 +53,7 @@ export default {
         return { router: router };
     },
 
-    components: {
-
-    },
-    
-    props: ["_id", "title", "content", "username", "postComment", "date", "picture"],
+    props: ["_id", "title", "content", "username", "postComment", "date", "picture", "color"],
     methods: {
         formatStory(story) {
             return story.replace(/<br>/g, '\n');
@@ -72,7 +68,8 @@ export default {
                 username: this.username,
                 postComment: this.postComment,
                 date: this.date,
-                imgName: this.picture
+                picture: this.picture,
+                color: this.color
             };
             this.emitData(dataToEmit);
             this.router.push('/storymous/post/' + this._id.$oid);
@@ -87,8 +84,7 @@ export default {
             return require('../../assets/img/' + this.picture);
         },
         outlineClass() {
-            const randomIndex = Math.floor(Math.random() * this.outlineColors.length);
-            return `outline ${this.outlineColors[randomIndex]}`;
+            return `outline ${this.color}`;
         },
     },
     
@@ -119,8 +115,8 @@ export default {
     width: 100%;
     /*border: 2px whitesmoke dashed;*/
     border-radius: 5px;
-    border: 2px rgb(55, 182, 97) solid;
-    background-color: rgba(60, 134, 85, 0.103);
+    border: 2px rgba(255, 255, 255, 0) solid;
+    background-color: rgba(255, 255, 255, 0);
 }
 
 .outline.salmon {
