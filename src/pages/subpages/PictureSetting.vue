@@ -14,6 +14,8 @@
   
   <script>
 import astronaut_reading from "@/assets/img/astronaut_reading.jpeg";
+import astronaut_reads_in_planet from "@/assets/img/astronaut_reads_in_planet.jpeg";
+import astronaut_saloon from "@/assets/img/astronaut_saloon.jpeg";
 import astronaut_earth from "@/assets/img/astronaut_earth.jpeg";
 import astronaut_reads from "@/assets/img/astronaut_reads.jpeg";
 import logo from "@/assets/img/logo.png";
@@ -36,6 +38,8 @@ export default {
                 { image: astronaut_reading, name: "astronaut_reading.jpeg", selected: false },
                 { image: astronaut_earth, name: "astronaut_earth.jpeg", selected: false },
                 { image: astronaut_reads, name: "astronaut_reads.jpeg", selected: false },
+                { image: astronaut_reads_in_planet, name: "astronaut_reads_in_planet.jpeg", selected: false },
+                { image: astronaut_saloon, name: "astronaut_saloon.jpeg", selected: false },
                 { image: logo, name: "logo.png", selected: false },
                 { image: bookpile, name: "bookpile.jpeg", selected: false },
                 { image: tree1, name: "tree1.jpeg", selected: false },
