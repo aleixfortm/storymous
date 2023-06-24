@@ -49,18 +49,28 @@
         <section v-else class="section_title">
             {{ profileUsername }}'s posts
         </section>
-        <post-container
-            v-for="post in posts"
-            :key="post._id"
-            :_id="post._id"
-            :title="post.title"
-            :content="post.content"
-            :username="post.username"
-            :postComment="post.post_comment"
-            :date="post.date"
-            :picture="post.picture"
-            :color="post.color">
-        </post-container>
+        <div v-if="loading" class="loader-container">
+            <div class="lds-facebook">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+                <span class="loader-text">Harvesting user stories...</span>
+            </div>
+        <div v-else>
+            <post-container 
+                v-for="post in posts"
+                :key="post._id"
+                :_id="post._id"
+                :title="post.title"
+                :content="post.content"
+                :username="post.username"
+                :postComment="post.post_comment"
+                :date="post.date"
+                :picture="post.picture"
+                :color="post.color">
+            </post-container>
+        </div>
     </feed-container>
 </template>
 
@@ -80,7 +90,8 @@ export default {
     data() {
         return {
             posts: [],
-            profileUsername: null
+            profileUsername: null,
+            loading: true
         }
     },
     components: {
@@ -100,7 +111,7 @@ export default {
         .get(`http://127.0.0.1:5000/posts/${this.profileUsername}`)
         .then(response => {
             this.posts = response.data;
-            console.log(this.posts)
+            this.loading = false;
         })
         .catch(error => {
             console.log(error);
@@ -129,6 +140,59 @@ export default {
 </script>
 
 <style scoped>
+.loader-text {
+    background-color: whitesmoke;
+    color: rgb(0, 0, 0);
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-weight: bold;
+}
+
+.loader-container {
+    margin: 40px 0 0 0;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.lds-facebook {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+.lds-facebook div {
+  display: inline-block;
+  position: absolute;
+  left: 8px;
+  width: 16px;
+  background: #fff;
+  animation: lds-facebook 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+}
+.lds-facebook div:nth-child(1) {
+  left: 8px;
+  animation-delay: -0.24s;
+}
+.lds-facebook div:nth-child(2) {
+  left: 32px;
+  animation-delay: -0.12s;
+}
+.lds-facebook div:nth-child(3) {
+  left: 56px;
+  animation-delay: 0;
+}
+@keyframes lds-facebook {
+  0% {
+    top: 8px;
+    height: 64px;
+  }
+  50%, 100% {
+    top: 24px;
+    height: 32px;
+  }
+}
+
 .name-color {
     display: flex;
 }
