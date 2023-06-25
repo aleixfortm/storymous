@@ -9,7 +9,8 @@
             :postComment="post.post_comment"
             :date="post.date"
             :picture="post.picture"
-            :color="post.color">
+            :color="post.color"
+            :feedMode="false">
         </post-container>
         <div class="pollancre">
             <form @submit.prevent="submitForm">

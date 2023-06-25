@@ -11,7 +11,8 @@
                 :postComment="post.post_comment"
                 :date="post.date"
                 :picture="post.picture"
-                :color="post.color">
+                :color="post.color"
+                :feedMode="true">
             </post-container>
         </div>
         <div v-else>

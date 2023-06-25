@@ -29,7 +29,7 @@
                     </div>
                     <p class="story__content">
                         {{ formatStory(content) }}
-                        <b class="readmore-button"><em>Read more</em></b>
+                        <b v-if="feedMode" class="readmore-button"><em>Read more</em></b>
                     </p>
                 </article>
             </router-link>
@@ -50,7 +50,7 @@ export default {
         const router = useRouter();
         return { router: router };
     },
-    props: ["_id", "title", "content", "username", "postComment", "date", "picture", "color"],
+    props: ["_id", "title", "content", "username", "postComment", "date", "picture", "color", "feedMode"],
     methods: {
         formatStory(story) {
             return story.replace(/<br>/g, '\n');
