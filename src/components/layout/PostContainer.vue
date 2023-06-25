@@ -8,7 +8,7 @@
                 <div class="story__user-container">
                     <div class="story__user-img-container">
                         <router-link to="" @click.stop="navigateToUser" style="color: inherit; text-decoration: none;">
-                            <img :src="imgSource" alt="pic" class="story__user-img">
+                            <img :src="imgSource" v-if="picture" alt="pic" class="story__user-img">
                         </router-link>
                     </div> 
                     <div class="story__user-info-container">
@@ -39,7 +39,6 @@
 
 <script>
 import { useRouter } from 'vue-router';
-import { mapActions } from "vuex";
 
 export default {
     data() {
@@ -47,31 +46,16 @@ export default {
             outlineColors: ["red", "blue", "green", "yellow", "white", "purple", "pink", "orange", "salmon"]
         }
     },
-
     setup() {
         const router = useRouter();
         return { router: router };
     },
-
     props: ["_id", "title", "content", "username", "postComment", "date", "picture", "color"],
     methods: {
         formatStory(story) {
             return story.replace(/<br>/g, '\n');
         },
-
-        ...mapActions("emitdata", ["emitData"]),
         navigateToPost() {
-            const dataToEmit =  {
-                _id: this._id,
-                title: this.title,
-                content: this.content,
-                username: this.username,
-                postComment: this.postComment,
-                date: this.date,
-                picture: this.picture,
-                color: this.color
-            };
-            this.emitData(dataToEmit);
             this.router.push('/storymous/post/' + this._id.$oid);
         },
         navigateToUser() {

@@ -1,7 +1,7 @@
 <template>
     <feed-container>
         <post-container
-        v-if="post"
+          v-if="post"
             :_id="post._id"
             :title="post.title"
             :content="post.content"
@@ -22,18 +22,20 @@
                       <button class="postbutton" type="submit">Comment</button>
                     </div>
                 </div>
-
             </form>
         </div>
-        <comment-container
-          v-for="comment in comments"
-          :key="comment._id"
-          :_id="comment._id"
-          :content="comment.content"
-          :username="comment.username"
-          :date="comment.date"
-          :picture="comment.random_img">
-        </comment-container>
+        <div v-if="replies">
+          <comment-container 
+            v-for="reply in replies"
+              :key="reply._id"
+              :_id="reply._id"
+              :content="reply.content"
+              :username="reply.username"
+              :date="reply.date"
+              :picture="reply.picture">
+          </comment-container>
+        </div>
+        <!--
         <continuestory-container
         v-if="replyPost"
             :_id="replyPost._id"
@@ -43,15 +45,15 @@
             :date="replyPost.date"
             :picture="replyPost.imgName">
         </continuestory-container>
+        -->
     </feed-container>
 </template>
 
 <script>
 import axios from "axios";
-import { mapGetters } from "vuex";
 
 import CommentContainer from "@/components/layout/CommentContainer.vue";
-import ContinuestoryContainer from "@/components/layout/ContinuestoryContainer.vue";
+//import ContinuestoryContainer from "@/components/layout/ContinuestoryContainer.vue";
 import FeedContainer from '@/components/layout/FeedContainer.vue';
 import PostContainer from '@/components/layout/PostContainer.vue';
 
@@ -60,54 +62,31 @@ export default {
     FeedContainer,
     PostContainer,
     CommentContainer,
-    ContinuestoryContainer
+    //ContinuestoryContainer
   },
   data() {
     return {
       post: null,
-      comments: [],
+      replies: null,
       formcomment: "",
       continuedStory: null,
-      replyPost: {
-                _id: "test",
-                content: "This shows how amazing your incredible story will look! Let us begin writing! Oh, and here is extra filler to make it look bigger, since a story is much longer than that hahaha, but never mind this!",
-                username: "your username",
-                postComment: "Looks awesome! Nice choice of color!",
-                date: "Now",
-                picture: "astronaut_reading.jpeg",
-            },
+      textareaHeight: null,
     }
   },
   mounted() {
+    const postId = this.$route.params.id;
     axios
-      .get(`http://192.168.1.44:5000/post/${this.profileUsername}`)
+      .get(`http://192.168.1.44:5000/post/${postId}`)
       .then(response => {
-        this.comments = response.data.comments;
-        const posts1 = response.data.latest;
-        const posts2 = response.data.following;
 
-        this.continuedStory = this.replyPost;
-        
-        const id = this.$route.params.id;
+        this.post = response.data.post;
+        console.log(this.post)
+        this.replies = response.data.replies;
 
-        const post1 = posts1.find(post => post._id.$oid === id);
-        if (post1) {
-          this.post = post1;
-        } else {
-          console.log('Post not found in latest');
-        }
-
-        const post2 = posts2.find(post => post._id.$oid === id);
-        if (post2) {
-          this.post = post2;
-        } else {
-          console.log('Post not found in following');
-        }
-        
       })
   },
   computed: {
-    ...mapGetters("emitdata", ["getEmittedData"])
+
   },
   methods: {
     adjustTextareaHeight() {

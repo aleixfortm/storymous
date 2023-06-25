@@ -3,7 +3,7 @@
         <div class="comment__user-container">
             <div><img src="../../assets/img/reply_icon3.png" alt="reply icon" style="max-width: 25px; margin: 0 0px 0 0px; transform: scaleX(-1); "></div>
             <div class="comment__user-img-container">
-                <img src="../../assets/img/logo.png" alt="Profile picture" class="comment__user-img">
+                <img :src="imgSource" v-if="picture" alt="Profile picture" class="comment__user-img">
             </div> 
             <div class="story__user-info-container">
                 <div class="comment__username cur-pnt"> 
@@ -26,7 +26,7 @@ export default {
 
         }
     },
-    props: ["_id", "content", "username", "date", "imgName"],
+    props: ["_id", "content", "username", "date", "picture"],
     components: {
 
     },
@@ -34,7 +34,9 @@ export default {
 
     },
     computed: {
-
+        imgSource() {
+            return require('../../assets/img/' + this.picture);
+        },
     },
     
 };
