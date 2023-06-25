@@ -8,6 +8,7 @@
         </section>
         <section class="profile-box">
             <profile-picture
+                v-if="userPicture"
                 :picture="userPicture">
             </profile-picture>
             <div class="statsblock">
@@ -21,20 +22,20 @@
                 <div class="stats">
                     <div class="count-block">
                         <b>Stories</b>
-                        <div class="count-block__num">3</div>
+                        <div class="count-block__num">{{ nStories }}</div>
                     </div>
                     <div class="count-block">
                         <b>Followers</b>
-                        <div class="count-block__num">10</div>
+                        <div class="count-block__num">{{ nFollowers }}</div>
                     </div>
                     <div class="count-block">
                         <b>Following</b>
-                        <div class="count-block__num">24</div>
+                        <div class="count-block__num">{{ nFollowing }}</div>
                     </div>
                 </div>
                 <div class="stats-bio">
                     <b>Bio</b>
-                    <div class="bio-content">{{ bio }}</div>
+                    <div class="bio-content">{{ userBio }}</div>
                 </div>
                 <div v-if="ownProfile()" class="miscbuttons">
                     <button class="settingsbutton" @click="goToSettings">Edit profile</button>
@@ -92,10 +93,13 @@ export default {
         return {
             posts: [],
             bio: null,
-            userData: null,
             profileUsername: null,
             loading: true,
-            userPicture: ""
+            userPicture: "",
+            userBio: "",
+            nStories: 0,
+            nFollowers: 0,
+            nFollowing: 0
         }
     },
     components: {
@@ -115,24 +119,17 @@ export default {
     },
     mounted() {
         this.profileUsername = this.$route.params.id;
-        /*
-    axios
-        .get(`http://127.0.0.1:5000/posts/${this.profileUsername}`)
-        .then(response => {
-            this.posts = response.data;
-            this.loading = false;
-        })
-        .catch(error => {
-            console.log(error);
-        });
-        */
     axios
         .get(`http://127.0.0.1:5000/user/${this.profileUsername}`)
         .then(response => {
             const data = response.data;
             this.posts = data.posts;
-            this.userData = data.userdata;
-            this.userPicture = this.userData.picture; 
+            const userData = data.userdata;
+            this.userPicture = userData.picture;
+            this.userBio = userData.bio; 
+            this.nStories = userData.n_writ_posts;
+            this.nFollowers = userData.followers.length;
+            this.nFollowing = userData.following.length;
             this.loading = false;
         })
         .catch(error => {
@@ -379,7 +376,7 @@ export default {
     color: rgb(0, 0, 0);
 }
 
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 700px) {
     .profile-box {
         flex-direction: column;
         width: fit-content;

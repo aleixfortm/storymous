@@ -23,13 +23,16 @@ export default {
     justify-content: center;
     align-items: stretch;
     width: 340px;
+    height: auto;
+    padding: 15px 30px;
 }
 
 .postimage {
     height: 100%;
     border-radius: 500%;
-    border: 6px whitesmoke solid;
-    margin: 35px;
+    border: 4px whitesmoke solid;
+    margin: auto;
+    width: 100%;
 }
 
 </style>
