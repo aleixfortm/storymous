@@ -7,9 +7,9 @@
             {{ profileUsername }}'s profile
         </section>
         <section class="profile-box">
-            <div class="imageblock">
-                <img class="postimage" src="../assets/img/default_blue.png" alt="profilepic">
-            </div>
+            <profile-picture
+                :picture="userPicture">
+            </profile-picture>
             <div class="statsblock">
                 <div class="topblock">
                     <div class="name-color">
@@ -34,7 +34,7 @@
                 </div>
                 <div class="stats-bio">
                     <b>Bio</b>
-                    <div class="bio-content">yo! My name's <b>{{ profileUsername }}</b> and I love Storymous! Follow me to be up to date with my content :) </div>
+                    <div class="bio-content">{{ bio }}</div>
                 </div>
                 <div v-if="ownProfile()" class="miscbuttons">
                     <button class="settingsbutton" @click="goToSettings">Edit profile</button>
@@ -76,11 +76,12 @@
 
 <script>
 import { mapActions, mapGetters } from 'vuex';
-import axios from 'axios';
 import { useRouter } from 'vue-router';
+import axios from 'axios';
 
 import FeedContainer from "../components/layout/FeedContainer.vue";
 import PostContainer from "../components/layout/PostContainer.vue";
+import ProfilePicture from '@/components/layout/ProfilePicture.vue';
 
 export default {
     setup() {
@@ -90,27 +91,48 @@ export default {
     data() {
         return {
             posts: [],
+            bio: null,
+            userData: null,
             profileUsername: null,
-            loading: true
+            loading: true,
+            userPicture: ""
         }
     },
     components: {
         FeedContainer,
-        PostContainer
+        PostContainer,
+        ProfilePicture
     },
     computed: {
         ...mapGetters('auth', ['isLoggedIn', 'currentUser']),
         currentParameter() {
             return this.$route.params.id; // Replace "parameter" with the actual name of your URL parameter
         },
+        imgSource() {
+            console.log(this.userPicture)
+            return require('../assets/img/' + this.userPicture);
+        },
     },
     mounted() {
         this.profileUsername = this.$route.params.id;
-        console.log(this.$route.params.id)
+        /*
     axios
         .get(`http://127.0.0.1:5000/posts/${this.profileUsername}`)
         .then(response => {
             this.posts = response.data;
+            this.loading = false;
+        })
+        .catch(error => {
+            console.log(error);
+        });
+        */
+    axios
+        .get(`http://127.0.0.1:5000/user/${this.profileUsername}`)
+        .then(response => {
+            const data = response.data;
+            this.posts = data.posts;
+            this.userData = data.userdata;
+            this.userPicture = this.userData.picture; 
             this.loading = false;
         })
         .catch(error => {
@@ -133,7 +155,8 @@ export default {
         },
         goToSettings() {
             this.router.push('/storymous/settings');
-        }
+        },
+
     }
 }
 
@@ -300,13 +323,6 @@ export default {
     margin: 25px 0 0 0;
 }
 
-.imageblock {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: auto;
-    width: 340px;
-}
 
 .statsblock {
     display: flex;
@@ -361,12 +377,6 @@ export default {
     padding: 10px;
     margin: 30px 10px 5px 10px;
     color: rgb(0, 0, 0);
-}
-
-.postimage {
-    height: 275px;
-    border-radius: 500%;
-    border: 6px solid whitesmoke;
 }
 
 @media screen and (max-width: 650px) {
