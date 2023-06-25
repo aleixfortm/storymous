@@ -17,7 +17,7 @@
             </div>
         </div>
         <div class="create_newstory">
-            <img class="postimage" src="../assets/img/default_blue.png" alt="profilepic">
+            <img class="postimage" v-if="userFetchedPicture" :src="imgSource" alt="profilepic">
             <router-link to="" class="story_form">
                 <input type="text" placeholder="Write new story" @click="navigateToNewPost">
             </router-link>
@@ -96,7 +96,7 @@ export default {
     },
     mounted() {
     axios
-        .get('http://127.0.0.1:5000/posts')
+        .get('http://192.168.1.44:5000/posts')
         .then(response => {
             console.log(response.data)
             this.posts = response.data;
@@ -120,15 +120,16 @@ export default {
         }
     },
     computed: {
-        ...mapGetters('auth', ['isLoggedIn', 'currentUser']),
-
+        ...mapGetters('auth', ['isLoggedIn', 'currentUser', "userFetchedPicture", "colorFetched"]),
         modifiedText() {
             if (this.showCharacter) {
                 return ""; // Replace character with underscore when showCharacter is false
             } else {
                 return ""
             }
-
+        },
+        imgSource() {
+            return require("../assets/img/" + this.userFetchedPicture);
         }
     }
 }

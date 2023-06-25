@@ -108,7 +108,7 @@ export default {
         ProfilePicture
     },
     computed: {
-        ...mapGetters('auth', ['isLoggedIn', 'currentUser']),
+        ...mapGetters('auth', ['isLoggedIn', 'currentUser', "userFetchedPicture", "colorFetched", "userFetchedBio", "nFetchedPosts", "nFetchedFollowers", "nFetchedFollowing"]),
         currentParameter() {
             return this.$route.params.id; // Replace "parameter" with the actual name of your URL parameter
         },
@@ -119,22 +119,43 @@ export default {
     },
     mounted() {
         this.profileUsername = this.$route.params.id;
-    axios
-        .get(`http://127.0.0.1:5000/user/${this.profileUsername}`)
-        .then(response => {
-            const data = response.data;
-            this.posts = data.posts;
-            const userData = data.userdata;
-            this.userPicture = userData.picture;
-            this.userBio = userData.bio; 
-            this.nStories = userData.n_writ_posts;
-            this.nFollowers = userData.followers.length;
-            this.nFollowing = userData.following.length;
-            this.loading = false;
-        })
-        .catch(error => {
-            console.log(error);
-        });
+        if (this.ownProfile()) {
+            this.userPicture = this.userFetchedPicture;
+            this.userBio = this.userFetchedBio;
+            this.nStories = this.nFetchedPosts;
+            this.nFollowers = this.nFetchedFollowers;
+            this.nFollowing = this.nFetchedFollowing;
+
+        axios
+            .get(`http://192.168.1.44:5000/posts/${this.profileUsername}`)
+            .then(response => {
+
+                const data = response.data;
+                console.log(data)
+                this.posts = data;
+                this.loading = false;
+            })
+            .catch(error => {
+                console.log(error);
+            });
+        } else {
+        axios
+            .get(`http://192.168.1.44:5000/user/${this.profileUsername}`)
+            .then(response => {
+                const data = response.data;
+                this.posts = data.posts;
+                const userData = data.userdata;
+                this.userPicture = userData.picture;
+                this.userBio = userData.bio; 
+                this.nStories = userData.n_writ_posts;
+                this.nFollowers = userData.followers.length;
+                this.nFollowing = userData.following.length;
+                this.loading = false;
+            })
+            .catch(error => {
+                console.log(error);
+            });
+        }
     },
     watch: {
         currentParameter() {

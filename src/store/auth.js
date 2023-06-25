@@ -14,16 +14,17 @@ export default {
     actions: {
         async login({ commit }, credentials) {
             try {
-              const response = await axios.post('http://127.0.0.1:5000/login', credentials); // Replace '/api/login' with your actual API endpoint for login
+              const response = await axios.post('http://192.168.1.44:5000/login', credentials); // Replace '/api/login' with your actual API endpoint for login
               const data = response.data; // Assuming the API returns the user data upon successful login
               if (data.status == "success") {
                 commit('SET_LOGGED_IN', true);
                 commit('SET_USER', data.username);
                 axios
-                    .get(`http://127.0.0.1:5000/user/${data.username}`)
+                    .get(`http://192.168.1.44:5000/user/${data.username}`)
                     .then(response => {
-                    const userData = response.data;
-                    commit('SET_USER_DATA', userData);
+                      const userFetchedData = response.data.userdata;
+                      console.log(userFetchedData)
+                      commit('SET_USER_DATA', userFetchedData);
                   }).catch(error => {
                     console.error('Failed to fetch user data:', error);
                   });
@@ -51,19 +52,19 @@ export default {
         SET_USER(state, user) {
           state.user = user;
         },
-        SET_USER_DATA(state, userData) {
-          state.userData = userData;
+        SET_USER_DATA(state, userFetchedData) {
+          state.userData = userFetchedData;
         }
     },
 
     getters: {
         isLoggedIn: state => state.loggedIn,
         currentUser: state => state.user,
-        userPicture: state => state.userData ? state.userData.picture : null,
-        username: state => state.userData ? state.userData.username : null,
-        color: state => state.userData ? state.userData.color: null,
-        nPosts: state => state.userData ? state.userData.nPosts : 0,
-        nFollowers: state => state.userData ? state.userData.nFollowers : 0,
-        nFollowing: state => state.userData ? state.userData.nFollowing : 0
+        userFetchedPicture: state => state.userData ? state.userData.picture : null,
+        userFetchedBio: state => state.userData ? state.userData.bio : null,
+        colorFetched: state => state.userData ? state.userData.color: null,
+        nFetchedPosts: state => state.userData ? state.userData.n_writ_posts : 0,
+        nFetchedFollowers: state => state.userData ? state.userData.followers.length : 0,
+        nFetchedFollowing: state => state.userData ? state.userData.following.length : 0
     }
 }

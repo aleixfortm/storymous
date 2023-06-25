@@ -13,7 +13,8 @@
           </div>
           <router-link :to="getProfileLink" v-else class="userdata">
                 <div class="username">@{{ currentUser }}</div>
-                <img class="userimg" src="../../assets/img/default_blue.png" alt="astronaut">
+                
+                <img class="userimg" v-if="userFetchedPicture" :src="imgSource" alt="astronaut">
           </router-link>
       </nav>
   </header>
@@ -57,10 +58,13 @@ export default {
     }
   },
   computed: {
-      ...mapGetters('auth', ['isLoggedIn', 'currentUser']),
+      ...mapGetters('auth', ['isLoggedIn', 'currentUser', "userFetchedPicture", "colorFetched"]),
       getProfileLink() {
         return '/storymous/user/' + this.currentUser;
-      }
+      },
+      imgSource() {
+            return require("../../assets/img/" + this.userFetchedPicture);
+        }
   }
 };
 </script>
