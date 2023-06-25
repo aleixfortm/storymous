@@ -125,10 +125,10 @@
 }
 
 .postimage {
-    height: 50px;
+    height: 55px;
     border-radius: 100%;
     margin: 10px 8px 0 10px;
-    border: 2px whitesmoke solid;
+    border: 0px whitesmoke solid;
 }
 
 textarea {
