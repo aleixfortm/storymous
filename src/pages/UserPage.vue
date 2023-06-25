@@ -6,7 +6,7 @@
         <section v-else class="section_title">
             {{ profileUsername }}'s profile
         </section>
-        <section class="profile-box">
+        <section class="profile-box" v-if="userPicture">
             <profile-picture
                 v-if="userPicture"
                 :picture="userPicture">
@@ -43,6 +43,16 @@
                 </div>
             </div>
         </section>
+        <section class="profile-box centered" v-else>
+            <div v-if="loading" class="loader-container">
+            <div class="lds-facebook">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <span class="loader-text">Spotting authors nearby...</span>
+        </div>
+        </section>
 
         <section v-if="ownProfile()" class="section_title">
             My posts
@@ -56,8 +66,8 @@
                 <div></div>
                 <div></div>
             </div>
-                <span class="loader-text">Harvesting user stories...</span>
-            </div>
+            <span class="loader-text">Harvesting user stories...</span>
+        </div>
         <div v-else>
             <post-container 
                 v-for="post in posts"
@@ -134,24 +144,6 @@ export default {
                 return false;
             }
         },
-        async fetchDetails(id) {
-            // Fetch the details based on the provided id
-            try {
-                const response = await axios.get(`http://192.168.1.44:5000/user/${id}`);
-                const data = response.data;
-                this.posts = data.posts;
-                const userData = data.userdata;
-                this.userPicture = userData.picture;
-                this.userBio = userData.bio;
-                this.nStories = userData.n_writ_posts;
-                this.nFollowers = userData.followers.length;
-                this.nFollowing = userData.following.length;
-                this.loading = false;
-            } catch (error) {
-                console.error(error);
-                throw error;
-            }
-        },
         goToSettings() {
             this.$router.push('/storymous/settings');
         },
@@ -201,6 +193,12 @@ export default {
 </script>
 
 <style scoped>
+.centered {
+    justify-content: center;
+    align-items: center;
+    height: 300px
+}
+
 .loader-text {
     background-color: whitesmoke;
     color: rgb(0, 0, 0);

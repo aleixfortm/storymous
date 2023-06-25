@@ -26,11 +26,11 @@
         </div>
         <section class="section_title"></section>
 
-        <component 
+        <component v-if="userFetchedPicture"
             :is="selectedSetting" 
-            :previousImage="selectedImage" 
-            :previousColor="selectedColor" 
-            :previous-bio="selectedBio"
+            :previousImage="userFetchedPicture" 
+            :previousColor="colorFetched" 
+            :previous-bio="userFetchedBio"
             @image-selected="handleImageSelected" 
             @color-selected="handleColorSelected"
             @bio-selected="handleBioSelected">
@@ -39,13 +39,13 @@
 </template>
 
 <script>
+import axios from "axios";
 import { useRouter } from 'vue-router';
 import { mapGetters } from 'vuex';
 
 import PictureSetting from '../pages/subpages/PictureSetting.vue';
 import ColorSetting from './subpages/ColorSetting.vue';
 import BioSetting from './subpages/BioSetting.vue';
-
 import FeedContainer from '@/components/layout/FeedContainer.vue';
 
 export default {
@@ -57,7 +57,7 @@ export default {
             //default values
             selectedImage: "astronaut_reading.jpeg",
             selectedColor: 'blue',
-            selectedBio: "yo! My name's asdf and I love Storymous! Follow me to be up to date with my content :) Let us go lololo lolol lololololo! Yeah boom bam paaam!!! PAPAPPAPA BOOM, pipip pipi fiuuuum...",
+            selectedBio: "yo! My name's asdf and I love Storymous! Follow me to be up to date with my content :-)",
         }
     },
     setup() {
@@ -76,7 +76,7 @@ export default {
         }
     },
     computed: {
-        ...mapGetters('auth', ['isLoggedIn', 'currentUser']),
+        ...mapGetters('auth', ['isLoggedIn', 'currentUser', "userFetchedPicture", "colorFetched", "userFetchedBio", "nFetchedPosts", "nFetchedFollowers", "nFetchedFollowing"]),
         saveButtonText() {
             return this.isSaveButtonDisabled ? "Saved!" : "Save changes"
         }
@@ -102,11 +102,28 @@ export default {
         },
         saveChanges() {
             this.isSaveButtonDisabled = true;
+            //this.loading = true; // Start loading state
             
-            // Handle saving sequence (API request in the future)
             console.log(this.selectedImage);
             console.log(this.selectedColor);
             console.log(this.selectedBio);
+
+        axios
+            .post('http://192.168.1.44:5000/update_settings', {
+                username: this.currentUser,
+                selectedImage: this.selectedImage,
+                selectedColor: this.selectedColor,
+                selectedBio: this.selectedBio
+            })
+            /*
+            .then(response => {
+                this.loading = false;
+            })
+            .catch(error => {
+                console.log(error);
+                this.loading = false;
+            });
+            */
         },
     }
 
