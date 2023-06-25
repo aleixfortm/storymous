@@ -42,6 +42,7 @@
 import axios from "axios";
 import { useRouter } from 'vue-router';
 import { mapGetters } from 'vuex';
+import { API_BASE_URL } from '@/config';
 
 import PictureSetting from '../pages/subpages/PictureSetting.vue';
 import ColorSetting from './subpages/ColorSetting.vue';
@@ -109,7 +110,7 @@ export default {
             console.log(this.selectedBio);
 
         axios
-            .post('http://192.168.1.44:5000/update_settings', {
+            .post(`${API_BASE_URL}/update_settings`, {
                 username: this.currentUser,
                 selectedImage: this.selectedImage,
                 selectedColor: this.selectedColor,

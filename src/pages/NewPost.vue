@@ -27,6 +27,7 @@
   
   <script>
   import { mapGetters } from 'vuex';
+  import { API_BASE_URL } from '@/config';
 
   import FeedContainer from '@/components/layout/FeedContainer.vue';
   import axios from 'axios';
@@ -48,7 +49,7 @@
     methods: {
       submitForm() {
         // Here you can perform the desired actions with the form data
-        axios.post('http://192.168.1.44:5000/new_post') //this.formtitle)
+        axios.post(`${API_BASE_URL}/new_post`) //this.formtitle)
       },
       adjustTextareaHeight() {
           const textarea = this.$el.querySelector('#comment');
@@ -70,7 +71,7 @@
           this.adjustTextareaHeight();
         },
         formbody() {
-          this.formbody = this.formbody.substring(0, 5000);
+          this.formbody = this.formbody.substring(0, 8001);
           this.adjustTextareaHeight1();
         },
         formtitle() {

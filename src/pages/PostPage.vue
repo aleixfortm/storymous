@@ -52,6 +52,7 @@
 
 <script>
 import axios from "axios";
+import { API_BASE_URL } from '@/config';
 
 import CommentContainer from "@/components/layout/CommentContainer.vue";
 //import ContinuestoryContainer from "@/components/layout/ContinuestoryContainer.vue";
@@ -77,7 +78,7 @@ export default {
   mounted() {
     const postId = this.$route.params.id;
     axios
-      .get(`http://192.168.1.44:5000/post/${postId}`)
+      .get(`${API_BASE_URL}/post/${postId}`)
       .then(response => {
 
         this.post = response.data.post;

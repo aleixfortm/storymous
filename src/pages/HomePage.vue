@@ -65,6 +65,8 @@
 <script>
 import { mapGetters } from 'vuex';
 import { useRouter } from 'vue-router';
+import { API_BASE_URL } from '@/config';
+
 import axios from 'axios';
 
 import FeedContainer from "../components/layout/FeedContainer.vue"
@@ -96,7 +98,7 @@ export default {
     },
     mounted() {
     axios
-        .get('http://192.168.1.44:5000/posts')
+        .get(`${API_BASE_URL}/posts`)
         .then(response => {
             console.log(response.data)
             this.posts = response.data;

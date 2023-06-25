@@ -88,6 +88,7 @@
 <script>
 import { mapActions, mapGetters } from 'vuex';
 import { useRouter } from 'vue-router';
+import { API_BASE_URL } from '@/config';
 import axios from 'axios';
 
 import FeedContainer from "../components/layout/FeedContainer.vue";
@@ -157,7 +158,7 @@ export default {
                 this.nFollowing = this.nFetchedFollowing;
 
             axios
-                .get(`http://192.168.1.44:5000/posts/${this.profileUsername}`)
+                .get(`${API_BASE_URL}/posts/${this.profileUsername}`)
                 .then(response => {
 
                     const data = response.data;
@@ -170,7 +171,7 @@ export default {
                 });
             } else {
             axios
-                .get(`http://192.168.1.44:5000/user/${this.profileUsername}`)
+                .get(`${API_BASE_URL}/user/${this.profileUsername}`)
                 .then(response => {
                     const data = response.data;
                     this.posts = data.posts;

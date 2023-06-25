@@ -1,6 +1,7 @@
 //import axios from 'axios';
 import router from '@/router'; // Import your Vue Router instance
 import axios from "axios"
+import { API_BASE_URL } from '@/config';
 
 export default {
     namespaced: true,
@@ -14,13 +15,13 @@ export default {
     actions: {
         async login({ commit }, credentials) {
             try {
-              const response = await axios.post('http://192.168.1.44:5000/login', credentials); // Replace '/api/login' with your actual API endpoint for login
+              const response = await axios.post(`${API_BASE_URL}/login`, credentials); // Replace '/api/login' with your actual API endpoint for login
               const data = response.data; // Assuming the API returns the user data upon successful login
               if (data.status == "success") {
                 commit('SET_LOGGED_IN', true);
                 commit('SET_USER', data.username);
                 axios
-                    .get(`http://192.168.1.44:5000/user/${data.username}`)
+                    .get(`http://83.44.90.168:8001/user/${data.username}`)
                     .then(response => {
                       const userFetchedData = response.data.userdata;
                       console.log(userFetchedData)
