@@ -54,7 +54,7 @@ export default {
     },
     goToProfile() {
       const ownUsername = this.currentUser;
-      this.router.push('/storymous/user/' + ownUsername);
+      this.$router.push('/storymous/user/' + ownUsername);
     }
   },
   computed: {

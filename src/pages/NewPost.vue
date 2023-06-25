@@ -7,7 +7,7 @@
             <form @submit.prevent="submitForm">
                 <div class="newstory_comment">
                     <div class="image_box">
-                        <img class="postimage" src="../assets/img/default_blue.png" alt="profilepic">
+                        <img class="postimage" v-if="userFetchedPicture" :src="imgSource" alt="profilepic">
                     </div>
                     <textarea id="comment" v-model="formcomment" placeholder="Author comment" rows="1" :style="{ height: textareaHeight }" required></textarea>
                 </div>
@@ -26,6 +26,8 @@
   </template>
   
   <script>
+  import { mapGetters } from 'vuex';
+
   import FeedContainer from '@/components/layout/FeedContainer.vue';
   import axios from 'axios';
 
@@ -46,7 +48,7 @@
     methods: {
       submitForm() {
         // Here you can perform the desired actions with the form data
-        axios.post('http://192.168.1.44:5000/newpost', this.formtitle)
+        axios.post('http://192.168.1.44:5000/new_post') //this.formtitle)
       },
       adjustTextareaHeight() {
           const textarea = this.$el.querySelector('#comment');
@@ -59,7 +61,8 @@
           textarea1.style.height = 'auto';
           textarea1.style.height = textarea1.scrollHeight + 'px';
           this.textareaHeight1 = textarea1.style.height;
-        }
+        },
+
     },
     watch: {
         formcomment() {
@@ -77,6 +80,12 @@
     mounted() {
       this.adjustTextareaHeight();
     },
+    computed: {
+      ...mapGetters('auth', ['currentUser', "userFetchedPicture", "colorFetched", "userFetchedBio", "nFetchedPosts", "nFetchedFollowers", "nFetchedFollowing"]),
+      imgSource() {
+          return require('../assets/img/' + this.userFetchedPicture);
+        }
+    }
   };
   </script>
 

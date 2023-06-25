@@ -113,54 +113,17 @@ export default {
             return this.$route.params.id; // Replace "parameter" with the actual name of your URL parameter
         },
         imgSource() {
-            console.log(this.userPicture)
             return require('../assets/img/' + this.userPicture);
         },
     },
     mounted() {
-        this.profileUsername = this.$route.params.id;
-        if (this.ownProfile()) {
-            this.userPicture = this.userFetchedPicture;
-            this.userBio = this.userFetchedBio;
-            this.nStories = this.nFetchedPosts;
-            this.nFollowers = this.nFetchedFollowers;
-            this.nFollowing = this.nFetchedFollowing;
-
-        axios
-            .get(`http://192.168.1.44:5000/posts/${this.profileUsername}`)
-            .then(response => {
-
-                const data = response.data;
-                console.log(data)
-                this.posts = data;
-                this.loading = false;
-            })
-            .catch(error => {
-                console.log(error);
-            });
-        } else {
-        axios
-            .get(`http://192.168.1.44:5000/user/${this.profileUsername}`)
-            .then(response => {
-                const data = response.data;
-                this.posts = data.posts;
-                const userData = data.userdata;
-                this.userPicture = userData.picture;
-                this.userBio = userData.bio; 
-                this.nStories = userData.n_writ_posts;
-                this.nFollowers = userData.followers.length;
-                this.nFollowing = userData.following.length;
-                this.loading = false;
-            })
-            .catch(error => {
-                console.log(error);
-            });
-        }
+        this.fetchDataComponent();
     },
     watch: {
         currentParameter() {
             this.profileUsername = this.$route.params.id;
         },
+
     },
     methods: {
         ...mapActions('auth', ['logout']),
@@ -171,10 +134,67 @@ export default {
                 return false;
             }
         },
-        goToSettings() {
-            this.router.push('/storymous/settings');
+        async fetchDetails(id) {
+            // Fetch the details based on the provided id
+            try {
+                const response = await axios.get(`http://192.168.1.44:5000/user/${id}`);
+                const data = response.data;
+                this.posts = data.posts;
+                const userData = data.userdata;
+                this.userPicture = userData.picture;
+                this.userBio = userData.bio;
+                this.nStories = userData.n_writ_posts;
+                this.nFollowers = userData.followers.length;
+                this.nFollowing = userData.following.length;
+                this.loading = false;
+            } catch (error) {
+                console.error(error);
+                throw error;
+            }
         },
+        goToSettings() {
+            this.$router.push('/storymous/settings');
+        },
+        fetchDataComponent() {
+            this.profileUsername = this.$route.params.id;
+            if (this.ownProfile()) {
+                this.userPicture = this.userFetchedPicture;
+                this.userBio = this.userFetchedBio;
+                this.nStories = this.nFetchedPosts;
+                this.nFollowers = this.nFetchedFollowers;
+                this.nFollowing = this.nFetchedFollowing;
 
+            axios
+                .get(`http://192.168.1.44:5000/posts/${this.profileUsername}`)
+                .then(response => {
+
+                    const data = response.data;
+                    console.log(data)
+                    this.posts = data;
+                    this.loading = false;
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+            } else {
+            axios
+                .get(`http://192.168.1.44:5000/user/${this.profileUsername}`)
+                .then(response => {
+                    const data = response.data;
+                    this.posts = data.posts;
+                    const userData = data.userdata;
+                    this.userPicture = userData.picture;
+                    this.userBio = userData.bio; 
+                    this.nStories = userData.n_writ_posts;
+                    this.nFollowers = userData.followers.length;
+                    this.nFollowing = userData.following.length;
+                    this.loading = false;
+                })
+                .catch(error => {
+                    console.log(error);
+                });
+            }
+        }
     }
 }
 
