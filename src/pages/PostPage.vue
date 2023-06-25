@@ -80,7 +80,7 @@ export default {
   },
   mounted() {
     axios
-      .get('https://api.npoint.io/786a14060decfb7e66d9')
+      .get(`http://192.168.1.44:5000/post/${this.profileUsername}`)
       .then(response => {
         this.comments = response.data.comments;
         const posts1 = response.data.latest;
