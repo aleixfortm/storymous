@@ -27,7 +27,7 @@
   
   <script>
   import { mapGetters } from 'vuex';
-  import { API_BASE_URL } from '@/config';
+  import { API_BASE_URL } from '../config';
 
   import FeedContainer from '@/components/layout/FeedContainer.vue';
   import axios from 'axios';

@@ -42,7 +42,7 @@
 import axios from "axios";
 import { useRouter } from 'vue-router';
 import { mapGetters } from 'vuex';
-import { API_BASE_URL } from '@/config';
+import { API_BASE_URL } from '../config';
 
 import PictureSetting from '../pages/subpages/PictureSetting.vue';
 import ColorSetting from './subpages/ColorSetting.vue';

@@ -65,7 +65,7 @@
 <script>
 import { mapGetters } from 'vuex';
 import { useRouter } from 'vue-router';
-import { API_BASE_URL } from '@/config';
+import { API_BASE_URL } from '../config';
 
 import axios from 'axios';
 

@@ -52,7 +52,7 @@
 
 <script>
 import axios from "axios";
-import { API_BASE_URL } from '@/config';
+import { API_BASE_URL } from '../config';
 
 import CommentContainer from "@/components/layout/CommentContainer.vue";
 //import ContinuestoryContainer from "@/components/layout/ContinuestoryContainer.vue";

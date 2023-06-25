@@ -1,7 +1,7 @@
 //import axios from 'axios';
 import router from '@/router'; // Import your Vue Router instance
-import axios from "axios"
-import { API_BASE_URL } from '@/config';
+import axios from "../config"
+import { API_BASE_URL } from '../config';
 
 export default {
     namespaced: true,
@@ -15,13 +15,20 @@ export default {
     actions: {
         async login({ commit }, credentials) {
             try {
-              const response = await axios.post(`${API_BASE_URL}/login`, credentials); // Replace '/api/login' with your actual API endpoint for login
-              const data = response.data; // Assuming the API returns the user data upon successful login
+              const response = await axios.post(`${API_BASE_URL}/login`, credentials);
+              const data = response.data;
               if (data.status == "success") {
                 commit('SET_LOGGED_IN', true);
                 commit('SET_USER', data.username);
+                const token = data.token;
+                
+                localStorage.setItem('jwtToken', token); // Store the JWT token in local storage or another suitable location
+
+                // Set the JWT token in the axios default headers for subsequent requests
+                axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+
                 axios
-                    .get(`http://83.44.90.168:8001/user/${data.username}`)
+                    .get(`${API_BASE_URL}/user/${data.username}`)
                     .then(response => {
                       const userFetchedData = response.data.userdata;
                       console.log(userFetchedData)
