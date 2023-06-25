@@ -21,8 +21,10 @@ export default {
                 commit('SET_LOGGED_IN', true);
                 commit('SET_USER', data.username);
                 const token = data.token;
+                const username = data.username;
                 
-                localStorage.setItem('jwtToken', token); // Store the JWT token in local storage or another suitable location
+                sessionStorage.setItem('username', username); // Store username in session storage
+                sessionStorage.setItem('jwtToken', token); // Store the JWT token in session storage
 
                 // Set the JWT token in the axios default headers for subsequent requests
                 axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
