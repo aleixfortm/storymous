@@ -14,37 +14,32 @@ export default {
 
     actions: {
         async login({ commit }, credentials) {
-            try {
-              const response = await axios.post(`${API_BASE_URL}/login`, credentials);
-              const data = response.data;
-              if (data.status == "success") {
-                commit('SET_LOGGED_IN', true);
-                commit('SET_USER', data.username);
-                const token = data.token;
-                const username = data.username;
-                
-                sessionStorage.setItem('username', username); // Store username in session storage
-                sessionStorage.setItem('jwtToken', token); // Store the JWT token in session storage
-
-                // Set the JWT token in the axios default headers for subsequent requests
-                axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-
-                axios
-                    .get(`${API_BASE_URL}/user/${data.username}`)
-                    .then(response => {
-                      const userFetchedData = response.data.userdata;
-                      console.log(userFetchedData)
-                      commit('SET_USER_DATA', userFetchedData);
-                  }).catch(error => {
-                    console.error('Failed to fetch user data:', error);
-                  });
-                }
+          try {
+            const response = await axios.post(`${API_BASE_URL}/login`, credentials);
+            const data = response.data;
+            if (data.status == "Success") {
+              commit('SET_LOGGED_IN', true);
+              commit('SET_USER', data.user_data.username);
+        
+              const token = data.token;
+              const userData = data.user_data;
+              console.log(userData);
+        
+              commit('SET_USER_DATA', userData);
+        
+              sessionStorage.setItem('username', userData.username); // Store username in session storage
+              sessionStorage.setItem('jwtToken', token); // Store the JWT token in session storage
+              sessionStorage.setItem("userData", userData);
+        
+              // Set the JWT token in the axios default headers for subsequent requests
+              axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+        
               return data;
-            } catch (error) {
-              // Handle login error here, e.g., show an error message
-              console.error('Login failed:', error);
             }
-          },
+          } catch (error) {
+            console.log(error);
+          }
+        },
         logout({ commit }) {
           // Call your logout API here
           // If logout is successful, commit the mutations
