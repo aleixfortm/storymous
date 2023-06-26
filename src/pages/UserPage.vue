@@ -180,8 +180,8 @@ export default {
                     this.userPicture = userData.picture;
                     this.userBio = userData.bio; 
                     this.nStories = userData.started_stories + userData.continued_stories;
-                    this.nFollowers = userData.followers;
-                    this.nFollowing = userData.following;
+                    this.nFollowers = userData.followers.length;
+                    this.nFollowing = userData.following.length;
                     this.loading = false;
                 })
                 .catch(error => {
