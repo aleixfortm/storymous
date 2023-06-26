@@ -150,7 +150,7 @@ export default {
 }
 
 .story__article {
-    padding: 10px 15px;
+    padding: 10px 10px;
     border-radius: 2px;
     cursor: pointer;
     transition: all 0s;
@@ -225,7 +225,7 @@ export default {
 }
 
 .story__title {
-    padding: 2px 8px;
+    padding: 1px 6px;
     border-radius: 5px;
     color: #2d3441;
     margin: 0px 0px;
