@@ -1,7 +1,7 @@
 <template>
     <div class="message">
-        This site is in early development and all of its content is static. <br><u> Feel free to log in with random credentials and
-        check it out. </u>
+        Backend API under maintenance, all content is currently static. <br><u> Feel free to log in with random credentials and
+        check the site out. </u>
     </div>
 </template>
 

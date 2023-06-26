@@ -48,6 +48,7 @@ import PictureSetting from '../pages/subpages/PictureSetting.vue';
 import ColorSetting from './subpages/ColorSetting.vue';
 import BioSetting from './subpages/BioSetting.vue';
 import FeedContainer from '@/components/layout/FeedContainer.vue';
+import store from "@/store";
 
 export default {
     data() {
@@ -102,29 +103,28 @@ export default {
             }
         },
         saveChanges() {
-            this.isSaveButtonDisabled = true;
-            //this.loading = true; // Start loading state
-            
-            console.log(this.selectedImage);
-            console.log(this.selectedColor);
-            console.log(this.selectedBio);
+            console.log("starting process")
 
-        axios
-            .post(`${API_BASE_URL}/update_settings`, {
-                username: this.currentUser,
-                selectedImage: this.selectedImage,
-                selectedColor: this.selectedColor,
-                selectedBio: this.selectedBio
-            })
-            /*
-            .then(response => {
-                this.loading = false;
-            })
-            .catch(error => {
-                console.log(error);
-                this.loading = false;
-            });
-            */
+            axios
+                .post(`${API_BASE_URL}/update_settings`, {
+                    username: this.currentUser,
+                    selectedImage: this.selectedImage,
+                    selectedColor: this.selectedColor,
+                    selectedBio: this.selectedBio
+                })
+                .then(response => {
+                    this.loading = false;
+                    const data = response.data;
+                    console.log(data)
+                    if (data.status === "success") {
+                        this.isSaveButtonDisabled = true;
+                        store.commit('auth/SET_USER_DATA', data.updated_user_data);
+                    }
+                })
+                .catch(error => {
+                    console.log(error);
+                    this.loading = false;
+                });
         },
     }
 
