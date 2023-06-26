@@ -29,7 +29,7 @@
                     </div>
                     <p class="story__content">
                         {{ formatStory(content) }}
-                        <b v-if="feedMode" class="readmore-button"><em>Read more</em></b>
+                        <b v-if="feedMode && checkLength" class="readmore-button"><em>Read more</em></b>
                     </p>
                 </article>
             </router-link>
@@ -53,7 +53,11 @@ export default {
     props: ["_id", "title", "content", "username", "postComment", "date", "picture", "color", "feedMode"],
     methods: {
         formatStory(story) {
-            return story.replace(/<br>/g, '\n').substring(0, 700);
+            const formattedStory = story.replace(/<br>/g, '\n')
+            if (formattedStory.length > 700) {
+                return formattedStory.substring(0, 700) + '...';
+            }
+            return formattedStory
         },
         navigateToPost() {
             this.router.push('/storymous/post/' + this._id.$oid);
@@ -70,6 +74,12 @@ export default {
         outlineClass() {
             return `outline ${this.color}`;
         },
+        checkLength() {
+            if (this.content.length >= 697) {
+                return true
+            }
+            return false
+        }
     },
     
 };
