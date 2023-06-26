@@ -150,7 +150,7 @@ export default {
         },
         fetchDataComponent() {
             this.profileUsername = this.$route.params.id;
-            if (this.ownProfile()) {
+            if (this.ownProfile() && this.userFetchedPicture) {
                 this.userPicture = this.userFetchedPicture;
                 this.userBio = this.userFetchedBio;
                 this.nStories = this.nFetchedPosts;

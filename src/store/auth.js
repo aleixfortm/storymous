@@ -26,7 +26,7 @@ export default {
               console.log(userData);
         
               commit('SET_USER_DATA', userData);
-        
+              
               sessionStorage.setItem('username', userData.username); // Store username in session storage
               sessionStorage.setItem('jwtToken', token); // Store the JWT token in session storage
               sessionStorage.setItem("userData", userData);
@@ -45,6 +45,7 @@ export default {
           // If logout is successful, commit the mutations
           commit('SET_LOGGED_IN', false);
           commit('SET_USER', null);
+          commit("SET_USER_DATA", null)
 
           router.push('/storymous/');
         },
