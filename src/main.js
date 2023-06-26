@@ -23,6 +23,8 @@ if (token && username) {
   // Set a flag or state variable indicating the user is logged in
   store.commit('auth/SET_LOGGED_IN', true);
   store.commit("auth/SET_USER", username);
+
+  router.push('/storymous/');
 }
 
 app.mount('#app');
