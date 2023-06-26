@@ -53,7 +53,7 @@ export default {
     props: ["_id", "title", "content", "username", "postComment", "date", "picture", "color", "feedMode"],
     methods: {
         formatStory(story) {
-            return story.replace(/<br>/g, '\n');
+            return story.replace(/<br>/g, '\n').substring(0, 700);
         },
         navigateToPost() {
             this.router.push('/storymous/post/' + this._id.$oid);
@@ -83,68 +83,69 @@ export default {
     padding: 1px 4px;
     border-radius: 3px;
     width: fit-content;
-    box-shadow: 0px 0px 5px rgba(255, 255, 255, 0.568);
+    box-shadow: 0px 0px 4px rgba(255, 255, 255, 0.568);
+    
 }
 
 .origin-container {
     display: flex;
     justify-content: flex-start;
-    margin: 2px 0 0 0;
+    margin: 2px 5px 0 5px;
 }
 
 .outline {
     margin-top: 20px;
-    padding: 5px 10px 10px 10px;
+    padding: 5px 5px 5px 5px;
     height: fit-content;
     width: 100%;
     /*border: 2px whitesmoke dashed;*/
     border-radius: 5px;
-    border: 2px rgba(255, 255, 255, 0) solid;
+    border: 1px rgba(255, 255, 255, 0) solid;
     background-color: rgba(255, 255, 255, 0);
 }
 
 .outline.salmon {
-    border: 2px rgb(255, 109, 93) solid;
+    border: 1px rgb(255, 109, 93) solid;
     background-color: rgba(255, 109, 93, 0.123);
 }
 
 .outline.red {
-    border: 2px rgb(255, 25, 0) solid;
+    border: 1px rgb(255, 25, 0) solid;
     background-color: rgba(255, 25, 0, 0.11);
 }
 
 .outline.blue {
-    border: 2px rgb(0, 153, 255) solid;
+    border: 1px rgb(0, 153, 255) solid;
     background-color: rgba(0, 153, 255, 0.103);
 }
 
 .outline.green {
-    border: 2px rgb(55, 182, 97) solid;
+    border: 1px rgb(55, 182, 97) solid;
     background-color: rgba(60, 134, 85, 0.103);
 }
 
 .outline.yellow {
-    border: 2px rgb(255, 217, 0) solid;
+    border: 1px rgb(255, 217, 0) solid;
     background-color: rgba(255, 217, 0, 0.116);
 }
 
 .outline.white {
-    border: 2px rgb(255, 255, 255) solid;
+    border: 1px rgb(255, 255, 255) solid;
     background-color: rgba(255, 255, 255, 0.11);
 }
 
 .outline.purple {
-    border: 2px rgb(183, 0, 255) solid;
+    border: 1px rgb(183, 0, 255) solid;
     background-color: rgba(183, 0, 255, 0.11);
 }
 
 .outline.pink {
-    border: 2px rgb(255, 0, 179) solid;
+    border: 1px rgb(255, 0, 179) solid;
     background-color: rgba(255, 0, 179, 0.096);
 }
 
 .outline.orange {
-    border: 2px rgb(255, 145, 0) solid;
+    border: 1px rgb(255, 145, 0) solid;
     background-color: rgba(255, 145, 0, 0.116);
 }
 
@@ -164,7 +165,7 @@ export default {
 }
 
 .story__user-container {
-    padding: 10px 5px 2px 2px;
+    padding: 10px 5px 1px 5px;
     display: flex;
     flex-direction: row;
 }
