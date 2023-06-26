@@ -104,7 +104,7 @@ export default {
         },
         saveChanges() {
             console.log("starting process")
-
+            console.log(this.currentUser)
             axios
                 .post(`${API_BASE_URL}/update_settings`, {
                     username: this.currentUser,
@@ -115,10 +115,10 @@ export default {
                 .then(response => {
                     this.loading = false;
                     const data = response.data;
-                    console.log(data)
+                    console.log(data.updated_user_data[0])
                     if (data.status === "success") {
                         this.isSaveButtonDisabled = true;
-                        store.commit('auth/SET_USER_DATA', data.updated_user_data);
+                        store.commit('auth/SET_USER_DATA', data.updated_user_data[0]);
                     }
                 })
                 .catch(error => {
