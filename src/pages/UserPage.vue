@@ -17,7 +17,7 @@
                         <div class="color-scheme"></div>
                         <div class="username">@{{ profileUsername }}</div>
                     </div>
-                    <button v-if="!ownProfile()" class="followbutton">Follow</button>
+                    <button v-if="!ownProfile() && isLoggedIn" class="followbutton">Follow</button>
                 </div>
                 <div class="stats">
                     <div class="count-block">
@@ -37,8 +37,8 @@
                     <b>Bio</b>
                     <div class="bio-content">{{ userBio }}</div>
                 </div>
-                <div v-if="ownProfile()" class="miscbuttons">
-                    <button class="settingsbutton" @click="goToSettings">Edit profile</button>
+                <div v-if="ownProfile() && isLoggedIn" class="miscbuttons">
+                    <button class="settingsbutton" @click="goToSettings">User settings</button>
                     <button class="logoutbutton" @click="logout()">Log out</button>
                 </div>
             </div>
@@ -259,12 +259,12 @@ export default {
 
 .color-scheme {
     border-radius: 500%;
-    background-color: red;
+    background-color: rgb(0, 183, 255);
     width: 25px;
     height: 25px;
     align-self: center;
     margin: 0 15px 0 0;
-    box-shadow: 0px 0px 10px 2px rgba(255, 0, 0, 0.479);
+    box-shadow: 0px 0px 10px 2px rgba(0, 183, 255, 0.479);
 }
 
 .followbutton {
@@ -322,7 +322,7 @@ export default {
     color: rgb(255, 255, 255);
     cursor: pointer;
     font-size: 15px;
-    width: 125px;
+    width: 140px;
     margin: 10px 10px 10px 0;
     background-color: rgba(0, 0, 0, 0.459);
     border-radius: 4px;
@@ -399,20 +399,11 @@ export default {
     background-color: rgba(192, 192, 192, 0.192);
 }
 
-/*
-.stats-bio {
-    background-color: rgba(151, 151, 151, 0.192);
-    border-radius: 8px;
-    padding: 5px;
-    margin: 30px 10px 5px 10px;
-    color: whitesmoke;
-}
-*/
 .stats-bio {
     background-color: rgb(255, 255, 255);
     border-radius: 10px 10px 10px 10px;
     padding: 10px;
-    margin: 30px 10px 5px 10px;
+    margin: 20px 10px 15px 10px;
     color: rgb(0, 0, 0);
 }
 

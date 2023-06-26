@@ -78,9 +78,11 @@ export default {
 
 .loader-text {
     background-color: whitesmoke;
+    text-align: center;
     color: rgb(0, 0, 0);
     padding: 5px 10px;
     border-radius: 15px;
     font-weight: bold;
+    margin: 0 10px;
 }
 </style>

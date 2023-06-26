@@ -11,8 +11,6 @@ app.use(store);
 app.use(router);
 
 
-
-
 // Check if the JWT token and username exist in session storage
 const token = sessionStorage.getItem('jwtToken');
 const username = sessionStorage.getItem('username');
