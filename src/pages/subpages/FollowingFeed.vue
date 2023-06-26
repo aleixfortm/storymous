@@ -27,11 +27,13 @@
 
 <script>
 import PostContainer from "../../components/layout/PostContainer.vue";
+import FeedContainer from "@/components/layout/FeedContainer.vue";
 
 export default {
     props: ["posts"],
     components: {
-        PostContainer
+        PostContainer,
+        FeedContainer
     },
     methods: {
         formatContent(text) {

@@ -1,3 +1,5 @@
+// this file executes after every page refresh // ----------
+
 import axios from 'axios';
 import store from './store'
 
@@ -10,13 +12,12 @@ const username = sessionStorage.getItem('username');
 // Check if the token exists
 if (token && username) {
   axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-  console.log(token)
-  console.log(username)
 
   axios
     .get(`${API_BASE_URL}/user/${username}`)
     .then(response => {
-        store.commit('auth/SET_USER_DATA', response.data.userdata);
+        console.log(response.data.user_data)
+        store.commit('auth/SET_USER_DATA', response.data.user_data);
     }).catch(error => {
         console.error('Failed to fetch user data:', error);
     })

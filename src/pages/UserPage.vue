@@ -150,7 +150,8 @@ export default {
         },
         fetchDataComponent() {
             this.profileUsername = this.$route.params.id;
-            if (this.ownProfile() && this.userFetchedPicture) {
+            console.log(this.profileUsername)
+            if (this.ownProfile()) {
                 this.userPicture = this.userFetchedPicture;
                 this.userBio = this.userFetchedBio;
                 this.nStories = this.nFetchedPosts;
@@ -175,12 +176,12 @@ export default {
                 .then(response => {
                     const data = response.data;
                     this.posts = data.posts;
-                    const userData = data.userdata;
+                    const userData = data.user_data;
                     this.userPicture = userData.picture;
                     this.userBio = userData.bio; 
-                    this.nStories = userData.n_writ_posts;
-                    this.nFollowers = userData.followers.length;
-                    this.nFollowing = userData.following.length;
+                    this.nStories = userData.started_stories + userData.continued_stories;
+                    this.nFollowers = userData.followers;
+                    this.nFollowing = userData.following;
                     this.loading = false;
                 })
                 .catch(error => {
