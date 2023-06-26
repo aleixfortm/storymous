@@ -7,8 +7,10 @@ const token = sessionStorage.getItem('jwtToken');
 const username = sessionStorage.getItem('username');
 
 // Check if the token exists
-if (token) {
+if (token && username) {
   axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+  console.log(token)
+  console.log(username)
 }
 
 export default axios;
