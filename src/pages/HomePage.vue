@@ -24,7 +24,7 @@
         </div>
     </feed-container>
     <feed-container v-else class="homepage-top">
-        <div class="welcome-message">
+        <div class="welcome-message" v-if="!loggedOutLoading">
             <div class="messagecontainer">
                 <div class="innermessagecontainer">
                     Welcome to  <b>Storymous</b>! <br>
@@ -93,7 +93,8 @@ export default {
             userLogged: true,
             text: " ",
             showCharacter: true,
-            loading: true
+            loading: true,
+            loggedOutLoading: true,
         }
     },
     mounted() {
@@ -103,6 +104,7 @@ export default {
             console.log(response.data)
             this.posts = response.data;
             this.loading = false;
+            this.loggedOutLoading = false;
         })
         .catch(error => {
             console.log(error);
@@ -132,7 +134,7 @@ export default {
         },
         imgSource() {
             return require("../assets/img/" + this.userFetchedPicture);
-        }
+        },
     }
 }
 </script>

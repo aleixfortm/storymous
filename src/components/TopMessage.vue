@@ -1,6 +1,6 @@
 <template>
     <div class="message">
-        Backend API under maintenance, all content is currently static.
+        Posting and following not available, backend API under maintenance.
     </div>
 </template>
 

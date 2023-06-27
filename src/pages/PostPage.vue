@@ -1,5 +1,5 @@
 <template>
-    <feed-container>
+    <feed-container v-if="!loading">
         <post-container
           v-if="post"
             :_id="post._id"
@@ -16,7 +16,7 @@
             <form @submit.prevent="submitForm">
                 <div class="newstory_comment">
                     <div class="image_box">
-                        <img class="postimage" src="../assets/img/default_blue.png" alt="profilepic">
+                        <img class="postimage" :src="imgSource" alt="profilepic">
                     </div>
                     <textarea id="comment" v-model="formcomment" placeholder="Add a comment..." rows="1" :style="{ height: textareaHeight }" required></textarea>
                     <div class="buttonbox">
@@ -48,11 +48,22 @@
         </continuestory-container>
         -->
     </feed-container>
+    <feed-container v-else>
+      <div class="loader-container">
+          <div class="lds-facebook">
+              <div></div>
+              <div></div>
+              <div></div>
+          </div>
+          <span class="loader-text">Attempting to locate story</span>
+      </div>
+    </feed-container>
 </template>
 
 <script>
 import axios from "axios";
 import { API_BASE_URL } from '../config';
+import { mapGetters } from 'vuex';
 
 import CommentContainer from "@/components/layout/CommentContainer.vue";
 //import ContinuestoryContainer from "@/components/layout/ContinuestoryContainer.vue";
@@ -73,6 +84,7 @@ export default {
       formcomment: "",
       continuedStory: null,
       textareaHeight: null,
+      loading: true
     }
   },
   mounted() {
@@ -80,15 +92,16 @@ export default {
     axios
       .get(`${API_BASE_URL}/post/${postId}`)
       .then(response => {
-
         this.post = response.data.post;
-        console.log(this.post)
         this.replies = response.data.replies;
-
+        this.loading = false;
       })
   },
   computed: {
-
+    ...mapGetters('auth', ['isLoggedIn', 'currentUser', "userFetchedPicture", "colorFetched"]),
+    imgSource() {
+       return require("../assets/img/" + this.userFetchedPicture);
+    }
   },
   methods: {
     adjustTextareaHeight() {
@@ -109,7 +122,58 @@ export default {
 </script>
 
 <style scoped>
+.loader-text {
+    background-color: whitesmoke;
+    color: rgb(0, 0, 0);
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-weight: bold;
+}
 
+.loader-container {
+    margin: 100px 0 0 0;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+.lds-facebook {
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+.lds-facebook div {
+  display: inline-block;
+  position: absolute;
+  left: 8px;
+  width: 16px;
+  background: #fff;
+  animation: lds-facebook 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+}
+.lds-facebook div:nth-child(1) {
+  left: 8px;
+  animation-delay: -0.24s;
+}
+.lds-facebook div:nth-child(2) {
+  left: 32px;
+  animation-delay: -0.12s;
+}
+.lds-facebook div:nth-child(3) {
+  left: 56px;
+  animation-delay: 0;
+}
+@keyframes lds-facebook {
+  0% {
+    top: 8px;
+    height: 64px;
+  }
+  50%, 100% {
+    top: 24px;
+    height: 32px;
+  }
+}
 
     .postbutton {
     height: 35px;

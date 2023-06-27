@@ -164,7 +164,6 @@ export default {
                 this.nStories = this.nFetchedPosts;
                 this.nFollowers = this.nFetchedFollowers;
                 this.nFollowing = this.nFetchedFollowing;
-                this.loading = false;
 
             axios
                 .get(`${API_BASE_URL}/posts/${this.profileUsername}`)
