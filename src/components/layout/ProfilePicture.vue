@@ -9,7 +9,6 @@ export default {
     props: ["picture"],
     computed: {
         imgSource() {
-            console.log(this.picture)
             return require("../../assets/img/" + this.picture);
         }
     }

@@ -158,7 +158,6 @@ export default {
             this.profileUsername = this.$route.params.id;
             if (this.ownProfile()) {
                 this.userPicture = this.userFetchedPicture;
-                console.log(this.colorFetched)
                 this.userColor = this.colorFetched;
                 this.userBio = this.userFetchedBio;
                 this.nStories = this.nFetchedPosts;
@@ -169,7 +168,6 @@ export default {
                 .get(`${API_BASE_URL}/posts/${this.profileUsername}`)
                 .then(response => {
                     const data = response.data;
-                    console.log(data)
                     this.posts = data;
                     this.loading = false;
                 })
@@ -185,7 +183,6 @@ export default {
                     const userData = data.user_data;
                     this.userPicture = userData.picture;
                     this.userColor = userData.color;
-                    console.log(this.userColor)
                     this.userBio = userData.bio; 
                     this.nStories = userData.started_stories + userData.continued_stories;
                     this.nFollowers = userData.followers.length;

@@ -94,14 +94,13 @@ export default {
             text: " ",
             showCharacter: true,
             loading: true,
-            loggedOutLoading: true,
+            loggedOutLoading: false,
         }
     },
     mounted() {
     axios
         .get(`${API_BASE_URL}/posts`)
         .then(response => {
-            console.log(response.data)
             this.posts = response.data;
             this.loading = false;
             this.loggedOutLoading = false;

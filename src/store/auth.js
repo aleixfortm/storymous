@@ -41,12 +41,31 @@ export default {
             console.error('Login failed:', error);
           }
         },
+
+        async singup(credentials) {
+          try {
+            const response = await axios.post(`${API_BASE_URL}/signup`, credentials);
+            const data = response.data
+
+            if (data.status == "Success") {
+              
+              
+              return data;
+            }
+          } catch (error) {
+            // Handle login error here, e.g., show an error message
+            console.error('Login failed:', error);
+          }
+        },
+
         logout({ commit }) {
           // Call your logout API here
           // If logout is successful, commit the mutations
           commit('SET_LOGGED_IN', false);
           commit('SET_USER', null);
           commit("SET_USER_DATA", null)
+
+          sessionStorage.clear();
 
           router.push('/');
         },

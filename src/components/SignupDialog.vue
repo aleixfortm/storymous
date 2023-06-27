@@ -55,6 +55,7 @@
 
 <script>
 import SelectButton from "./SelectButton.vue";
+import { mapActions } from "vuex";
 
 export default {
   emits: ["close"],
@@ -97,6 +98,7 @@ export default {
     }
   },
   computed: {
+    ...mapActions('auth', ['login', 'logout']), // Map the login action from the auth module
     usernameClass() {
       var usernameLength = this.usernameValue.length;
       if (usernameLength === 0) {

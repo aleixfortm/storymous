@@ -50,7 +50,17 @@ export default {
           _username: this.usernameValue,
           _password: this.passwordValue
         };
-        this.login(credentials);
+        this.login(credentials)
+          .then(data => {
+            // Handle the data here
+            if (data.status === "Success") {
+              console.log(data);
+            }
+          })
+          .catch(error => {
+            // Handle the error here
+            console.error('Login failed:', error);
+          });
         this.$emit("close");
         window.scrollTo({
           top: 0,
