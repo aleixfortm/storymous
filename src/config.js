@@ -3,7 +3,7 @@
 import axios from 'axios';
 import store from './store'
 
-export const API_BASE_URL = 'http://192.168.1.44:5000';
+export const API_BASE_URL = 'https://aleixfortm.pythonanywhere.com/';
 
 // Retrieve the JWT token and username from session storage
 const token = sessionStorage.getItem('jwtToken');
