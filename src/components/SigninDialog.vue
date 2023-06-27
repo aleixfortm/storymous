@@ -10,7 +10,12 @@
           <input v-model="passwordValue" id="password" name="password" type="password" ref="passwordInput" placeholder="Password">
         </div>
         <div>
-            <button class="button" :disabled="!validateForm()" type="submit" @click="scrollToTop">Log In</button>
+            <button class="button" :disabled="!validateForm()" type="submit" @click="scrollToTop">
+            <span v-if="!loading">Log In</span>
+            <span v-else>
+              <div class="lds-facebook"><div></div><div></div><div></div></div>
+            </span>
+            </button>
         </div>
         <div class="signup-message">New to storymous? <a href="" @click.prevent="$emit('signup')" class="link">Sign Up</a></div>
       </form>
@@ -28,7 +33,8 @@ export default {
     return {
       formValid: false,
       usernameValue: "",
-      passwordValue: ""
+      passwordValue: "",
+      loading: false
     }
   },
   methods: {
@@ -50,6 +56,7 @@ export default {
           username: this.usernameValue,
           password: this.passwordValue
         };
+        this.loading = true;
         this.login(credentials)
           .then(data => {
             // Handle the data here
@@ -84,6 +91,49 @@ export default {
 </script>
 
 <style scoped>
+.lds-facebook {
+  display: inline-block;
+  position: relative;
+  width: 40px;
+  height: 40px;
+}
+
+.lds-facebook div {
+  display: inline-block;
+  position: absolute;
+  left: 4px;
+  width: 8px;
+  background: #fff;
+  animation: lds-facebook 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+}
+
+.lds-facebook div:nth-child(1) {
+  left: 4px;
+  animation-delay: -0.12s;
+}
+
+.lds-facebook div:nth-child(2) {
+  left: 16px;
+  animation-delay: -0.06s;
+}
+
+.lds-facebook div:nth-child(3) {
+  left: 28px;
+  animation-delay: 0;
+}
+
+@keyframes lds-facebook {
+  0% {
+    top: 4px;
+    height: 32px;
+  }
+  50%, 100% {
+    top: 12px;
+    height: 16px;
+  }
+}
+
+
 label {
     font-weight: bold;
     display: block;

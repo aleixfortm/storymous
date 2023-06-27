@@ -2,7 +2,7 @@ import { createApp } from 'vue';
 import router from "./router.js";
 import App from './App.vue';
 import store from './store'
-import axios from "./config.js"
+import axios, { API_BASE_URL } from "./config.js"
 
 
 const app = createApp(App);
@@ -24,6 +24,20 @@ if (token && username) { // add userData if taking into account
   store.commit('auth/SET_LOGGED_IN', true);
   store.commit("auth/SET_USER", username);
   //store.commit("auth/SET_USER_DATA", userData)
+
+  axios
+    .get(`${API_BASE_URL}/user/${username}`, { timeout: 5000 })
+    .then(response => {
+        store.commit('auth/SET_USER_DATA', response.data.user_data);
+    }).catch(error => {
+        if (axios.isCancel(error)) {
+            // Request timed out
+            console.error('Request timed out:', error);
+          } else {
+            // Other error occurred
+            console.error('Failed to fetch user data:', error);
+          }
+    });
 
   router.push('/');
 }
