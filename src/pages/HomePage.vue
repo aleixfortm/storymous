@@ -108,12 +108,7 @@ export default {
         })
         .catch(error => {
             console.log(error);
-        }),
-
-        setInterval(() => {
-            this.showCharacter = !this.showCharacter; // Toggle showCharacter value every second
-        }, 750);
-        
+        });
     },
     methods: {
         setSelectedTab(tab) {
