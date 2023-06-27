@@ -25,7 +25,7 @@ if (token && username) { // add userData if taking into account
   store.commit("auth/SET_USER", username);
   //store.commit("auth/SET_USER_DATA", userData)
 
-  router.push('/storymous/');
+  router.push('/');
 }
 
 app.mount('#app');

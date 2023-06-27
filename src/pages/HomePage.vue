@@ -118,7 +118,7 @@ export default {
             this.selectedTab = tab;
         },
         navigateToNewPost() {
-            this.router.push('/storymous/newpost');
+            this.router.push('/newpost');
         }
     },
     computed: {

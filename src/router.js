@@ -11,13 +11,12 @@ const router = createRouter({
     history: createWebHistory(),
     routes: [
         { path: "/", component: HomePage },
-        { path: "/storymous/", component: HomePage },
-        { path: "/storymous/home", redirect: "/storymous/" },
-        { path: "/storymous/newpost", component: NewPost },
-        { path: "/storymous/user/:id", component: UserPage },
-        { path: "/storymous/post/:id", component: PostPage },
-        { path: "/storymous/settings", component: SettingsPage },
-        { path: "/storymous/:catchAll(.*)", component: NotfoundPage } // named redirect route for any undefined route
+        { path: "/home", redirect: "/" },
+        { path: "/newpost", component: NewPost },
+        { path: "/user/:id", component: UserPage },
+        { path: "/post/:id", component: PostPage },
+        { path: "/settings", component: SettingsPage },
+        { path: "/:catchAll(.*)", component: NotfoundPage } // named redirect route for any undefined route
     ],
 });
 

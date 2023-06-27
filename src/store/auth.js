@@ -48,7 +48,7 @@ export default {
           commit('SET_USER', null);
           commit("SET_USER_DATA", null)
 
-          router.push('/storymous/');
+          router.push('/');
         },
     },
 

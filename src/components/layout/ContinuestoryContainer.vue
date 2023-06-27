@@ -60,10 +60,10 @@ export default {
                 imgName: this.imgName
             };
             this.emitData(dataToEmit);
-            this.router.push('/storymous/post/' + this._id.$oid);
+            this.router.push('/post/' + this._id.$oid);
         },
         navigateToUser() {
-            this.router.push('/storymous/user/' + this.username);
+            this.router.push('/user/' + this.username);
         }
     },
     computed: {

@@ -74,7 +74,7 @@ export default {
     },
     mounted() {
         if (this.isLoggedIn === false) {
-            this.router.push('/storymous/home');
+            this.router.push('/home');
         }
     },
     computed: {

@@ -152,7 +152,7 @@ export default {
             }
         },
         goToSettings() {
-            this.$router.push('/storymous/settings');
+            this.$router.push('/settings');
         },
         fetchDataComponent() {
             this.profileUsername = this.$route.params.id;
