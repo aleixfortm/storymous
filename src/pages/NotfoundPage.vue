@@ -1,8 +1,8 @@
 <template>
     <div class="imagecontainer">
-        <div class="onomatopoeia">crick crick</div>
+        <div class="onomatopoeia">404</div>
         <img class="astronaut-image" src="../assets/img/astronaut_reading_space_nostars.png" alt="astronaut floating">
-        <div class="loader-text">There are up to 400 billion stars in our galaxy. Perhaps there is an inhabitable planet out here where this URL exists. Who knows?</div>
+        <div class="loader-text">There are up to 400 billion stars in our galaxy. Perhaps there is an inhabitable planet out there where this URL exists. Who knows?</div>
     </div>
 </template>
 
@@ -22,7 +22,7 @@ export default {
 .onomatopoeia {
     color: whitesmoke;
     font-weight: bold;
-    font-size: 14px;
+    font-size: 100px;
     margin-bottom: -10px;
 }
 
