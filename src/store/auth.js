@@ -41,15 +41,14 @@ export default {
             console.error('Login failed:', error);
           }
         },
-
-        async singup(credentials) {
+        async signup({ commit }, stuff) {
           try {
-            const response = await axios.post(`${API_BASE_URL}/signup`, credentials);
+            const response = await axios.post(`${API_BASE_URL}/signup`, stuff);
             const data = response.data
 
             if (data.status == "Success") {
-              
-              
+
+              commit('SET_LOGGED_IN', false);
               return data;
             }
           } catch (error) {
@@ -57,7 +56,6 @@ export default {
             console.error('Login failed:', error);
           }
         },
-
         logout({ commit }) {
           // Call your logout API here
           // If logout is successful, commit the mutations

@@ -74,6 +74,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions('auth', ['signup']), // Map the login action from the auth module
     validateForm() {
       const patternUsername = /^[A-Za-z0-9_]+$/;
       const patternEmail = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,})+$/;
@@ -89,16 +90,35 @@ export default {
       }
     },
     submitForm() {
-      this.validateForm();
-      if (this.formValid) {
-        alert("pollancre!!!!")
-      } else {
-        alert("poll")
+      const value = this.validateForm();
+      if (value) {
+        const credentials = {
+          username: this.usernameValue,
+          email: this.emailValue,
+          password: this.passOneValue
+        };
+        console.log(credentials)
+        this.signup(credentials)
+          .then(data => {
+            // Handle the data here
+            if (data.status === "Success") {
+              console.log(data);
+              this.$emit('signin')
+            }
+          })
+          .catch(error => {
+            // Handle the error here
+            console.error('Registration failed:', error);
+          });
+        //this.$emit("close");
+        window.scrollTo({
+          top: 0,
+          behavior: 'auto' // Use 'smooth' for smooth scrolling, or 'auto' for instant scrolling
+        });
       }
     }
   },
   computed: {
-    ...mapActions('auth', ['login', 'logout']), // Map the login action from the auth module
     usernameClass() {
       var usernameLength = this.usernameValue.length;
       if (usernameLength === 0) {

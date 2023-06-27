@@ -32,7 +32,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions('auth', ['login', 'logout']), // Map the login action from the auth module
+    ...mapActions('auth', ['login']), // Map the login action from the auth module
     validateForm() {
       if ((this.usernameValue.length >= 3) && (this.passwordValue.length >= 3)) {
           this.formValid = true;
@@ -61,7 +61,7 @@ export default {
             // Handle the error here
             console.error('Login failed:', error);
           });
-        this.$emit("close");
+        
         window.scrollTo({
           top: 0,
           behavior: 'auto' // Use 'smooth' for smooth scrolling, or 'auto' for instant scrolling
