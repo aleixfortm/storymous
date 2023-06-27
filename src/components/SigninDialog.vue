@@ -47,8 +47,8 @@ export default {
       if (this.formValid) {
         const credentials = {
         // Obtain the entered credentials from the form
-          _username: this.usernameValue,
-          _password: this.passwordValue
+          username: this.usernameValue,
+          password: this.passwordValue
         };
         this.login(credentials)
           .then(data => {
