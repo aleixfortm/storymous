@@ -55,6 +55,7 @@ export default {
             // Handle the data here
             if (data.status === "Success") {
               console.log(data);
+              this.$emit('close');
             }
           })
           .catch(error => {

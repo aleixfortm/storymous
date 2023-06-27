@@ -102,8 +102,8 @@ export default {
           .then(data => {
             // Handle the data here
             if (data.status === "Success") {
-              console.log(data);
-              this.$emit('signin')
+
+              this.$emit('signin');
             }
           })
           .catch(error => {

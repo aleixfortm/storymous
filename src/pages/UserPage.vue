@@ -70,7 +70,7 @@
             </div>
             <span class="loader-text">Harvesting user stories...</span>
         </div>
-        <div v-else>
+        <div v-else-if="posts.length > 0">
             <post-container 
                 v-for="post in posts"
                 :key="post._id"
@@ -83,6 +83,13 @@
                 :picture="post.picture"
                 :color="post.color">
             </post-container>
+        </div>
+        <div v-else>
+            <div class="imagecontainer">
+                <div class="onomatopoeia">crick crick</div>
+                <img class="astronaut-image" src="../assets/img/astronaut_reading_space_nostars.png" alt="astronaut floating">
+                <div class="loader-text">Countless tales have been told since the beginning of time, yet none have borne your signature. Let's change that!</div>
+            </div>
         </div>
     </feed-container>
 </template>
@@ -200,6 +207,50 @@ export default {
 </script>
 
 <style scoped>
+.onomatopoeia {
+    color: whitesmoke;
+    font-weight: bold;
+    font-size: 14px;
+    margin-bottom: -10px;
+}
+
+@keyframes floatAnimation {
+  0% {
+    transform: translateY(-5px);
+  }
+  50% {
+    transform: translateY(5px);
+  }
+  100% {
+    transform: translateY(-5px);
+  }
+}
+
+.astronaut-image {
+    width: 175px;
+    height: auto;
+    animation: floatAnimation 4s ease-in-out infinite;
+}
+
+.imagecontainer {
+    margin: 50px auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+}
+
+.loader-text {
+    background-color: whitesmoke;
+    text-align: center;
+    color: rgb(0, 0, 0);
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-weight: bold;
+    margin: 0 10px;
+}
+
 .centered {
     justify-content: center;
     align-items: center;
