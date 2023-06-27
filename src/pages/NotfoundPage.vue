@@ -2,7 +2,7 @@
     <div class="imagecontainer">
         <div class="onomatopoeia">crick crick</div>
         <img class="astronaut-image" src="../assets/img/astronaut_reading_space_nostars.png" alt="astronaut floating">
-        <div class="loader-text">Looks like you aren't following anyone yet...</div>
+        <div class="loader-text">There are up to 400 billion stars in our galaxy. Perhaps there is an inhabitable planet out here where this URL exists. Who knows?</div>
     </div>
 </template>
 
