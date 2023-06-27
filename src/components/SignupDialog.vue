@@ -2,6 +2,7 @@
   <div class="bg" @click="$emit('close')"></div>
   <dialog open>
     <div class="dialog-div"> <b>Sign Up</b> </div>
+    <span v-if="errorMessage" class="error-message">User already exists</span>
     <form @submit.prevent="submitForm">
         <div class="form-control">
             <input 
@@ -46,7 +47,12 @@
           <span v-else class="requirements" :class="requirementsPassTwo"></span> 
         </div>
         <div>
-            <button type="submit" class="button" :disabled="!validateForm()">Sign Up</button>
+            <button type="submit" class="button" :disabled="!validateForm()">
+            <span v-if="!loading">Sign Up</span>
+            <span v-else>
+              <div class="lds-facebook"><div></div><div></div><div></div></div>
+            </span>
+            </button>
         </div>
         <div class="signup-message">Have an account already? <a href="" class="link" @click.prevent="$emit('signin')">Log In</a></div>
       </form>
@@ -70,7 +76,9 @@ export default {
       passOneFocused: false,
       passTwoValue: '',
       passTwoFocused: false,
-      formValid: false
+      formValid: false,
+      loading: false,
+      errorMessage: false
     }
   },
   methods: {
@@ -79,15 +87,23 @@ export default {
       const patternUsername = /^[A-Za-z0-9_]+$/;
       const patternEmail = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,})+$/;
 
-      if ((this.usernameValue.length >= 3) && (this.usernameValue.length <= 20)
-        && patternUsername.test(this.usernameValue) && patternEmail.test(this.emailValue) === true
-        && (this.passOneValue.length >= 3) && (this.passTwoValue === this.passOneValue)) {
-          this.formValid = true;
-          return true;
-      } else {
+      if (this.loading) {
           this.formValid = false;
           return false;
-      }
+        } else if (
+          (this.usernameValue.length >= 3) &&
+          (this.usernameValue.length <= 20) &&
+          patternUsername.test(this.usernameValue) &&
+          patternEmail.test(this.emailValue) &&
+          (this.passOneValue.length >= 3) &&
+          (this.passTwoValue === this.passOneValue)
+        ) {
+          this.formValid = true;
+          return true;
+        } else {
+          this.formValid = false;
+          return false;
+        }
     },
     submitForm() {
       const value = this.validateForm();
@@ -97,17 +113,19 @@ export default {
           email: this.emailValue,
           password: this.passOneValue
         };
-        console.log(credentials)
+        this.loading = true;
         this.signup(credentials)
           .then(data => {
             // Handle the data here
             if (data.status === "Success") {
-
+              this.loading = false;
               this.$emit('signin');
             }
           })
           .catch(error => {
             // Handle the error here
+            this.errorMessage = true;
+            this.loading = false;
             console.error('Registration failed:', error);
           });
         //this.$emit("close");
@@ -207,6 +225,57 @@ export default {
 </script>
 
 <style scoped>
+.error-message {
+  font-size: 15px;
+  font-weight: bold;
+  padding: 0 10px 0 10px;
+  margin: 15px 0 -5px 0;
+  color: rgb(255, 0, 0);
+  align-self: center;
+}
+
+.lds-facebook {
+  display: inline-block;
+  position: relative;
+  width: 40px;
+  height: 40px;
+}
+
+.lds-facebook div {
+  display: inline-block;
+  position: absolute;
+  left: 4px;
+  width: 8px;
+  background: #fff;
+  animation: lds-facebook 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+}
+
+.lds-facebook div:nth-child(1) {
+  left: 4px;
+  animation-delay: -0.12s;
+}
+
+.lds-facebook div:nth-child(2) {
+  left: 16px;
+  animation-delay: -0.06s;
+}
+
+.lds-facebook div:nth-child(3) {
+  left: 28px;
+  animation-delay: 0;
+}
+
+@keyframes lds-facebook {
+  0% {
+    top: 4px;
+    height: 32px;
+  }
+  50%, 100% {
+    top: 12px;
+    height: 16px;
+  }
+}
+
 .valid-input {
   border: 1px solid rgb(0, 214, 82);
 }

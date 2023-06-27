@@ -2,6 +2,7 @@
   <div class="bg" @click="$emit('close')"></div>
   <dialog open>
     <div class="dialog-div"> <b>Log In</b> </div>
+    <span v-if="errorMessage" class="error-message">Invalid credentials</span>
     <form @submit.prevent="submitForm">
         <div class="form-control">
             <input v-model="usernameValue" id="title" name="title" type="text" ref="titleInput" placeholder="Username">
@@ -34,19 +35,26 @@ export default {
       formValid: false,
       usernameValue: "",
       passwordValue: "",
-      loading: false
+      loading: false,
+      errorMessage: false
     }
   },
   methods: {
     ...mapActions('auth', ['login']), // Map the login action from the auth module
     validateForm() {
-      if ((this.usernameValue.length >= 3) && (this.passwordValue.length >= 3)) {
-          this.formValid = true;
-          return true;
-      } else {
+
+      if (this.loading) {
           this.formValid = false;
           return false;
-      }
+        } else if (
+          (this.usernameValue.length >= 3) && (this.passwordValue.length >= 3)
+        ) {
+          this.formValid = true;
+          return true;
+        } else {
+          this.formValid = false;
+          return false;
+        }
     },
     submitForm() {
       this.validateForm();
@@ -61,12 +69,16 @@ export default {
           .then(data => {
             // Handle the data here
             if (data.status === "Success") {
-              console.log(data);
               this.$emit('close');
+            } else {
+              this.loading = false;
+              this.errorMessage = true;
             }
           })
           .catch(error => {
             // Handle the error here
+            this.errorMessage = true;
+            this.loading = false;
             console.error('Login failed:', error);
           });
         
@@ -91,6 +103,15 @@ export default {
 </script>
 
 <style scoped>
+.error-message {
+  font-size: 15px;
+  font-weight: bold;
+  padding: 0 10px 0 10px;
+  margin: 15px 0 -5px 0;
+  color: rgb(255, 0, 0);
+  align-self: center;
+}
+
 .lds-facebook {
   display: inline-block;
   position: relative;

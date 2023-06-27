@@ -19,27 +19,44 @@ const username = sessionStorage.getItem('username');
 
 // Check if both token and username exist
 if (token && username) { // add userData if taking into account
-  axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
-  // Set a flag or state variable indicating the user is logged in
+
   store.commit('auth/SET_LOGGED_IN', true);
   store.commit("auth/SET_USER", username);
-  //store.commit("auth/SET_USER_DATA", userData)
 
   axios
     .get(`${API_BASE_URL}/user/${username}`, { timeout: 5000 })
     .then(response => {
+        axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+        // Set a flag or state variable indicating the user is logged in
         store.commit('auth/SET_USER_DATA', response.data.user_data);
     }).catch(error => {
         if (axios.isCancel(error)) {
             // Request timed out
             console.error('Request timed out:', error);
+
+            store.commit('SET_LOGGED_IN', false);
+            store.commit('SET_USER', null);
+            store.commit("SET_USER_DATA", null)
+
+            sessionStorage.clear();
+
+            router.push('/home');
+            
           } else {
             // Other error occurred
             console.error('Failed to fetch user data:', error);
+            
+            store.commit('SET_LOGGED_IN', false);
+            store.commit('SET_USER', null);
+            store.commit("SET_USER_DATA", null)
+
+            sessionStorage.clear();
+
+            router.push('/home');
           }
     });
 
-  router.push('/');
+  router.push('/home');
 }
 
 app.mount('#app');
