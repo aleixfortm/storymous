@@ -6,7 +6,7 @@
         <section v-else class="section_title">
             {{ profileUsername }}'s profile
         </section>
-        <section class="profile-box" v-if="userPicture">
+        <section :class="profileBoxClass" v-if="userPicture">
             <profile-picture
                 v-if="userPicture"
                 :picture="userPicture">
@@ -14,7 +14,9 @@
             <div class="statsblock">
                 <div class="topblock">
                     <div class="name-color">
+                        <!--
                         <div class="color-scheme"></div>
+                        -->
                         <div class="username">@{{ profileUsername }}</div>
                     </div>
                     <button v-if="!ownProfile() && isLoggedIn" class="followbutton">Follow</button>
@@ -107,6 +109,7 @@ export default {
             profileUsername: null,
             loading: true,
             userPicture: "",
+            userColor: "",
             userBio: "",
             nStories: 0,
             nFollowers: 0,
@@ -124,7 +127,10 @@ export default {
             return this.$route.params.id; // Replace "parameter" with the actual name of your URL parameter
         },
         imgSource() {
-            return require('../assets/img/' + this.userPicture);
+            return require('../assets/img/' + this.userColor);
+        },
+        profileBoxClass() {
+            return `profile-box ${this.userColor}`;
         },
     },
     mounted() {
@@ -150,18 +156,19 @@ export default {
         },
         fetchDataComponent() {
             this.profileUsername = this.$route.params.id;
-            console.log(this.profileUsername)
             if (this.ownProfile()) {
                 this.userPicture = this.userFetchedPicture;
+                console.log(this.colorFetched)
+                this.userColor = this.colorFetched;
                 this.userBio = this.userFetchedBio;
                 this.nStories = this.nFetchedPosts;
                 this.nFollowers = this.nFetchedFollowers;
                 this.nFollowing = this.nFetchedFollowing;
+                this.loading = false;
 
             axios
                 .get(`${API_BASE_URL}/posts/${this.profileUsername}`)
                 .then(response => {
-
                     const data = response.data;
                     console.log(data)
                     this.posts = data;
@@ -178,6 +185,8 @@ export default {
                     this.posts = data.posts;
                     const userData = data.user_data;
                     this.userPicture = userData.picture;
+                    this.userColor = userData.color;
+                    console.log(this.userColor)
                     this.userBio = userData.bio; 
                     this.nStories = userData.started_stories + userData.continued_stories;
                     this.nFollowers = userData.followers.length;
@@ -265,7 +274,7 @@ export default {
     height: 25px;
     align-self: center;
     margin: 0 15px 0 0;
-    box-shadow: 0px 0px 10px 2px rgba(0, 183, 255, 0.479);
+    box-shadow: 0px 0px 10px 2px rgba(0, 183, 255, 0.575);
 }
 
 .followbutton {
@@ -350,6 +359,42 @@ export default {
     background-color: rgb(119 119 119 / 19%);
     padding: 10px;
     border-radius: 10px;
+}
+
+.profile-box.salmon {
+    box-shadow: 0px 0px 15px 2px rgb(255, 109, 93);
+}
+
+.profile-box.red {
+    box-shadow: 0px 0px 15px 2px rgb(255, 25, 0);
+}
+
+.profile-box.blue {
+    box-shadow: 0px 0px 15px 2px rgb(0, 153, 255);
+}
+
+.profile-box.green {
+    box-shadow: 0px 0px 15px 2px rgb(55, 182, 97);
+}
+
+.profile-box.yellow {
+    box-shadow: 0px 0px 15px 2px rgb(255, 217, 0);
+}
+
+.profile-box.white {
+    box-shadow: 0px 0px 15px 2px rgb(255, 255, 255);
+}
+
+.profile-box.purple {
+    box-shadow: 0px 0px 15px 2px rgb(183, 0, 255);
+}
+
+.profile-box.pink {
+    box-shadow: 0px 0px 15px 2px rgb(255, 0, 179);
+}
+
+.profile-box.orange {
+    box-shadow: 0px 0px 15px 2px rgb(255, 145, 0);
 }
 
 .topblock {
