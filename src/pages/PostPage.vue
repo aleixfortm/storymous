@@ -12,7 +12,7 @@
             :color="post.color"
             :feedMode="false">
         </post-container>
-        <div class="pollancre">
+        <div class="pollancre" v-if="isLoggedIn">
             <form @submit.prevent="submitForm">
                 <div class="newstory_comment">
                     <div class="image_box">
