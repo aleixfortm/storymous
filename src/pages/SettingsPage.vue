@@ -28,9 +28,9 @@
 
         <component v-if="userFetchedPicture"
             :is="selectedSetting" 
-            :previousImage="userFetchedPicture" 
-            :previousColor="colorFetched" 
-            :previous-bio="userFetchedBio"
+            :previousImage="selectedImage" 
+            :previousColor="selectedColor" 
+            :previousBio="selectedBio"
             @image-selected="handleImageSelected" 
             @color-selected="handleColorSelected"
             @bio-selected="handleBioSelected">
@@ -57,9 +57,9 @@ export default {
             isSaveButtonDisabled: true,
 
             //default values
-            selectedImage: "",
-            selectedColor: '',
-            selectedBio: "",
+            selectedImage: null,
+            selectedColor: null,
+            selectedBio: null
         }
     },
     setup() {
@@ -76,6 +76,19 @@ export default {
         if (this.isLoggedIn === false) {
             this.router.push('/home');
         }
+        axios
+        .get(`${API_BASE_URL}/settings/${this.currentUser}`, { timeout: 7000 })
+        .then(response => {
+            const data = response.data;
+            this.selectedImage = data.picture,
+            this.selectedColor = data.color,
+            this.selectedBio = data.bio;
+            console.log(data)
+        }).catch(error => {
+            if (axios.isCancel(error)) {
+                console.error('Request timed out:', error);
+            }
+        })
     },
     computed: {
         ...mapGetters('auth', ['isLoggedIn', 'currentUser', "userFetchedPicture", "colorFetched", "userFetchedBio", "nFetchedPosts", "nFetchedFollowers", "nFetchedFollowing"]),
@@ -124,7 +137,6 @@ export default {
                 });
         },
     }
-
 }
 
 </script>
