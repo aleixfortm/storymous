@@ -21,27 +21,31 @@
                     </div>
                     <button v-if="!ownProfile() && isLoggedIn" class="followbutton">Follow</button>
                 </div>
-                <div class="stats">
-                    <div class="count-block">
-                        <b>Stories</b>
-                        <div class="count-block__num">{{ nStories }}</div>
-                    </div>
-                    <div class="count-block">
-                        <b>Followers</b>
-                        <div class="count-block__num">{{ nFollowers }}</div>
-                    </div>
-                    <div class="count-block">
-                        <b>Following</b>
-                        <div class="count-block__num">{{ nFollowing }}</div>
+                <div class="stats-container">
+                    <div class="stats">
+                        <div class="count-block">
+                            <b>Stories</b>
+                            <div class="count-block__num">{{ nStories }}</div>
+                        </div>
+                        <div class="count-block">
+                            <b>Followers</b>
+                            <div class="count-block__num">{{ nFollowers }}</div>
+                        </div>
+                        <div class="count-block">
+                            <b>Following</b>
+                            <div class="count-block__num">{{ nFollowing }}</div>
+                        </div>
                     </div>
                 </div>
-                <div class="stats-bio">
-                    <b>Bio</b>
-                    <div class="bio-content">{{ userBio }}</div>
-                </div>
-                <div v-if="ownProfile() && isLoggedIn" class="miscbuttons">
-                    <button class="settingsbutton" @click="goToSettings">User settings</button>
-                    <button class="logoutbutton" @click="logout()">Log out</button>
+                <div class="separator">
+                    <div class="stats-bio">
+                        <b>Bio</b>
+                        <div class="bio-content">{{ userBio }}</div>
+                    </div>
+                    <div v-if="ownProfile() && isLoggedIn" class="miscbuttons">
+                        <button class="settingsbutton" @click="goToSettings">User settings</button>
+                        <button class="logoutbutton" @click="logout()">Log out</button>
+                    </div>
                 </div>
             </div>
         </section>
@@ -207,6 +211,19 @@ export default {
 </script>
 
 <style scoped>
+.separator {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.stats-container {
+    width: 100%;
+    padding: 0 10px;
+}
+
 .onomatopoeia {
     color: whitesmoke;
     font-weight: bold;
@@ -345,7 +362,7 @@ export default {
 .miscbuttons {
     display: flex;
     flex-direction: row;
-    margin: 10px 0 0px 0;
+    margin: 10px 0 5px 0;
     height: 30px;
     align-items: center;
     justify-content: flex-end;
@@ -460,7 +477,7 @@ export default {
     align-items: center;
     height: fit-content;
     width: 340px;
-    
+    height: auto;
 }
 
 .username {
@@ -472,7 +489,7 @@ export default {
 .stats {
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
     margin: 20px 0 0 0;
     width: 100%;
     color: whitesmoke;

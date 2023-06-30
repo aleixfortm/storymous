@@ -27,7 +27,6 @@ export default {
 }
 
 .postimage {
-    height: 100%;
     border-radius: 500%;
     border: 4px whitesmoke solid;
     margin: auto;
