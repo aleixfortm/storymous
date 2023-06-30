@@ -95,6 +95,7 @@ export default {
             showCharacter: true,
             loading: true,
             loggedOutLoading: false,
+            loggedOutImageLoaded: false
         }
     },
     mounted() {

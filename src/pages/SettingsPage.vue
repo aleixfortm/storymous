@@ -57,9 +57,9 @@ export default {
             isSaveButtonDisabled: true,
 
             //default values
-            selectedImage: "astronaut_reading.jpeg",
-            selectedColor: 'blue',
-            selectedBio: "yo! My name's asdf and I love Storymous! Follow me to be up to date with my content :-)",
+            selectedImage: "",
+            selectedColor: '',
+            selectedBio: "",
         }
     },
     setup() {
@@ -113,9 +113,9 @@ export default {
                 .then(response => {
                     this.loading = false;
                     const data = response.data;
-                    if (data.status === "success") {
+                    if (data.status === "Success") {
                         this.isSaveButtonDisabled = true;
-                        store.commit('auth/SET_USER_DATA', data.updated_user_data[0]);
+                        store.commit('auth/SET_USER_DATA', data.updated_user_data);
                     }
                 })
                 .catch(error => {
