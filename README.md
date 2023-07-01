@@ -27,6 +27,9 @@
 - [ ] Add continuing story functionality
 - [ ] Add functionality to write new chapters to existing stories
 
+## Current bugs
+- LOL
+
 ## Project setup
 ```
 npm install
