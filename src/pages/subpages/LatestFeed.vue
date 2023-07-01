@@ -15,7 +15,7 @@
             :title="post.title"
             :content="post.content"
             :username="post.username"
-            :postComment="post.post_comment"
+            :postComment="post.comment"
             :date="post.date"
             :picture="post.picture"
             :color="post.color"

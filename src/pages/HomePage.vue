@@ -1,5 +1,7 @@
 <template>
     <feed-container v-if="isLoggedIn">
+        <img src="../assets/img/storymous-forest-min.png" alt="storymous forest" class="testimage">
+        <!--
         <div class="loggedintop">
             <div class="loggedimagecontainer">
                 <img src="../assets/img/tree2.jpeg" alt="storymous tree" class="treeimg">
@@ -16,6 +18,7 @@
                 </div>
             </div>
         </div>
+        -->
         <div class="create_newstory">
             <img class="postimage" v-if="userFetchedPicture" :src="imgSource" alt="profilepic">
             <router-link to="" class="story_form">
@@ -136,6 +139,12 @@ export default {
 
 
 <style scoped>
+.testimage {
+    width: 100%;
+    border-radius: 10px;
+    opacity: 1;
+}
+
 .statstop {
     color: whitesmoke;
     padding: 10px;
