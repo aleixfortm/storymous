@@ -28,7 +28,7 @@
 - [ ] Add functionality to write new chapters to existing stories
 
 ## Current bugs
-- LOL
+- Following feed appears as if user is not following anybody after log in. That, however, does not happen after refreshing page or navigating to other routes and coming back to feed.
 
 ## Project setup
 ```
