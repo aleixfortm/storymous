@@ -23,6 +23,7 @@
 - [x] Allow visiting user profiles
 - [x] Add different user settings options (Color scheme, picture and bio)
 - [ ] Add general stats, either on home page or a create a dedicated route for it
+- [ ] Add option to select color scheme for new story
 - [ ] Make search bar functional and responsive to input
 - [ ] Show users following/followers when hover/click on profile stats
 - [ ] Add story tags
