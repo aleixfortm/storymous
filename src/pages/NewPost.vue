@@ -18,7 +18,7 @@
                     <textarea id="body" v-model="formbody" placeholder="Story content" required></textarea>
                 </div>
                 <div class="buttonbox">
-                  <button class="postbutton" type="submit">Submit</button>
+                  <button :class="{ 'postbutton': true, 'disabled': isPostButtonDisabled }" :disabled="isPostButtonDisabled" type="submit">Submit</button>
                 </div>
             </form>
         </div>
@@ -31,6 +31,7 @@
 
   import FeedContainer from '@/components/layout/FeedContainer.vue';
   import axios from 'axios';
+import router from '@/router';
 
   export default {
     name: "NewPost",
@@ -43,13 +44,35 @@
         formcomment: "",
         formbody: "",
         textareaHeight: 0,
-        textareaHeight1: 0
+        textareaHeight1: 0,
+        loading: false,
+        isPostButtonDisabled: false,
       };
     },
     methods: {
       submitForm() {
-        // Here you can perform the desired actions with the form data
-        axios.post(`${API_BASE_URL}/new_post`) //this.formtitle)
+        this.loading = true;
+
+        const data_packet = {
+          comment: this.formcomment,
+          title: this.formtitle,
+          body: this.formbody,
+          username: this.currentUser
+        }
+
+        axios.post(`${API_BASE_URL}/new_post`, data_packet)
+        .then(response => {
+            this.loading = false;
+            const data = response.data;
+            if (data.status === "Success") {
+                this.isPostButtonDisabled = true;
+                router.push("/home")
+            }
+          })
+          .catch(error => {
+              console.log(error);
+              this.loading = false;
+          });
       },
       adjustTextareaHeight() {
           const textarea = this.$el.querySelector('#comment');
@@ -85,6 +108,9 @@
       ...mapGetters('auth', ['currentUser', "userFetchedPicture", "colorFetched", "userFetchedBio", "nFetchedPosts", "nFetchedFollowers", "nFetchedFollowing"]),
       imgSource() {
           return require('../assets/img/' + this.userFetchedPicture);
+        },
+        postButtonText() {
+            return this.isPostButtonDisabled ? "Submitted" : "Submit?"
         }
     }
   };
@@ -235,15 +261,30 @@ input[type="text"] {
     }
   
     .postbutton {
+    font-family: inherit;
+    border: 0px solid #e5e3ff;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    font-size: 15px;
+    width: fit-content;
+    margin: 10px 10px 10px 10px;
+    background-color: rgba(0, 255, 76, 0.726);
+    border-radius: 4px;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.322);
+    padding: 5px;
+}
+
+    .disabled {
     height: 30px;
     font-family: inherit;
     border: 0px solid #e5e3ff;
-    color: rgb(0, 255, 98);
+    color: rgb(255, 255, 255);
     cursor: pointer;
     font-size: 15px;
     width: 80px;
     margin: 10px 10px 10px 0;
-    background-color: #ffffff1e;
+    background-color: #94949425;
     border-radius: 4px;
     }
 
