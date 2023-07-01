@@ -102,16 +102,31 @@ export default {
         }
     },
     mounted() {
-    axios
-        .get(`${API_BASE_URL}/posts`)
-        .then(response => {
-            this.posts = response.data;
-            this.loading = false;
-            this.loggedOutLoading = false;
-        })
-        .catch(error => {
-            console.log(error);
-        });
+    if (this.isLoggedIn) {
+        console.log(this.currentUser)
+        axios
+            .get(`${API_BASE_URL}/homepage_posts/${this.currentUser}`)
+            .then(response => {
+                this.posts = response.data;
+                this.loading = false;
+                this.loggedOutLoading = false;
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    } else {
+        axios
+            .get(`${API_BASE_URL}/posts`)
+            .then(response => {
+                this.posts = response.data;
+                this.loading = false;
+                this.loggedOutLoading = false;
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    }
+    
     },
     methods: {
         setSelectedTab(tab) {

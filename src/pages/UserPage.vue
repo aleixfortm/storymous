@@ -22,8 +22,9 @@
                     <button 
                         v-if="!ownProfile() && isLoggedIn" 
                         class="followbutton"
-                        :class="{ following: isFollowing }" 
-                        @click="followAction">
+                        :class="{ following: isFollowing, disabled: isFollowButtonDisabled }" 
+                        @click="followAction"
+                        :disabled="isFollowButtonDisabled">
                         {{ isFollowing ? 'Unfollow' : 'Follow' }}
                     </button>
                 </div>
@@ -131,7 +132,8 @@ export default {
             nStories: 0,
             nFollowers: 0,
             nFollowing: 0,
-            isFollowing: null
+            isFollowing: null,
+            isFollowButtonDisabled: false,
         }
     },
     components: {
@@ -170,30 +172,28 @@ export default {
             }
         },
         followAction() {
-            var action = ""
-            if (this.isFollowing) {
-                this.isFollowing = false
-                action = "unfollow"
-            } else {
-                this.isFollowing = true
-                action = "follow"
-            }
+
+            this.isFollowButtonDisabled = true;
 
             const data_packet = {
-                action: action,
+                action: !this.isFollowing ? "follow" : "unfollow",
                 user_being_followed: this.profileUsername,
                 user_follows: this.currentUser
             }
-            
+
             axios
                 .post(`${API_BASE_URL}/follow`, data_packet)
-                /*
                 .then(response => {
-                    //const data = response.data;
+                    const data = response.data;
+                    if (data == "Success") {
+                        this.isFollowing = !this.isFollowing
+                    }
+                    this.isFollowButtonDisabled = false;
                 })
-                */
+
                 .catch(error => {
                     console.log(error);
+                    this.isFollowButtonDisabled = false;
                 });
         },
         goToSettings() {
@@ -253,6 +253,12 @@ export default {
 </script>
 
 <style scoped>
+.disabled {
+  opacity: 0.5; /* or any other visual styling for disabled state */
+  pointer-events: none; /* disable pointer events */
+  cursor: default; /* set cursor to "not-allowed" */
+}
+
 .followbutton.following {
   /* Button styles when following */
   background-color: #ff7b009c;
