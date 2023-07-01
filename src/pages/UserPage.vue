@@ -486,42 +486,52 @@ export default {
     background-color: rgb(119 119 119 / 19%);
     padding: 10px;
     border-radius: 10px;
+    border: 4px rgb(0, 183, 255) solid;
 }
 
 .profile-box.salmon {
-    box-shadow: 0px 0px 15px 2px rgb(255, 109, 93);
+    border: 4px rgb(255, 109, 93) solid;
+    box-shadow: 0px 0px 5px 2px rgb(255, 109, 93);
 }
 
 .profile-box.red {
-    box-shadow: 0px 0px 15px 2px rgb(255, 25, 0);
+    border: 4px rgb(255, 25, 0) solid;
+    box-shadow: 0px 0px 5px 2px rgb(255, 25, 0);
 }
 
 .profile-box.blue {
-    box-shadow: 0px 0px 15px 2px rgb(0, 153, 255);
+    border: 4px rgb(0, 153, 255) solid;
+    box-shadow: 0px 0px 5px 2px rgb(0, 153, 255);
 }
 
 .profile-box.green {
-    box-shadow: 0px 0px 15px 2px rgb(55, 182, 97);
+    border: 4px rgb(55, 182, 97) solid;
+    box-shadow: 0px 0px 5px 2px rgb(55, 182, 97);
 }
 
 .profile-box.yellow {
-    box-shadow: 0px 0px 15px 2px rgb(255, 217, 0);
+    border: 4px rgb(255, 217, 0) solid;
+    box-shadow: 0px 0px 5px 2px rgb(255, 217, 0);
 }
 
 .profile-box.white {
-    box-shadow: 0px 0px 15px 2px rgb(255, 255, 255);
+    border: 4px rgb(255, 255, 255) solid;
+    box-shadow: 0px 0px 5px 2px rgb(255, 255, 255);
 }
 
 .profile-box.purple {
-    box-shadow: 0px 0px 15px 2px rgb(183, 0, 255);
+    border: 4px rgb(183, 0, 255) solid;
+    box-shadow: 0px 0px 5px 2px rgb(183, 0, 255);
 }
 
 .profile-box.pink {
-    box-shadow: 0px 0px 15px 2px rgb(255, 0, 179);
+    border: 4px rgb(255, 0, 179) solid;
+    box-shadow: 0px 0px 5px 2px rgb(255, 0, 179);
 }
 
 .profile-box.orange {
-    box-shadow: 0px 0px 15px 2px rgb(255, 145, 0);
+    border: 4px rgb(255, 145, 0) solid;
+    box-shadow: 0px 0px 5px 2px rgb(255, 145, 0);
 }
 
 .topblock {
