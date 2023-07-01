@@ -99,7 +99,8 @@
             <div class="imagecontainer">
                 <div class="onomatopoeia">crick crick</div>
                 <img class="astronaut-image" src="../assets/img/astronaut_reading_space_nostars.png" alt="astronaut floating">
-                <div class="loader-text">Countless tales have been told since the beginning of time, yet none have borne your signature. Let's change that!</div>
+                <div v-if="ownProfile()" class="loader-text">Countless tales have been told since the beginning of time, yet none have borne your signature. Let's change that!</div>
+                <div v-else class="loader-text">Countless tales have been told since the beginning of time, yet none have borne their signature. What might they be doing?</div>
             </div>
         </div>
     </feed-container>
