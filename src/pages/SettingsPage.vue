@@ -83,7 +83,6 @@ export default {
             this.selectedImage = data.picture,
             this.selectedColor = data.color,
             this.selectedBio = data.bio;
-            console.log(data)
         }).catch(error => {
             if (axios.isCancel(error)) {
                 console.error('Request timed out:', error);
