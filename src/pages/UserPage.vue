@@ -19,7 +19,13 @@
                         -->
                         <div class="username">@{{ profileUsername }}</div>
                     </div>
-                    <button v-if="!ownProfile() && isLoggedIn" class="followbutton">Follow</button>
+                    <button 
+                        v-if="!ownProfile() && isLoggedIn" 
+                        class="followbutton"
+                        :class="{ following: isFollowing }" 
+                        @click="followAction">
+                        {{ isFollowing ? 'Unfollow' : 'Follow' }}
+                    </button>
                 </div>
                 <div class="stats-container">
                     <div class="stats">
@@ -82,7 +88,7 @@
                 :title="post.title"
                 :content="post.content"
                 :username="post.username"
-                :postComment="post.post_comment"
+                :postComment="post.comment"
                 :date="post.date"
                 :picture="post.picture"
                 :color="post.color">
@@ -124,7 +130,8 @@ export default {
             userBio: "",
             nStories: 0,
             nFollowers: 0,
-            nFollowing: 0
+            nFollowing: 0,
+            isFollowing: null
         }
     },
     components: {
@@ -161,6 +168,33 @@ export default {
             } else {
                 return false;
             }
+        },
+        followAction() {
+            var action = ""
+            if (this.isFollowing) {
+                this.isFollowing = false
+                action = "unfollow"
+            } else {
+                this.isFollowing = true
+                action = "follow"
+            }
+
+            const data_packet = {
+                action: action,
+                user_being_followed: this.profileUsername,
+                user_follows: this.currentUser
+            }
+            
+            axios
+                .post(`${API_BASE_URL}/follow`, data_packet)
+                /*
+                .then(response => {
+                    //const data = response.data;
+                })
+                */
+                .catch(error => {
+                    console.log(error);
+                });
         },
         goToSettings() {
             this.$router.push('/settings');
@@ -199,6 +233,14 @@ export default {
                     this.nFollowers = userData.followers.length;
                     this.nFollowing = userData.following.length;
                     this.loading = false;
+
+                    if (this.isLoggedIn) {
+                        if (userData.followers.includes(this.currentUser)) {
+                            this.isFollowing = true;
+                        } else {
+                            this.isFollowing = false;
+                        }
+                    }
                 })
                 .catch(error => {
                     console.log(error);
@@ -211,6 +253,20 @@ export default {
 </script>
 
 <style scoped>
+.followbutton.following {
+  /* Button styles when following */
+  background-color: #ff7b009c;
+  color: #fffb00f6;
+  text-align: center;
+  width: auto;
+}
+
+.followbutton.following:hover {
+  /* Button styles when following */
+  background-color: #ff7b006e;
+  color: #fffb00f6;
+}
+
 .separator {
     width: 100%;
     display: flex;
