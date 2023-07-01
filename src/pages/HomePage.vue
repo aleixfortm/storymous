@@ -103,7 +103,6 @@ export default {
     },
     mounted() {
     if (this.isLoggedIn) {
-        console.log(this.currentUser)
         axios
             .get(`${API_BASE_URL}/homepage_posts/${this.currentUser}`)
             .then(response => {

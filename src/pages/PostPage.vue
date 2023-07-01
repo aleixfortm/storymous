@@ -13,7 +13,7 @@
             :feedMode="false">
         </post-container>
         <div class="pollancre" v-if="isLoggedIn">
-            <form @submit.prevent="submitForm">
+            <form @submit.prevent="submitComment">
                 <div class="newstory_comment">
                     <div class="image_box">
                         <img class="postimage" :src="imgSource" alt="profilepic">
@@ -30,7 +30,7 @@
             v-for="reply in replies"
               :key="reply._id"
               :_id="reply._id"
-              :content="reply.content"
+              :content="reply.comment"
               :username="reply.username"
               :date="reply.date"
               :picture="reply.picture">
@@ -110,6 +110,27 @@ export default {
           textarea.style.height = textarea.scrollHeight + 'px';
           this.textareaHeight = textarea.style.height;
         },
+        submitComment() {
+
+          const data_packet = {
+            username: this.currentUser,
+            comment: this.formcomment,
+            parentId: this.post._id.$oid
+          }
+
+          axios
+            .post(`${API_BASE_URL}/new_comment`, data_packet)
+            .then(response => {
+              const dataPayload = response.data;
+              //const comment_data = dataPayload.data_payload;
+
+              this.replies.unshift(dataPayload.comment_data); // Add the new comment to the beginning of the replies array
+              this.formcomment = ''; // Clear the comment input field
+            })
+            .catch(error => {
+              console.log(error);
+            });
+        }
   },
   watch: {
     formcomment() {
