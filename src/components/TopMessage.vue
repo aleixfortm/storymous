@@ -1,6 +1,6 @@
 <template>
     <div class="message">
-        Posting and following unavailable, backend API under maintenance.
+        Continuing stories is under development, coming soon!
     </div>
 </template>
 
