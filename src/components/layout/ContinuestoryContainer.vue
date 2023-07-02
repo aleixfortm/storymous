@@ -8,6 +8,7 @@
                 <div class="box2">
                     <div class="origin-container">
                         <div :class="['origin', chapterNum > 1 ? 'unmountable' : '']">Chapter {{ chapterNum }}</div>
+                        <div></div>
                     </div>
                     <div class="story__user-container2">
                         <div class="story__user-img-container2">
@@ -130,8 +131,8 @@ export default {
 }
 
 .unmountable {
-    background-color: rgba(255, 88, 88, 0.863);
-    color: rgb(100, 20, 0);
+    background-color: rgb(255, 125, 125);
+    color: rgb(121, 24, 0);
     box-shadow: 0px 0px 5px 0px rgba(255, 130, 130, 0.568);
 }
 
