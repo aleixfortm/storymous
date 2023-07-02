@@ -1,7 +1,7 @@
 <template>
     <feed-container>
       <section class="section_title">
-        Write new story
+        Start new story
       </section>
         <div class="pollancre">
             <form @submit.prevent="submitForm">

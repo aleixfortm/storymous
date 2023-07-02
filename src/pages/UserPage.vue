@@ -486,7 +486,6 @@ export default {
     background-color: rgb(119 119 119 / 19%);
     padding: 10px;
     border-radius: 10px;
-    border: 4px rgb(0, 183, 255) solid;
 }
 
 .profile-box.salmon {
