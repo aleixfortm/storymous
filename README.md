@@ -26,6 +26,7 @@
 - [ ] Add option to select color scheme for new story
 - [ ] Make search bar functional and responsive to input
 - [ ] Show users following/followers when hover/click on profile stats
+- [ ] Add links to user profiles dynamically to comment boxes
 - [ ] Add story tags
 - [ ] Add continuing story functionality
 - [ ] Add functionality to write new chapters to existing stories (like a new comment form)
