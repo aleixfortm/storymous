@@ -3,7 +3,7 @@
         <div :class="outlineClass">
             <router-link to="" @click="navigateToPost" style="text-decoration: none;" >
                 <div class="origin-container">
-                    <div class="origin">Started new story</div>
+                    <div class="origin">Prologue of "<span style="font-weight: bold;">{{ title }}</span>"</div>
                 </div>
                 <div class="story__user-container">
                     <div class="story__user-img-container">
@@ -21,12 +21,10 @@
                         </div>
                     </div>
                 </div>
-                <article class="story__article">    
+                <article class="story__article">
                     <div class="story__upper">
-                        <div class="story__title-container">
-                            <h2 class="story__title">{{ title }}</h2>
-                        </div>
-                    </div>
+                        <h2 class="story__title "><span class="story_title highlight">CHAPTER 1</span>Hang in, by all means, my friend</h2>
+                    </div>      
                     <p class="story__content">
                         {{ formatStory(content) }}
                         <b v-if="feedMode && checkLength" class="readmore-button"><em>Read more</em></b>
@@ -86,14 +84,38 @@ export default {
 </script>
 
 <style scoped>
+.highlight {
+    background-color: rgba(96, 120, 255, 0.308);
+    border-radius: 40px;
+    padding: 0 5px;
+    margin: 0 5px 0 0;
+}
+
+.story__upper {
+    display: flex;
+    margin: 5px 0 5px 0;
+
+}   
+
+.story__title {
+    color: bisque;
+    font-size: 18px;
+    align-self: center;
+    justify-self: center;
+    margin: 0px 0px 0px 0px;
+    background-color: #7979792d;
+    padding: 0px 5px 0px 0px;
+    border-radius: 10px;
+}
+
 .origin {
-    background-color: rgb(255, 255, 255);
-    color: rgb(0, 0, 0);
+    background-color: rgba(160, 160, 160, 0.247);
+    color: rgb(255, 255, 255);
     font-size: 14px;
-    padding: 1px 4px;
-    border-radius: 3px;
+    padding: 0px 3px;
+    border-radius: 1px;
     width: fit-content;
-    box-shadow: 0px 0px 4px rgba(255, 255, 255, 0.568);
+    box-shadow: 0px 0px 2px rgba(128, 128, 128, 0.568);
     
 }
 
@@ -116,51 +138,51 @@ export default {
 
 .outline.salmon {
     border: 1px rgb(255, 109, 93) solid;
-    background-color: rgba(255, 109, 93, 0.05);
+    background-color: rgba(255, 109, 93, 0.02);
 }
 
 .outline.red {
     border: 1px rgb(255, 25, 0) solid;
-    background-color: rgba(255, 25, 0, 0.05);
+    background-color: rgba(255, 25, 0, 0.02);
 }
 
 .outline.blue {
     border: 1px rgb(0, 153, 255) solid;
-    background-color: rgba(0, 153, 255, 0.05);
+    background-color: rgba(0, 153, 255, 0.02);
 }
 
 .outline.green {
     border: 1px rgb(55, 182, 97) solid;
-    background-color: rgba(60, 134, 85, 0.05);
+    background-color: rgba(60, 134, 85, 0.02);
 }
 
 .outline.yellow {
     border: 1px rgb(255, 217, 0) solid;
-    background-color: rgba(255, 217, 0, 0.05);
+    background-color: rgba(255, 217, 0, 0.02);
 }
 
 .outline.white {
     border: 1px rgb(255, 255, 255) solid;
-    background-color: rgba(255, 255, 255, 0.05);
+    background-color: rgba(255, 255, 255, 0.02);
 }
 
 .outline.purple {
     border: 1px rgb(183, 0, 255) solid;
-    background-color: rgba(183, 0, 255, 0.05);
+    background-color: rgba(183, 0, 255, 0.02);
 }
 
 .outline.pink {
     border: 1px rgb(255, 0, 179) solid;
-    background-color: rgba(255, 0, 179, 0.05);
+    background-color: rgba(255, 0, 179, 0.02);
 }
 
 .outline.orange {
     border: 1px rgb(255, 145, 0) solid;
-    background-color: rgba(255, 145, 0, 0.05);
+    background-color: rgba(255, 145, 0, 0.02);
 }
 
 .story__article {
-    padding: 10px 10px;
+    padding: 5px 10px 5px 10px;
     border-radius: 2px;
     cursor: pointer;
     transition: all 0s;
@@ -212,16 +234,6 @@ export default {
     justify-content: space-between;
 }
 
-
-.story__upper {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    padding: 0px 0px;
-    width: 100%;
-}
-
 .story__title-container {
     background-color: rgb(255, 214, 164);
     padding: 2px;
@@ -233,15 +245,6 @@ export default {
     hyphens: auto;
 }
 
-.story__title {
-    padding: 1px 6px;
-    border-radius: 5px;
-    color: #2d3441;
-    margin: 0px 0px;
-    font-size: large;
-    word-wrap: break-word;
-    hyphens: auto;
-}
 
 .story__content {
     text-align: left;

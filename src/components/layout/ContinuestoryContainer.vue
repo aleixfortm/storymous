@@ -64,7 +64,7 @@ export default {
                 username: this.username,
                 postComment: this.postComment,
                 date: this.date,
-                imgName: this.imgName
+                picture: this.picture
             };
             this.emitData(dataToEmit);
             this.router.push('/post/' + this._id.$oid);
