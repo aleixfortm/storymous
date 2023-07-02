@@ -116,47 +116,47 @@ export default {
 
 .outline.salmon {
     border: 1px rgb(255, 109, 93) solid;
-    background-color: rgba(255, 109, 93, 0.123);
+    background-color: rgba(255, 109, 93, 0.05);
 }
 
 .outline.red {
     border: 1px rgb(255, 25, 0) solid;
-    background-color: rgba(255, 25, 0, 0.11);
+    background-color: rgba(255, 25, 0, 0.05);
 }
 
 .outline.blue {
     border: 1px rgb(0, 153, 255) solid;
-    background-color: rgba(0, 153, 255, 0.103);
+    background-color: rgba(0, 153, 255, 0.05);
 }
 
 .outline.green {
     border: 1px rgb(55, 182, 97) solid;
-    background-color: rgba(60, 134, 85, 0.103);
+    background-color: rgba(60, 134, 85, 0.05);
 }
 
 .outline.yellow {
     border: 1px rgb(255, 217, 0) solid;
-    background-color: rgba(255, 217, 0, 0.116);
+    background-color: rgba(255, 217, 0, 0.05);
 }
 
 .outline.white {
     border: 1px rgb(255, 255, 255) solid;
-    background-color: rgba(255, 255, 255, 0.11);
+    background-color: rgba(255, 255, 255, 0.05);
 }
 
 .outline.purple {
     border: 1px rgb(183, 0, 255) solid;
-    background-color: rgba(183, 0, 255, 0.11);
+    background-color: rgba(183, 0, 255, 0.05);
 }
 
 .outline.pink {
     border: 1px rgb(255, 0, 179) solid;
-    background-color: rgba(255, 0, 179, 0.096);
+    background-color: rgba(255, 0, 179, 0.05);
 }
 
 .outline.orange {
     border: 1px rgb(255, 145, 0) solid;
-    background-color: rgba(255, 145, 0, 0.116);
+    background-color: rgba(255, 145, 0, 0.05);
 }
 
 .story__article {
