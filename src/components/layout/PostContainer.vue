@@ -133,6 +133,7 @@ export default {
     border-radius: 5px;
     border: 1px rgba(255, 255, 255, 0) solid;
     background-color: rgba(255, 255, 255, 0);
+    transition: 0.1s all;
 }
 
 .outline.salmon {
@@ -180,6 +181,12 @@ export default {
     background-color: rgba(255, 145, 0, 0.02);
 }
 
+.outline:hover {
+    background-color: rgba(202, 202, 202, 0.055);
+    border: 1px rgba(190, 190, 190, 0.616) solid;
+    cursor: pointer;
+}
+
 .story__article {
     padding: 5px 10px 5px 10px;
     border-radius: 2px;
@@ -189,10 +196,6 @@ export default {
     color: rgb(223, 223, 223);
 }
 
-.outline:hover {
-    cursor: pointer;
-    /*border: 2px whitesmoke solid;*/
-}
 
 .story__user-container {
     padding: 10px 5px 1px 5px;

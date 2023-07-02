@@ -165,6 +165,15 @@ export default {
     padding: 5px;
     margin: 8px 0 0 0;
     border-radius: 10px;
+    transition: 0.1s all;
+}
+
+.background-story-reply2:hover {
+    background-color: rgba(167, 167, 167, 0.199);
+}
+
+.background-story-reply2:active {
+    background-color: rgba(167, 167, 167, 0.199);
 }
 
 
