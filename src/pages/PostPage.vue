@@ -48,6 +48,7 @@
             :postComment="reply.comment"
             :date="reply.date"
             :picture="reply.picture"
+            :tags="reply.tags"
           ></continuestory-container>
         </template>
       </div>

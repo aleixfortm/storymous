@@ -8,7 +8,7 @@
                 <div class="box2">
                     <div class="origin-container">
                         <div :class="['origin', chapterNum > 1 ? 'unmountable' : '']">Chapter {{ chapterNum }}</div>
-                        <div></div>
+                        <div v-if="tags.includes('End')" class="origin end">End</div>
                     </div>
                     <div class="story__user-container2">
                         <div class="story__user-img-container2">
@@ -52,7 +52,7 @@ export default {
         const router = useRouter();
         return { router: router };
     },
-    props: ["_id", "content", "username", "postComment", "date", "picture", "chapterNum", "storyId", "parentChapterId", "chapterName"],
+    props: ["_id", "content", "username", "postComment", "date", "picture", "chapterNum", "storyId", "parentChapterId", "chapterName", "tags"],
     methods: {
         formatStory(story) {
             return story.replace(/<br>/g, '\n');
@@ -79,6 +79,9 @@ export default {
             return require('../../assets/img/' + this.picture);
         },
     },
+    mounted() {
+
+    }
 };
 </script>
 
@@ -127,13 +130,19 @@ export default {
     border-radius: 3px;
     width: fit-content;
     box-shadow: 0px 0px 5px 0px rgba(13, 255, 0, 0.568);
-    
+    margin: 0 10px 0 0;
 }
 
 .unmountable {
     background-color: rgb(255, 125, 125);
     color: rgb(121, 24, 0);
     box-shadow: 0px 0px 5px 0px rgba(255, 130, 130, 0.568);
+}
+
+.end {
+    background-color: rgb(192, 165, 255);
+    color: rgb(141, 0, 184);
+    box-shadow: 0px 0px 5px 0px rgba(164, 125, 255, 0.568);
 }
 
 .origin-container {
