@@ -26,10 +26,11 @@
                         </div>
                     </div>
                 </div>
-                
             </div>
-        
-            <article class="story__article2">  
+            <article class="story__article2">
+                <div class="story__upper">
+                    <h2 class="story__title "><span class="story_title highlight">2</span>{{ chapterName }}</h2>
+                </div>  
                 <p class="story__content2">
                     {{ formatStory(content) }}
                 </p>
@@ -81,6 +82,27 @@ export default {
 </script>
 
 <style scoped>
+.highlight {
+    background-color: rgba(96, 120, 255, 0.308);
+    border-radius: 5px;
+    padding: 0 5px;
+    margin: 0 10px 0 0;
+}
+
+.story__upper {
+    display: flex;
+
+}
+
+.story__title {
+    color: bisque;
+    font-size: 23px;
+    align-self: center;
+    justify-self: center;
+    margin: 0px 0px 5px 0;
+
+}
+
 .box2 {
     display: flex;
     flex-direction: column;
@@ -134,11 +156,12 @@ export default {
     background-color: rgb(46, 46, 53);
     color: rgb(223, 223, 223);
     font-weight: 400;
+    text-align: left;
 }
 
 
 .story__user-container2 {
-    padding: 2px 10px 2px 2px;
+    padding: 0px 5px 2px 0px;
     display: flex;
     flex-direction: row;
 }
@@ -254,11 +277,7 @@ export default {
     margin: 0px 0px 5px 0;
 }
 
-.story__user-container2 {
-    padding: 0px 5px 5px 0px;
-    display: flex;
-    flex-direction: row;
-}
+
 
 .story__user-comment2 {
     margin-top: 0px;

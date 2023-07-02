@@ -54,7 +54,7 @@ export default {
     methods: {
         formatStory(story) {
             const formattedStory = story.replace(/<br>/g, '\n')
-            if (formattedStory.length > 700) {
+            if (formattedStory.length > 700 && this.feedMode) {
                 return formattedStory.substring(0, 700) + '...';
             }
             return formattedStory
@@ -166,7 +166,6 @@ export default {
     transition: all 0s;
     background-color: rgb(46, 46, 53);
     color: rgb(223, 223, 223);
-    font-weight: 400;
 }
 
 .outline:hover {
