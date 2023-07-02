@@ -7,7 +7,7 @@
                 </div>
                 <div class="box2">
                     <div class="origin-container">
-                            <div class="origin">Chapter 2</div>
+                        <div :class="['origin', chapterNum > 1 ? 'unmountable' : '']">Chapter {{ chapterNum }}</div>
                     </div>
                     <div class="story__user-container2">
                         <div class="story__user-img-container2">
@@ -29,7 +29,7 @@
             </div>
             <article class="story__article2">
                 <div class="story__upper">
-                    <h2 class="story__title "><span class="story_title highlight">2</span>{{ chapterName }}</h2>
+                    <h2 class="story__title "><span class="story_title highlight">{{ chapterNum }}</span>{{ chapterName }}</h2>
                 </div>  
                 <p class="story__content2">
                     {{ formatStory(content) }}
@@ -82,24 +82,28 @@ export default {
 </script>
 
 <style scoped>
+
+
 .highlight {
-    background-color: rgba(96, 120, 255, 0.308);
-    border-radius: 5px;
+    background-color: rgba(255, 115, 0, 0.438);
+    border-radius: 40px;
     padding: 0 5px;
-    margin: 0 10px 0 0;
+    margin: 0 5px 0 -5px;
+    font-size: 17px;
 }
 
 .story__upper {
     display: flex;
+    margin: 5px 0 5px 0;
 
-}
+}   
 
 .story__title {
     color: bisque;
-    font-size: 23px;
+    font-size: 17px;
     align-self: center;
     justify-self: center;
-    margin: 0px 0px 5px 0;
+    margin: 0px 0px 0px 5px;
 
 }
 
@@ -123,6 +127,12 @@ export default {
     width: fit-content;
     box-shadow: 0px 0px 5px 0px rgba(13, 255, 0, 0.568);
     
+}
+
+.unmountable {
+    background-color: rgba(255, 88, 88, 0.863);
+    color: rgb(100, 20, 0);
+    box-shadow: 0px 0px 5px 0px rgba(255, 130, 130, 0.568);
 }
 
 .origin-container {
@@ -149,7 +159,7 @@ export default {
 
 
 .story__article2 {
-    padding: 10px 15px;
+    padding: 5px 10px;
     border-radius: 2px;
     cursor: pointer;
     transition: all 0s;
