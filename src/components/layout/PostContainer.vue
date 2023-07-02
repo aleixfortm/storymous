@@ -137,42 +137,42 @@ export default {
 }
 
 .outline.salmon {
-    border: 1px rgb(255, 109, 93) solid;
+    border: 1px rgba(255, 109, 93, 0.747) solid;
     background-color: rgba(255, 109, 93, 0.02);
 }
 
 .outline.red {
-    border: 1px rgb(255, 25, 0) solid;
+    border: 1px rgb(255, 43, 43) solid;
     background-color: rgba(255, 25, 0, 0.02);
 }
 
 .outline.blue {
-    border: 1px rgb(0, 153, 255) solid;
+    border: 1px rgba(0, 153, 255, 0.7) solid;
     background-color: rgba(0, 153, 255, 0.02);
 }
 
 .outline.green {
-    border: 1px rgb(55, 182, 97) solid;
+    border: 1px rgba(55, 182, 97, 0.705) solid;
     background-color: rgba(60, 134, 85, 0.02);
 }
 
 .outline.yellow {
-    border: 1px rgb(255, 217, 0) solid;
+    border: 1px rgba(255, 217, 0, 0.726) solid;
     background-color: rgba(255, 217, 0, 0.02);
 }
 
 .outline.white {
-    border: 1px rgb(255, 255, 255) solid;
+    border: 1px rgba(255, 255, 255, 0.753) solid;
     background-color: rgba(255, 255, 255, 0.02);
 }
 
 .outline.purple {
-    border: 1px rgb(183, 0, 255) solid;
+    border: 1px rgba(183, 0, 255, 0.747) solid;
     background-color: rgba(183, 0, 255, 0.02);
 }
 
 .outline.pink {
-    border: 1px rgb(255, 0, 179) solid;
+    border: 1px rgba(255, 0, 179, 0.685) solid;
     background-color: rgba(255, 0, 179, 0.02);
 }
 
