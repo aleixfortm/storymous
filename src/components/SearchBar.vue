@@ -36,7 +36,7 @@ input[type="text"] {
   border-radius: 5px;
   font-size: 14px;
   font-weight: 500;
-  height: 40px;
+  height: 35px;
   outline: none;
   padding: 8px 8px 8px 20px; /* add left padding */
   width: 95%;
