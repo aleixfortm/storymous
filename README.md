@@ -4,7 +4,7 @@
 <img src="https://github.com/aleixfortm/storymous/assets/95043218/0298a2af-3140-4de2-b4b3-1a0ee6262904" alt="storymous_tree" width="200" height="auto">
 
 
-[Storymous](https://www.storymous.com) is a unique social media platform centered around storytelling. It empowers users to not only start their own stories but also collaborate and continue existing stories dynamically through a chapter-based system. Through the creation of branching storylines, captivating narratives unfold, offering readers the ability to shape their own journey within the story.
+[Storymous](https://www.storymous.com) is a unique social media platform centered around storytelling. It empowers users to not only start their own stories but also collaborate and continue existing stories dynamically through a chapter-based system. With the creation of branching storylines, captivating narratives unfold, offering readers the ability to shape their own journey within the story.
 
 ## Roadmap
 - [x] Add story feed
