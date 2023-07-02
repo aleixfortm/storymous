@@ -23,7 +23,6 @@
             <article class="story__article2">  
                 <p class="story__content2">
                     {{ formatStory(content) }}
-                    <b class="readmore-button2"><em>Read more</em></b>
                 </p>
             </article>
         </router-link>
