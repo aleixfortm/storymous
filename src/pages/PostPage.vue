@@ -25,6 +25,33 @@
                 </div>
             </form>
         </div>
+
+      <div v-for="reply in replies" :key="reply._id">
+        <template v-if="reply.type === 'comment'">
+          <comment-container
+            :_id="reply._id"
+            :content="reply.comment"
+            :username="reply.username"
+            :date="reply.date"
+            :picture="reply.picture"
+          ></comment-container>
+        </template>
+        <template v-else>
+          <continuestory-container
+            :_id="reply._id"
+            :storyId="reply.story_id"
+            :parentChapterId="reply.parent_chapter_id"
+            :content="reply.content"
+            :chapterName="reply.chapter_name"
+            :chapterNum="reply.chapter_num"
+            :username="reply.username"
+            :postComment="reply.comment"
+            :date="reply.date"
+            :picture="reply.picture"
+          ></continuestory-container>
+        </template>
+      </div>
+        <!--
         <div v-if="replies">
           <comment-container 
             v-for="reply in replies"
@@ -49,6 +76,8 @@
             :date="replyPost.date"
             :picture="replyPost.picture">
         </continuestory-container>
+        -->
+
     </feed-container>
     <feed-container v-else>
       <div class="loader-container">
@@ -68,7 +97,7 @@ import { API_BASE_URL } from '../config';
 import { mapGetters } from 'vuex';
 
 import CommentContainer from "@/components/layout/CommentContainer.vue";
-//import ContinuestoryContainer from "@/components/layout/ContinuestoryContainer.vue";
+import ContinuestoryContainer from "../components/layout/ContinuestoryContainer.vue";
 import FeedContainer from '@/components/layout/FeedContainer.vue';
 import PostContainer from '@/components/layout/PostContainer.vue';
 
@@ -77,7 +106,7 @@ export default {
     FeedContainer,
     PostContainer,
     CommentContainer,
-    //ContinuestoryContainer
+    ContinuestoryContainer
   },
   data() {
     return {
@@ -94,6 +123,7 @@ export default {
     axios
       .get(`${API_BASE_URL}/post/${postId}`)
       .then(response => {
+        console.log(response.data)
         this.post = response.data.post;
         this.replies = response.data.replies;
         this.loading = false;

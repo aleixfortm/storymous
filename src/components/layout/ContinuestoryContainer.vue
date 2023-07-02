@@ -44,7 +44,7 @@ export default {
         const router = useRouter();
         return { router: router };
     },
-    props: ["_id", "content", "username", "postComment", "date", "imgName"],
+    props: ["_id", "content", "username", "postComment", "date", "picture", "chapterNum", "storyId", "parentChapterId", "chapterName"],
     methods: {
         formatStory(story) {
             return story.replace(/<br>/g, '\n');
@@ -68,7 +68,7 @@ export default {
     },
     computed: {
         imgSource() {
-            return require('../../assets/img/' + this.imgName);
+            return require('../../assets/img/' + this.picture);
         },
     },
 };
