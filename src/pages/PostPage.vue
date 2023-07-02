@@ -36,17 +36,19 @@
               :picture="reply.picture">
           </comment-container>
         </div>
-        <!--
         <continuestory-container
         v-if="replyPost"
             :_id="replyPost._id"
+            :storyId="replyPost.story_id"
+            :parentChapterId="replyPost.parent_chapter_id"
             :content="replyPost.content"
+            :chapterName="replyPost.chapter_name"
+            :chapterNum="replyPost.chapter_num"
             :username="replyPost.username"
-            :postComment="replyPost.postComment"
+            :postComment="replyPost.comment"
             :date="replyPost.date"
-            :picture="replyPost.imgName">
+            :picture="replyPost.picture">
         </continuestory-container>
-        -->
     </feed-container>
     <feed-container v-else>
       <div class="loader-container">
@@ -55,7 +57,7 @@
               <div></div>
               <div></div>
           </div>
-          <span class="loader-text">Attempting to locate story</span>
+          <span class="loader-text">Harvesting story from story tree</span>
       </div>
     </feed-container>
 </template>
