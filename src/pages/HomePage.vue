@@ -43,9 +43,9 @@
     -->
     <feed-container v-else class="homepage-top">
         <div class="imagecontainer">
-            <div class="onomatopoeia">strange noises</div>
+            <div class="onomatopoeia">eerie noises</div>
             <img class="astronaut-image" src="../assets/img/astronaut_reading_space_nostars.png" alt="astronaut floating">
-            <div class="loader-text">In the depths of our galaxy lies a distant planet, where a mesmerizing forest thrives—a place where the ethereal story tree whispers secrets of cosmic wonders...</div>
+            <div class="loader-text">"In the depths of our galaxy lies a distant planet, where a mesmerizing forest thrives— a place where the ethereal story tree whispers secrets of cosmic wonders..."</div>
             
         </div>
     </feed-container>
@@ -132,6 +132,7 @@ export default {
                 this.posts = response.data;
                 this.loading = false;
                 this.loggedOutLoading = false;
+                console.log(this.posts.latest)
             })
             .catch(error => {
                 console.log(error);

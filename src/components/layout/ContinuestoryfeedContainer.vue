@@ -3,7 +3,7 @@
         <div :class="outlineClass">
             <router-link to="" @click="navigateToPost" style="text-decoration: none;" >
                 <div class="origin-container">
-                    <div class="origin">Contributed to "<span style="font-weight: bold;">Some story</span>"</div>
+                    <div class="origin">Contributed to "<span style="font-weight: bold;">{{storyTitle}}</span>"</div>
                 </div>
                 <div class="story__user-container">
                     <div class="story__user-img-container">
@@ -23,7 +23,7 @@
                 </div>
                 <article class="story__article">
                     <div class="story__upper">
-                        <h2 class="story__title "><span class="story_title highlight">CHAPTER {{ chapterNum }}</span>{{ title }}</h2>
+                        <h2 class="story__title "><span class="story_title highlight">CHAPTER {{ chapterNum }}</span>{{ chapterName }}</h2>
                     </div>      
                     <p class="story__content">
                         {{ formatStory(content) }}
@@ -48,7 +48,7 @@ export default {
         const router = useRouter();
         return { router: router };
     },
-    props: ["_id", "content", "username", "postComment", "date", "picture", "chapterNum", "storyId", "parentChapterId", "chapterName", "tags"],
+    props: ["_id", "content", "username", "postComment", "storyTitle", "color", "date", "picture", "chapterNum", "storyId", "parentChapterId", "chapterName", "tags"],
     methods: {
         formatStory(story) {
             const formattedStory = story.replace(/<br>/g, '\n')

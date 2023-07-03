@@ -47,6 +47,8 @@
             :chapterName="post.chapter_name"
             :chapterNum="post.chapter_num"
             :username="post.username"
+            :color="post.color"
+            :storyTitle="post.story_title"
             :postComment="post.comment"
             :date="post.date"
             :picture="post.picture"
