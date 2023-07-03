@@ -3,7 +3,7 @@
         <div :class="outlineClass">
             <router-link to="" @click="navigateToPost" style="text-decoration: none;" >
                 <div class="origin-container">
-                    <div class="origin">Prologue of "<span style="font-weight: bold;">{{ title }}</span>"</div>
+                    <div class="origin">Started "<span style="font-weight: bold;">{{ title }}</span>"</div>
                 </div>
                 <div class="story__user-container">
                     <div class="story__user-img-container">
