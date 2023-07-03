@@ -8,7 +8,7 @@
 
 
 
-[Storymous](https://www.storymous.com) is a unique social media platform centered around storytelling. It empowers users to not only start their own stories but also collaborate and continue existing stories dynamically through a chapter-based system. With the creation of branching storylines, captivating narratives unfold, offering readers the ability to shape their own journey within the story.
+[Storymous](https://www.storymous.com) is a unique social media platform centered around storytelling. It empowers users to not only start their own stories but also collaborate and continue existing stories dynamically through a chapter-based system. With the creation of branching storylines, captivating narratives unfold, offering readers the ability to shape their own journey.
 <br> The backend API repo of this project can be found [here](https://github.com/aleixfortm/storymous-API).
 
 ## Roadmap
