@@ -87,12 +87,14 @@ import SelectButton from "../components/SelectButton.vue";
 import LatestFeed from "../pages/subpages/LatestFeed.vue";
 import FollowingFeed from "../pages/subpages/FollowingFeed.vue";
 
+
 export default {
     components: {
         FeedContainer,
         SelectButton,
         LatestFeed,
-        FollowingFeed
+        FollowingFeed,
+
     },
     setup() {
         const router = useRouter();

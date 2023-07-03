@@ -7,6 +7,7 @@
         </div>
         <span class="loader-text">Harvesting stories...</span>
     </div>
+    <!--
     <div v-else>
         <post-container
         v-for="post in posts.latest"
@@ -21,22 +22,58 @@
             :color="post.color"
             :feedMode="true">
         </post-container>
+        -->
+    <div v-else v-for="post in posts.latest" :key="post._id">
+      <template v-if="post.type === 'prologue'">
+        <post-container
+            :_id="post._id"
+            :title="post.title"
+            :content="post.content"
+            :username="post.username"
+            :postComment="post.comment"
+            :date="post.date"
+            :picture="post.picture"
+            :color="post.color"
+            :feedMode="true">
+        </post-container>
+      </template>
+      <template v-else>
+        <continuestoryfeed-container
+        v-if="post.type === 'chapter'"
+            :_id="post._id"
+            :storyId="post.story_id"
+            :parentChapterId="post.parent_chapter_id"
+            :content="post.content"
+            :chapterName="post.chapter_name"
+            :chapterNum="post.chapter_num"
+            :username="post.username"
+            :postComment="post.comment"
+            :date="post.date"
+            :picture="post.picture"
+            :tags="post.tags">
+        </continuestoryfeed-container>
+      </template>
     </div>
 </template>
 
 
 <script>
 import PostContainer from "../../components/layout/PostContainer.vue";
+import ContinuestoryfeedContainer from "@/components/layout/ContinuestoryfeedContainer.vue";
 
 export default {
     props: ["posts", "loading"],
     components: {
-        PostContainer
+        PostContainer,
+        ContinuestoryfeedContainer
     },
     methods: {
         formatContent(text) {
             return text.replace(/<br>/g, '\n');
         }
+    },
+    mounted() {
+
     }
 }
 
