@@ -26,6 +26,7 @@
             </router-link>
         </div>
     </feed-container>
+    <!--
     <feed-container v-else class="homepage-top">
         <div class="welcome-message" v-if="!loggedOutLoading">
             <div class="messagecontainer">
@@ -37,6 +38,15 @@
             <div class="imagecontainer">
                 <img class="welcomeimage" src="../assets/img/astronaut_reading.jpeg" alt="astronaut reading under tree">
             </div>
+        </div>
+    </feed-container>
+    -->
+    <feed-container v-else class="homepage-top">
+        <div class="imagecontainer">
+            <div class="onomatopoeia">strange noises</div>
+            <img class="astronaut-image" src="../assets/img/astronaut_reading_space_nostars.png" alt="astronaut floating">
+            <div class="loader-text">In the depths of our galaxy lies a distant planet, where a mesmerizing forest thrives—a place where the ethereal story tree whispers secrets of cosmic wonders...</div>
+            
         </div>
     </feed-container>
     <div v-if="isLoggedIn" class="block">
@@ -153,10 +163,68 @@ export default {
 
 
 <style scoped>
+.nomargin {
+    padding: 0px 0px;
+    margin: 0px;
+}
+
+.onomatopoeia {
+    color: whitesmoke;
+    font-weight: bold;
+    font-size: 14px;
+    margin-bottom: -10px;
+    text-decoration: wavy;
+}
+
+@keyframes floatAnimation {
+  0% {
+    transform: translateY(-5px);
+  }
+  50% {
+    transform: translateY(5px);
+  }
+  100% {
+    transform: translateY(-5px);
+  }
+}
+
+.astronaut-image {
+    width: 175px;
+    height: auto;
+    animation: floatAnimation 4s ease-in-out infinite;
+}
+
+.centered {
+    justify-content: center;
+    align-items: center;
+    height: 300px
+}
+
+
+.imagecontainer {
+    margin: 10px auto 20px auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+}
+
+.loader-text {
+    background-color: whitesmoke;
+    text-align: center;
+    color: rgb(0, 0, 0);
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-weight: bold;
+    margin: 0 10px;
+}
+
 .testimage {
     width: 100%;
     border-radius: 10px;
     opacity: 1;
+    margin: 20px 0 0 0;
 }
 
 .statstop {
@@ -259,8 +327,9 @@ export default {
 
 .homepage-top {
     /*background-color: rgba(90, 90, 90, 0.13);*/
-    padding: 20px 10px;
+    padding: 0px;
     border-radius: 10px;
+    margin: 10px auto;
 }
 
 .messagecontainer {
@@ -319,7 +388,8 @@ export default {
 
 .imagecontainer {
     width: fit-content;
-    display: flex
+    display: flex;
+    margin: 10px 0 0 0;
 }
 
 @media (max-width: 690px) {
