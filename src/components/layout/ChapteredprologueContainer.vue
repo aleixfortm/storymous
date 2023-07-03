@@ -37,8 +37,6 @@
 import { useRouter } from 'vue-router';
 
 export default {
-    data() {
-    },
     setup() {
         const router = useRouter();
         return { router: router };

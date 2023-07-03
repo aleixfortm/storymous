@@ -34,13 +34,12 @@
 import { useRouter } from 'vue-router';
 
 export default {
-    data() {
-    },
+
     setup() {
         const router = useRouter();
         return { router: router };
     },
-    props: ["_id", "content", "username", "postComment", "date", "picture", "chapterNum", "storyId", "parentChapterId", "chapterName", "tags"],
+    props: ["_id", "content", "username", "postComment", "color", "date", "picture", "chapterNum", "storyId", "parentChapterId", "chapterName", "tags", "feedMode"],
     methods: {
         formatStory(story) {
             const formattedStory = story.replace(/<br>/g, '\n')
@@ -50,7 +49,7 @@ export default {
             return formattedStory
         },
         navigateToPost() {
-            this.router.push('/post/' + this._id.$oid);
+            this.router.push('/chapter/' + this._id.$oid);
         },
         navigateToUser() {
             this.router.push('/user/' + this.username);

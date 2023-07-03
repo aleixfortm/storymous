@@ -45,9 +45,6 @@ import { useRouter } from 'vue-router';
 import { mapActions } from "vuex";
 
 export default {
-    data() {
-
-    },
     setup() {
         const router = useRouter();
         return { router: router };

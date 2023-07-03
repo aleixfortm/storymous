@@ -1,19 +1,7 @@
 <template>
     <feed-container v-if="!loading">
 
-        <div class="pollancre" v-if="isLoggedIn">
-            <form @submit.prevent="submitComment">
-                <div class="newstory_comment">
-                    <div class="image_box">
-                        <img class="postimage" :src="imgSource" alt="profilepic">
-                    </div>
-                    <textarea id="comment" v-model="formcomment" placeholder="Add a comment..." rows="1" :style="{ height: textareaHeight }" required></textarea>
-                    <div class="buttonbox">
-                      <button class="postbutton" type="submit">Comment</button>
-                    </div>
-                </div>
-            </form>
-        </div>
+
 
       <div v-for="chapter in chapterList" :key="chapter._id" class="story__article">
         <template v-if="chapter.type === 'prologue'">
@@ -44,6 +32,45 @@
           ></chaptered-container>
         </template>
       </div>
+      <div class="pollancre" v-if="isLoggedIn">
+            <form @submit.prevent="submitComment">
+                <div class="newstory_comment">
+                    <div class="image_box">
+                        <img class="postimage" :src="imgSource" alt="profilepic">
+                    </div>
+                    <textarea id="comment" v-model="formcomment" placeholder="Add a comment..." rows="1" :style="{ height: textareaHeight }" required></textarea>
+                    <div class="buttonbox">
+                      <button class="postbutton" type="submit">Comment</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div v-for="reply in replies" :key="reply._id">
+          <template v-if="reply.type === 'comment'">
+            <comment-container
+              :_id="reply._id"
+              :content="reply.comment"
+              :username="reply.username"
+              :date="reply.date"
+              :picture="reply.picture"
+            ></comment-container>
+          </template>
+          <template v-else-if="reply.type === 'chapter' && !chapterList.some(obj => obj._id === reply._id)">
+            <continuestory-container
+              :_id="reply._id"
+              :storyId="reply.story_id"
+              :parentChapterId="reply.parent_chapter_id"
+              :content="reply.content"
+              :chapterName="reply.chapter_name"
+              :chapterNum="reply.chapter_num"
+              :username="reply.username"
+              :postComment="reply.comment"
+              :date="reply.date"
+              :picture="reply.picture"
+              :tags="reply.tags"
+            ></continuestory-container>
+          </template>
+        </div>
 
     </feed-container>
     <feed-container v-else>
@@ -53,7 +80,7 @@
               <div></div>
               <div></div>
           </div>
-          <span class="loader-text">Harvesting story from story tree</span>
+          <span class="loader-text">Harvesting all chapters from story...</span>
       </div>
     </feed-container>
 </template>
@@ -66,13 +93,16 @@ import { mapGetters } from 'vuex';
 import FeedContainer from '@/components/layout/FeedContainer.vue';
 import ChapteredContainer from "@/components/layout/ChapteredContainer.vue";
 import ChapteredprologueContainer from "@/components/layout/ChapteredprologueContainer.vue";
-
+import CommentContainer from "@/components/layout/CommentContainer.vue";
+import ContinuestoryContainer from "@/components/layout/ContinuestoryContainer.vue";
 
 export default {
   components: {
     FeedContainer,
     ChapteredContainer,
-    ChapteredprologueContainer
+    ChapteredprologueContainer,
+    CommentContainer,
+    ContinuestoryContainer
   },
   data() {
     return {
@@ -80,7 +110,8 @@ export default {
       formcomment: "",
       continuedStory: null,
       textareaHeight: null,
-      loading: true
+      loading: true,
+      replies: []
     }
   },
   mounted() {
@@ -90,6 +121,15 @@ export default {
       .then(response => {
         console.log(response.data)
         this.chapterList = response.data;
+        this.loading = false;
+      })
+    const postId = this.chapterList;
+    console.log(postId)
+    axios
+      .get(`${API_BASE_URL}/post/${postId}`)
+      .then(response => {
+        console.log(response.data)
+        this.replies = response.data.replies;
         this.loading = false;
       })
   },
@@ -251,7 +291,7 @@ export default {
   padding: 1px 0 0 0;
   background-color: rgb(119 119 119 / 19%);
   border-radius: 10px;
-  margin: 5px 0 12px 0;
+  margin: 10px 0 12px 0;
 }
 
 .newstory_comment {
