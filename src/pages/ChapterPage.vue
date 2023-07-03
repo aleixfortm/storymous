@@ -1,17 +1,6 @@
 <template>
     <feed-container v-if="!loading">
-        <post-container
-          v-if="post"
-            :_id="post._id"
-            :title="post.title"
-            :content="post.content"
-            :username="post.username"
-            :postComment="post.comment"
-            :date="post.date"
-            :picture="post.picture"
-            :color="post.color"
-            :feedMode="false">
-        </post-container>
+
         <div class="pollancre" v-if="isLoggedIn">
             <form @submit.prevent="submitComment">
                 <div class="newstory_comment">
@@ -26,30 +15,38 @@
             </form>
         </div>
 
-      <div v-for="reply in replies" :key="reply._id">
-        <template v-if="reply.type === 'comment'">
-          <comment-container
-            :_id="reply._id"
-            :content="reply.comment"
-            :username="reply.username"
-            :date="reply.date"
-            :picture="reply.picture"
-          ></comment-container>
+      <div v-for="chapter in chapterList" :key="chapter._id" class="story__article">
+        <template v-if="chapter.type === 'prologue'">
+          <post-container
+            :_id="chapter._id"
+            :storyId="chapter.story_id"
+            :parentChapterId="chapter.parent_chapter_id"
+            :content="chapter.content"
+            :chapterName="chapter.chapter_name"
+            :chapterNum="chapter.chapter_num"
+            :username="chapter.username"
+            :color="chapter.color"
+            :storyTitle="chapter.story_title"
+            :chapterComment="chapter.comment"
+            :date="chapter.date"
+            :picture="chapter.picture"
+            :tags="chapter.tags">
+          </post-container>
         </template>
         <template v-else>
-          <continuestory-container
-            :_id="reply._id"
-            :storyId="reply.story_id"
-            :parentChapterId="reply.parent_chapter_id"
-            :content="reply.content"
-            :chapterName="reply.chapter_name"
-            :chapterNum="reply.chapter_num"
-            :username="reply.username"
-            :postComment="reply.comment"
-            :date="reply.date"
-            :picture="reply.picture"
-            :tags="reply.tags"
-          ></continuestory-container>
+          <chaptered-container
+            :_id="chapter._id"
+            :storyId="chapter.story_id"
+            :parentChapterId="chapter.parent_chapter_id"
+            :content="chapter.content"
+            :chapterName="chapter.chapter_name"
+            :chapterNum="chapter.chapter_num"
+            :username="chapter.username"
+            :postComment="chapter.comment"
+            :date="chapter.date"
+            :picture="chapter.picture"
+            :tags="chapter.tags"
+          ></chaptered-container>
         </template>
       </div>
 
@@ -71,22 +68,18 @@ import axios from "axios";
 import { API_BASE_URL } from '../config';
 import { mapGetters } from 'vuex';
 
-import CommentContainer from "@/components/layout/CommentContainer.vue";
-import ContinuestoryContainer from "../components/layout/ContinuestoryContainer.vue";
 import FeedContainer from '@/components/layout/FeedContainer.vue';
-import PostContainer from '@/components/layout/PostContainer.vue';
+import ChapteredContainer from "@/components/layout/ChapteredContainer.vue";
+
 
 export default {
   components: {
     FeedContainer,
-    PostContainer,
-    CommentContainer,
-    ContinuestoryContainer
+    ChapteredContainer
   },
   data() {
     return {
-      post: null,
-      replies: null,
+      chapterList: null,
       formcomment: "",
       continuedStory: null,
       textareaHeight: null,
@@ -94,13 +87,12 @@ export default {
     }
   },
   mounted() {
-    const postId = this.$route.params.id;
+    const chapterId = this.$route.params.id;
     axios
-      .get(`${API_BASE_URL}/post/${postId}`)
+      .get(`${API_BASE_URL}/chapter/${chapterId}`)
       .then(response => {
         console.log(response.data)
-        this.post = response.data.post;
-        this.replies = response.data.replies;
+        this.chapterList = response.data;
         this.loading = false;
       })
   },
@@ -150,6 +142,15 @@ export default {
 </script>
 
 <style scoped>
+.story__article {
+    padding: 5px 10px 5px 10px;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0s;
+    background-color: rgb(46, 46, 53);
+    color: rgb(223, 223, 223);
+}
+
 .loader-text {
     background-color: whitesmoke;
     color: rgb(0, 0, 0);

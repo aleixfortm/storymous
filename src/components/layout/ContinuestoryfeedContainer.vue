@@ -58,7 +58,7 @@ export default {
             return formattedStory
         },
         navigateToPost() {
-            this.router.push('/post/' + this._id.$oid);
+            this.router.push('/chapter/' + this._id.$oid);
         },
         navigateToUser() {
             this.router.push('/user/' + this.username);

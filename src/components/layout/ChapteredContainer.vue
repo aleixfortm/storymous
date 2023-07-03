@@ -2,9 +2,6 @@
     <div>
         <div :class="outlineClass">
             <router-link to="" @click="navigateToPost" style="text-decoration: none;" >
-                <div class="origin-container">
-                    <div class="origin">Started "<span style="font-weight: bold;">{{ title }}</span>"</div>
-                </div>
                 <div class="story__user-container">
                     <div class="story__user-img-container">
                         <router-link to="" @click.stop="navigateToUser" style="color: inherit; text-decoration: none;">
@@ -12,7 +9,6 @@
                         </router-link>
                     </div> 
                     <div class="story__user-info-container">
-                        <div class="story__user-comment-container"><div class="story__user-comment cur-def"> {{ postComment }} </div></div>
                         <div class="story__username cur-pnt"> 
                             <router-link to="" @click.stop="navigateToUser" style="color: inherit; text-decoration: none;">
                                 <span class="lower" style="color: whitesmoke;"><b>@</b></span><b class="story__user-name">{{ username }}</b>
@@ -23,11 +19,10 @@
                 </div>
                 <article class="story__article">
                     <div class="story__upper">
-                        <h2 class="story__title "><span class="story_title highlight">PROLOGUE</span>{{ title }}</h2>
+                        <h2 class="story__title "><span class="story_title highlight">CHAPTER {{ chapterNum }}</span> {{ chapterName }}</h2>
                     </div>      
                     <p class="story__content">
                         {{ formatStory(content) }}
-                        <b v-if="feedMode && checkLength" class="readmore-button"><em>Read more</em></b>
                     </p>
                 </article>
             </router-link>
@@ -40,15 +35,12 @@ import { useRouter } from 'vue-router';
 
 export default {
     data() {
-        return {
-            outlineColors: ["red", "blue", "green", "yellow", "white", "purple", "pink", "orange", "salmon"]
-        }
     },
     setup() {
         const router = useRouter();
         return { router: router };
     },
-    props: ["_id", "title", "content", "username", "postComment", "date", "picture", "color", "feedMode"],
+    props: ["_id", "content", "username", "postComment", "date", "picture", "chapterNum", "storyId", "parentChapterId", "chapterName", "tags"],
     methods: {
         formatStory(story) {
             const formattedStory = story.replace(/<br>/g, '\n')
@@ -188,7 +180,7 @@ export default {
 }
 
 .story__article {
-    padding: 5px 10px 5px 10px;
+
     border-radius: 2px;
     cursor: pointer;
     transition: all 0s;
@@ -198,7 +190,7 @@ export default {
 
 
 .story__user-container {
-    padding: 10px 5px 1px 5px;
+    padding: 2px 5px 1px 5px;
     display: flex;
     flex-direction: row;
 }
@@ -266,7 +258,7 @@ export default {
 
 .story__username-date {
     margin: 0 0 0 5px;
-    font-size: 14px;
+    font-size: 12px;
     color: whitesmoke;
     font-weight: normal;
 }
@@ -282,14 +274,14 @@ export default {
 }
 
 .story__username {
-    margin: 5px 0px;
+    margin: 0px 0px;
+    font-size: 14px;
 }
 
 .story__user-img {
-    width: 55px;
+    width: 30px;
     height: auto;
     border-radius: 100%;
-    margin-bottom: 2px;
     cursor: pointer;
     transition: all 0.1s;
 }
@@ -315,7 +307,8 @@ export default {
     margin: 0 0 0 5px;
     width: fit-content;
     hyphens: auto;
-    justify-content: space-between;
+    justify-content: center;
+    align-items: center;
 }
 
 .story__user-comment {
