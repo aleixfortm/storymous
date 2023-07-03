@@ -6,6 +6,7 @@ import UserPage from "./pages/UserPage.vue";
 import NewPost from "./pages/NewPost.vue";
 import NotfoundPage from "./pages/NotfoundPage.vue";
 import SettingsPage from "./pages/SettingsPage.vue";
+import ChapterPage from "./pages/ChapterPage.vue";
 
 const router = createRouter({
     history: createWebHistory(),
@@ -15,6 +16,7 @@ const router = createRouter({
         { path: "/newpost", component: NewPost },
         { path: "/user/:id", component: UserPage },
         { path: "/post/:id", component: PostPage },
+        { path: "/chapter/:id", component: ChapterPage },
         { path: "/settings", component: SettingsPage },
         { path: "/:catchAll(.*)", component: NotfoundPage } // named redirect route for any undefined route
     ],
