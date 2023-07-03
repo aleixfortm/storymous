@@ -17,7 +17,7 @@
 
       <div v-for="chapter in chapterList" :key="chapter._id" class="story__article">
         <template v-if="chapter.type === 'prologue'">
-          <post-container
+          <chapteredprologue-container
             :_id="chapter._id"
             :storyId="chapter.story_id"
             :parentChapterId="chapter.parent_chapter_id"
@@ -31,7 +31,7 @@
             :date="chapter.date"
             :picture="chapter.picture"
             :tags="chapter.tags">
-          </post-container>
+          </chapteredprologue-container>
         </template>
         <template v-else>
           <chaptered-container
@@ -70,12 +70,14 @@ import { mapGetters } from 'vuex';
 
 import FeedContainer from '@/components/layout/FeedContainer.vue';
 import ChapteredContainer from "@/components/layout/ChapteredContainer.vue";
+import ChapteredprologueContainer from "@/components/layout/ChapteredprologueContainer.vue";
 
 
 export default {
   components: {
     FeedContainer,
-    ChapteredContainer
+    ChapteredContainer,
+    ChapteredprologueContainer
   },
   data() {
     return {
@@ -144,11 +146,17 @@ export default {
 <style scoped>
 .story__article {
     padding: 5px 10px 5px 10px;
-    border-radius: 2px;
+    border-radius: 0 0 0px 0px;
     cursor: pointer;
     transition: all 0s;
     background-color: rgb(46, 46, 53);
     color: rgb(223, 223, 223);
+    transition: 0.2s all;
+}
+
+.story__article:hover {
+    background-color: rgba(46, 46, 53, 0.247);
+
 }
 
 .loader-text {
