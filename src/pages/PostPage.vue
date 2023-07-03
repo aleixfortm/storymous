@@ -52,33 +52,6 @@
           ></continuestory-container>
         </template>
       </div>
-        <!--
-        <div v-if="replies">
-          <comment-container 
-            v-for="reply in replies"
-              :key="reply._id"
-              :_id="reply._id"
-              :content="reply.comment"
-              :username="reply.username"
-              :date="reply.date"
-              :picture="reply.picture">
-          </comment-container>
-        </div>
-        <continuestory-container
-        v-if="replyPost"
-            :_id="replyPost._id"
-            :storyId="replyPost.story_id"
-            :parentChapterId="replyPost.parent_chapter_id"
-            :content="replyPost.content"
-            :chapterName="replyPost.chapter_name"
-            :chapterNum="replyPost.chapter_num"
-            :username="replyPost.username"
-            :postComment="replyPost.comment"
-            :date="replyPost.date"
-            :picture="replyPost.picture">
-        </continuestory-container>
-        -->
-
     </feed-container>
     <feed-container v-else>
       <div class="loader-container">

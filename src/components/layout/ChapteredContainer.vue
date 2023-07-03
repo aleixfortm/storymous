@@ -19,7 +19,7 @@
                 </div>
                 <article class="story__article">
                     <div class="story__upper">
-                        <h2 class="story__title "><span class="story_title highlight">CHAPTER {{ chapterNum }}</span> {{ chapterName }}</h2>
+                        <h2 class="story__title "><span class="story_title highlight">CHAPTER {{ chapterNum }}</span>{{ chapterName }}</h2>
                     </div>      
                     <p class="story__content">
                         {{ formatStory(content) }}
@@ -125,9 +125,10 @@ export default {
 
 
 .story__user-container {
-    padding: 0px 5px 0px 0px;
+    padding: 5px 0 0 0px;
     display: flex;
     flex-direction: row;
+    border-top: 1px rgba(129, 129, 129, 0.322) solid;
 }
 
 .story__user-img-container {

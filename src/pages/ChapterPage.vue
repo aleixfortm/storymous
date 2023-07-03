@@ -55,7 +55,7 @@
               :picture="reply.picture"
             ></comment-container>
           </template>
-          <template v-else-if="reply.type === 'chapter' && !chapterList.some(obj => obj._id === reply._id)">
+          <template v-else-if="reply.type === 'chapter' && !chapterList.some(obj => obj._id.$oid === reply._id.$oid)">
             <continuestory-container
               :_id="reply._id"
               :storyId="reply.story_id"
@@ -71,7 +71,6 @@
             ></continuestory-container>
           </template>
         </div>
-
     </feed-container>
     <feed-container v-else>
       <div class="loader-container">
@@ -111,7 +110,7 @@ export default {
       continuedStory: null,
       textareaHeight: null,
       loading: true,
-      replies: []
+      replies: null
     }
   },
   mounted() {
@@ -122,16 +121,16 @@ export default {
         console.log(response.data)
         this.chapterList = response.data;
         this.loading = false;
+        const postId = this.chapterList[0]._id.$oid;
+        axios
+          .get(`${API_BASE_URL}/post/${postId}`)
+          .then(response => {
+            console.log(response.data)
+            this.replies = response.data.replies;
+            this.loading = false;
+          })
       })
-    const postId = this.chapterList;
-    console.log(postId)
-    axios
-      .get(`${API_BASE_URL}/post/${postId}`)
-      .then(response => {
-        console.log(response.data)
-        this.replies = response.data.replies;
-        this.loading = false;
-      })
+    
   },
   computed: {
     ...mapGetters('auth', ['isLoggedIn', 'currentUser', "userFetchedPicture", "colorFetched"]),
