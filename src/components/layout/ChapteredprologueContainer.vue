@@ -2,6 +2,9 @@
     <div>
         <div :class="outlineClass">
             <router-link to="" @click="navigateToPost" style="text-decoration: none;" >
+                <div class="main-title-container">
+                        <h2 class="main-title">{{ title }}</h2>
+                    </div>   
                 <div class="story__user-container">
                     <div class="story__user-img-container">
                         <router-link to="" @click.stop="navigateToUser" style="color: inherit; text-decoration: none;">
@@ -76,6 +79,21 @@ export default {
 </script>
 
 <style scoped>
+.main-title-container {
+    display: flex;
+    margin: 5px 0 5px 0;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.main-title {
+    color: bisque;
+    font-size: 25px;
+    margin: 5px 0px 10px 0px;
+
+}
+
 .highlight {
     background-color: rgba(255, 115, 0, 0.438);
     border-radius: 40px;

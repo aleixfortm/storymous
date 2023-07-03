@@ -19,18 +19,13 @@
         <template v-if="chapter.type === 'prologue'">
           <chapteredprologue-container
             :_id="chapter._id"
-            :storyId="chapter.story_id"
-            :parentChapterId="chapter.parent_chapter_id"
             :content="chapter.content"
-            :chapterName="chapter.chapter_name"
-            :chapterNum="chapter.chapter_num"
+            :title="chapter.title"
             :username="chapter.username"
             :color="chapter.color"
-            :storyTitle="chapter.story_title"
-            :chapterComment="chapter.comment"
+            :postComment="chapter.comment"
             :date="chapter.date"
-            :picture="chapter.picture"
-            :tags="chapter.tags">
+            :picture="chapter.picture">
           </chapteredprologue-container>
         </template>
         <template v-else>
@@ -155,7 +150,7 @@ export default {
 }
 
 .story__article:hover {
-    background-color: rgba(46, 46, 53, 0.247);
+    background-color: rgba(105, 105, 105, 0.247);
 
 }
 
