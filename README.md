@@ -2,6 +2,7 @@
 # storymous
 
 <img src="https://github.com/aleixfortm/storymous/assets/95043218/0298a2af-3140-4de2-b4b3-1a0ee6262904" alt="storymous_tree" width="200" height="auto">
+
 ![storymous-forest](https://github.com/aleixfortm/storymous/assets/95043218/059cd0c3-dda7-4738-891d-cf440cab78c5)
 
 
