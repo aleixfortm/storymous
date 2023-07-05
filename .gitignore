@@ -1,1 +1,4 @@
 node_modules
+backend-API/config.py
+backend-API/venv
+backend-API/wvenv
