@@ -139,47 +139,47 @@ export default {
 
 .outline.salmon {
     border: 1px rgba(255, 109, 93, 0.747) solid;
-    background-color: rgba(255, 109, 93, 0.02);
+    background-color: rgba(255, 109, 93, 0.1);
 }
 
 .outline.red {
     border: 1px rgb(255, 43, 43) solid;
-    background-color: rgba(255, 25, 0, 0.02);
+    background-color: rgba(255, 25, 0, 0.1);
 }
 
 .outline.blue {
     border: 1px rgba(0, 153, 255, 0.7) solid;
-    background-color: rgba(0, 153, 255, 0.02);
+    background-color: rgba(0, 153, 255, 0.1);
 }
 
 .outline.green {
     border: 1px rgba(55, 182, 97, 0.705) solid;
-    background-color: rgba(60, 134, 85, 0.02);
+    background-color: rgba(60, 134, 85, 0.1);
 }
 
 .outline.yellow {
     border: 1px rgba(255, 217, 0, 0.726) solid;
-    background-color: rgba(255, 217, 0, 0.02);
+    background-color: rgba(255, 217, 0, 0.1);
 }
 
 .outline.white {
     border: 1px rgba(255, 255, 255, 0.753) solid;
-    background-color: rgba(255, 255, 255, 0.02);
+    background-color: rgba(255, 255, 255, 0.1);
 }
 
 .outline.purple {
     border: 1px rgba(183, 0, 255, 0.747) solid;
-    background-color: rgba(183, 0, 255, 0.02);
+    background-color: rgba(183, 0, 255, 0.1);
 }
 
 .outline.pink {
     border: 1px rgba(255, 0, 179, 0.685) solid;
-    background-color: rgba(255, 0, 179, 0.02);
+    background-color: rgba(255, 0, 179, 0.1);
 }
 
 .outline.orange {
     border: 1px rgb(255, 145, 0) solid;
-    background-color: rgba(255, 145, 0, 0.02);
+    background-color: rgba(255, 145, 0, 0.1);
 }
 
 .outline:hover {
