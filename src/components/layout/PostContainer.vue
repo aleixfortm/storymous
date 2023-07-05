@@ -85,10 +85,10 @@ export default {
 
 <style scoped>
 .highlight {
-    background-color: rgba(255, 115, 0, 0.438);
-    border-radius: 40px;
-    padding: 0 5px;
-    margin: 0 5px 0 -5px;
+    background-color: rgba(0, 255, 106, 0.44);
+    border-radius: 5px;
+    padding: 0 3px;
+    margin: 0 10px 0 -5px;
     font-size: 17px;
 }
 
