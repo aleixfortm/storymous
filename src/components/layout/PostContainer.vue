@@ -23,7 +23,7 @@
                 </div>
                 <article class="story__article">
                     <div class="story__upper">
-                        <h2 class="story__title "><span class="story_title highlight">PROLOGUE</span>{{ title }}</h2>
+                        <h2 class="story__title "><span class="story_title highlight">PROLOGUE</span>{{ title.toUpperCase() }}</h2>
                     </div>      
                     <p class="story__content">
                         {{ formatStory(content) }}
@@ -85,7 +85,8 @@ export default {
 
 <style scoped>
 .highlight {
-    background-color: rgba(0, 255, 106, 0.44);
+    background-color: rgba(0, 255, 106, 0.582);
+    box-shadow: 0px 0px 5px 0px rgba(13, 255, 0, 0.568);
     border-radius: 5px;
     padding: 0 3px;
     margin: 0 10px 0 -5px;

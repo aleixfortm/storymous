@@ -36,7 +36,7 @@ export default {
 
 html {
   font-family: "IBM Plex Mono", monospace;
-  background-color: rgb(46, 54, 61);
+  background-color: rgb(35, 45, 54);
 }
 
 body {
