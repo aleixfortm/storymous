@@ -4,10 +4,8 @@
   <header>
       <nav>
           <div class="logo">
-            <span>
-              <router-link class="logoimgcontainer" to="/"><img class="logoimg" src="../../assets/img/tree2.jpeg" alt="treelogo"></router-link>
-            </span>
-              <router-link to="/" class="header-title">Storymous</router-link>
+            <router-link class="logoimgcontainer" to="/"><img class="logoimg" src="../../assets/img/tree2.jpeg" alt="treelogo"></router-link>
+            <router-link to="/" class="header-title">Storymous</router-link>
           </div>
           <search-bar></search-bar>
           <div v-if="isLoggedIn === false" class="login-div">
@@ -71,6 +69,7 @@ export default {
 </script>
 
 <style scoped>
+
 .header-title {
   font-size: 26px;
   margin: 0 0 0 5px;
@@ -93,7 +92,7 @@ export default {
   align-items: center;
   justify-content: center;
   margin: auto;
-  height: fit-content;
+  height: 45px;
 }
 
 .logoimg {
