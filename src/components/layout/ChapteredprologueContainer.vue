@@ -93,11 +93,12 @@ export default {
 }
 
 .highlight {
-    background-color: rgba(255, 115, 0, 0.438);
-    border-radius: 40px;
+    background-color: rgba(0, 255, 106, 0.658);
+    border-radius: 4px;
     padding: 0 5px;
     margin: 0 5px 0 -5px;
     font-size: 17px;
+    box-shadow: 0px 0px 3px 0px rgba(0, 255, 106, 0.658);
 }
 
 .story__upper {
@@ -142,9 +143,10 @@ export default {
 
 
 .story__user-container {
-    padding: 0px 5px 0px 0px;
+    padding: 5px 0px 0px 0px;
     display: flex;
     flex-direction: row;
+    border-top: 1px rgba(129, 129, 129, 0.322) solid;
 }
 
 .story__user-img-container {

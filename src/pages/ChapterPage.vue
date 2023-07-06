@@ -3,7 +3,7 @@
 
 
       <div class="story-container">
-        <div v-for="chapter in chapterList" :key="chapter._id" class="story__article">
+        <div v-for="chapter in chapterList" :key="chapter._id">
           <template v-if="chapter.type === 'prologue'">
             <chapteredprologue-container
               :_id="chapter._id"
@@ -13,7 +13,8 @@
               :color="chapter.color"
               :postComment="chapter.comment"
               :date="chapter.date"
-              :picture="chapter.picture">
+              :picture="chapter.picture"
+              class="story__article1">
             </chapteredprologue-container>
           </template>
           <template v-else>
@@ -29,7 +30,8 @@
               :date="chapter.date"
               :picture="chapter.picture"
               :tags="chapter.tags"
-            ></chaptered-container>
+              class="story__article2">
+            </chaptered-container>
           </template>
         </div>
       </div>
@@ -193,6 +195,33 @@ export default {
     color: rgb(223, 223, 223);
 
     transition: 0.2s all;
+}
+
+.story__article1 {
+    padding: 5px 10px 5px 10px;
+    border-radius: 10px 10px 0px 0px;
+    cursor: pointer;
+    transition: all 0s;
+    background-color: rgb(43, 43, 46);
+    color: rgb(223, 223, 223);
+
+    transition: 0.2s all;
+}
+
+.story__article2 {
+    padding: 5px 10px 5px 10px;
+    border-radius: 0 0 0 0;
+    cursor: pointer;
+    transition: all 0s;
+    background-color: rgb(43, 43, 46);
+    color: rgb(223, 223, 223);
+
+    transition: 0.2s all;
+}
+
+.story__article1:hover, .story__article2:hover {
+    background-color: rgba(105, 105, 105, 0.247);
+
 }
 
 .story__article:hover {

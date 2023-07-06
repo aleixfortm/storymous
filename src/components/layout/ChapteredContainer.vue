@@ -76,11 +76,12 @@ export default {
 
 <style scoped>
 .highlight {
-    background-color: rgba(255, 115, 0, 0.438);
-    border-radius: 40px;
-    padding: 0 5px;
+    background-color: rgb(0, 132, 184);
+    border-radius: 4px;
+    padding: 0 3px;
     margin: 0 5px 0 -5px;
     font-size: 17px;
+    box-shadow: 0px 0px 3px 0px rgb(0, 132, 184);
 }
 
 .story__upper {
@@ -95,7 +96,6 @@ export default {
     align-self: center;
     justify-self: center;
     margin: 0px 0px 0px 5px;
-
 }
 
 .origin {
