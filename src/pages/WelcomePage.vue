@@ -1,70 +1,19 @@
 <template>
-    <feed-container v-if="isLoggedIn">
-        <img src="../assets/img/storymous-forest-min.png" alt="storymous forest" class="testimage">
-        <!--
-        <div class="loggedintop">
-            <div class="loggedimagecontainer">
-                <img src="../assets/img/tree2.jpeg" alt="storymous tree" class="treeimg">
-            </div>
-            <div class="statstop">
-                <div class="statstop1">
-                    The <b style="color: greenyellow;">story tree</b> holds a total of <b>122</b> <b><span style="color: rgb(240, 150, 15);">stories</span></b> from <b>21</b><b> <span style="color: rgb(30, 153, 210);"> authors</span></b>
-                </div>
-                <div class="statstop1">
-                    <b>84</b><b><span style="color: rgb(255, 0, 106);"> readers</span></b> have been spotted nearby
-                </div>
-                <div class="statstop2">
-                    <b>2</b> new  <b><span style="color: rgb(240, 150, 15);">stories</span></b> published today
-                </div>
-            </div>
-        </div>
-        -->
-        <div class="create_newstory">
-            <img class="postimage" v-if="userFetchedPicture" :src="imgSource" alt="profilepic">
-            <router-link to="" class="story_form">
-                <input type="text" placeholder="Write new story" @click="navigateToNewPost">
-            </router-link>
+    <feed-container class="homepage-top">
+        <div class="imagecontainer">
+            <div class="onomatopoeia">eerie noises</div>
+            <img class="astronaut-image" src="../assets/img/astronaut_reading_space_nostars.png" alt="astronaut floating">
+            <div class="loader-text">"In the depths of our galaxy lies a distant planet, where a mesmerizing forest thrives— a place where the ethereal story tree whispers secrets of cosmic wonders..."</div>
         </div>
     </feed-container>
-    <!--
-    <feed-container v-else class="homepage-top">
-        <div class="welcome-message" v-if="!loggedOutLoading">
-            <div class="messagecontainer">
-                <div class="innermessagecontainer">
-                    Welcome to  <b>Storymous</b>! <br>
-                    <span class="innermessagecontainer2">Amazing stories await...</span>
-                </div>
-            </div>
-            <div class="imagecontainer">
-                <img class="welcomeimage" src="../assets/img/astronaut_reading.jpeg" alt="astronaut reading under tree">
-            </div>
-        </div>
-    </feed-container>
-    -->
-
-    <div v-if="isLoggedIn" class="block">
-        <div class="rectangle">
-            <select-button @click="setSelectedTab('latest-feed')" :mode="selectedTab === 'following-feed' ? null : 'flat'">
-                <div>Latest</div>
-            </select-button>
-        </div>
-        <div class="rectangle">
-            <select-button @click="setSelectedTab('following-feed')" :mode="selectedTab === 'following-feed' ? 'flat' : null">
-                <div>Following</div>
-            </select-button>
-        </div>
-    </div>
-    <div v-else class="block">
-
+    <div class="block">
         <div class="rectangle">
             <select-button @click="setSelectedTab('latest-feed')" :mode="selectedTab === 'following-feed' ? null : 'flat'">
                 <div>Explore</div>
             </select-button>
         </div>
     </div>
-
-    <component :is="selectedTab" :posts="posts" :loading="loading"></component>
-
+    <latest-feed :posts="posts" :loading="loading"></latest-feed>
 </template>
 
 
@@ -78,16 +27,13 @@ import axios from 'axios';
 import FeedContainer from "../components/layout/FeedContainer.vue"
 import SelectButton from "../components/SelectButton.vue";
 import LatestFeed from "../pages/subpages/LatestFeed.vue";
-import FollowingFeed from "../pages/subpages/FollowingFeed.vue";
 
 
 export default {
     components: {
         FeedContainer,
         SelectButton,
-        LatestFeed,
-        FollowingFeed,
-
+        LatestFeed
     },
     setup() {
         const router = useRouter();
@@ -96,49 +42,34 @@ export default {
     data() {
         return {
             posts: {},
-            selectedTab: 'latest-feed',
             openDialog: true,
-            userLogged: true,
+            userLogged: false,
             text: " ",
             showCharacter: true,
             loading: true,
-            loggedOutLoading: false,
-            loggedOutImageLoaded: false
         }
     },
     mounted() {
-        if (!this.isLoggedIn) {
-            this.router.push('/');
-        } else {
-            axios
-                .get(`${API_BASE_URL}/homepage_posts/${this.currentUser}`)
-                .then(response => {
-                    this.posts = response.data;
-                    this.loading = false;
-                    this.loggedOutLoading = false;
-                })
-                .catch(error => {
-                    console.log(error);
-                });
-        }
-    },
-    methods: {
-        setSelectedTab(tab) {
-            this.selectedTab = tab;
-        },
-        navigateToNewPost() {
-            this.router.push('/newpost');
+    if (this.isLoggedIn) {
+        this.router.push("/home")
+    } else {
+        axios
+            .get(`${API_BASE_URL}/posts`)
+            .then(response => {
+                this.posts = response.data;
+                this.loading = false;
+            })
+            .catch(error => {
+                console.log(error);
+            });
         }
     },
     computed: {
-        ...mapGetters('auth', ['isLoggedIn', 'currentUser', "userFetchedPicture", "colorFetched"]),
-        imgSource() {
-            return require("../assets/img/" + this.userFetchedPicture);
-        },
+        ...mapGetters('auth', ['isLoggedIn']),
     }
 }
-</script>
 
+</script>
 
 <style scoped>
 .nomargin {

@@ -33,6 +33,8 @@ export default {
         
               // Set the JWT token in the axios default headers for subsequent requests
               axios.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+
+              router.push("/home")
               
               return data;
             }

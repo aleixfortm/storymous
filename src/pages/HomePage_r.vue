@@ -41,7 +41,14 @@
         </div>
     </feed-container>
     -->
-
+    <feed-container v-else class="homepage-top">
+        <div class="imagecontainer">
+            <div class="onomatopoeia">eerie noises</div>
+            <img class="astronaut-image" src="../assets/img/astronaut_reading_space_nostars.png" alt="astronaut floating">
+            <div class="loader-text">"In the depths of our galaxy lies a distant planet, where a mesmerizing forest thrives— a place where the ethereal story tree whispers secrets of cosmic wonders..."</div>
+            
+        </div>
+    </feed-container>
     <div v-if="isLoggedIn" class="block">
         <div class="rectangle">
             <select-button @click="setSelectedTab('latest-feed')" :mode="selectedTab === 'following-feed' ? null : 'flat'">
@@ -107,20 +114,31 @@ export default {
         }
     },
     mounted() {
-        if (!this.isLoggedIn) {
-            this.router.push('/');
-        } else {
-            axios
-                .get(`${API_BASE_URL}/homepage_posts/${this.currentUser}`)
-                .then(response => {
-                    this.posts = response.data;
-                    this.loading = false;
-                    this.loggedOutLoading = false;
-                })
-                .catch(error => {
-                    console.log(error);
-                });
-        }
+    if (this.isLoggedIn) {
+        axios
+            .get(`${API_BASE_URL}/homepage_posts/${this.currentUser}`)
+            .then(response => {
+                this.posts = response.data;
+                this.loading = false;
+                this.loggedOutLoading = false;
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    } else {
+        axios
+            .get(`${API_BASE_URL}/posts`)
+            .then(response => {
+                this.posts = response.data;
+                this.loading = false;
+                this.loggedOutLoading = false;
+                console.log(this.posts.latest)
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    }
+    
     },
     methods: {
         setSelectedTab(tab) {
@@ -132,6 +150,13 @@ export default {
     },
     computed: {
         ...mapGetters('auth', ['isLoggedIn', 'currentUser', "userFetchedPicture", "colorFetched"]),
+        modifiedText() {
+            if (this.showCharacter) {
+                return ""; // Replace character with underscore when showCharacter is false
+            } else {
+                return ""
+            }
+        },
         imgSource() {
             return require("../assets/img/" + this.userFetchedPicture);
         },
