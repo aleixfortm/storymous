@@ -1,31 +1,23 @@
 <template>
     <div class="background-story-reply2">
         <router-link to="" @click="navigateToPost" style="text-decoration: none;" >
-            <div class="box1">
+            <div class="story__user-container2">
                 <div class="sum-icon-container2">
                     <img src="../../assets/img/plus_icon4.png" alt="Plus icon" class="sum-icon2">
                 </div>
-                <div class="box2">
-                    <div class="origin-container">
-                        <div :class="['origin', chapterNum > 1 ? 'unmountable' : '']">Chapter {{ chapterNum }}</div>
-                        <div v-if="tags.includes('End')" class="origin end">End</div>
+                <div class="story__user-img-container2">
+                    <router-link to="" @click.stop="navigateToUser" style="color: inherit; text-decoration: none;">
+                        <img :src="imgSource" alt="pic" class="story__user-img2">
+                    </router-link>
+                </div> 
+                <div class="story__user-info-container2">
+                    <div class="story__username2 cur-pnt"> 
+                        <router-link to="" @click.stop="navigateToUser" style="color: inherit; text-decoration: none;">
+                            <span class="lower" style="color: whitesmoke;"><b>@</b></span><b class="story__user-name2">{{ username }}</b>
+                        </router-link>
+                            <span class="story__username-date2 lower cur-def">· {{ date }} </span>
                     </div>
-                    <div class="story__user-container2">
-                        <div class="story__user-img-container2">
-                            <router-link to="" @click.stop="navigateToUser" style="color: inherit; text-decoration: none;">
-                                <img :src="imgSource" alt="pic" class="story__user-img2">
-                            </router-link>
-                        </div> 
-                        <div class="story__user-info-container2">
-                            <div class="story__username2 cur-pnt"> 
-                                <router-link to="" @click.stop="navigateToUser" style="color: inherit; text-decoration: none;">
-                                    <span class="lower" style="color: whitesmoke;"><b>@</b></span><b class="story__user-name2">{{ username }}</b>
-                                </router-link>
-                                    <span class="story__username-date2 lower cur-def">· {{ date }} </span>
-                            </div>
-                            <div class="story__user-comment-container2"><div class="story__user-comment2 cur-def"> {{ postComment }} </div></div>
-                        </div>
-                    </div>
+                    <div class="story__user-comment-container2"><div class="story__user-comment2 cur-def"> {{ postComment }} </div></div>
                 </div>
             </div>
             <article class="story__article2">
@@ -149,7 +141,7 @@ export default {
 }
 
 .sum-icon-container2 {
-    margin: 30px 3px 0 0;
+    margin: 5px 3px 0 0;
 }
 
 .sum-icon2{

@@ -1,8 +1,12 @@
 <template>
     <feed-container v-if="!loading">
       <div class="story-container">
+
         <div v-for="chapter in chapterList" :key="chapter._id">
           <template v-if="chapter.type === 'prologue'">
+            <div class="main-title-container">
+              <h2 class="main-title">{{ chapter.title }}</h2>
+            </div>   
             <chapteredprologue-container
               :_id="chapter._id"
               :content="chapter.content"
@@ -190,9 +194,26 @@ export default {
 </script>
 
 <style scoped>
+.main-title-container {
+    display: flex;
+    margin: 5px 0 5px 0;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+}
+
+.main-title {
+    color: bisque;
+    font-size: 25px;
+    margin: 10px 0px 10px 0px;
+
+}
+
 .story-container {
   border: hsla(0,0%,51%,.322) 1px solid;
   border-radius: 10px 10px 0 0;
+  background-color: rgb(43, 43, 46);
 }
 
 .story__article {
@@ -208,7 +229,7 @@ export default {
 
 .story__article1 {
     padding: 5px 10px 5px 10px;
-    border-radius: 10px 10px 0px 0px;
+    border-radius: 0px 0px 0px 0px;
     cursor: pointer;
     transition: all 0s;
     background-color: rgb(43, 43, 46);
