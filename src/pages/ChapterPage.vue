@@ -5,7 +5,7 @@
         <div v-for="chapter in chapterList" :key="chapter._id">
           <template v-if="chapter.type === 'prologue'">
             <div class="main-title-container">
-              <h2 class="main-title">{{ chapter.title }}</h2>
+              <h2 class="main-title">{{ chapter.title.toUpperCase() }}</h2>
             </div>   
             <chapteredprologue-container
               :_id="chapter._id"

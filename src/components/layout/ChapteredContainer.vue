@@ -19,7 +19,7 @@
                 </div>
                 <article class="story__article">
                     <div class="story__upper">
-                        <h2 class="story__title "><span class="story_title highlight">CHAPTER {{ chapterNum }}</span>{{ chapterName }}</h2>
+                        <h2 class="story__title "><span class="story_title highlight">CHAPTER {{ chapterNum }}</span>{{ chapterName.toUpperCase() }}</h2>
                     </div>      
                     <p class="story__content">
                         {{ formatStory(content) }}
