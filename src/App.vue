@@ -1,7 +1,7 @@
 <template>
   <the-header></the-header>
   <block-frame>
-    <router-view></router-view>
+    <router-view :key="$route.params.id"></router-view>
   </block-frame>
   <div class="marg-bot"></div>
 </template>
