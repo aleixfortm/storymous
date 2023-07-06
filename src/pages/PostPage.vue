@@ -1,6 +1,10 @@
 <template>
     <feed-container v-if="!loading">
-        <post-container
+      <div class="story-container">
+        <div class="main-title-container">
+          <h2 class="main-title">{{ post.title.toUpperCase() }}</h2>
+        </div>   
+        <chapteredprologue-container
           v-if="post"
             :_id="post._id"
             :title="post.title"
@@ -10,22 +14,23 @@
             :date="post.date"
             :picture="post.picture"
             :color="post.color"
-            :feedMode="false">
-        </post-container>
-        <div class="pollancre" v-if="isLoggedIn">
-            <form @submit.prevent="submitComment">
-                <div class="newstory_comment">
-                    <div class="image_box">
-                        <img class="postimage" :src="imgSource" alt="profilepic">
-                    </div>
-                    <textarea id="comment" v-model="formcomment" placeholder="Add a comment..." rows="1" :style="{ height: textareaHeight }" required></textarea>
-                    <div class="buttonbox">
-                      <button class="postbutton" type="submit">Comment</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-
+            :feedMode="false"
+            class="story__article">
+        </chapteredprologue-container>
+      </div>
+      <div class="pollancre" v-if="isLoggedIn">
+          <form @submit.prevent="submitComment">
+              <div class="newstory_comment">
+                  <div class="image_box">
+                      <img class="postimage" :src="imgSource" alt="profilepic">
+                  </div>
+                  <textarea id="comment" v-model="formcomment" placeholder="Add a comment..." rows="1" :style="{ height: textareaHeight }" required></textarea>
+                  <div class="buttonbox">
+                    <button class="postbutton" type="submit">Comment</button>
+                  </div>
+              </div>
+          </form>
+      </div>
       <div v-for="reply in replies" :key="reply._id">
         <template v-if="reply.type === 'comment'">
           <comment-container
@@ -73,14 +78,16 @@ import { mapGetters } from 'vuex';
 import CommentContainer from "@/components/layout/CommentContainer.vue";
 import ContinuestoryContainer from "../components/layout/ContinuestoryContainer.vue";
 import FeedContainer from '@/components/layout/FeedContainer.vue';
-import PostContainer from '@/components/layout/PostContainer.vue';
+//import PostContainer from '@/components/layout/PostContainer.vue';
+import ChapteredprologueContainer from "@/components/layout/ChapteredprologueContainer.vue";
 
 export default {
   components: {
     FeedContainer,
-    PostContainer,
+    //PostContainer,
     CommentContainer,
-    ContinuestoryContainer
+    ContinuestoryContainer,
+    ChapteredprologueContainer
   },
   data() {
     return {
@@ -149,6 +156,45 @@ export default {
 </script>
 
 <style scoped>
+.story__article {
+    padding: 5px 10px 5px 10px;
+    border-radius: 0px 0px 0px 0px;
+    cursor: pointer;
+    transition: all 0s;
+    background-color: rgb(43, 43, 46);
+    color: rgb(223, 223, 223);
+
+    transition: 0.2s all;
+}
+
+.story__article:hover {
+    background-color: rgba(105, 105, 105, 0.247);
+
+}
+
+.main-title-container {
+    display: flex;
+    margin: 5px 0 5px 0;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+}
+
+.main-title {
+    color: bisque;
+    font-size: 25px;
+    margin: 10px 0px 10px 0px;
+
+}
+
+
+.story-container {
+  border: hsla(0,0%,51%,.322) 1px solid;
+  border-radius: 10px 10px 0 0;
+  background-color: rgb(43, 43, 46);
+}
+
 .loader-text {
     background-color: whitesmoke;
     color: rgb(0, 0, 0);

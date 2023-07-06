@@ -1,7 +1,6 @@
 <template>
     <feed-container v-if="!loading">
       <div class="story-container">
-
         <div v-for="chapter in chapterList" :key="chapter._id">
           <template v-if="chapter.type === 'prologue'">
             <div class="main-title-container">
