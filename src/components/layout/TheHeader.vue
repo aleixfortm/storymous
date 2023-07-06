@@ -4,8 +4,10 @@
   <header>
       <nav>
           <div class="logo">
+            <span>
               <router-link class="logoimgcontainer" to="/"><img class="logoimg" src="../../assets/img/tree2.jpeg" alt="treelogo"></router-link>
-              <h1><router-link to="/home">Storymous</router-link></h1>
+            </span>
+              <router-link to="/" class="header-title">Storymous</router-link>
           </div>
           <search-bar></search-bar>
           <div v-if="isLoggedIn === false" class="login-div">
@@ -13,7 +15,6 @@
           </div>
           <router-link :to="getProfileLink" v-else class="userdata">
                 <div class="username">@{{ currentUser }}</div>
-                
                 <img class="userimg" v-if="userFetchedPicture" :src="imgSource" alt="astronaut">
           </router-link>
       </nav>
@@ -70,6 +71,16 @@ export default {
 </script>
 
 <style scoped>
+.header-title {
+  font-size: 26px;
+  margin: 0 0 0 5px;
+  color: rgb(0, 255, 149);
+}
+
+.header-title:hover {
+  text-decoration: underline;
+}
+
   .no-underline {
     text-decoration: none;
   }
@@ -82,13 +93,12 @@ export default {
   align-items: center;
   justify-content: center;
   margin: auto;
-  height: auto;
+  height: fit-content;
 }
 
 .logoimg {
   height: 45px;
-  border-radius: 10px;
-  margin: 7px 0px 0 0;
+  border-radius: 500%;
 }
 
 .userdata {
@@ -154,28 +164,9 @@ header a {
   border: 1px solid transparent;
 }
 
-a:active,
-a:hover,
-a.router-link-active {
-  color: rgb(4, 255, 171);
-}
 
-h1 {
-  margin: 0;
-}
 
-h1 a {
-  color: rgb(4, 255, 150);
-  margin: 0 0 0 5px;
-  text-decoration: none;
-}
 
-h1 a:hover,
-h1 a:active,
-h1 a.router-link-active {
-  border-color: transparent;
-  text-decoration: underline;
-}
 
 header nav {
   width: 100%;
@@ -227,7 +218,7 @@ li {
 }
 
 @media (max-width: 500px) {
-  h1 {
+  .header-title {
     display: none;
   }
 }

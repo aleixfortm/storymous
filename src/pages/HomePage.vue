@@ -1,5 +1,5 @@
 <template>
-    <feed-container v-if="isLoggedIn">
+    <feed-container>
         <img src="../assets/img/storymous-forest-min.png" alt="storymous forest" class="testimage">
         <!--
         <div class="loggedintop">
@@ -42,7 +42,7 @@
     </feed-container>
     -->
 
-    <div v-if="isLoggedIn" class="block">
+    <div class="block">
         <div class="rectangle">
             <select-button @click="setSelectedTab('latest-feed')" :mode="selectedTab === 'following-feed' ? null : 'flat'">
                 <div>Latest</div>
@@ -51,14 +51,6 @@
         <div class="rectangle">
             <select-button @click="setSelectedTab('following-feed')" :mode="selectedTab === 'following-feed' ? 'flat' : null">
                 <div>Following</div>
-            </select-button>
-        </div>
-    </div>
-    <div v-else class="block">
-
-        <div class="rectangle">
-            <select-button @click="setSelectedTab('latest-feed')" :mode="selectedTab === 'following-feed' ? null : 'flat'">
-                <div>Explore</div>
             </select-button>
         </div>
     </div>

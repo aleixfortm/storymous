@@ -1,7 +1,7 @@
 <template>
     <feed-container class="homepage-top">
         <div class="imagecontainer">
-            <div class="onomatopoeia">eerie noises</div>
+            <div class="onomatopoeia"></div>
             <img class="astronaut-image" src="../assets/img/astronaut_reading_space_nostars.png" alt="astronaut floating">
             <div class="loader-text">"In the depths of our galaxy lies a distant planet, where a mesmerizing forest thrives— a place where the ethereal story tree whispers secrets of cosmic wonders..."</div>
         </div>
@@ -50,10 +50,10 @@ export default {
         }
     },
     mounted() {
-    if (this.isLoggedIn) {
-        this.router.push("/home")
-    } else {
-        axios
+        if (this.isLoggedIn) {
+            this.router.push("/home")
+        } else {
+            axios
             .get(`${API_BASE_URL}/posts`)
             .then(response => {
                 this.posts = response.data;
@@ -66,6 +66,11 @@ export default {
     },
     computed: {
         ...mapGetters('auth', ['isLoggedIn']),
+    },
+    methods: {
+        setSelectedTab(tab) {
+            this.selectedTab = tab;
+        },
     }
 }
 
