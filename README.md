@@ -1,9 +1,9 @@
 
 # storymous
 
-<!--<img src="https://github.com/aleixfortm/storymous/assets/95043218/0298a2af-3140-4de2-b4b3-1a0ee6262904" alt="storymous_tree" width="200" height="auto">-->
+<img src="[https://github.com/aleixfortm/storymous/assets/95043218/0298a2af-3140-4de2-b4b3-1a0ee6262904](https://github.com/aleixfortm/storymous/assets/95043218/97013ee7-c787-4587-adfe-6650a9c29f3b)" alt="storymous_tree" width="200" height="auto" >
 
-![storymous-forest-min](https://github.com/aleixfortm/storymous/assets/95043218/97013ee7-c787-4587-adfe-6650a9c29f3b)
+<!--![storymous-forest-min](https://github.com/aleixfortm/storymous/assets/95043218/97013ee7-c787-4587-adfe-6650a9c29f3b)-->
 
 
 
