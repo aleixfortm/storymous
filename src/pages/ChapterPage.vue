@@ -1,7 +1,5 @@
 <template>
     <feed-container v-if="!loading">
-
-
       <div class="story-container">
         <div v-for="chapter in chapterList" :key="chapter._id">
           <template v-if="chapter.type === 'prologue'">
@@ -36,18 +34,19 @@
         </div>
       </div>
       <div class="pollancre" v-if="isLoggedIn">
-            <form @submit.prevent="submitComment">
-                <div class="newstory_comment">
-                    <div class="image_box">
-                        <img class="postimage" :src="imgSource" alt="profilepic">
-                    </div>
-                    <textarea id="comment" v-model="formcomment" placeholder="Add a comment..." rows="1" :style="{ height: textareaHeight }" required></textarea>
-                    <div class="buttonbox">
-                      <button class="postbutton" type="submit">Comment</button>
-                    </div>
+        <form @submit.prevent="submitComment">
+            <div class="newstory_comment">
+                <div class="image_box">
+                    <img class="postimage" :src="imgSource" alt="profilepic">
                 </div>
-            </form>
-        </div>
+                <textarea id="comment" v-model="formcomment" placeholder="Add a comment..." rows="1" :style="{ height: textareaHeight }" required></textarea>
+                <div class="buttonbox">
+                  <button class="postbutton" type="submit">Comment</button>
+                </div>
+            </div>
+        </form>
+      </div>
+      <span v-if="!loadingComments">
         <div v-for="reply in replies" :key="reply._id">
           <template v-if="reply.type === 'comment'">
             <comment-container
@@ -74,15 +73,24 @@
             ></continuestory-container>
           </template>
         </div>
+      </span>
+      <div v-else class="loader-container">
+        <div class="lds-facebook">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <span class="loader-text">Harvesting all chapters from story...</span>
+      </div>
     </feed-container>
     <feed-container v-else>
       <div class="loader-container">
-          <div class="lds-facebook">
-              <div></div>
-              <div></div>
-              <div></div>
-          </div>
-          <span class="loader-text">Harvesting all chapters from story...</span>
+        <div class="lds-facebook">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <span class="loader-text">Harvesting all chapters from story...</span>
       </div>
     </feed-container>
 </template>
@@ -113,7 +121,8 @@ export default {
       continuedStory: null,
       textareaHeight: null,
       loading: true,
-      replies: null
+      replies: null,
+      loadingComments: null
     }
   },
   mounted() {
@@ -130,7 +139,7 @@ export default {
           .then(response => {
             console.log(response.data)
             this.replies = response.data.replies;
-            this.loading = false;
+            this.loadingComments = false;
           })
       })
     
