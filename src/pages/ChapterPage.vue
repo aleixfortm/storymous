@@ -74,7 +74,7 @@
           </template>
         </div>
       </span>
-      <div v-else class="loader-container">
+      <div v-else class="loader-container" style="margin-top: -8px">
         <div class="lds-facebook">
             <div></div>
             <div></div>
@@ -122,7 +122,7 @@ export default {
       textareaHeight: null,
       loading: true,
       replies: null,
-      loadingComments: null
+      loadingComments: true
     }
   },
   mounted() {
