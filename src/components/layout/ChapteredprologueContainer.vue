@@ -138,7 +138,7 @@ export default {
     border-radius: 10px;
     cursor: pointer;
     transition: all 0s;
-    color: rgb(223, 223, 223);
+    color: #d3d3d3;
 }
 
 
@@ -203,7 +203,7 @@ export default {
 .readmore-button {
     white-space: nowrap;
     font-weight: bolder;
-    color: whitesmoke;
+    color: #dddddd;
 }
 
 .readmore-button:hover {

@@ -182,11 +182,7 @@ export default {
     background-color: rgba(255, 145, 0, 0.1);
 }
 
-.outline:hover {
-    background-color: rgba(202, 202, 202, 0.055);
-    border: 1px rgba(190, 190, 190, 0.616) solid;
-    cursor: pointer;
-}
+
 
 .story__article {
     padding: 5px 10px 5px 10px;
@@ -194,9 +190,14 @@ export default {
     cursor: pointer;
     transition: all 0s;
     background-color: rgb(46, 46, 53);
-    color: rgb(223, 223, 223);
+    color: #d3d3d3
 }
 
+.outline:hover {
+    background-color: rgba(202, 202, 202, 0.055);
+    border: 1px rgba(190, 190, 190, 0.616) solid;
+    cursor: pointer;
+}
 
 .story__user-container {
     padding: 10px 5px 1px 5px;
@@ -258,7 +259,7 @@ export default {
 .readmore-button {
     white-space: nowrap;
     font-weight: bolder;
-    color: whitesmoke;
+    color: #dddddd;
 }
 
 .readmore-button:hover {
