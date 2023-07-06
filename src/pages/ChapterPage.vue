@@ -33,7 +33,7 @@
           </template>
         </div>
       </div>
-      <div class="pollancre" v-if="isLoggedIn">
+      <div class="add-comment-box" v-if="isLoggedIn">
         <form @submit.prevent="submitComment">
             <div class="newstory_comment">
                 <div class="image_box">
@@ -331,7 +331,7 @@ export default {
   background-color: rgb(224, 224, 224);
 }
 
-.pollancre {
+.add-comment-box {
   padding: 1px 0 0 0;
   background-color: rgb(119 119 119 / 19%);
   border-radius: 10px;
