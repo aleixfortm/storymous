@@ -89,7 +89,7 @@ export default {
     box-shadow: 0px 0px 5px 0px rgba(13, 255, 0, 0.568);
     border-radius: 5px;
     padding: 0 3px;
-    margin: 0 10px 0 -5px;
+    margin: 0 10px 0 0px;
     font-size: 17px;
 }
 
@@ -104,7 +104,7 @@ export default {
     font-size: 17px;
     align-self: center;
     justify-self: center;
-    margin: 0px 0px 0px 5px;
+    margin: 0px 0px 0px 0px;
 
 }
 
@@ -189,7 +189,7 @@ export default {
     border-radius: 2px;
     cursor: pointer;
     transition: all 0s;
-    background-color: rgb(46, 46, 53);
+    background-color: rgb(43, 43, 46);
     color: #d3d3d3
 }
 

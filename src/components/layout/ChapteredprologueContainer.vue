@@ -77,11 +77,11 @@ export default {
 
 .highlight {
     background-color: rgba(0, 255, 106, 0.658);
-    border-radius: 4px;
-    padding: 0 5px;
-    margin: 0 5px 0 -5px;
+    border-radius: 2px;
+    padding: 0 3px;
+    margin: 0 8px 0 0px;
     font-size: 17px;
-    box-shadow: 0px 0px 3px 0px rgba(0, 255, 106, 0.658);
+    box-shadow: 0px 0px 5px 0px rgba(0, 255, 106, 0.658);
 }
 
 .story__upper {
@@ -95,7 +95,7 @@ export default {
     font-size: 17px;
     align-self: center;
     justify-self: center;
-    margin: 0px 0px 0px 5px;
+    margin: 0px 0px 0px 0px;
 
 }
 

@@ -22,7 +22,7 @@
             </div>
             <article class="story__article2">
                 <div class="story__upper">
-                    <h2 class="story__title "><span class="story_title highlight">{{ chapterNum }}</span>{{ chapterName.toUpperCase() }}</h2>
+                    <h2 class="story__title "><span class="story_title highlight">CHAPTER {{ chapterNum }}</span>{{ chapterName.toUpperCase() }}</h2>
                 </div>  
                 <p class="story__content2">
                     {{ formatStory(content) }}
@@ -78,11 +78,12 @@ export default {
 
 
 .highlight {
-    background-color: rgba(255, 115, 0, 0.438);
-    border-radius: 40px;
-    padding: 0 5px;
-    margin: 0 5px 0 -5px;
+    background-color: rgb(0, 132, 255);
+    border-radius: 4px;
+    padding: 0 3px;
+    margin: 0 8px 0 0px;
     font-size: 17px;
+    box-shadow: 0px 0px 5px 0px rgb(0, 132, 255);
 }
 
 .story__upper {
@@ -96,7 +97,7 @@ export default {
     font-size: 17px;
     align-self: center;
     justify-self: center;
-    margin: 0px 0px 0px 5px;
+    margin: 0px 0px 0px 0px;
 
 }
 
