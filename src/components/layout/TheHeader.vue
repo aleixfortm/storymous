@@ -93,6 +93,7 @@ export default {
   justify-content: center;
   margin: auto;
   height: 45px;
+  border-radius: 500%;
 }
 
 .logoimg {

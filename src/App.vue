@@ -23,7 +23,7 @@ export default {
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&display=swap');
 
 .marg-bot {
-  margin: 60px;
+  margin: 30px;
 }
 
 #app {

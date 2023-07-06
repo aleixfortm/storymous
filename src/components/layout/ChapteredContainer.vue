@@ -121,6 +121,7 @@ export default {
     cursor: pointer;
     transition: all 0s;
     color: rgb(223, 223, 223);
+
 }
 
 

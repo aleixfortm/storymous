@@ -2,35 +2,36 @@
     <feed-container v-if="!loading">
 
 
-
-      <div v-for="chapter in chapterList" :key="chapter._id" class="story__article">
-        <template v-if="chapter.type === 'prologue'">
-          <chapteredprologue-container
-            :_id="chapter._id"
-            :content="chapter.content"
-            :title="chapter.title"
-            :username="chapter.username"
-            :color="chapter.color"
-            :postComment="chapter.comment"
-            :date="chapter.date"
-            :picture="chapter.picture">
-          </chapteredprologue-container>
-        </template>
-        <template v-else>
-          <chaptered-container
-            :_id="chapter._id"
-            :storyId="chapter.story_id"
-            :parentChapterId="chapter.parent_chapter_id"
-            :content="chapter.content"
-            :chapterName="chapter.chapter_name"
-            :chapterNum="chapter.chapter_num"
-            :username="chapter.username"
-            :postComment="chapter.comment"
-            :date="chapter.date"
-            :picture="chapter.picture"
-            :tags="chapter.tags"
-          ></chaptered-container>
-        </template>
+      <div class="story-container">
+        <div v-for="chapter in chapterList" :key="chapter._id" class="story__article">
+          <template v-if="chapter.type === 'prologue'">
+            <chapteredprologue-container
+              :_id="chapter._id"
+              :content="chapter.content"
+              :title="chapter.title"
+              :username="chapter.username"
+              :color="chapter.color"
+              :postComment="chapter.comment"
+              :date="chapter.date"
+              :picture="chapter.picture">
+            </chapteredprologue-container>
+          </template>
+          <template v-else>
+            <chaptered-container
+              :_id="chapter._id"
+              :storyId="chapter.story_id"
+              :parentChapterId="chapter.parent_chapter_id"
+              :content="chapter.content"
+              :chapterName="chapter.chapter_name"
+              :chapterNum="chapter.chapter_num"
+              :username="chapter.username"
+              :postComment="chapter.comment"
+              :date="chapter.date"
+              :picture="chapter.picture"
+              :tags="chapter.tags"
+            ></chaptered-container>
+          </template>
+        </div>
       </div>
       <div class="pollancre" v-if="isLoggedIn">
             <form @submit.prevent="submitComment">
@@ -178,13 +179,19 @@ export default {
 </script>
 
 <style scoped>
+.story-container {
+  border: hsla(0,0%,51%,.322) 1px solid;
+  border-radius: 10px 10px 0 0;
+}
+
 .story__article {
     padding: 5px 10px 5px 10px;
-    border-radius: 0 0 0px 0px;
+    border-radius: 10px 10px 0px 0px;
     cursor: pointer;
     transition: all 0s;
     background-color: rgb(46, 46, 53);
     color: rgb(223, 223, 223);
+
     transition: 0.2s all;
 }
 
