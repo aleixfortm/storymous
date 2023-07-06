@@ -1,14 +1,12 @@
-
-# storymous
 <p align="center">
   <img src="https://github.com/aleixfortm/storymous/assets/95043218/97013ee7-c787-4587-adfe-6650a9c29f3b" alt="storymous_tree" width="900" height="auto">
 </p>
 <!--![storymous-forest-min](https://github.com/aleixfortm/storymous/assets/95043218/97013ee7-c787-4587-adfe-6650a9c29f3b)-->
 
+### **<p align="center">[Storymous](https://www.storymous.com)</p>**
 
+<p align="center"><strong>Unique social media platform centered around storytelling where users are empowered to collaborate and continue existing stories dynamically through a chapter-based system. With the creation of branching storylines, captivating narratives unfold, offering readers the ability to shape their own journey.</strong></p>
 
-
-[Storymous](https://www.storymous.com) is a unique social media platform centered around storytelling. It empowers users to not only start their own stories but also collaborate and continue existing stories dynamically through a chapter-based system. With the creation of branching storylines, captivating narratives unfold, offering readers the ability to shape their own journey.
 
 ## Roadmap
 - [x] Add story feed
