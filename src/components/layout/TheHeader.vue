@@ -99,6 +99,11 @@ export default {
 .logoimg {
   height: 45px;
   border-radius: 500%;
+  transition: 0.2s all;
+}
+
+.logoimg:hover {
+  filter: brightness(90%);
 }
 
 .userdata {
@@ -154,7 +159,10 @@ header {
   margin: 0;
   width: 100%;
   height: 3.5rem;
-  background-color: #435055;
+  background-color: #2b3830;
+  background-color: #484945;
+  border-bottom: rgba(0, 0, 0, 0.356) 1px solid;
+  box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.445);
 }
 
 header a {
