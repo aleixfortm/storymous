@@ -38,7 +38,15 @@
   - [x] User posts feed
   - [ ] Responsive user profile box
   - [ ] Specific data visualization upon stat hover (e.g. show name of followers)
-  
+
+## Preview
+
+### Homepage
+![image](https://github.com/aleixfortm/storymous/assets/95043218/5c57db4c-41d9-4a21-9453-44f4513b472b)
+
+### User profile, profile box
+![profike](https://github.com/aleixfortm/storymous/assets/95043218/b53536a3-75a5-46de-b17f-31e17a9a9960)
+
 
 ## Current bugs
 - [x] <code>Solved!</code> Routing client to the same component (same URL) but with different URL param will not reload data and page will not update. Solved by adding <code>:key="router.params.id"</code> attribute to router-view on App.vue
