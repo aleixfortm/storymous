@@ -44,6 +44,10 @@
 ### Homepage
 ![image](https://github.com/aleixfortm/storymous/assets/95043218/5c57db4c-41d9-4a21-9453-44f4513b472b)
 
+### Post page, including comments and continued chapters
+![image](https://github.com/aleixfortm/storymous/assets/95043218/847f8e91-4f36-4fff-96ee-b7edade3bbca)
+
+
 ### User profile, profile box
 ![profike](https://github.com/aleixfortm/storymous/assets/95043218/b53536a3-75a5-46de-b17f-31e17a9a9960)
 
