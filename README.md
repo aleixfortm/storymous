@@ -22,7 +22,7 @@
       - [ ] Longest storyline
   - [x] Start new story input
 - [x] Theme
-  - [x] Pixel art ish themed site
+  - [x] Pixel art themed site
   - [x] Following color patterns across components
   - [x] Huge amount of cool astronauts
 - [ ] User profiles
