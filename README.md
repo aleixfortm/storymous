@@ -34,6 +34,7 @@
 - [x] Add functionality to write new chapters to existing stories (like a new comment form)
 
 ## Current bugs
+- [ ] <code>Solved!</code> Routing client to the same component (same URL) but with different URL param will not reload data and page will not update. <code>Solved by adding ":key" attribute to router-view on App.vue</code>
 - [ ] Feed stories display only a section of the content (substring of the whole text). However, when inside the story page, it should display the whole text, and still displays de substring.
 - [x] <code>Solved!</code> Trying to visit own profile when in some other user's profile will bug the data and display stats incorrectly. Needs some sort of component refresh, as the component is the same but with different data.
 - [x] <code>Solved!</code> Switching to "following" feed before "latest" feed finishes loading causes a bug in which all retrieved data is lost. Needs page refresh to solve and reload posts. 
