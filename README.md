@@ -49,9 +49,11 @@
 
 
 
-### User profile, profile box
+### Own profile
 ![image](https://github.com/aleixfortm/storymous/assets/95043218/91976897-b320-4e47-bac8-7c03492031c1)
 
+### Others' user profiles
+![image](https://github.com/aleixfortm/storymous/assets/95043218/c9e0f2ea-3921-413c-9c47-f1e2cec929bd)
 
 
 ## Current bugs
