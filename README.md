@@ -8,30 +8,33 @@
 <p align="center"><strong>Unique social media platform centered around storytelling where users are empowered to start or continue existing stories dynamically through a chapter-based system. With the creation of branching storylines, captivating narratives unfold, offering readers the ability to shape their own journey.</strong></p>
 
 
-## Roadmap
-- [x] Add story feed
-- [x] Add user profiles
-- [x] Add user posts section on user profile page
-- [x] Add user settings option
-- [x] Add logout option
-- [x] Save data on session storage to keep user logged in
-- [x] Create storymous art for homepage, profile pictures, and more
-- [x] Style posts with colors and page style
-- [x] Add latest/following sections on homepage
-- [x] Add logged in/out homepage
-- [x] Add starting stories functionality
-- [x] Add commenting on posts functionlity
-- [x] Display comments on post page
-- [x] Allow visiting user profiles
-- [x] Add different user settings options (Color scheme, picture and bio)
-- [ ] Add general stats, either on home page or a create a dedicated route for it
-- [ ] Add option to select color scheme for new story
-- [ ] Make search bar functional and responsive to input
-- [ ] Show users following/followers when hover/click on profile stats
-- [x] Add links to user profiles dynamically to comment boxes
-- [x] Add story tags
-- [ ] Add continuing story functionality
-- [x] Add functionality to write new chapters to existing stories (like a new comment form)
+## Features
+- [x] Welcome page (logged out)
+  - [x] Explore feed
+  - [x] Good-looking(-ish) welcome message  
+- [ ] Home page
+  - [x] Latest / Following feed selector
+  - [ ] Top section
+    - [x] Good-looking(-ish) top image
+    - [ ] General stats section
+      - [ ] Most active authors
+      - [ ] Most visited / liked stories
+      - [ ] Longest storyline
+  - [x] Start new story input
+- [ ] User profiles
+  - [x] Visiting user profiles
+  - [x] Check profile stats (Following, Followers, Posts)
+  - [x] User bio
+  - [x] Following and unfollowing user
+  - [x] Profile color scheme (border of user profile box)
+  - [x] User settings if user owner
+    - [x] Changing profile picture
+    - [x] Changing bio
+    - [x] Changing profile color scheme
+  - [x] User posts feed
+  - [ ] Responsive user profile box
+  - [ ] Specific data visualization upon stat hover (e.g. show name of followers)
+  
 
 ## Current bugs
 - [x] <code>Solved!</code> Routing client to the same component (same URL) but with different URL param will not reload data and page will not update. Solved by adding <code>:key="router.params.id"</code> attribute to router-view on App.vue
