@@ -17,6 +17,9 @@
             :feedMode="false"
             class="story__article">
         </chapteredprologue-container>
+        <div v-if="isLoggedIn" class="add-story-container">
+          <h2 class="add-story"> WRITE CHAPTER 1 (START NEW STORYLINE)</h2>
+        </div>   
       </div>
       <div class="pollancre" v-if="isLoggedIn">
           <form @submit.prevent="submitComment">
@@ -186,6 +189,34 @@ export default {
     font-size: 25px;
     margin: 10px 0px 10px 0px;
 
+}
+
+.add-story-container {
+    display: flex;
+    margin: 5px 0 5px 0;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-top: 1px rgba(129, 129, 129, 0.322) solid;
+    padding: 2px 0 0 0;
+    background-color: rgba(86, 175, 120, 0.26);
+    transition: 0.2s all;
+}
+
+.add-story-container:hover {
+  background-color: rgba(105, 105, 105, 0.247);
+  cursor: pointer;
+}
+
+.add-story {
+    color: rgb(255, 255, 255);
+    font-size: 16px;
+    margin: 10px 0px 10px 0px;
+
+}
+
+.border-top {
+  border-top: solid 1px rgba(129, 129, 129, 0.322) 1px solid;
 }
 
 

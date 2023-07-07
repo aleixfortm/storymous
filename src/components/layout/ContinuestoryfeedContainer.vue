@@ -127,7 +127,7 @@ export default {
 
 .outline {
     margin-top: 20px;
-    padding: 5px 5px 5px 5px;
+    padding: 5px 4px 4px 4px;
     height: fit-content;
     width: 100%;
     /*border: 2px whitesmoke dashed;*/

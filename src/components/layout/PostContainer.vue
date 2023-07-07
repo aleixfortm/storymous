@@ -2,9 +2,11 @@
     <div>
         <div :class="outlineClass">
             <router-link to="" @click="navigateToPost" style="text-decoration: none;" >
+ 
                 <div class="origin-container">
                     <div class="origin">Started "<span style="font-weight: bold;">{{ title }}</span>"</div>
                 </div>
+
                 <div class="story__user-container">
                     <div class="story__user-img-container">
                         <router-link to="" @click.stop="navigateToUser" style="color: inherit; text-decoration: none;">
@@ -21,6 +23,7 @@
                         </div>
                     </div>
                 </div>
+
                 <article class="story__article">
                     <div class="story__upper">
                         <h2 class="story__title "><span class="story_title highlight">PROLOGUE</span>{{ title.toUpperCase() }}</h2>
@@ -84,6 +87,11 @@ export default {
 </script>
 
 <style scoped>
+.user-out {
+    padding: 5px 5px 0 5px;
+
+}
+
 .highlight {
     background-color: rgba(0, 255, 106, 0.582);
     box-shadow: 0px 0px 5px 0px rgba(13, 255, 0, 0.568);
@@ -127,7 +135,7 @@ export default {
 
 .outline {
     margin-top: 20px;
-    padding: 5px 5px 5px 5px;
+    padding: 5px 4px 4px 4px;
     height: fit-content;
     width: 100%;
     /*border: 2px whitesmoke dashed;*/

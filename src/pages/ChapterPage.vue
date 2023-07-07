@@ -35,6 +35,9 @@
             </chaptered-container>
           </template>
         </div>
+        <div v-if="!isLoggedIn" class="add-story-container">
+          <h2 class="add-story"> WRITE CHAPTER {{ chapterList[chapterList.length - 1].chapter_num + 1 }} FOR CURRENT STORYLINE</h2>
+        </div> 
       </div>
       <div class="add-comment-box" v-if="isLoggedIn">
         <form @submit.prevent="submitComment">
@@ -193,6 +196,29 @@ export default {
 </script>
 
 <style scoped>
+.add-story-container {
+    display: flex;
+    margin: 5px 0 5px 0;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    border-top: 1px rgba(129, 129, 129, 0.322) solid;
+    padding: 2px 0 0 0;
+    transition: 0.2s all;
+}
+
+.add-story-container:hover {
+  background-color: rgba(105, 105, 105, 0.247);
+  cursor: pointer;
+}
+
+.add-story {
+    color: rgb(255, 255, 255);
+    font-size: 16px;
+    margin: 10px 0px 10px 0px;
+
+}
+
 .main-title-container {
     display: flex;
     margin: 5px 0 5px 0;
