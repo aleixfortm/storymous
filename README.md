@@ -22,9 +22,10 @@
       - [ ] Longest storyline
   - [x] Start new story input
 - [x] Theme
+  - [x] Huge amount of cool astronauts
+  - [x] Story tree as storymous logo 
   - [x] Pixel art themed site
   - [x] Following color patterns across components
-  - [x] Huge amount of cool astronauts
 - [ ] User profiles
   - [x] Visiting user profiles
   - [x] Check profile stats (Following, Followers, Posts)
