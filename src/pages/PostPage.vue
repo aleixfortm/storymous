@@ -23,7 +23,7 @@
           </div>
           <writechapter-container
           v-if="showContinueContainer"
-          :chapter="1"
+          :chapterNum="1"
           :username="currentUser"
           :postId="post._id">
         </writechapter-container>

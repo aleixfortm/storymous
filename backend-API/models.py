@@ -143,7 +143,7 @@ class PostModel:
         
 
 class ChapterModel:
-    def __init__(self, story_id, username, chapter_name, chapter_num, parent_chapter_id, content, comment, continued_stories=None, status=None, date=None, _id=None):
+    def __init__(self, story_id, username, chapter_name, chapter_num, parent_chapter_id, content, comment, continued_stories=None, color=None, status=None, date=None, _id=None):
         self._id = ObjectId(_id) if _id else ObjectId()
         self.story_id = story_id
         self.parent_chapter_id = parent_chapter_id
@@ -155,6 +155,7 @@ class ChapterModel:
         self.content = content
         self.comment = comment
         self.continued_stories = continued_stories or []
+        self.color = color or random.choice(COLOR_LIST)
         self.type = "chapter"
     
     def quicksave_to_db(self):

@@ -345,14 +345,15 @@ def new_chapter():
 
     # gather data from POST request and place it into a dictionary
     data = request.json
+    pprint(data)
     chapter_data = {
-        "story_id": data.storyId,
-        "username": data.username,
-        "chapter_name": data.title,
-        "chapter_num": data.chapterNum,
-        "parent_chapter": data.parentChapterId,
-        "content": data.body,
-        "comment": data.comment
+        "story_id": ObjectId(data["storyId"]),
+        "username": data["username"],
+        "chapter_name": data["title"],
+        "chapter_num": data["chapterNum"],
+        "parent_chapter_id": data["parentChapterId"],
+        "content": data["body"],
+        "comment": data["comment"]
     }
 
     # create chapter object from chapter model schema and save it to db

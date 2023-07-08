@@ -48,7 +48,7 @@ import router from '@/router';
     methods: {
       submitForm() {
         this.loading = true;
-
+        console.log(this.chapterNum)
         const data_packet = {
           comment: this.formcomment,
           title: this.formtitle,
