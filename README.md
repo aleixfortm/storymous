@@ -34,7 +34,7 @@
 - [ ] Home page
   - [x] Latest / Following feed selector
   - [ ] Top section
-    - [x] Good-looking(-ish) top image
+    - [x] Top image
     - [ ] General stats section
       - [ ] Most active authors
       - [ ] Most visited / liked stories
