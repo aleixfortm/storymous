@@ -17,7 +17,7 @@
 </p>
 
 ## Features 🧰
-- 🧭 Browse stories from the community
+- 🌍 Browse stories from the community
 - 🌟 Start new stories
 - 📚 Continue stories via a chapter-based system
 - 📈 Comment on stories and express your thoughts
