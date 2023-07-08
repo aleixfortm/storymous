@@ -20,7 +20,7 @@
       - [ ] Most active authors
       - [ ] Most visited / liked stories
       - [ ] Longest storyline
-  - [x] Start new story input
+  - [x] Start new story option
 - [x] Theme
   - [x] Huge amount of cool astronauts
   - [x] Story tree as storymous logo 
@@ -39,6 +39,14 @@
   - [x] User posts feed
   - [ ] Responsive user profile box
   - [ ] Specific data visualization upon stat hover (e.g. show name of followers)
+- [ ] Story page
+  - [x] Includes prologue
+  - [x] Option to mount chapters on current storyline
+  - [x] Option to write new chapter on current storyline
+  - [x] Option to write comment on story post
+  - [x] Comments and continued chapters feed
+  - [ ] Option for filtering comments / continued stories
+  
 
 
 
