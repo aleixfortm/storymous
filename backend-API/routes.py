@@ -339,8 +339,6 @@ def update_user_settings():
     })
 
 
-
-
 @bp_routes.route("/new_chapter", methods=["POST"])
 @jwt_required()
 def new_chapter():
