@@ -54,7 +54,10 @@ import router from '@/router';
           title: this.formtitle,
           body: this.formbody,
           username: this.currentUser,
-          postId: this.postId.$oid
+          storyId: this.postId.$oid,
+          chapterNum: this.chapterNum,
+          parentChapterId: null,
+
         }
 
         console.log(data_packet)
@@ -64,7 +67,7 @@ import router from '@/router';
             const data = response.data;
             if (data.status === "Success") {
                 this.isPostButtonDisabled = true;
-                router.push("/chapter/" + data.chapter_id)
+                router.push("/chapter/" + data.chapter_id.$oid)
             }
           })
           .catch(error => {

@@ -339,24 +339,40 @@ def update_user_settings():
     })
 
 
-@bp_routes.route("/create_chapter", methods=["GET"])
-@jwt_required()
-def create_chapter():
 
+
+@bp_routes.route("/new_chapter", methods=["POST"])
+@jwt_required()
+def new_chapter():
+
+    # gather data from POST request and place it into a dictionary
+    data = request.json
     chapter_data = {
-        "username": "pollancre",
-        "chapter_name": "A tragic end of hope",
-        "comment": "Here goes mine",
-        "content": "Sarah's relentless efforts paid off as she successfully repaired the Orion's communication systems. Just as she prepared to send a distress signal, a catastrophic event shook the planet. Violent tremors destabilized the cave, collapsing its walls and trapping Sarah inside. Her pleas for help echoed fruitlessly in the darkness. Days turned into weeks, and hope dwindled as resources ran scarce. Alone and without rescue, Sarah's strength faded, and her spirit succumbed to the unforgiving solitude. The remnants of her unfinished mission lay forgotten, buried beneath the weight of an unyielding fate. The once vibrant light of exploration and discovery extinguished, leaving behind a tragic tale lost to the void of an alien world.",
-        "chapter_num": 2,
-        "story_id": ObjectId("64a02d3201846b62484ef1ac"),
-        "parent_chapter_id": ObjectId("64a14935b8ffc1c615d211ba")
+        "story_id": data.storyId,
+        "username": data.username,
+        "chapter_name": data.title,
+        "chapter_num": data.chapterNum,
+        "parent_chapter": data.parentChapterId,
+        "content": data.body,
+        "comment": data.comment
     }
 
+    # create chapter object from chapter model schema and save it to db
     chapter_object = ChapterModel(**chapter_data)
     chapter_object.quicksave_to_db()
 
-    return "lol"
+    # create data packet containing status message and chapter_id of the newly created chapter
+    data_packet = {
+        "status": "Success",
+        "chapter_id": chapter_object._id
+    }
+
+    # if there was a problem with object construction, _id will not exist, therefore send failed status
+    if not data_packet.get("chapter_id"):
+        return json_util.dumps({"status": "failed"})
+    
+    # else send the previously stablished data packet
+    return json_util.dumps(data_packet)
 
 
 # edit posts
