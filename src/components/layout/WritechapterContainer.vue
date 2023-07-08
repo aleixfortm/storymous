@@ -33,7 +33,7 @@ import router from '@/router';
 
   export default {
     name: "NewPost",
-    props: ["chapter", "username"],
+    props: ["chapterNum", "username"],
     data() {
       return {
         formtitle: "",

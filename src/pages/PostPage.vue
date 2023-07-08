@@ -18,10 +18,11 @@
             class="story__article">
         </chapteredprologue-container>
         <span v-if="isLoggedIn">
-          <div class="add-story-container">
+          <div class="add-story-container" @click="toggleContinueContainer">
             <h2 class="add-story"> WRITE CHAPTER 1 (START NEW STORYLINE)</h2>
           </div>
           <writechapter-container
+          v-if="showContinueContainer"
           :chapter="1"
           :username="currentUser">
         </writechapter-container>
@@ -107,7 +108,8 @@ export default {
       formcomment: "",
       continuedStory: null,
       textareaHeight: null,
-      loading: true
+      loading: true,
+      showContinueContainer: false
     }
   },
   mounted() {
@@ -133,6 +135,9 @@ export default {
           textarea.style.height = 'auto';
           textarea.style.height = textarea.scrollHeight + 'px';
           this.textareaHeight = textarea.style.height;
+        },
+        toggleContinueContainer() {
+          this.showContinueContainer = !this.showContinueContainer
         },
         submitComment() {
 

@@ -22,7 +22,7 @@
         <div class="create_newstory">
             <img class="postimage" v-if="userFetchedPicture" :src="imgSource" alt="profilepic">
             <router-link to="" class="story_form">
-                <input type="text" placeholder="Write new story" @click="navigateToNewPost">
+                <input type="text" placeholder="Start new story" @click="navigateToNewPost">
             </router-link>
         </div>
     </feed-container>

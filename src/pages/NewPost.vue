@@ -9,13 +9,16 @@
                     <div class="image_box">
                         <img class="postimage" v-if="userFetchedPicture" :src="imgSource" alt="profilepic">
                     </div>
-                    <textarea id="comment" v-model="formcomment" placeholder="Author comment" rows="1" :style="{ height: textareaHeight }" required></textarea>
+                    <div class="extended-container">
+                      <textarea id="comment" v-model="formcomment" placeholder="Author comment" rows="1" :style="{ height: textareaHeight }" required></textarea>
+                    <span class="story__user-name3"><b>@{{ username }}</b> · Now</span>
+                </div>
                 </div>
                 <div class="newstory_title">
                     <input id="title" v-model="formtitle" type="text" placeholder="Story title" required>
                 </div>
                 <div class="newstory_title">
-                    <textarea id="body" v-model="formbody" placeholder="Story content" required></textarea>
+                    <textarea id="body" v-model="formbody" placeholder="Prologue content" required></textarea>
                 </div>
                 <div class="buttonbox">
                   <button :class="{ 'postbutton': true, 'disabled': isPostButtonDisabled }" :disabled="isPostButtonDisabled" type="submit">Submit</button>
@@ -25,12 +28,12 @@
     </feed-container>
   </template>
   
-  <script>
-  import { mapGetters } from 'vuex';
-  import { API_BASE_URL } from '../config';
+<script>
+import { mapGetters } from 'vuex';
+import { API_BASE_URL } from '../config';
 
-  import FeedContainer from '@/components/layout/FeedContainer.vue';
-  import axios from 'axios';
+import FeedContainer from '@/components/layout/FeedContainer.vue';
+import axios from 'axios';
 import router from '@/router';
 
   export default {
@@ -117,6 +120,18 @@ import router from '@/router';
   </script>
 
 <style scoped>
+.extended-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.story__user-name3 {
+    color: whitesmoke;
+    text-decoration: none;
+    margin: 0 4px 0 0;
+}
+
 .section_title {
   padding-bottom: 2px;
   margin: 35px 10px 20px 10px;
@@ -190,7 +205,7 @@ textarea {
     resize: none;
     overflow: auto;
     box-sizing: border-box;
-    margin: 0 10px 20px 0;
+    margin: 0 10px 8px 0;
 }
 
 #comment:hover {
