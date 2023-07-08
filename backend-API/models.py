@@ -143,12 +143,13 @@ class PostModel:
         
 
 class ChapterModel:
-    def __init__(self, story_id, username, chapter_name, chapter_num, parent_chapter_id, content, comment, continued_stories=None, color=None, status=None, date=None, _id=None):
+    def __init__(self, story_id, username, chapter_name, chapter_num, parent_chapter_id, content, comment, story_title=None, continued_stories=None, color=None, status=None, date=None, _id=None):
         self._id = ObjectId(_id) if _id else ObjectId()
         self.story_id = story_id
         self.parent_chapter_id = parent_chapter_id
         self.username = username
         self.date = date or datetime.datetime.now().isoformat()
+        self.story_title = story_title or self.get_story_title()
         self.status = status or "active"
         self.chapter_name = chapter_name
         self.chapter_num = chapter_num
@@ -164,6 +165,11 @@ class ChapterModel:
     def add_record_to_main_story(self):
         query = {"_id": self.story_id}
         db_posts.find_one()
+    
+    def get_story_title(self):
+        query = {"_id": self.story_id}
+        story_data = db_posts.find_one(query)
+        return story_data.get("title")
 
                     
 class CommentModel:
