@@ -6,6 +6,8 @@
 
 ###  **<p align="center">[Storymous](https://www.storymous.com)</p>**
 
+
+
 <p align="center"><strong>Unique social media platform centered around storytelling where users are empowered to start or continue existing stories dynamically through a chapter-based system. With the creation of branching storylines, captivating narratives unfold, offering readers the ability to shape their own journey.</strong></p>
 
 <p align="center">
