@@ -3,12 +3,20 @@
 </p>
 <!--![storymous-forest-min](https://github.com/aleixfortm/storymous/assets/95043218/97013ee7-c787-4587-adfe-6650a9c29f3b)-->
 
-### **<p align="center">[Storymous](https://www.storymous.com)</p>**
+###  **<p align="center">[Storymous](https://www.storymous.com)</p>**
 
 <p align="center"><strong>Unique social media platform centered around storytelling where users are empowered to start or continue existing stories dynamically through a chapter-based system. With the creation of branching storylines, captivating narratives unfold, offering readers the ability to shape their own journey.</strong></p>
 
+## Features 🧰
+- 🧭 Browse stories from the community
+- 🌟 Start new stories
+- 📚 Continue stories via a chapter-based system
+- 📈 Comment on stories and express your thoughts
+- 🙌 Check out user profiles
+- 🎈 Customize your profile with color schemes, pictures and more
+- 🔥 More to come!
 
-## Features
+## Roadmap 📜
 - [x] Welcome page (logged out)
   - [x] Explore feed
   - [x] Good-looking(-ish) welcome message  
@@ -50,16 +58,17 @@
 
 
 
-## Known bugs
+## Known bugs 🐛
 - [x] <code>Solved!</code> Routing client to the same component (same URL) but with different URL param will not reload data and page will not update. Solved by passing <code>:key="router.params.id"</code> prop to router-view on App.vue
 - [x] <code>Solved!</code> Feed stories display only a section of the content (substring of the whole text). However, when inside the story page, it should display the whole text, and still displays de substring.
 - [x] <code>Solved!</code> Trying to visit own profile when in some other user's profile will bug the data and display stats incorrectly. Needs some sort of component refresh, as the component is the same but with different data.
 - [x] <code>Solved!</code> Switching to "following" feed before "latest" feed finishes loading causes a bug in which all retrieved data is lost. Needs page refresh to solve and reload posts. 
 - [x] <code>Solved!</code> Following feed appears as if user is not following anybody after log in. That, however, does not happen after refreshing page or navigating to other routes and coming back to feed.
+- [ ] Posting comments broken when at least one chapter has been mounted to the story.
 - [ ] User profile box is not fully responsive, and screens smaller than 400px display a bit eerie. Not urgent fix.
 - [ ] If JWT token expires, user will still be able to be logged in, but requests to API won't work. Solve by checking expiration status of JWT on every request and log out if expired.
 
-## Preview
+## Preview 👀
 
 ### Homepage
 ![image](https://github.com/aleixfortm/storymous/assets/95043218/5c57db4c-41d9-4a21-9453-44f4513b472b)
