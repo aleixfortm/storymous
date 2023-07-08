@@ -35,9 +35,18 @@
             </chaptered-container>
           </template>
         </div>
-        <div v-if="!isLoggedIn" class="add-story-container">
-          <h2 class="add-story"> WRITE CHAPTER {{ chapterList[chapterList.length - 1].chapter_num + 1 }} FOR CURRENT STORYLINE</h2>
-        </div> 
+        <span v-if="isLoggedIn">
+          <div class="add-story-container" @click="toggleContinueContainer">
+            <h2 class="add-story"> WRITE CHAPTER {{ chapterList[chapterList.length - 1].chapter_num + 1 }} FOR THIS STORYLINE</h2>
+          </div>
+          <writechapter-container
+          v-if="showContinueContainer"
+          :chapterNum="chapterList[chapterList.length - 1].chapter_num + 1"
+          :username="currentUser"
+          :postId="chapterList[0]._id"
+          :postTitle="chapterList[0].title">
+        </writechapter-container>
+        </span>   
       </div>
       <div class="add-comment-box" v-if="isLoggedIn">
         <form @submit.prevent="submitComment">
@@ -111,6 +120,7 @@ import ChapteredContainer from "@/components/layout/ChapteredContainer.vue";
 import ChapteredprologueContainer from "@/components/layout/ChapteredprologueContainer.vue";
 import CommentContainer from "@/components/layout/CommentContainer.vue";
 import ContinuestoryContainer from "@/components/layout/ContinuestoryContainer.vue";
+import WritechapterContainer from "@/components/layout/WritechapterContainer.vue";
 
 export default {
   components: {
@@ -118,7 +128,8 @@ export default {
     ChapteredContainer,
     ChapteredprologueContainer,
     CommentContainer,
-    ContinuestoryContainer
+    ContinuestoryContainer,
+    WritechapterContainer
   },
   data() {
     return {
@@ -128,7 +139,8 @@ export default {
       textareaHeight: null,
       loading: true,
       replies: null,
-      loadingComments: true
+      loadingComments: true,
+      showContinueContainer: false
     }
   },
   mounted() {
@@ -158,32 +170,35 @@ export default {
   },
   methods: {
     adjustTextareaHeight() {
-          const textarea = this.$el.querySelector('#comment');
-          textarea.style.height = 'auto';
-          textarea.style.height = textarea.scrollHeight + 'px';
-          this.textareaHeight = textarea.style.height;
-        },
-        submitComment() {
+      const textarea = this.$el.querySelector('#comment');
+      textarea.style.height = 'auto';
+      textarea.style.height = textarea.scrollHeight + 'px';
+      this.textareaHeight = textarea.style.height;
+    },
+    toggleContinueContainer() {
+      this.showContinueContainer = !this.showContinueContainer
+    },
+    submitComment() {
 
-          const data_packet = {
-            username: this.currentUser,
-            comment: this.formcomment,
-            parentId: this.post._id.$oid
-          }
+      const data_packet = {
+        username: this.currentUser,
+        comment: this.formcomment,
+        parentId: this.post._id.$oid
+      }
 
-          axios
-            .post(`${API_BASE_URL}/new_comment`, data_packet)
-            .then(response => {
-              const dataPayload = response.data;
-              //const comment_data = dataPayload.data_payload;
+      axios
+        .post(`${API_BASE_URL}/new_comment`, data_packet)
+        .then(response => {
+          const dataPayload = response.data;
+          //const comment_data = dataPayload.data_payload;
 
-              this.replies.unshift(dataPayload.comment_data); // Add the new comment to the beginning of the replies array
-              this.formcomment = ''; // Clear the comment input field
-            })
-            .catch(error => {
-              console.log(error);
-            });
-        }
+          this.replies.unshift(dataPayload.comment_data); // Add the new comment to the beginning of the replies array
+          this.formcomment = ''; // Clear the comment input field
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    }
   },
   watch: {
     formcomment() {
@@ -191,7 +206,6 @@ export default {
           this.adjustTextareaHeight();
         },
   }
-
 }
 </script>
 
@@ -204,11 +218,18 @@ export default {
     text-align: center;
     border-top: 1px rgba(129, 129, 129, 0.322) solid;
     padding: 2px 0 0 0;
+    background-color: rgba(88, 110, 98, 0.349);
+    user-select: none;
     transition: 0.2s all;
 }
 
 .add-story-container:hover {
   background-color: rgba(105, 105, 105, 0.247);
+  cursor: pointer;
+}
+
+.add-story-container:active {
+  background-color: rgba(218, 218, 218, 0.247);
   cursor: pointer;
 }
 
