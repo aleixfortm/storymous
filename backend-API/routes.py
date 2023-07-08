@@ -201,11 +201,14 @@ def posts():
 def posts_logged_in(user):
 
     post_list = list(db_posts.find())
-    for post in post_list:
+    post_list.extend(list(db_chapters.find()))
+    sorted_post_list = sorted(post_list, key=lambda x: x["date"])
+
+    for post in sorted_post_list:
         PostModel.format_date_data(post)
-        user_data = db_users.find_one({"username": post["username"]})
-        post["picture"] = user_data["picture"]
-    post_dict["latest"] = post_list[::-1]
+        user_fetched_data = db_users.find_one({"username": post["username"]})
+        post["picture"] = user_fetched_data["picture"]
+    post_dict["latest"] = sorted_post_list[::-1]
 
     user_query = {"username": user}
     user_data = db_users.find_one(user_query)
@@ -218,10 +221,13 @@ def posts_logged_in(user):
     # if the user follows other users
     following_query = {"username": {"$in": user_data["following"]}}
     post_list = list(db_posts.find(following_query))
+    post_list.extend(list(db_chapters.find(following_query)))
+    sorted_post_list = sorted(post_list, key=lambda x: x["date"])
+
     for post in post_list:
         PostModel.format_date_data(post)
-        user_data = db_users.find_one({"username": post["username"]})
-        post["picture"] = user_data["picture"]
+        user_fetched_data_fol = db_users.find_one({"username": post["username"]})
+        post["picture"] = user_fetched_data_fol["picture"]
     post_dict["following"] = post_list[::-1]
 
     return json_util.dumps(post_dict)

@@ -1,10 +1,10 @@
 <template>
     <feed-container>
         <span v-if="!loading">
-          <div v-if="posts.following.length >= 1">
-            <div v-for="post in posts.following" :key="post._id">
-              <template v-if="post.type === 'prologue'">
+            <div v-if="posts.following.length >= 1">
                 <post-container
+                    v-for="post in posts.following"
+                    :key="post._id"
                     :_id="post._id"
                     :title="post.title"
                     :content="post.content"
@@ -15,34 +15,14 @@
                     :color="post.color"
                     :feedMode="true">
                 </post-container>
-              </template>
-              <template v-else>
-                <continuestoryfeed-container
-                v-if="post.type === 'chapter'"
-                    :_id="post._id"
-                    :storyId="post.story_id"
-                    :parentChapterId="post.parent_chapter_id"
-                    :content="post.content"
-                    :chapterName="post.chapter_name"
-                    :chapterNum="post.chapter_num"
-                    :username="post.username"
-                    :color="post.color"
-                    :storyTitle="post.story_title"
-                    :postComment="post.comment"
-                    :date="post.date"
-                    :picture="post.picture"
-                    :tags="post.tags">
-                </continuestoryfeed-container>
-              </template>
             </div>
-          </div>
-          <div v-else>
-              <div class="imagecontainer">
-                  <div class="onomatopoeia">crick crick</div>
-                  <img class="astronaut-image" src="../../assets/img/astronaut_reading_space_nostars.png" alt="astronaut floating">
-                  <div class="loader-text">Looks like you aren't following anyone yet...</div>
-              </div>
-          </div>
+            <div v-else>
+                <div class="imagecontainer">
+                    <div class="onomatopoeia">crick crick</div>
+                    <img class="astronaut-image" src="../../assets/img/astronaut_reading_space_nostars.png" alt="astronaut floating">
+                    <div class="loader-text">Looks like you aren't following anyone yet...</div>
+                </div>
+            </div>
         </span>
         <span v-else class="loader-container">
             <div class="lds-facebook">
