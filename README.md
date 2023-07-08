@@ -23,7 +23,8 @@
 - 📈 Comment on stories and express your thoughts
 - 🙌 Check out user profiles
 - 🎈 Customize your profile with color schemes, pictures and more
-- 🧩 Fully responsive design that gently adapts to any screen
+- 🧩 Beautifully themed on sci-fi pixel art
+- 📱 Fully responsive design that gently adapts to any screen
 - 🔥 More to come!
 
 ## Roadmap 📜
