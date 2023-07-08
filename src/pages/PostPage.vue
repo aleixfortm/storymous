@@ -24,7 +24,8 @@
           <writechapter-container
           v-if="showContinueContainer"
           :chapter="1"
-          :username="currentUser">
+          :username="currentUser"
+          :postId="post._id">
         </writechapter-container>
         </span>   
       </div>
@@ -144,7 +145,7 @@ export default {
           const data_packet = {
             username: this.currentUser,
             comment: this.formcomment,
-            parentId: this.post._id.$oid
+            parentId: this.post._id.$oid,
           }
 
           axios
@@ -212,12 +213,18 @@ export default {
     text-align: center;
     border-top: 1px rgba(129, 129, 129, 0.322) solid;
     padding: 2px 0 0 0;
-    background-color: rgba(86, 175, 120, 0.26);
+    background-color: rgba(86, 175, 123, 0.349);
+    user-select: none;
     transition: 0.2s all;
 }
 
 .add-story-container:hover {
   background-color: rgba(105, 105, 105, 0.247);
+  cursor: pointer;
+}
+
+.add-story-container:active {
+  background-color: rgba(218, 218, 218, 0.247);
   cursor: pointer;
 }
 

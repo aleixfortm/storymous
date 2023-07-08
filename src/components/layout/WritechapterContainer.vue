@@ -1,6 +1,6 @@
 <template>
     <div class="write-container">
-        <form @submit.prevent="">
+        <form @submit.prevent="submitForm">
             <div class="newstory_comment">
                 <div class="image_box">
                     <img class="postimage" v-if="userFetchedPicture" :src="imgSource" alt="profilepic">
@@ -33,7 +33,7 @@ import router from '@/router';
 
   export default {
     name: "NewPost",
-    props: ["chapterNum", "username"],
+    props: ["chapterNum", "username", "postId"],
     data() {
       return {
         formtitle: "",
@@ -53,16 +53,18 @@ import router from '@/router';
           comment: this.formcomment,
           title: this.formtitle,
           body: this.formbody,
-          username: this.currentUser
+          username: this.currentUser,
+          postId: this.postId.$oid
         }
 
-        axios.post(`${API_BASE_URL}/new_post`, data_packet)
+        console.log(data_packet)
+        axios.post(`${API_BASE_URL}/new_chapter`, data_packet)
         .then(response => {
             this.loading = false;
             const data = response.data;
             if (data.status === "Success") {
                 this.isPostButtonDisabled = true;
-                router.push("/home")
+                router.push("/chapter/" + data.chapter_id)
             }
           })
           .catch(error => {
@@ -302,6 +304,7 @@ input[type="text"] {
     font-weight: bold;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.322);
     padding: 5px;
+    transition: 0.2s all;
 }
 
     .disabled {
