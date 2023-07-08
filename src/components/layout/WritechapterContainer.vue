@@ -33,7 +33,7 @@ import router from '@/router';
 
   export default {
     name: "NewPost",
-    props: ["chapterNum", "username", "postId"],
+    props: ["chapterNum", "username", "postId", "postTitle", "parentChapterId"],
     data() {
       return {
         formtitle: "",
@@ -56,8 +56,8 @@ import router from '@/router';
           username: this.currentUser,
           storyId: this.postId.$oid,
           chapterNum: this.chapterNum,
-          parentChapterId: null,
-
+          parentChapterId: this.parentChapterId,
+          postTitle: this.postTitle
         }
 
         console.log(data_packet)

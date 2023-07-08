@@ -25,7 +25,9 @@
           v-if="showContinueContainer"
           :chapterNum="1"
           :username="currentUser"
-          :postId="post._id">
+          :postId="post._id"
+          :postTitle="post.title"
+          :parentChapterId="null">
         </writechapter-container>
         </span>   
       </div>
