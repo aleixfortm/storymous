@@ -7,8 +7,16 @@
 
 <p align="center"><strong>Unique social media platform centered around storytelling where users are empowered to start or continue existing stories dynamically through a chapter-based system. With the creation of branching storylines, captivating narratives unfold, offering readers the ability to shape their own journey.</strong></p>
 
-
 ## Features
+- Browse stories from the community
+- Start new stories
+- Continue stories via a chapter-based system
+- Comment on stories and express your thoughts
+- Check out user profiles
+- Customize your profile with color schemes, pictures and more
+- More to come!
+
+## Roadmap
 - [x] Welcome page (logged out)
   - [x] Explore feed
   - [x] Good-looking(-ish) welcome message  
