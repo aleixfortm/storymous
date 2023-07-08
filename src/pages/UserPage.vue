@@ -82,20 +82,40 @@
             <span class="loader-text">Harvesting user stories...</span>
         </div>
         <div v-else-if="posts.length > 0">
-            <post-container 
-                v-for="post in posts"
-                :key="post._id"
-                :_id="post._id"
-                :title="post.title"
-                :content="post.content"
-                :username="post.username"
-                :postComment="post.comment"
-                :date="post.date"
-                :picture="post.picture"
-                :color="post.color">
-            </post-container>
-        </div>
-        <div v-else>
+            <div v-for="post in posts" :key="post._id.$oid">
+                <template v-if="post.type === 'prologue'">
+                    <post-container
+                        :_id="post._id"
+                        :title="post.title"
+                        :content="post.content"
+                        :username="post.username"
+                        :postComment="post.comment"
+                        :date="post.date"
+                        :picture="post.picture"
+                        :color="post.color"
+                        :feedMode="true">
+                    </post-container>
+                </template>
+                <template v-else>
+                    <continuestoryfeed-container
+                        :_id="post._id"
+                        :storyId="post.story_id"
+                        :parentChapterId="post.parent_chapter_id"
+                        :content="post.content"
+                        :chapterName="post.chapter_name"
+                        :chapterNum="post.chapter_num"
+                        :username="post.username"
+                        :color="post.color"
+                        :storyTitle="post.story_title"
+                        :postComment="post.comment"
+                        :date="post.date"
+                        :picture="post.picture"
+                        :tags="post.tags">
+                    </continuestoryfeed-container>
+                </template>
+                </div>
+            </div>
+            <div v-else>
             <div class="imagecontainer">
                 <div class="onomatopoeia">crick crick</div>
                 <img class="astronaut-image" src="../assets/img/astronaut_reading_space_nostars.png" alt="astronaut floating">
@@ -115,6 +135,7 @@ import axios from 'axios';
 import FeedContainer from "../components/layout/FeedContainer.vue";
 import PostContainer from "../components/layout/PostContainer.vue";
 import ProfilePicture from '@/components/layout/ProfilePicture.vue';
+import ContinuestoryfeedContainer from '@/components/layout/ContinuestoryfeedContainer.vue';
 
 export default {
     setup() {
@@ -140,7 +161,8 @@ export default {
     components: {
         FeedContainer,
         PostContainer,
-        ProfilePicture
+        ProfilePicture,
+        ContinuestoryfeedContainer
     },
     computed: {
         ...mapGetters('auth', ['isLoggedIn', 'currentUser', "userFetchedPicture", "colorFetched", "userFetchedBio", "nFetchedPosts", "nFetchedFollowers", "nFetchedFollowing"]),
@@ -214,6 +236,7 @@ export default {
                 .get(`${API_BASE_URL}/posts/${this.profileUsername}`)
                 .then(response => {
                     const data = response.data;
+                    console.log(data)
                     this.posts = data;
                     this.loading = false;
                 })

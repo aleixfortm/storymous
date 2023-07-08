@@ -74,11 +74,21 @@ class UserModel:
         db_users.update_one(filter_query, update_operation)
 
     @staticmethod
-    def update_post_count(username) -> None:
+    def update_post_count_general(username) -> None:
         user_query = {"username": username}
         n_posts = len(list(db_posts.find(user_query)))
         new_value = {"$set": {"started_stories": n_posts}}
         db_users.update_one(user_query, new_value)
+
+    @staticmethod
+    def update_started_story_count(username) -> None:
+        user_query = {"username": username}
+        db_users.update_one(user_query, {"$inc": {"started_stories": 1}})
+
+    @staticmethod
+    def update_continued_story_count(username) -> None:
+        user_query = {"username": username}
+        db_users.update_one(user_query, {"$inc": {"continued_stories": 1}})
 
 
 class PostModel:
@@ -96,6 +106,7 @@ class PostModel:
         self.views = views or 1
         self.chapters = chapters or {}
         self.type = "prologue"
+        self.increase_num_started_stories()
 
     def quicksave_to_db(self):
         db_posts.insert_one(self.__dict__)
@@ -109,6 +120,9 @@ class PostModel:
 
     def increase_visits(self):
         self.visits += 1
+
+    def increase_num_started_stories(self):
+        UserModel.update_started_story_count(self.username)
 
     @staticmethod
     def format_date_data(post_data):
@@ -158,6 +172,7 @@ class ChapterModel:
         self.continued_stories = continued_stories or []
         self.color = color or random.choice(COLOR_LIST)
         self.type = "chapter"
+        self.increase_num_started_stories()
     
     def quicksave_to_db(self):
         db_chapters.insert_one(self.__dict__)
@@ -170,6 +185,9 @@ class ChapterModel:
         query = {"_id": self.story_id}
         story_data = db_posts.find_one(query)
         return story_data.get("title")
+    
+    def increase_num_started_stories(self):
+        UserModel.update_continued_story_count(self.username)
 
                     
 class CommentModel:

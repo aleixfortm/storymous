@@ -87,17 +87,23 @@ def login():
 # load user data
 @bp_routes.route("/user/<user>", methods=["GET"])
 def user(user):
-    posts_list = list(db_posts.find({"username": user}))[::-1]
-    for post in posts_list:
-        user_data = db_users.find_one({"username": user})
-        post["picture"] = user_data["picture"]
-        PostModel.format_date_data(post)
-    user_data = db_users.find_one({"username": user})
+    post_list = list(db_posts.find({"username": user}))
+    post_list.extend(list(db_chapters.find({"username": user})))
+    sorted_post_list = sorted(post_list, key=lambda x: x["date"])
 
-    return json_util.dumps({
-                            "user_data": user_data,
-                            "posts": posts_list
-                            })
+    for post in sorted_post_list:
+        PostModel.format_date_data(post)
+        user_fetched_data = db_users.find_one({"username": post["username"]})
+        post["picture"] = user_fetched_data["picture"]
+    
+    user_data = db_users.find_one({"username": user})
+    
+    data_packet = {
+        "user_data": user_data,
+        "posts": sorted_post_list[::-1]
+    }
+
+    return json_util.dumps(data_packet)
 
 
 # load user data
@@ -236,13 +242,19 @@ def posts_logged_in(user):
 # get user posts
 @bp_routes.route("/posts/<user>", methods=["GET"])
 def user_posts(user):
-    cursor = list(db_posts.find({"username": user}))
-    for post in cursor:
-        user_data = db_users.find_one({"username": user})
+
+    post_list = list(db_posts.find({"username": user}))
+    post_list.extend(list(db_chapters.find({"username": user})))
+    sorted_post_list = sorted(post_list, key=lambda x: x["date"])
+
+    for post in sorted_post_list:
         PostModel.format_date_data(post)
-        post["picture"] = user_data["picture"]
+        user_fetched_data = db_users.find_one({"username": post["username"]})
+        post["picture"] = user_fetched_data["picture"]
         
-    return json_util.dumps(cursor[::-1])
+    return json_util.dumps(sorted_post_list[::-1])
+
+
 
 
 # get chapter by id
