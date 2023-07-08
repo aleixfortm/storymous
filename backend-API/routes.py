@@ -348,10 +348,10 @@ def new_chapter():
     pprint(data)
     chapter_data = {
         "story_id": ObjectId(data["storyId"]),
+        "parent_chapter_id": ObjectId(data["parentChapterId"]),
         "username": data["username"],
         "chapter_name": data["title"],
         "chapter_num": data["chapterNum"],
-        "parent_chapter_id": data["parentChapterId"],
         "content": data["body"],
         "comment": data["comment"]
     }

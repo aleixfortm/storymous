@@ -26,9 +26,8 @@
 
 <script>
 import { mapGetters } from 'vuex';
-  import { API_BASE_URL } from '../../config';
-
-  import axios from 'axios';
+import { API_BASE_URL } from '../../config';
+import axios from 'axios';
 import router from '@/router';
 
   export default {
@@ -48,7 +47,12 @@ import router from '@/router';
     methods: {
       submitForm() {
         this.loading = true;
-        console.log(this.chapterNum)
+        let parentIdCheck;
+        if (this.parentChapterId !== null) {
+          parentIdCheck = this.parentChapterId.$oid;
+        } else {
+          parentIdCheck = null;
+        }
         const data_packet = {
           comment: this.formcomment,
           title: this.formtitle,
@@ -56,7 +60,7 @@ import router from '@/router';
           username: this.currentUser,
           storyId: this.postId.$oid,
           chapterNum: this.chapterNum,
-          parentChapterId: this.parentChapterId,
+          parentChapterId: parentIdCheck,
           postTitle: this.postTitle
         }
 
