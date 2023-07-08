@@ -17,9 +17,15 @@
             :feedMode="false"
             class="story__article">
         </chapteredprologue-container>
-        <div v-if="isLoggedIn" class="add-story-container">
-          <h2 class="add-story"> WRITE CHAPTER 1 (START NEW STORYLINE)</h2>
-        </div>   
+        <span v-if="isLoggedIn">
+          <div class="add-story-container">
+            <h2 class="add-story"> WRITE CHAPTER 1 (START NEW STORYLINE)</h2>
+          </div>
+          <writechapter-container
+          :chapter="1"
+          :username="currentUser">
+        </writechapter-container>
+        </span>   
       </div>
       <div class="pollancre" v-if="isLoggedIn">
           <form @submit.prevent="submitComment">
@@ -83,6 +89,7 @@ import ContinuestoryContainer from "../components/layout/ContinuestoryContainer.
 import FeedContainer from '@/components/layout/FeedContainer.vue';
 //import PostContainer from '@/components/layout/PostContainer.vue';
 import ChapteredprologueContainer from "@/components/layout/ChapteredprologueContainer.vue";
+import WritechapterContainer from "@/components/layout/WritechapterContainer.vue";
 
 export default {
   components: {
@@ -90,7 +97,8 @@ export default {
     //PostContainer,
     CommentContainer,
     ContinuestoryContainer,
-    ChapteredprologueContainer
+    ChapteredprologueContainer,
+    WritechapterContainer
   },
   data() {
     return {
