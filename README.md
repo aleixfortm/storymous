@@ -50,7 +50,7 @@
 
 
 
-## Current bugs
+## Known bugs
 - [x] <code>Solved!</code> Routing client to the same component (same URL) but with different URL param will not reload data and page will not update. Solved by passing <code>:key="router.params.id"</code> prop to router-view on App.vue
 - [x] <code>Solved!</code> Feed stories display only a section of the content (substring of the whole text). However, when inside the story page, it should display the whole text, and still displays de substring.
 - [x] <code>Solved!</code> Trying to visit own profile when in some other user's profile will bug the data and display stats incorrectly. Needs some sort of component refresh, as the component is the same but with different data.
