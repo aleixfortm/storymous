@@ -11,7 +11,7 @@
                     </div>
                     <div class="extended-container">
                       <textarea id="comment" v-model="formcomment" placeholder="Author comment" rows="1" :style="{ height: textareaHeight }" required></textarea>
-                    <span class="story__user-name3"><b>@{{ username }}</b> · Now</span>
+                    <span class="story__user-name3"><b>@{{ currentUser }}</b> · Now</span>
                 </div>
                 </div>
                 <div class="newstory_title">
@@ -206,6 +206,7 @@ textarea {
     overflow: auto;
     box-sizing: border-box;
     margin: 0 10px 8px 0;
+    transition: 0.2s all;
 }
 
 #comment:hover {
@@ -227,6 +228,7 @@ textarea {
     overflow: auto;
     box-sizing: border-box;
     margin: 10px 10px 0px 10px;
+    transition: 0.2s all;
 }
 
 #body:hover {
@@ -252,6 +254,7 @@ input[type="text"] {
     color: rgb(0, 0, 0);
     box-sizing: border-box;
     margin: 0 10px 0 10px;
+    transition: 0.2s all;
   }
   
   input[type="text"]:hover {
@@ -288,6 +291,7 @@ input[type="text"] {
     font-weight: bold;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.322);
     padding: 5px;
+    transition: 0.2s all;
 }
 
     .disabled {
