@@ -10,7 +10,7 @@
 ###  **<p align="center">Storymous</p>**
 <p align="center"><strong>Unique social media platform centered around storytelling where users are empowered to start or continue existing stories dynamically through a chapter-based system. With the creation of branching storylines, captivating narratives unfold, offering readers the ability to shape their own journey.</strong></p>
 
-###  **<p align="center">[![Shields](https://img.shields.io/badge/Website-up-brightgreen)](https://www.storymous.com)  ![Shields](https://img.shields.io/badge/Version-1.0-blue)</p>**
+###  **<p align="center">[![Shields](https://img.shields.io/badge/Website-Online-brightgreen)](https://www.storymous.com)  ![Shields](https://img.shields.io/badge/Version-1.0-blue)</p>**
 
 <p align="center">
   <a href="https://skillicons.dev">
