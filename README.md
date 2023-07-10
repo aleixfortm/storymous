@@ -83,19 +83,15 @@
 
 ## Preview 
 
-### Homepage
-![image](https://github.com/aleixfortm/storymous/assets/95043218/5c57db4c-41d9-4a21-9453-44f4513b472b)
+![set 1](https://github.com/aleixfortm/storymous/assets/95043218/5d768ff0-5682-44d0-93b1-b1fa6cea083a)
 
-### Post page, including comments and continued chapters
-![image](https://github.com/aleixfortm/storymous/assets/95043218/01a04a84-b495-4c31-b6c6-07ffa2e9b766)
+![set2](https://github.com/aleixfortm/storymous/assets/95043218/0d88ab8f-ec67-4863-9f3f-3e3e757807c0)
 
+![set3](https://github.com/aleixfortm/storymous/assets/95043218/806b67d4-a5be-48c8-908e-90fe7648233a)
 
+![set4](https://github.com/aleixfortm/storymous/assets/95043218/ddfc9338-f102-493e-97d0-12abb4a53f71)
 
-### Own profile
-![image](https://github.com/aleixfortm/storymous/assets/95043218/91976897-b320-4e47-bac8-7c03492031c1)
-
-### Others' user profiles
-![image](https://github.com/aleixfortm/storymous/assets/95043218/c9e0f2ea-3921-413c-9c47-f1e2cec929bd)
+![set5](https://github.com/aleixfortm/storymous/assets/95043218/333ba1ad-a6ec-4fb6-a900-735ea2026d67)
 
 
 ## Project setup
