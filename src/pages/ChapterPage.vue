@@ -184,7 +184,7 @@ export default {
       const data_packet = {
         username: this.currentUser,
         comment: this.formcomment,
-        parentId: this.post._id.$oid
+        parentId: this.chapterList[0]._id.$oid
       }
 
       axios
