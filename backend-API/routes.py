@@ -330,8 +330,8 @@ def post(postId):
     for reply in replies:
         PostModel.format_date_data(reply)
 
-    post_data["replies"] = replies
-    pprint(post_data)
+    post_data["replies"] = replies[::-1]
+
     return json_util.dumps(post_data)
 
 
