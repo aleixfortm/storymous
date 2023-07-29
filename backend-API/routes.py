@@ -154,7 +154,7 @@ def new_post():
     return json_util.dumps({"status": "Success"})
 
 
-# create new post sequence
+# create new comment sequence
 @bp_routes.route('/new_comment', methods=['POST'])
 @jwt_required()
 def new_pcomment():
@@ -255,8 +255,6 @@ def user_posts(user):
     return json_util.dumps(sorted_post_list[::-1])
 
 
-
-
 # get chapter by id
 @bp_routes.route("/chapter/<chapterId>", methods=["GET"])
 def chapter(chapterId):
@@ -273,6 +271,7 @@ def chapter(chapterId):
     user_data = db_users.find_one(user_query)
     prologue_data["picture"] = user_data["picture"]
     PostModel.format_date_data(prologue_data)
+    PostModel.increase_visits(prologue_data["_id"])
 
     # iterate through parent chapters until it reaches chapter 1
     for _ in range(chapter_data["chapter_num"]): 
@@ -289,8 +288,6 @@ def chapter(chapterId):
     
     # add prologue to first position
     chapter_list.insert(0, prologue_data)
-    pprint(chapter_list)
-    print(len(chapter_list))
     return json_util.dumps(chapter_list)
 
 
@@ -306,6 +303,7 @@ def post(postId):
     post["picture"] = user_data["picture"]
     PostModel.format_date_data(post)
     post_data["post"] = post
+    PostModel.increase_visits(post["_id"])
 
     replies = []
     for comment_id in post["user_comments"]:
@@ -363,7 +361,6 @@ def new_chapter():
 
     # gather data from POST request and place it into a dictionary
     data = request.json
-    pprint(data)
     chapter_data = {
         "story_id": ObjectId(data["storyId"]),
         "parent_chapter_id": ObjectId(data["parentChapterId"]),

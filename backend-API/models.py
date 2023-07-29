@@ -118,11 +118,11 @@ class PostModel:
         post_dict = self.__dict__
         db_posts.update_one({'_id': self._id}, {'$set': post_dict})
 
-    def increase_visits(self):
-        self.visits += 1
-
     def increase_num_started_stories(self):
         UserModel.update_started_story_count(self.username)
+
+    def increase_visits(post_id, ):
+        db_posts.update_one({'_id': post_id}, {'$inc': {'views': 1}})
 
     @staticmethod
     def format_date_data(post_data):
