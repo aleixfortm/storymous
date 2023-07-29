@@ -7,22 +7,6 @@
         </div>
         <span class="loader-text">Harvesting stories...</span>
     </div>
-    <!--
-    <div v-else>
-        <post-container
-        v-for="post in posts.latest"
-            :key="post._id"
-            :_id="post._id"
-            :title="post.title"
-            :content="post.content"
-            :username="post.username"
-            :postComment="post.comment"
-            :date="post.date"
-            :picture="post.picture"
-            :color="post.color"
-            :feedMode="true">
-        </post-container>
-        -->
     <div v-else v-for="post in posts.latest" :key="post._id">
       <template v-if="post.type === 'prologue'">
         <post-container

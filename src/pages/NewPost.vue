@@ -3,7 +3,7 @@
       <section class="section_title">
         Start new story
       </section>
-        <div class="pollancre">
+        <div v-if="!loading" class="pollancre">
             <form @submit.prevent="submitForm">
                 <div class="newstory_comment">
                     <div class="image_box">
@@ -24,6 +24,14 @@
                   <button :class="{ 'postbutton': true, 'disabled': isPostButtonDisabled }" :disabled="isPostButtonDisabled" type="submit">Submit</button>
                 </div>
             </form>
+        </div>
+        <div v-else class="loader-container">
+          <div class="lds-facebook">
+              <div></div>
+              <div></div>
+              <div></div>
+          </div>
+          <span class="loader-text">Planting story seed...</span>
         </div>
     </feed-container>
   </template>
@@ -54,8 +62,6 @@ import router from '@/router';
     },
     methods: {
       submitForm() {
-        this.loading = true;
-
         const data_packet = {
           comment: this.formcomment,
           title: this.formtitle,
@@ -63,12 +69,13 @@ import router from '@/router';
           username: this.currentUser
         }
 
+        this.loading = true;
+
         axios.post(`${API_BASE_URL}/new_post`, data_packet)
         .then(response => {
             this.loading = false;
             const data = response.data;
             if (data.status === "Success") {
-                this.isPostButtonDisabled = true;
                 router.push("/home")
             }
           })
@@ -308,7 +315,7 @@ input[type="text"] {
     }
 
     .postbutton:hover {
-      background-color: #94949425;
+      background-color: rgba(0, 255, 76, 0.425);
     }
 
     .buttonbox {

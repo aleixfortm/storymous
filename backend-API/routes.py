@@ -149,7 +149,7 @@ def new_post():
     post_object.add_html_line_jumps()
     post_object.quicksave_to_db()
 
-    UserModel.update_post_count(post["username"])
+    UserModel.update_started_story_count(post["username"])
 
     return json_util.dumps({"status": "Success"})
 

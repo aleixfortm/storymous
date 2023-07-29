@@ -1,24 +1,6 @@
 <template>
     <feed-container>
         <img src="../assets/img/storymous-forest-min.png" alt="storymous forest" class="testimage">
-        <!--
-        <div class="loggedintop">
-            <div class="loggedimagecontainer">
-                <img src="../assets/img/tree2.jpeg" alt="storymous tree" class="treeimg">
-            </div>
-            <div class="statstop">
-                <div class="statstop1">
-                    The <b style="color: greenyellow;">story tree</b> holds a total of <b>122</b> <b><span style="color: rgb(240, 150, 15);">stories</span></b> from <b>21</b><b> <span style="color: rgb(30, 153, 210);"> authors</span></b>
-                </div>
-                <div class="statstop1">
-                    <b>84</b><b><span style="color: rgb(255, 0, 106);"> readers</span></b> have been spotted nearby
-                </div>
-                <div class="statstop2">
-                    <b>2</b> new  <b><span style="color: rgb(240, 150, 15);">stories</span></b> published today
-                </div>
-            </div>
-        </div>
-        -->
         <div class="create_newstory">
             <img class="postimage" v-if="userFetchedPicture" :src="imgSource" alt="profilepic">
             <router-link to="" class="story_form">
@@ -26,22 +8,6 @@
             </router-link>
         </div>
     </feed-container>
-    <!--
-    <feed-container v-else class="homepage-top">
-        <div class="welcome-message" v-if="!loggedOutLoading">
-            <div class="messagecontainer">
-                <div class="innermessagecontainer">
-                    Welcome to  <b>Storymous</b>! <br>
-                    <span class="innermessagecontainer2">Amazing stories await...</span>
-                </div>
-            </div>
-            <div class="imagecontainer">
-                <img class="welcomeimage" src="../assets/img/astronaut_reading.jpeg" alt="astronaut reading under tree">
-            </div>
-        </div>
-    </feed-container>
-    -->
-
     <div class="block">
         <div class="rectangle">
             <select-button @click="setSelectedTab('latest-feed')" :mode="selectedTab === 'following-feed' ? null : 'flat'">
