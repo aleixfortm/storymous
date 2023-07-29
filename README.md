@@ -68,7 +68,9 @@
   - [x] Comments and continued chapters feed
   - [ ] Option for filtering comments / continued stories
   
+## Database structure
 
+![Untitled](https://github.com/aleixfortm/storymous/assets/95043218/e68b8a81-e2aa-419a-8f48-18f271c51a59)
 
 
 ## Known bugs 
