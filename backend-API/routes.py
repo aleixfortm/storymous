@@ -391,7 +391,7 @@ def new_chapter():
     # else send the previously stablished data packet
     return json_util.dumps(data_packet)
 
-
+'''
 # edit posts
 @bp_routes.route('/posts_edit', methods=["GET"])
 @jwt_required()
@@ -452,3 +452,4 @@ def chapters_edit():
         db_chapters.replace_one(chapter_query, chapter)
 
     return "successful change"
+'''
