@@ -1,11 +1,6 @@
 <p align="center">
   <img src="https://github.com/aleixfortm/storymous/assets/95043218/97013ee7-c787-4587-adfe-6650a9c29f3b" alt="storymous_tree" width="800" height="auto">
 </p>
-<!--![storymous-forest-min](https://github.com/aleixfortm/storymous/assets/95043218/97013ee7-c787-4587-adfe-6650a9c29f3b)-->
-
-
-
-
 
 ###  **<p align="center">Storymous</p>**
 <p align="center"><strong>Unique social media platform centered around storytelling where users are empowered to start and continue existing stories dynamically through a chapter-based system. </strong><br><br> With the creation of branching storylines, captivating narratives unfold, offering readers the ability to shape their own journey.</p>
@@ -17,6 +12,12 @@
     <img src="https://skillicons.dev/icons?i=vue,js,mongodb,python,flask" />
   </a>
 </p>
+<br>
+<br>
+
+<div align="center"><a href='https://ko-fi.com/G2G7NPEM9' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://storage.ko-fi.com/cdn/kofi3.png?v=3' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a></div>
+<div align="center">Time for a coffee? Help me maintain and improve the infrastructure cost of the project!</div>
+
 
 ## Features 
 - 🌍 Browse stories from the community
@@ -81,8 +82,9 @@
 - [x] <code>Solved!</code> Switching to "following" feed before "latest" feed finishes loading causes a bug in which all retrieved data is lost. Needs page refresh to solve and reload posts. 
 - [x] <code>Solved!</code> Following feed appears as if user is not following anybody after log in. That, however, does not happen after refreshing page or navigating to other routes and coming back to feed.
 - [x] <code>Solved!</code> Posting comments broken when at least one chapter has been mounted to the story.
+- [x] <code>Solved!</code> If JWT token expires, user will still be able to be logged in, but requests to API won't work. Solve by checking expiration status of JWT on every request and log out if expired.
 - [ ] User profile box is not fully responsive, and screens smaller than 400px display a bit eerie. Not urgent fix.
-- [ ] If JWT token expires, user will still be able to be logged in, but requests to API won't work. Solve by checking expiration status of JWT on every request and log out if expired.
+
 
 ## Preview 
 
