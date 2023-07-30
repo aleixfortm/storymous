@@ -1,11 +1,6 @@
 <p align="center">
   <img src="https://github.com/aleixfortm/storymous/assets/95043218/97013ee7-c787-4587-adfe-6650a9c29f3b" alt="storymous_tree" width="800" height="auto">
 </p>
-<!--![storymous-forest-min](https://github.com/aleixfortm/storymous/assets/95043218/97013ee7-c787-4587-adfe-6650a9c29f3b)-->
-
-
-
-
 
 ###  **<p align="center">Storymous</p>**
 <p align="center"><strong>Unique social media platform centered around storytelling where users are empowered to start and continue existing stories dynamically through a chapter-based system. </strong><br><br> With the creation of branching storylines, captivating narratives unfold, offering readers the ability to shape their own journey.</p>
@@ -21,7 +16,7 @@
 <br>
 
 <div align="center"><a href='https://ko-fi.com/G2G7NPEM9' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://storage.ko-fi.com/cdn/kofi3.png?v=3' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a></div>
-<div align="center">Help maintaining and improving the infrastructure cost of this project!</div>
+<div align="center">Time for a coffee? Help me maintain and improve the infrastructure cost of the project!</div>
 
 
 ## Features 
