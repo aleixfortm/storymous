@@ -81,8 +81,9 @@
 - [x] <code>Solved!</code> Switching to "following" feed before "latest" feed finishes loading causes a bug in which all retrieved data is lost. Needs page refresh to solve and reload posts. 
 - [x] <code>Solved!</code> Following feed appears as if user is not following anybody after log in. That, however, does not happen after refreshing page or navigating to other routes and coming back to feed.
 - [x] <code>Solved!</code> Posting comments broken when at least one chapter has been mounted to the story.
+- [x] <code>Solved!</code> If JWT token expires, user will still be able to be logged in, but requests to API won't work. Solve by checking expiration status of JWT on every request and log out if expired.
 - [ ] User profile box is not fully responsive, and screens smaller than 400px display a bit eerie. Not urgent fix.
-- [ ] If JWT token expires, user will still be able to be logged in, but requests to API won't work. Solve by checking expiration status of JWT on every request and log out if expired.
+
 
 ## Preview 
 
