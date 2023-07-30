@@ -258,6 +258,15 @@ export default {
                         this.isFollowing = !this.isFollowing
                     }
                     this.isFollowButtonDisabled = false;
+                    if (this.isFollowing) {
+                        this.userFollowers.push(this.currentUser)
+                    } else {
+                        const index = this.userFollowers.indexOf(this.currentUser);
+                        if (index !== -1) {
+                            this.userFollowers.splice(index, 1);
+                        }
+                    }
+                    
                 })
 
                 .catch(error => {

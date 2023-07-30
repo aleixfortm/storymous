@@ -3,9 +3,9 @@
         <div class="comment__user-container">
             <div><img src="../../assets/img/reply_icon3.png" alt="reply icon" style="max-width: 25px; margin: 0 0px 0 0px; transform: scaleX(-1); "></div>
             <div class="comment__user-img-container">
-                <a href="" @click.stop="navigateToUser">
+                <router-link to="" @click.stop="navigateToUser">
                     <img :src="imgSource" v-if="picture" alt="Profile picture" class="comment__user-img">
-                </a>
+                </router-link>
             </div> 
             <div class="story__user-info-container">
                 <div class="comment__username cur-pnt"> 
