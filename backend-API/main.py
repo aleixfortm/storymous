@@ -10,7 +10,8 @@ app = Flask(__name__)
 app.secret_key = SECRET_KEY
 
 # enable CORS
-CORS(app, resources={r'/*': {'origins': '*'}})
+allowed_origin = 'https://www.storymous.com'
+CORS(app, resources={r'/*': {'origins': allowed_origin}})
 
 # instiantiate JSON Web Token authentication
 jwt = JWTManager(app)

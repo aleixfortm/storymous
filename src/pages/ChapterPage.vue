@@ -89,6 +89,11 @@
             ></continuestory-container>
           </template>
         </div>
+        <div v-if="replies.length == chapterList[chapterList.length - 1].chapter_num" class="imagecontainer">
+          <div class="onomatopoeia">crick crick</div>
+          <img class="astronaut-image" src="../assets/img/astronaut_reading_space_nostars.png" alt="astronaut floating">
+          <div class="loader-text">No comments or chapters have been written for this story yet. You can be the first, hurry up!</div>
+        </div>
       </span>
       <div v-else class="loader-container" style="margin-top: -8px">
         <div class="lds-facebook">
@@ -96,7 +101,7 @@
             <div></div>
             <div></div>
         </div>
-        <span class="loader-text">Harvesting all chapters from story...</span>
+        <span class="loader-text">Harvesting comments from story...</span>
       </div>
     </feed-container>
     <feed-container v-else>
@@ -106,7 +111,7 @@
             <div></div>
             <div></div>
         </div>
-        <span class="loader-text">Harvesting all chapters from story...</span>
+        <span class="loader-text">Adding chapters to main story...</span>
       </div>
     </feed-container>
 </template>
@@ -139,7 +144,7 @@ export default {
       continuedStory: null,
       textareaHeight: null,
       loading: true,
-      replies: null,
+      replies: [],
       loadingComments: true,
       showContinueContainer: false
     }
@@ -211,6 +216,50 @@ export default {
 </script>
 
 <style scoped>
+.onomatopoeia {
+    color: whitesmoke;
+    font-weight: bold;
+    font-size: 14px;
+    margin-bottom: -10px;
+}
+
+@keyframes floatAnimation {
+  0% {
+    transform: translateY(-5px);
+  }
+  50% {
+    transform: translateY(5px);
+  }
+  100% {
+    transform: translateY(-5px);
+  }
+}
+
+.astronaut-image {
+    width: 175px;
+    height: auto;
+    animation: floatAnimation 4s ease-in-out infinite;
+}
+
+.imagecontainer {
+    margin: 50px auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+}
+
+.loader-text {
+    background-color: whitesmoke;
+    text-align: center;
+    color: rgb(0, 0, 0);
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-weight: bold;
+    margin: 0 10px;
+}
+
 .add-story-container {
     display: flex;
     margin: 5px 0 5px 0;
