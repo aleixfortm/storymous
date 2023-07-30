@@ -89,7 +89,7 @@ export default {
         userFetchedPicture: state => state.userData ? state.userData.picture : null,
         userFetchedBio: state => state.userData ? state.userData.bio : null,
         colorFetched: state => state.userData ? state.userData.color: null,
-        nFetchedPosts: state => state.userData ? state.userData.started_stories : 0,
+        nFetchedPosts: state => state.userData ? state.userData.started_stories + state.userData.continued_stories : 0,
         nFetchedFollowers: state => state.userData ? state.userData.followers.length : 0,
         nFetchedFollowing: state => state.userData ? state.userData.following.length : 0
     }
