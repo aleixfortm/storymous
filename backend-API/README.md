@@ -6,4 +6,5 @@ Backend API for Storymous made with Flask
 
 ## Database model
 
-![ERD (3)](https://user-images.githubusercontent.com/95043218/236589878-33ad98ac-ab3b-42f7-92ea-66e3e228c0ae.png)
+
+![Untitled](https://github.com/aleixfortm/storymous/assets/95043218/4a32c76c-da29-43b6-9fbc-eae6ab249824)
