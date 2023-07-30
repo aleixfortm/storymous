@@ -14,9 +14,6 @@
             <div class="statsblock">
                 <div class="topblock">
                     <div class="name-color">
-                        <!--
-                        <div class="color-scheme"></div>
-                        -->
                         <div class="username">@{{ profileUsername }}</div>
                     </div>
                     <button 
@@ -33,14 +30,43 @@
                         <div class="count-block">
                             <b>Stories</b>
                             <div class="count-block__num">{{ nStories }}</div>
+                            <div class="tooltip" v-if="hoveringStories">
+                                <div class="tooltip-data">
+                                    <div>something</div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="count-block">
+                        <div class="count-block" @mouseover="followersMouseOver" @mouseout="followersMouseOut">
                             <b>Followers</b>
-                            <div class="count-block__num">{{ nFollowers }}</div>
+                            <div class="count-block__num">{{ userFollowers.length }}</div>
+                            <div class="tooltip" v-if="hoveringFollowers">
+                                <div v-if="userFollowers.length > 0">
+                                    <div v-for="user in userFollowers" class="tooltip-data" :key="user">
+                                        <div >
+                                            {{ user }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div v-else>
+                                    *empty*
+                                </div>
+                            </div>
                         </div>
-                        <div class="count-block">
+                        <div class="count-block" @mouseover="followingMouseOver" @mouseout="followingsMouseOut">
                             <b>Following</b>
-                            <div class="count-block__num">{{ nFollowing }}</div>
+                            <div class="count-block__num">{{ userFollowing.length }}</div>
+                            <div class="tooltip" v-if="hoveringFollowing">
+                                <div v-if="userFollowing.length > 0">
+                                    <div v-for="user in userFollowing" class="tooltip-data" :key="user">
+                                        <div v-if="userFollowing.length > 0">
+                                            {{ user }}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div v-else>
+                                    *empty*
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -124,6 +150,7 @@
             </div>
         </div>
     </feed-container>
+
 </template>
 
 <script>
@@ -152,10 +179,15 @@ export default {
             userColor: "",
             userBio: "",
             nStories: 0,
-            nFollowers: 0,
-            nFollowing: 0,
+            userFollowers: 0,
+            userFollowing: 0,
             isFollowing: null,
             isFollowButtonDisabled: false,
+            hoveringStories: false,
+            hoveringFollowers: false,
+            hoveringFollowing: false,
+            tooltipY: 0,
+            tooltipX: 0
         }
     },
     components: {
@@ -187,6 +219,20 @@ export default {
     },
     methods: {
         ...mapActions('auth', ['logout']),
+        followersMouseOver(event) {
+            this.hoveringFollowers = true;
+            this.tooltipX = event.pageX
+            this.tooltipY = event.pageY + 30
+        },
+        followersMouseOut() {
+            this.hoveringFollowers = false;
+        },
+        followingMouseOver() {
+            this.hoveringFollowing = true;
+        },
+        followingsMouseOut() {
+            this.hoveringFollowing = false;
+        },
         ownProfile() {
             if (this.profileUsername === this.currentUser) {
                 return true;
@@ -229,8 +275,8 @@ export default {
                 this.userColor = this.colorFetched;
                 this.userBio = this.userFetchedBio;
                 this.nStories = this.nFetchedPosts;
-                this.nFollowers = this.nFetchedFollowers;
-                this.nFollowing = this.nFetchedFollowing;
+                this.userFollowers = this.nFetchedFollowers;
+                this.userFollowing = this.nFetchedFollowing;
 
             axios
                 .get(`${API_BASE_URL}/posts/${this.profileUsername}`)
@@ -254,8 +300,8 @@ export default {
                     this.userColor = userData.color;
                     this.userBio = userData.bio; 
                     this.nStories = userData.started_stories + userData.continued_stories;
-                    this.nFollowers = userData.followers.length;
-                    this.nFollowing = userData.following.length;
+                    this.userFollowers = userData.followers;
+                    this.userFollowing = userData.following;
                     this.loading = false;
 
                     if (this.isLoggedIn) {
@@ -277,6 +323,33 @@ export default {
 </script>
 
 <style scoped>
+.tooltip {
+  position: absolute;
+  top: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: rgba(39, 39, 39, 1);
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 18px;
+  text-align: start;
+  z-index: 10;
+  color: rgb(255, 255, 255);
+  box-shadow: 0 0 20px 3px rgba(0, 0, 0, 0.15);
+}
+
+.tooltip::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  bottom: 100%; /* Change 'top' to 'bottom' to move the triangle above the tooltip */
+  margin-left: -10px;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid rgba(39, 39, 39, 1); /* Use 'border-bottom' to create the triangle pointing upwards */
+  z-index: 2; /* Set a higher z-index to ensure the triangle appears above the tooltip */
+}
+
 .disabled {
   opacity: 0.5; /* or any other visual styling for disabled state */
   pointer-events: none; /* disable pointer events */
@@ -592,6 +665,7 @@ export default {
 }
 
 .count-block {
+    position: relative;
     display: flex;
     flex-direction: column;
     background-color: rgba(151, 151, 151, 0.192);

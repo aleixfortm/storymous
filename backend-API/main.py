@@ -3,15 +3,14 @@ from flask_cors import CORS
 from flask_pymongo import PyMongo
 from config import MONGODB_URI, SECRET_KEY
 from flask_jwt_extended import JWTManager
-
+from config import ALLOWED_ORIGIN
 
 # instantiate the app
 app = Flask(__name__)
 app.secret_key = SECRET_KEY
 
 # enable CORS
-allowed_origin = 'https://www.storymous.com'
-CORS(app, resources={r'/*': {'origins': allowed_origin}})
+CORS(app, resources={r'/*': {'origins': ALLOWED_ORIGIN}})
 
 # instiantiate JSON Web Token authentication
 jwt = JWTManager(app)
