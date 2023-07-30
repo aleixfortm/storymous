@@ -17,6 +17,12 @@
     <img src="https://skillicons.dev/icons?i=vue,js,mongodb,python,flask" />
   </a>
 </p>
+<br>
+<br>
+
+<div align="center"><a href='https://ko-fi.com/G2G7NPEM9' target='_blank'><img height='36' style='border:0px;height:36px;' src='https://storage.ko-fi.com/cdn/kofi3.png?v=3' border='0' alt='Buy Me a Coffee at ko-fi.com' /></a></div>
+<div align="center">Help maintaining and improving the infrastructure cost of this project!</div>
+
 
 ## Features 
 - 🌍 Browse stories from the community
