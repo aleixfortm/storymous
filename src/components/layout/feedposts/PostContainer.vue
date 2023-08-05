@@ -2,11 +2,9 @@
     <div>
         <div :class="outlineClass">
             <router-link to="" @click="navigateToPost" style="text-decoration: none;" >
- 
                 <div class="origin-container">
                     <div class="origin">Started "<span style="font-weight: bold;">{{ title }}</span>"</div>
                 </div>
-
                 <div class="story__user-container">
                     <div class="story__user-img-container">
                         <router-link to="" @click.stop="navigateToUser" style="color: inherit; text-decoration: none;">
@@ -23,7 +21,6 @@
                         </div>
                     </div>
                 </div>
-
                 <article class="story__article">
                     <div class="story__upper">
                         <h2 class="story__title "><span class="story_title highlight">PROLOGUE</span>{{ title.toUpperCase() }}</h2>
@@ -70,7 +67,7 @@ export default {
 
     computed: {
         imgSource() {
-            return require('../../assets/img/' + this.picture);
+            return require('@/assets/img/' + this.picture);
         },
         outlineClass() {
             return `outline ${this.color}`;

@@ -55,7 +55,7 @@
 </template>
 
 <script>
-import PostContainer from "../../components/layout/PostContainer.vue";
+import PostContainer from "@/components/layout/feedposts/PostContainer.vue";
 import FeedContainer from "@/components/layout/FeedContainer.vue";
 import AstronautMessage from "@/components/AstronautMessage.vue";
 
