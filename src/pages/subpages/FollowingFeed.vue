@@ -37,11 +37,10 @@
             </div>
           </div>
           <div v-else>
-              <div class="imagecontainer">
-                  <div class="onomatopoeia">crick crick</div>
-                  <img class="astronaut-image" src="../../assets/img/astronaut_reading_space_nostars.png" alt="astronaut floating">
-                  <div class="loader-text">Looks like you aren't following anyone yet...</div>
-              </div>
+            <astronaut-message
+            :onomatopoeia="'crick crick'"
+            :text="`Looks like you aren't following anyone yet...`"
+            ></astronaut-message>
           </div>
         </span>
         <span v-else class="loader-container">
@@ -58,12 +57,14 @@
 <script>
 import PostContainer from "../../components/layout/PostContainer.vue";
 import FeedContainer from "@/components/layout/FeedContainer.vue";
+import AstronautMessage from "@/components/AstronautMessage.vue";
 
 export default {
     props: ["posts", "loading"],
     components: {
         PostContainer,
-        FeedContainer
+        FeedContainer,
+        AstronautMessage
     },
     methods: {
         formatContent(text) {

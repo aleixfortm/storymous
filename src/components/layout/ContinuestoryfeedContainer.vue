@@ -85,7 +85,8 @@ export default {
 
 <style scoped>
 .highlight {
-    outline: solid 2px rgb(0, 202, 135);
+    background-color: bisque;
+    color: black;
     border-radius: 2px;
     padding: 0 3px;
     margin: 0 8px 0 0px;
@@ -95,7 +96,6 @@ export default {
 .story__upper {
     display: flex;
     margin: 5px 0 5px 0;
-
 }   
 
 .story__title {
