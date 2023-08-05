@@ -1,4 +1,6 @@
 <template>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,300,1,200" />
+
     <div>
         <div :class="outlineClass">
             <router-link to="" @click="navigateToPost" style="text-decoration: none;" >
@@ -33,7 +35,12 @@
                     </p>
                 </article>
                 <div class="separator"></div>
-                <div class="story__article">Visits: {{ views }}  Comments: {{ comments.length }}</div>
+                <div class="story-stats">
+                    <div class="story-stats-section"><span class="material-symbols-outlined margin1">nest_eco_leaf</span>{{ likes }} N/A</div>
+                    <div class="story-stats-section"><span class="material-symbols-outlined margin1">bar_chart</span>{{ views }}</div>
+                    <div class="story-stats-section"><span class="material-symbols-outlined margin1">chat</span>{{ comments.length }}</div>
+                    <div class="story-stats-section"><span class="material-symbols-outlined margin1">share</span></div>
+                </div>
             </router-link>
         </div>
     </div>
@@ -45,7 +52,8 @@ import PostTag from '../PostTag.vue';
 
 export default {
     components: {
-        PostTag
+        PostTag,
+
     },
     data() {
         return {
@@ -92,6 +100,14 @@ export default {
 </script>
 
 <style scoped>
+.margin1 {
+    margin-right: 2px;
+}
+
+.margin2 {
+    margin-right: 5px;
+}
+
 .user-out {
     padding: 5px 5px 0 5px;
 }
@@ -100,6 +116,25 @@ export default {
     border-top: rgba(245, 245, 245, 0.075) 1px solid;
     width: 95%;
     margin: auto;
+}
+
+.story-stats {
+    display: flex;
+    color: whitesmoke;
+    margin: 5px 0 2px 5px;
+    justify-content: center;
+}
+
+.story-stats-section {
+    display: flex;
+    align-items: center;
+    margin-right: 25px;
+    padding: 1px 6px 1px 1px;
+}
+
+.story-stats-section:hover {
+    background-color: rgba(194, 194, 194, 0.137);
+    border-radius: 10px;
 }
 
 .tag-section {

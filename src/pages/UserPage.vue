@@ -119,6 +119,8 @@
                         :date="post.date"
                         :picture="post.picture"
                         :color="post.color"
+                        :views="post.views"
+                        :comments="post.user_comments"
                         :feedMode="true">
                     </post-container>
                 </template>
@@ -165,6 +167,12 @@ import ProfilePicture from '@/components/layout/ProfilePicture.vue';
 import ContinuestoryfeedContainer from '@/components/layout/feedposts/ContinuestoryfeedContainer.vue';
 
 export default {
+    components: {
+        FeedContainer,
+        PostContainer,
+        ProfilePicture,
+        ContinuestoryfeedContainer
+    },
     setup() {
         const router = useRouter();
         return { router: router };
@@ -189,12 +197,6 @@ export default {
             tooltipY: 0,
             tooltipX: 0
         }
-    },
-    components: {
-        FeedContainer,
-        PostContainer,
-        ProfilePicture,
-        ContinuestoryfeedContainer
     },
     computed: {
         ...mapGetters('auth', ['isLoggedIn', 'currentUser', "userFetchedPicture", "colorFetched", "userFetchedBio", "nFetchedPosts", "nFetchedFollowers", "nFetchedFollowing"]),
