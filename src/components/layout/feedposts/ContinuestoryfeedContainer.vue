@@ -24,7 +24,7 @@
                 <div class="separator"></div>
                 <article class="story__article">
                     <div class="story__upper">
-                        <h2 class="story__title "><span class="story_title highlight">CHAPTER {{ chapterNum }}</span>{{ chapterName.toUpperCase() }}</h2>
+                        <h2 class="story__title "><span class="story_title highlight1">CHAPTER</span><span class="story_title highlight">{{ chapterNum }}</span>{{ chapterName.toUpperCase() }}</h2>
                     </div>
                     <div class="tag-section"><post-tag></post-tag></div> 
                     <p class="story__content">
@@ -96,6 +96,15 @@ export default {
     border-radius: 2px;
     padding: 0 3px;
     margin: 0 8px 0 0px;
+    font-size: 17px;
+}
+
+.highlight1 {
+    background-color: bisque;
+    color: black;
+    border-radius: 2px;
+    padding: 0 3px;
+    margin: 0 3px 0 0px;
     font-size: 17px;
 }
 
