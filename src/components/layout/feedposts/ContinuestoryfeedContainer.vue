@@ -104,7 +104,7 @@ export default {
     color: black;
     border-radius: 2px;
     padding: 0 3px;
-    margin: 0 3px 0 0px;
+    margin: 0 4px 0 0px;
     font-size: 17px;
 }
 
