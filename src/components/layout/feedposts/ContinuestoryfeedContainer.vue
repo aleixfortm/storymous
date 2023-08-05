@@ -21,10 +21,12 @@
                         </div>
                     </div>
                 </div>
+                <div class="separator"></div>
                 <article class="story__article">
                     <div class="story__upper">
                         <h2 class="story__title "><span class="story_title highlight">CHAPTER {{ chapterNum }}</span>{{ chapterName.toUpperCase() }}</h2>
-                    </div>      
+                    </div>
+                    <div class="tag-section"><post-tag></post-tag></div> 
                     <p class="story__content">
                         {{ formatStory(content) }}
                         <b v-if="checkLength" class="readmore-button"><em>Read more</em></b>
@@ -37,8 +39,12 @@
 
 <script>
 import { useRouter } from 'vue-router';
+import PostTag from '../PostTag.vue';
 
 export default {
+    components: {
+        PostTag
+    },
     data() {
         return {
             outlineColors: ["red", "blue", "green", "yellow", "white", "purple", "pink", "orange", "salmon"]
@@ -93,9 +99,21 @@ export default {
     font-size: 17px;
 }
 
+.separator {
+    border-top: rgba(245, 245, 245, 0.075) 1px solid;
+    width: 95%;
+    margin: auto;
+}
+
+.tag-section {
+    display: flex;
+    justify-content: left;
+    margin: 7px 0 5px 0;
+}
+
 .story__upper {
     display: flex;
-    margin: 5px 0 5px 0;
+    margin: 2px 0 5px 0;
 }   
 
 .story__title {
@@ -125,65 +143,17 @@ export default {
 }
 
 .outline {
-    margin-top: 20px;
+    margin-top: 12px;
     padding: 5px 4px 4px 4px;
     height: fit-content;
     width: 100%;
-    /*border: 2px whitesmoke dashed;*/
-    border-radius: 5px;
-    border: 1px rgba(255, 255, 255, 0) solid;
-    background-color: rgba(255, 255, 255, 0);
-    transition: 0.1s all;
+    border-radius: 1px;
+    border: 1px rgba(255, 255, 255, 0.247) solid;
+    background-color: rgb(43, 43, 46);
+    transition: 0.2s all;
 }
-
-.outline.salmon {
-    border: 1px rgba(255, 109, 93, 0.747) solid;
-    background-color: rgba(255, 109, 93, 0.1);
-}
-
-.outline.red {
-    border: 1px rgb(255, 43, 43) solid;
-    background-color: rgba(255, 25, 0, 0.1);
-}
-
-.outline.blue {
-    border: 1px rgba(0, 153, 255, 0.7) solid;
-    background-color: rgba(0, 153, 255, 0.1);
-}
-
-.outline.green {
-    border: 1px rgba(55, 182, 97, 0.705) solid;
-    background-color: rgba(60, 134, 85, 0.1);
-}
-
-.outline.yellow {
-    border: 1px rgba(255, 217, 0, 0.726) solid;
-    background-color: rgba(255, 217, 0, 0.1);
-}
-
-.outline.white {
-    border: 1px rgba(255, 255, 255, 0.753) solid;
-    background-color: rgba(255, 255, 255, 0.1);
-}
-
-.outline.purple {
-    border: 1px rgba(183, 0, 255, 0.747) solid;
-    background-color: rgba(183, 0, 255, 0.1);
-}
-
-.outline.pink {
-    border: 1px rgba(255, 0, 179, 0.685) solid;
-    background-color: rgba(255, 0, 179, 0.1);
-}
-
-.outline.orange {
-    border: 1px rgb(255, 145, 0) solid;
-    background-color: rgba(255, 145, 0, 0.1);
-}
-
 .outline:hover {
-    background-color: rgba(202, 202, 202, 0.055);
-    border: 1px rgba(190, 190, 190, 0.616) solid;
+    border: 1px rgb(190, 190, 190) solid;
     cursor: pointer;
 }
 
@@ -196,9 +166,8 @@ export default {
     color: #d3d3d3;
 }
 
-
 .story__user-container {
-    padding: 10px 5px 1px 5px;
+    padding: 10px 5px 3px 5px;
     display: flex;
     flex-direction: row;
 }

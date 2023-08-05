@@ -21,15 +21,19 @@
                         </div>
                     </div>
                 </div>
+                <div class="separator"></div>
                 <article class="story__article">
                     <div class="story__upper">
                         <h2 class="story__title "><span class="story_title highlight">PROLOGUE</span>{{ title.toUpperCase() }}</h2>
-                    </div>      
+                    </div>
+                    <div class="tag-section"><post-tag></post-tag></div>
                     <p class="story__content">
                         {{ formatStory(content) }}
                         <b v-if="feedMode && checkLength" class="readmore-button"><em>Read more</em></b>
                     </p>
                 </article>
+                <div class="separator"></div>
+                <div class="story__article">Visits: {{ views }}  Comments: {{ comments.length }}</div>
             </router-link>
         </div>
     </div>
@@ -37,8 +41,12 @@
 
 <script>
 import { useRouter } from 'vue-router';
+import PostTag from '../PostTag.vue';
 
 export default {
+    components: {
+        PostTag
+    },
     data() {
         return {
             outlineColors: ["red", "blue", "green", "yellow", "white", "purple", "pink", "orange", "salmon"]
@@ -48,7 +56,7 @@ export default {
         const router = useRouter();
         return { router: router };
     },
-    props: ["_id", "title", "content", "username", "postComment", "date", "picture", "color", "feedMode"],
+    props: ["_id", "title", "content", "username", "postComment", "date", "picture", "color", "views", "comments", "feedMode"],
     methods: {
         formatStory(story) {
             const formattedStory = story.replace(/<br>/g, '\n')
@@ -86,7 +94,18 @@ export default {
 <style scoped>
 .user-out {
     padding: 5px 5px 0 5px;
+}
 
+.separator {
+    border-top: rgba(245, 245, 245, 0.075) 1px solid;
+    width: 95%;
+    margin: auto;
+}
+
+.tag-section {
+    display: flex;
+    justify-content: left;
+    margin: 7px 0 5px 0;
 }
 
 .highlight {
@@ -100,7 +119,7 @@ export default {
 
 .story__upper {
     display: flex;
-    margin: 5px 0 5px 0;
+    margin: 2px 0 5px 0;
 
 }   
 
@@ -130,64 +149,6 @@ export default {
     margin: 2px 5px 0 5px;
 }
 
-.outline {
-    margin-top: 20px;
-    padding: 5px 4px 4px 4px;
-    height: fit-content;
-    width: 100%;
-    border-radius: 5px;
-    border: 1px rgba(255, 255, 255, 0) solid;
-    background-color: rgba(255, 255, 255, 0);
-    transition: 0.1s all;
-}
-
-.outline.salmon {
-    border: 1px rgba(255, 109, 93, 0.747) solid;
-    background-color: rgba(255, 109, 93, 0.1);
-}
-
-.outline.red {
-    border: 1px rgb(255, 43, 43) solid;
-    background-color: rgba(255, 25, 0, 0.1);
-}
-
-.outline.blue {
-    border: 1px rgba(0, 153, 255, 0.7) solid;
-    background-color: rgba(0, 153, 255, 0.05);
-}
-
-.outline.green {
-    border: 1px rgba(55, 182, 97, 0.705) solid;
-    background-color: rgba(60, 134, 85, 0.1);
-}
-
-.outline.yellow {
-    border: 1px rgba(255, 217, 0, 0.726) solid;
-    background-color: rgba(255, 217, 0, 0.1);
-}
-
-.outline.white {
-    border: 1px rgba(255, 255, 255, 0.753) solid;
-    background-color: rgba(255, 255, 255, 0.1);
-}
-
-.outline.purple {
-    border: 1px rgba(183, 0, 255, 0.747) solid;
-    background-color: rgba(183, 0, 255, 0.1);
-}
-
-.outline.pink {
-    border: 1px rgba(255, 0, 179, 0.685) solid;
-    background-color: rgba(255, 0, 179, 0.1);
-}
-
-.outline.orange {
-    border: 1px rgb(255, 145, 0) solid;
-    background-color: rgba(255, 145, 0, 0.1);
-}
-
-
-
 .story__article {
     padding: 5px 10px 5px 10px;
     border-radius: 2px;
@@ -197,14 +158,24 @@ export default {
     color: #d3d3d3
 }
 
+.outline {
+    margin-top: 12px;
+    padding: 5px 4px 4px 4px;
+    height: fit-content;
+    width: 100%;
+    border-radius: 1px;
+    border: 1px rgba(255, 255, 255, 0.247) solid;
+    background-color: rgb(43, 43, 46);
+    transition: 0.2s all;
+}
+
 .outline:hover {
-    background-color: rgba(202, 202, 202, 0.055);
-    border: 1px rgba(190, 190, 190, 0.616) solid;
+    border: 1px rgb(190, 190, 190) solid;
     cursor: pointer;
 }
 
 .story__user-container {
-    padding: 10px 5px 1px 5px;
+    padding: 10px 5px 3px 5px;
     display: flex;
     flex-direction: row;
 }

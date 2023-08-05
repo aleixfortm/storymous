@@ -286,7 +286,7 @@ def chapter(chapterId):
         parent_chapter_data = db_chapters.find_one(parent_chapter_query)
         chapter_data = parent_chapter_data
     
-    # add prologue to first position
+    # add prologue to first positionvisits
     chapter_list.insert(0, prologue_data)
     return json_util.dumps(chapter_list)
 

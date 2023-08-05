@@ -18,6 +18,8 @@
             :date="post.date"
             :picture="post.picture"
             :color="post.color"
+            :views="post.views"
+            :comments="post.user_comments"
             :feedMode="true">
         </post-container>
       </template>
