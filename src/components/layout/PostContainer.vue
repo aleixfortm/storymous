@@ -138,7 +138,6 @@ export default {
     padding: 5px 4px 4px 4px;
     height: fit-content;
     width: 100%;
-    /*border: 2px whitesmoke dashed;*/
     border-radius: 5px;
     border: 1px rgba(255, 255, 255, 0) solid;
     background-color: rgba(255, 255, 255, 0);
@@ -157,7 +156,7 @@ export default {
 
 .outline.blue {
     border: 1px rgba(0, 153, 255, 0.7) solid;
-    background-color: rgba(0, 153, 255, 0.1);
+    background-color: rgba(0, 153, 255, 0.05);
 }
 
 .outline.green {
