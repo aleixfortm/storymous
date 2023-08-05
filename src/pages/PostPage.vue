@@ -1,8 +1,15 @@
 <template>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,300,1,200" />
     <feed-container v-if="!loading">
       <div class="story-container">
         <div class="main-title-container">
           <h2 class="main-title">{{ post.title.toUpperCase() }}</h2>
+        </div>
+        <div class="story-stats">
+            <div class="story-stats-section"><span class="material-symbols-outlined margin1">nest_eco_leaf</span>N/A</div>
+            <div class="story-stats-section"><span class="material-symbols-outlined margin1">bar_chart</span>{{ post.views }}</div>
+            <div class="story-stats-section"><span class="material-symbols-outlined margin1">chat</span>{{ post.user_comments.length }}</div>
+            <div class="story-stats-section"><span class="material-symbols-outlined margin1">share</span></div>
         </div>   
         <chapteredprologue-container
           v-if="post"
@@ -180,6 +187,31 @@ export default {
 </script>
 
 <style scoped>
+.separator {
+    border-top: rgba(245, 245, 245, 0.075) 1px solid;
+    width: 95%;
+    margin: auto;
+}
+
+.story-stats {
+    display: flex;
+    color: whitesmoke;
+    margin: 5px 0 2px 5px;
+    justify-content: center;
+}
+
+.story-stats-section {
+    display: flex;
+    align-items: center;
+    margin-right: 25px;
+    padding: 1px 6px 1px 1px;
+}
+
+.story-stats-section:hover {
+    background-color: rgba(194, 194, 194, 0.137);
+    border-radius: 10px;
+}
+
 .onomatopoeia {
     color: whitesmoke;
     font-weight: bold;

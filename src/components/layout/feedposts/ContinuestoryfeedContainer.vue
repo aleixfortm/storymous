@@ -26,12 +26,20 @@
                     <div class="story__upper">
                         <h2 class="story__title "><span class="story_title highlight1">CHAPTER</span><span class="story_title highlight">{{ chapterNum }}</span>{{ chapterName.toUpperCase() }}</h2>
                     </div>
-                    <div class="tag-section"><post-tag></post-tag></div> 
+                    <div class="tag-section">
+                        <post-tag v-for="tag in tags" :key="tag" :tag="tag"></post-tag>
+                    </div> 
                     <p class="story__content">
                         {{ formatStory(content) }}
                         <b v-if="checkLength" class="readmore-button"><em>Read more</em></b>
                     </p>
                 </article>
+                <div class="separator"></div>
+                <div class="story-stats">
+                    <div class="story-stats-section"><span class="material-symbols-outlined margin1">nest_eco_leaf</span>{{ likes }} N/A</div>
+                    <div class="story-stats-section"><span class="material-symbols-outlined margin1">bar_chart</span>22</div>
+                    <div class="story-stats-section"><span class="material-symbols-outlined margin1">share</span></div>
+                </div>
             </router-link>
         </div>
     </div>
@@ -47,14 +55,15 @@ export default {
     },
     data() {
         return {
-            outlineColors: ["red", "blue", "green", "yellow", "white", "purple", "pink", "orange", "salmon"]
+            outlineColors: ["red", "blue", "green", "yellow", "white", "purple", "pink", "orange", "salmon"],
+            tags: ["mystery", "chill", "sci-fi"]
         }
     },
     setup() {
         const router = useRouter();
         return { router: router };
     },
-    props: ["_id", "content", "username", "postComment", "storyTitle", "color", "date", "picture", "chapterNum", "storyId", "parentChapterId", "chapterName", "tags"],
+    props: ["_id", "content", "username", "postComment", "storyTitle", "color", "date", "picture", "chapterNum", "storyId", "parentChapterId", "chapterName"],
     methods: {
         formatStory(story) {
             const formattedStory = story.replace(/<br>/g, '\n')
@@ -90,6 +99,26 @@ export default {
 </script>
 
 <style scoped>
+
+.story-stats {
+    display: flex;
+    color: whitesmoke;
+    margin: 5px 0 2px 5px;
+    justify-content: center;
+}
+
+.story-stats-section {
+    display: flex;
+    align-items: center;
+    margin-right: 25px;
+    padding: 1px 6px 1px 1px;
+}
+
+.story-stats-section:hover {
+    background-color: rgba(194, 194, 194, 0.137);
+    border-radius: 10px;
+}
+
 .highlight {
     background-color: bisque;
     color: black;
@@ -117,7 +146,7 @@ export default {
 .tag-section {
     display: flex;
     justify-content: left;
-    margin: 7px 0 5px 0;
+    margin: 7px 0 0px 0;
 }
 
 .story__upper {

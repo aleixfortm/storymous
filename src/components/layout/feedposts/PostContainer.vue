@@ -28,7 +28,9 @@
                     <div class="story__upper">
                         <h2 class="story__title "><span class="story_title highlight">PROLOGUE</span>{{ title.toUpperCase() }}</h2>
                     </div>
-                    <div class="tag-section"><post-tag></post-tag></div>
+                    <div class="tag-section">
+                        <post-tag v-for="tag in tags" :key="tag" :tag="tag"></post-tag>
+                    </div>
                     <p class="story__content">
                         {{ formatStory(content) }}
                         <b v-if="feedMode && checkLength" class="readmore-button"><em>Read more</em></b>
@@ -53,11 +55,11 @@ import PostTag from '../PostTag.vue';
 export default {
     components: {
         PostTag,
-
     },
     data() {
         return {
-            outlineColors: ["red", "blue", "green", "yellow", "white", "purple", "pink", "orange", "salmon"]
+            outlineColors: ["red", "blue", "green", "yellow", "white", "purple", "pink", "orange", "salmon"],
+            tags: ["sci-fi", "short", "long", "medieval", "jungle", "horror", "historical", "fantasy", "world-building"]
         }
     },
     setup() {
@@ -140,7 +142,8 @@ export default {
 .tag-section {
     display: flex;
     justify-content: left;
-    margin: 7px 0 5px 0;
+    margin: 7px 0 0px 0;
+    flex-wrap: wrap;
 }
 
 .highlight {
