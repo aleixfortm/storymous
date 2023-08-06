@@ -22,10 +22,10 @@
                 </div>
                 <div class="tag-section">
                   <div class="alert alert-light p-2 ml-3 mr-3 mt-1 mb-1 opacity-75" role="alert">
-                    <strong>Tags</strong> Choose as many as you see fit, but don't overdo it!
+                    <strong>Tags</strong> Select tags to show on your post
                   </div>
                   <div class="tag-list">
-                      <post-tag v-for="tag in availableTags" :key="tag" :clickable="true" :tag="tag" @selected="onSelected"></post-tag>
+                      <post-tag v-for="tag in availableTags" :key="tag" :clickable="isClickable" :reachedMax="reachedMax" :tag="tag" @selected="onSelected"></post-tag>
                   </div>
 
                 </div>
@@ -68,18 +68,21 @@ import PostTag from '@/components/layout/PostTag.vue';
         textareaHeight1: 0,
         loading: false,
         isPostButtonDisabled: false,
-        availableTags: ["sci-fi", "mystery", "chill", "short", "long", "medieval", "jungle", "horror", "historical", "fantasy", "world-building"],
+        availableTags: ["sci-fi", "mystery", "chill", "short", "long", "medieval", "jungle", "horror", "historical", "fantasy", "world-building", "romance", "thriller",
+                        "young-adults", "humor", "self-help", "action", "suspense", "fairy", "pirate", "space", "science", "contemporary", "spirituality", "politics", "paranormal",
+                        "crime", "speculation", "literature", "travel", "development", "adventure", "classic", "detective", "memoir"],
         selectedTags: [],
+        isClickable: true,
+        reachedMax: false
       };
     },
     methods: {
       onSelected(tag, selected) {
-            if (selected) {
-                this.selectedTags.push(tag);
-            } else {
-                this.selectedTags.splice(this.selectedTags.indexOf(tag), 1);
-            }
-            console.log(this.selectedTags)
+          if (selected) {
+            this.selectedTags.push(tag);
+          } else {
+            this.selectedTags.splice(this.selectedTags.indexOf(tag), 1);
+          }
       },
       submitForm() {
         const data_packet = {
