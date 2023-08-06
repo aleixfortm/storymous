@@ -17,7 +17,6 @@
     <latest-feed :posts="posts" :loading="loading"></latest-feed>
 </template>
 
-
 <script>
 import { mapGetters } from 'vuex';
 import { useRouter } from 'vue-router';

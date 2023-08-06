@@ -1,5 +1,7 @@
 <template>
+    <success-message></success-message>
     <feed-container>
+        
         <img src="../assets/img/storymous-forest-min.png" alt="storymous forest" class="testimage">
 
         <div class="create_newstory">
@@ -39,6 +41,7 @@ import FeedContainer from "../components/layout/FeedContainer.vue"
 import SelectButton from "../components/SelectButton.vue";
 import LatestFeed from "../pages/subpages/LatestFeed.vue";
 import FollowingFeed from "../pages/subpages/FollowingFeed.vue";
+import SuccessMessage from '@/components/layout/messages/SuccessMessage.vue';
 
 
 export default {
@@ -47,7 +50,7 @@ export default {
         SelectButton,
         LatestFeed,
         FollowingFeed,
-
+        SuccessMessage
     },
     setup() {
         const router = useRouter();
