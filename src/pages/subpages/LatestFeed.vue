@@ -1,12 +1,10 @@
 <template>
   <feed-container>
     <div v-if="loading" class="loader-container">
-        <div class="lds-facebook">
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
-        <span class="loader-text">Harvesting stories...</span>
+      <div class="spinner-border text-light mb-3" style="width: 5rem; height: 5rem;" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+      <span class="loader-text">Loading stories...</span>
     </div>
     <div v-else v-for="post in posts.latest" :key="post._id">
       <template v-if="post.type === 'prologue'">
@@ -86,43 +84,6 @@ export default {
     justify-content: center;
     flex-direction: column;
     align-items: center;
-}
-
-.lds-facebook {
-  display: inline-block;
-  position: relative;
-  width: 80px;
-  height: 80px;
-}
-.lds-facebook div {
-  display: inline-block;
-  position: absolute;
-  left: 8px;
-  width: 16px;
-  background: #fff;
-  animation: lds-facebook 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
-}
-.lds-facebook div:nth-child(1) {
-  left: 8px;
-  animation-delay: -0.24s;
-}
-.lds-facebook div:nth-child(2) {
-  left: 32px;
-  animation-delay: -0.12s;
-}
-.lds-facebook div:nth-child(3) {
-  left: 56px;
-  animation-delay: 0;
-}
-@keyframes lds-facebook {
-  0% {
-    top: 8px;
-    height: 64px;
-  }
-  50%, 100% {
-    top: 24px;
-    height: 32px;
-  }
 }
 
 </style>

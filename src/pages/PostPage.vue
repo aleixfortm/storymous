@@ -77,19 +77,16 @@
           ></continuestory-container>
         </template>
       </div>
-      <div v-if="replies.length == 0" class="imagecontainer">
-          <div class="onomatopoeia">crick crick</div>
-          <img class="astronaut-image" src="../assets/img/astronaut_reading_space_nostars.png" alt="astronaut floating">
-          <div class="loader-text">No comments or chapters have been written for this story yet. You can be the first, hurry up!</div>
-      </div>
+      <astronaut-message v-if="replies.length == 0" 
+        :onomatopoeia="'crick crick'" 
+        :text="'No comments or chapters have been written for this story yet. You can be the first, hurry up!'">
+      </astronaut-message>
     </feed-container>
     <feed-container v-else>
       <div class="loader-container">
-          <div class="lds-facebook">
-              <div></div>
-              <div></div>
-              <div></div>
-          </div>
+        <div class="spinner-border text-light mb-3" style="width: 5rem; height: 5rem;" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
           <span class="loader-text">Harvesting story from story tree</span>
       </div>
     </feed-container>
@@ -103,14 +100,14 @@ import { mapGetters } from 'vuex';
 import CommentContainer from "@/components/layout/CommentContainer.vue";
 import ContinuestoryContainer from "../components/layout/ContinuestoryContainer.vue";
 import FeedContainer from '@/components/layout/FeedContainer.vue';
-//import PostContainer from '@/components/layout/PostContainer.vue';
+import AstronautMessage from "@/components/AstronautMessage.vue";
 import ChapteredprologueContainer from "@/components/layout/ChapteredprologueContainer.vue";
 import WritechapterContainer from "@/components/layout/WritechapterContainer.vue";
 
 export default {
   components: {
     FeedContainer,
-    //PostContainer,
+    AstronautMessage,
     CommentContainer,
     ContinuestoryContainer,
     ChapteredprologueContainer,
@@ -212,50 +209,6 @@ export default {
     border-radius: 10px;
 }
 
-.onomatopoeia {
-    color: whitesmoke;
-    font-weight: bold;
-    font-size: 14px;
-    margin-bottom: -10px;
-}
-
-@keyframes floatAnimation {
-  0% {
-    transform: translateY(-5px);
-  }
-  50% {
-    transform: translateY(5px);
-  }
-  100% {
-    transform: translateY(-5px);
-  }
-}
-
-.astronaut-image {
-    width: 175px;
-    height: auto;
-    animation: floatAnimation 4s ease-in-out infinite;
-}
-
-.imagecontainer {
-    margin: 50px auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: fit-content;
-}
-
-.loader-text {
-    background-color: whitesmoke;
-    text-align: center;
-    color: rgb(0, 0, 0);
-    padding: 5px 10px;
-    border-radius: 15px;
-    font-weight: bold;
-    margin: 0 10px;
-}
-
 .story__article {
     padding: 5px 10px 5px 10px;
     border-radius: 0px 0px 0px 0px;
@@ -345,60 +298,23 @@ export default {
     align-items: center;
 }
 
-.lds-facebook {
-  display: inline-block;
-  position: relative;
-  width: 80px;
-  height: 80px;
-}
-.lds-facebook div {
-  display: inline-block;
-  position: absolute;
-  left: 8px;
-  width: 16px;
-  background: #fff;
-  animation: lds-facebook 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
-}
-.lds-facebook div:nth-child(1) {
-  left: 8px;
-  animation-delay: -0.24s;
-}
-.lds-facebook div:nth-child(2) {
-  left: 32px;
-  animation-delay: -0.12s;
-}
-.lds-facebook div:nth-child(3) {
-  left: 56px;
-  animation-delay: 0;
-}
-@keyframes lds-facebook {
-  0% {
-    top: 8px;
-    height: 64px;
-  }
-  50%, 100% {
-    top: 24px;
-    height: 32px;
-  }
+.postbutton {
+height: 35px;
+font-family: inherit;
+border: 0px solid #e5e3ff;
+color: rgb(0, 255, 98);
+cursor: pointer;
+font-size: 15px;
+width: 80px;
+margin: 0px 5px 7px 0;
+background-color: #ffffff1e;
+border-radius: 4px;
+align-self: flex-end;
 }
 
-    .postbutton {
-    height: 35px;
-    font-family: inherit;
-    border: 0px solid #e5e3ff;
-    color: rgb(0, 255, 98);
-    cursor: pointer;
-    font-size: 15px;
-    width: 80px;
-    margin: 0px 5px 7px 0;
-    background-color: #ffffff1e;
-    border-radius: 4px;
-    align-self: flex-end;
-  }
-
-  .postbutton:hover {
-    background-color: #94949425;
-  }
+.postbutton:hover {
+background-color: #94949425;
+}
 
 #comment {
   background-color: #ffffff;

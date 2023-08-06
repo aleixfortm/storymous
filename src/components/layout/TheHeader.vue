@@ -1,6 +1,8 @@
 <template>
   <signin-dialog v-if="dialogShown === true && dialog === 'signin'" @close="toggleDialog" @signup="changeDialog('signup')" :key="'signin'"></signin-dialog>
   <signup-dialog v-else-if="dialogShown === true && dialog === 'signup'" @close="toggleDialog" @signin="changeDialog('signin')" :key="'signup'"></signup-dialog>
+
+
   <header>
       <nav>
           <div class="logo">
@@ -12,8 +14,8 @@
             <button class="loginButton" @click="toggleDialog(); changeDialog('signin')">Log In</button>
           </div>
           <div v-else class="options">
-            <span class="material-symbols-outlined">home</span>
-            <span class="material-symbols-outlined">notifications</span>
+            <div class="material-symbols-outlined m-2 user-select-none icon" @click="goHome">home</div>
+            <div class="material-symbols-outlined m-1 user-select-none icon" @click="showNotifications">notifications</div>
             <router-link :to="getProfileLink" class="userdata">
               <div class="username">@{{ currentUser }}</div>
               <img class="userimg" v-if="userFetchedPicture" :src="imgSource" alt="astronaut">
@@ -27,7 +29,6 @@
 <script>
 import { mapGetters } from 'vuex';
 import { useRouter } from 'vue-router';
-
 import SigninDialog from "@/components/SigninDialog.vue";
 import SignupDialog from "@/components/SignupDialog.vue";
 
@@ -56,7 +57,10 @@ export default {
     goToProfile() {
       const ownUsername = this.currentUser;
       this.$router.push('/user/' + ownUsername);
-    }
+    },
+    goHome() {
+      this.$router.push('/home');
+    },
   },
   computed: {
       ...mapGetters('auth', ['isLoggedIn', 'currentUser', "userFetchedPicture", "colorFetched"]),
@@ -71,10 +75,34 @@ export default {
 </script>
 
 <style scoped>
+.icon {
+  color: rgba(245, 245, 245, 0.877);
+  cursor: pointer;
+  transition: 0.1s all;
+}
+
+.icon:hover {
+  color: rgba(245, 245, 245, 0.877);
+  cursor: pointer;
+  font-variation-settings:
+  'FILL' 1,
+  'wght' 500,
+  'GRAD' 0,
+  'opsz' 48
+}
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 500,
+  'GRAD' 0,
+  'opsz' 48
+}
 
 .options {
   display: flex;
   align-items: center;
+  margin: 0 5px 0 5px;
 }
 
 .header-title {
@@ -117,7 +145,7 @@ export default {
   cursor: pointer;
   font-size: 15px;
   width: fit-content;
-  margin: 0 5px 0 20px;
+  margin: 0 5px 0 10px;
   background-color: #ffffff1e;
   border-radius: 4px;
   align-items: center;

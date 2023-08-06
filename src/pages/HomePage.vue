@@ -106,63 +106,11 @@ export default {
     margin: 0px;
 }
 
-.onomatopoeia {
-    color: whitesmoke;
-    font-weight: bold;
-    font-size: 14px;
-    margin-bottom: -10px;
-    text-decoration: wavy;
-}
-
-@keyframes floatAnimation {
-  0% {
-    transform: translateY(-5px);
-  }
-  50% {
-    transform: translateY(5px);
-  }
-  100% {
-    transform: translateY(-5px);
-  }
-}
-
-.astronaut-image {
-    width: 175px;
-    height: auto;
-    animation: floatAnimation 4s ease-in-out infinite;
-}
-
-.centered {
-    justify-content: center;
-    align-items: center;
-    height: 300px
-}
-
-
-.imagecontainer {
-    margin: 10px auto 20px auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: fit-content;
-}
-
-.loader-text {
-    background-color: whitesmoke;
-    text-align: center;
-    color: rgb(0, 0, 0);
-    padding: 5px 10px;
-    border-radius: 15px;
-    font-weight: bold;
-    margin: 0 10px;
-}
-
 .testimage {
     width: 100%;
     border-radius: 10px;
     opacity: 1;
-    margin: 20px 0 0 0;
+    margin: 0px 0 0 0;
 }
 
 .statstop {

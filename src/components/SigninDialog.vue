@@ -2,19 +2,23 @@
   <div class="bg" @click="$emit('close')"></div>
   <dialog open>
     <div class="dialog-div"> <b>Log In</b> </div>
-    <span v-if="errorMessage" class="error-message">Invalid credentials</span>
+    <div v-if="errorMessage" class="alert alert-danger m-0 mt-3" role="alert">
+      Invalid credentials!
+    </div>
     <form @submit.prevent="submitForm">
-        <div class="form-control">
+        <div class="form--control">
             <input v-model="usernameValue" id="title" name="title" type="text" ref="titleInput" placeholder="Username">
         </div>
-        <div class="form-control">
+        <div class="form--control">
           <input v-model="passwordValue" id="password" name="password" type="password" ref="passwordInput" placeholder="Password">
         </div>
         <div>
             <button class="button" :disabled="!validateForm()" type="submit" @click="scrollToTop">
             <span v-if="!loading">Log In</span>
             <span v-else>
-              <div class="lds-facebook"><div></div><div></div><div></div></div>
+              <div class="spinner-border spinner-border-sm" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
             </span>
             </button>
         </div>
@@ -112,48 +116,6 @@ export default {
   align-self: center;
 }
 
-.lds-facebook {
-  display: inline-block;
-  position: relative;
-  width: 40px;
-  height: 40px;
-}
-
-.lds-facebook div {
-  display: inline-block;
-  position: absolute;
-  left: 4px;
-  width: 8px;
-  background: #fff;
-  animation: lds-facebook 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
-}
-
-.lds-facebook div:nth-child(1) {
-  left: 4px;
-  animation-delay: -0.12s;
-}
-
-.lds-facebook div:nth-child(2) {
-  left: 16px;
-  animation-delay: -0.06s;
-}
-
-.lds-facebook div:nth-child(3) {
-  left: 28px;
-  animation-delay: 0;
-}
-
-@keyframes lds-facebook {
-  0% {
-    top: 4px;
-    height: 32px;
-  }
-  50%, 100% {
-    top: 12px;
-    height: 16px;
-  }
-}
-
 
 label {
     font-weight: bold;
@@ -234,7 +196,7 @@ form {
   font-weight: bold;
 }
 
-.form-control {
+.form--control {
     margin: 1rem 0;
     width: auto;
 }

@@ -26,10 +26,8 @@
             </form>
         </div>
         <div v-else class="loader-container">
-          <div class="lds-facebook">
-              <div></div>
-              <div></div>
-              <div></div>
+          <div class="spinner-border spinner-border-sm" style="width: 5rem; height: 5rem;" role="status">
+            <span class="visually-hidden">Loading...</span>
           </div>
           <span class="loader-text">Planting story seed...</span>
         </div>

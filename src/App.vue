@@ -1,5 +1,5 @@
 <template>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,300,1,200" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
   <the-header></the-header>
   
   <block-frame>
@@ -49,7 +49,6 @@ html {
 
 body {
   margin: 0;
-  position: relative;
   background-color: rgb(35, 42, 48);
 }
 

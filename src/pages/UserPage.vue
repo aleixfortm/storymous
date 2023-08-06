@@ -86,11 +86,9 @@
         </section>
         <section class="profile-box centered" v-else>
             <div v-if="loading" class="loader-container">
-            <div class="lds-facebook">
-                <div></div>
-                <div></div>
-                <div></div>
-            </div>
+                <div class="spinner-border text-light mb-3" style="width: 5rem; height: 5rem;" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
             <span class="loader-text">Spotting authors nearby...</span>
         </div>
         </section>
@@ -102,10 +100,8 @@
             {{ profileUsername }}'s posts
         </section>
         <div v-if="loading" class="loader-container">
-            <div class="lds-facebook">
-                <div></div>
-                <div></div>
-                <div></div>
+            <div class="spinner-border text-light mb-3" style="width: 5rem; height: 5rem;" role="status">
+                <span class="visually-hidden">Loading...</span>
             </div>
             <span class="loader-text">Harvesting user stories...</span>
         </div>
@@ -146,12 +142,8 @@
                 </div>
             </div>
             <div v-else>
-            <div class="imagecontainer">
-                <div class="onomatopoeia">crick crick</div>
-                <img class="astronaut-image" src="../assets/img/astronaut_reading_space_nostars.png" alt="astronaut floating">
-                <div v-if="ownProfile()" class="loader-text">Countless tales have been told since the beginning of time, yet none have borne your signature. Let's change that!</div>
-                <div v-else class="loader-text">Countless tales have been told since the beginning of time, yet none have borne their signature. What might they be doing?</div>
-            </div>
+            <astronaut-message :onomatopoeia="'crick crick'"
+            :text="'Countless tales have been told since the beginning of time, yet none have borne their signature. What might they be doing?'"></astronaut-message>
         </div>
     </feed-container>
 
@@ -167,13 +159,15 @@ import FeedContainer from "../components/layout/FeedContainer.vue";
 import PostContainer from "@/components/layout/feedposts/PostContainer.vue";
 import ProfilePicture from '@/components/layout/ProfilePicture.vue';
 import ContinuestoryfeedContainer from '@/components/layout/feedposts/ContinuestoryfeedContainer.vue';
+import AstronautMessage from '@/components/AstronautMessage.vue';
 
 export default {
     components: {
         FeedContainer,
         PostContainer,
         ProfilePicture,
-        ContinuestoryfeedContainer
+        ContinuestoryfeedContainer,
+        AstronautMessage
     },
     setup() {
         const router = useRouter();
@@ -400,50 +394,6 @@ export default {
     padding: 0 10px;
 }
 
-.onomatopoeia {
-    color: whitesmoke;
-    font-weight: bold;
-    font-size: 14px;
-    margin-bottom: -10px;
-}
-
-@keyframes floatAnimation {
-  0% {
-    transform: translateY(-5px);
-  }
-  50% {
-    transform: translateY(5px);
-  }
-  100% {
-    transform: translateY(-5px);
-  }
-}
-
-.astronaut-image {
-    width: 175px;
-    height: auto;
-    animation: floatAnimation 4s ease-in-out infinite;
-}
-
-.imagecontainer {
-    margin: 50px auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: fit-content;
-}
-
-.loader-text {
-    background-color: whitesmoke;
-    text-align: center;
-    color: rgb(0, 0, 0);
-    padding: 5px 10px;
-    border-radius: 15px;
-    font-weight: bold;
-    margin: 0 10px;
-}
-
 .centered {
     justify-content: center;
     align-items: center;
@@ -464,43 +414,6 @@ export default {
     justify-content: center;
     flex-direction: column;
     align-items: center;
-}
-
-.lds-facebook {
-  display: inline-block;
-  position: relative;
-  width: 80px;
-  height: 80px;
-}
-.lds-facebook div {
-  display: inline-block;
-  position: absolute;
-  left: 8px;
-  width: 16px;
-  background: #fff;
-  animation: lds-facebook 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
-}
-.lds-facebook div:nth-child(1) {
-  left: 8px;
-  animation-delay: -0.24s;
-}
-.lds-facebook div:nth-child(2) {
-  left: 32px;
-  animation-delay: -0.12s;
-}
-.lds-facebook div:nth-child(3) {
-  left: 56px;
-  animation-delay: 0;
-}
-@keyframes lds-facebook {
-  0% {
-    top: 8px;
-    height: 64px;
-  }
-  50%, 100% {
-    top: 24px;
-    height: 32px;
-  }
 }
 
 .name-color {

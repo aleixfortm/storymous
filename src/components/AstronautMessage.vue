@@ -1,7 +1,6 @@
 <template>
     <div class="imagecontainer">
         <div v-if="onomatopoeia" class="onomatopoeia">{{ onomatopoeia }}</div>
-        <div v-else class="onomatopoeia">crick crick</div>
         <img class="astronaut-image" src="../assets/img/astronaut_reading_space_nostars.png" alt="astronaut floating">
         <div v-if="text" class="loader-text">{{ text }}</div>
         <div v-else class="loader-text">{{ text }}</div>

@@ -4,7 +4,7 @@
     <div class="dialog-div"> <b>Sign Up</b> </div>
     <span v-if="errorMessage" class="error-message">User already exists</span>
     <form @submit.prevent="submitForm">
-        <div class="form-control">
+        <div class="form--control">
             <input 
             v-model="usernameValue"
             :class="usernameClass" 
@@ -18,7 +18,7 @@
             <span v-if="usernameFocused" class="requirements" :class="requirementsCharcount">Contains between 3-20 characters<br></span> 
             <span v-if="usernameFocused" class="requirements" :class="requirementsSpecial">No special characters (_ allowed)</span>
         </div>
-        <div class="form-control">
+        <div class="form--control">
             <input 
             v-model="emailValue" 
             :class="emailClass" 
@@ -27,7 +27,7 @@
             id="email" name="email" type="text" ref="emailInput" placeholder="Your e-mail">
             <span v-if="emailFocused" class="requirements" :class="requirementsValidEmail">Valid e-mail format</span>
         </div>
-        <div class="form-control">
+        <div class="form--control">
             <input 
             v-model="passOneValue" 
             :class="passOneClass" 
@@ -36,7 +36,7 @@
             id="password" name="password" type="password" ref="passwordInput" placeholder="Choose a password">
             <span v-if="passOneFocused" class="requirements" :class="requirementsPassOne">Contains min. 3 characters<br></span> 
         </div>
-        <div class="form-control">
+        <div class="form--control">
           <input 
           v-model="passTwoValue" 
           :class="passTwoClass"
@@ -50,7 +50,9 @@
             <button type="submit" class="button" :disabled="!validateForm()">
             <span v-if="!loading">Sign Up</span>
             <span v-else>
-              <div class="lds-facebook"><div></div><div></div><div></div></div>
+              <div class="spinner-border spinner-border-sm" role="status">
+                <span class="visually-hidden">Loading...</span>
+              </div>
             </span>
             </button>
         </div>
@@ -234,48 +236,6 @@ export default {
   align-self: center;
 }
 
-.lds-facebook {
-  display: inline-block;
-  position: relative;
-  width: 40px;
-  height: 40px;
-}
-
-.lds-facebook div {
-  display: inline-block;
-  position: absolute;
-  left: 4px;
-  width: 8px;
-  background: #fff;
-  animation: lds-facebook 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
-}
-
-.lds-facebook div:nth-child(1) {
-  left: 4px;
-  animation-delay: -0.12s;
-}
-
-.lds-facebook div:nth-child(2) {
-  left: 16px;
-  animation-delay: -0.06s;
-}
-
-.lds-facebook div:nth-child(3) {
-  left: 28px;
-  animation-delay: 0;
-}
-
-@keyframes lds-facebook {
-  0% {
-    top: 4px;
-    height: 32px;
-  }
-  50%, 100% {
-    top: 12px;
-    height: 16px;
-  }
-}
-
 .valid-input {
   border: 1px solid rgb(0, 214, 82);
 }
@@ -383,7 +343,7 @@ form {
   font-weight: bold;
 }
 
-.form-control {
+.form--control {
     margin: 1rem 0;
     width: auto;
 }

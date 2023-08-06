@@ -1,10 +1,9 @@
 <template>
     <feed-container class="homepage-top">
-        <div class="imagecontainer">
-            <div class="onomatopoeia"></div>
-            <img class="astronaut-image" src="../assets/img/astronaut_reading_space_nostars.png" alt="astronaut floating">
-            <div class="loader-text">"In the depths of our galaxy lies a distant planet, where a mesmerizing forest thrives— a place where the ethereal story tree whispers secrets of cosmic wonders..."</div>
-        </div>
+        <astronaut-message 
+        :onomatopoeia="''" 
+        :text="'In the depths of our galaxy lies a distant planet, where a mesmerizing forest thrives— a place where the ethereal story tree whispers secrets of cosmic wonders...'">
+    </astronaut-message>
     </feed-container>
     <div class="block">
         <div class="rectangle">
@@ -27,13 +26,15 @@ import axios from 'axios';
 import FeedContainer from "../components/layout/FeedContainer.vue"
 import SelectButton from "../components/SelectButton.vue";
 import LatestFeed from "../pages/subpages/LatestFeed.vue";
+import AstronautMessage from '@/components/AstronautMessage.vue';
 
 
 export default {
     components: {
         FeedContainer,
         SelectButton,
-        LatestFeed
+        LatestFeed,
+        AstronautMessage
     },
     setup() {
         const router = useRouter();
@@ -80,58 +81,6 @@ export default {
 .nomargin {
     padding: 0px 0px;
     margin: 0px;
-}
-
-.onomatopoeia {
-    color: whitesmoke;
-    font-weight: bold;
-    font-size: 14px;
-    margin-bottom: -10px;
-    text-decoration: wavy;
-}
-
-@keyframes floatAnimation {
-  0% {
-    transform: translateY(-5px);
-  }
-  50% {
-    transform: translateY(5px);
-  }
-  100% {
-    transform: translateY(-5px);
-  }
-}
-
-.astronaut-image {
-    width: 175px;
-    height: auto;
-    animation: floatAnimation 4s ease-in-out infinite;
-}
-
-.centered {
-    justify-content: center;
-    align-items: center;
-    height: 300px
-}
-
-
-.imagecontainer {
-    margin: 10px auto 20px auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    width: fit-content;
-}
-
-.loader-text {
-    background-color: whitesmoke;
-    text-align: center;
-    color: rgb(0, 0, 0);
-    padding: 5px 10px;
-    border-radius: 15px;
-    font-weight: bold;
-    margin: 0 10px;
 }
 
 .testimage {
