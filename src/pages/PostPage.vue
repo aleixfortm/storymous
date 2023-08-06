@@ -103,9 +103,9 @@ import { mapGetters } from 'vuex';
 import CommentContainer from "@/components/layout/CommentContainer.vue";
 import ContinuestoryContainer from "../components/layout/ContinuestoryContainer.vue";
 import FeedContainer from '@/components/layout/FeedContainer.vue';
-import AstronautMessage from "@/components/AstronautMessage.vue";
 import ChapteredprologueContainer from "@/components/layout/ChapteredprologueContainer.vue";
 import WritechapterContainer from "@/components/layout/WritechapterContainer.vue";
+import AstronautMessage from "@/components/layout/messages/AstronautMessage.vue";
 
 export default {
   components: {

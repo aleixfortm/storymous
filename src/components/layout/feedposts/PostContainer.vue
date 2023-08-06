@@ -29,7 +29,7 @@
                         <h2 class="story__title "><span class="story_title highlight">PROLOGUE</span>{{ title.toUpperCase() }}</h2>
                     </div>
                     <div class="tag-section">
-                        <post-tag v-for="tag in tags" :key="tag" :tag="tag"></post-tag>
+                        <post-tag v-for="tag in tags" :key="tag" :clickable="false" :tag="tag"></post-tag>
                     </div>
                     <p class="story__content">
                         {{ formatStory(content) }}
@@ -226,18 +226,6 @@ export default {
     word-wrap: break-word;
 }
 
-.story__user-comment {
-    margin-top: 0px;
-    font-weight: bold;
-    color: black;
-    background-color: #faf8f8;
-    padding: 5px 10px;
-    border-radius: 15px 15px 15px 0;
-    text-align: left;
-    word-wrap: break-word;
-    hyphens: auto;
-    width: auto;
-}
 
 .story__user-info-container {
     display: flex;
@@ -298,12 +286,12 @@ export default {
 }
 
 .story__user-img {
-    width: 55px;
+    width: 45px;
     height: auto;
     border-radius: 100%;
-    margin-bottom: 2px;
+    margin-bottom: 5px;
     cursor: pointer;
-    transition: all 0.1s;
+    transition: all 0.2s;
 }
 
 .story__user-img:hover {
@@ -332,10 +320,11 @@ export default {
 
 .story__user-comment {
     margin-top: 0px;
+    font-size: 15px;
     font-weight: bold;
     color: black;
     background-color: #faf8f8;
-    padding: 5px 10px;
+    padding: 3px 10px;
     border-radius: 15px 15px 15px 0;
     text-align: left;
     word-wrap: break-word;

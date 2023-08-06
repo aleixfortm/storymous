@@ -1,21 +1,55 @@
 <template>
-    <div class="tag-shape" :class="tag">{{ tag }}</div>
+    <div v-if="!clickable" class="tag-shape" :class="tag">{{ tag }}</div>
+    <div v-else @click="selectTag" class="tag-shape clickable" :class="[tag, selected ? 'tag-selected' : '']">
+        <span class="material-symbols-outlined" v-if="selected">done</span>
+        {{ tag }}
+    </div>
 </template>
 
 <script>
 export default {
-    props: ["tag"]
+    props: ["tag", "clickable"],
+    data() {
+        return {
+            selected: false,
+        };
+    },
+    methods: {
+        selectTag() {
+            this.selected = !this.selected;
+            this.$emit("selected", this.tag, this.selected);
+        },
+    },
 }
 </script>
 
 <style scoped>
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 100,
+  'GRAD' 0,
+  'opsz' 0
+}
+
+.clickable {
+    cursor: pointer;
+}
+
 .tag-shape {
+    display: flex;
     padding: 1px 5px;
     font-size: 13px;
     font-weight: bold;
     margin: 0 5px 5px 0;
     width: fit-content;
     border-radius: 100px;
+    align-items: center;
+}
+
+.tag-selected {
+    outline: 1px rgba(255, 255, 255, 0.568) solid;
+    padding-right: 10px;
 }
 
 .mystery {

@@ -3,7 +3,8 @@
     <feed-container class="homepage-top">
         <astronaut-message 
         :onomatopoeia="''" 
-        :text="'In the depths of our galaxy lies a distant planet, where a mesmerizing forest thrives— a place where the ethereal story tree whispers secrets of cosmic wonders...'">
+        :text="'In the depths of our galaxy lies a distant planet, where a mesmerizing forest thrives— a place where the ethereal story tree whispers secrets of cosmic wonders...'"
+        :flipped="true">
     </astronaut-message>
     </feed-container>
     <div class="block">
@@ -27,8 +28,7 @@ import axios from 'axios';
 import FeedContainer from "../components/layout/FeedContainer.vue"
 import SelectButton from "../components/SelectButton.vue";
 import LatestFeed from "../pages/subpages/LatestFeed.vue";
-import AstronautMessage from '@/components/AstronautMessage.vue';
-
+import AstronautMessage from '@/components/layout/messages/AstronautMessage.vue';
 
 export default {
     components: {

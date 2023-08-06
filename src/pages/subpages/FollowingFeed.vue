@@ -15,6 +15,7 @@
                     :color="post.color"
                     :comments="post.user_comments"
                     :views="post.views"
+                    :tags="post.tags"
                     :feedMode="true">
                 </post-container>
               </template>
@@ -57,7 +58,7 @@
 <script>
 import PostContainer from "@/components/layout/feedposts/PostContainer.vue";
 import FeedContainer from "@/components/layout/FeedContainer.vue";
-import AstronautMessage from "@/components/AstronautMessage.vue";
+import AstronautMessage from "@/components/layout/messages/AstronautMessage.vue";
 
 export default {
     props: ["posts", "loading"],

@@ -127,7 +127,7 @@ import ChapteredprologueContainer from "@/components/layout/ChapteredprologueCon
 import CommentContainer from "@/components/layout/CommentContainer.vue";
 import ContinuestoryContainer from "@/components/layout/ContinuestoryContainer.vue";
 import WritechapterContainer from "@/components/layout/WritechapterContainer.vue";
-import AstronautMessage from "@/components/AstronautMessage.vue";
+import AstronautMessage from "@/components/layout/messages/AstronautMessage.vue";
 
 export default {
   components: {

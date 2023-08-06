@@ -27,7 +27,7 @@
                         <h2 class="story__title "><span class="story_title highlight1">CHAPTER</span><span class="story_title highlight">{{ chapterNum }}</span>{{ chapterName.toUpperCase() }}</h2>
                     </div>
                     <div class="tag-section">
-                        <post-tag v-for="tag in tags" :key="tag" :tag="tag"></post-tag>
+                        <post-tag v-for="tag in tags" :key="tag" :clickable="false" :tag="tag"></post-tag>
                     </div> 
                     <p class="story__content">
                         {{ formatStory(content) }}
@@ -146,6 +146,7 @@ export default {
     display: flex;
     justify-content: left;
     margin: 7px 0 0px 0;
+    flex-wrap: wrap;
 }
 
 .story__upper {
@@ -292,12 +293,12 @@ export default {
 }
 
 .story__user-img {
-    width: 55px;
+    width: 45px;
     height: auto;
     border-radius: 100%;
-    margin-bottom: 2px;
+    margin-bottom: 5px;
     cursor: pointer;
-    transition: all 0.1s;
+    transition: all 0.2s;
 }
 
 .story__user-img:hover {
@@ -328,8 +329,9 @@ export default {
     margin-top: 0px;
     font-weight: bold;
     color: black;
-    background-color: #faf8f8;
-    padding: 5px 10px;
+    background-color: rgba(255, 255, 255, 0.88);
+    padding: 3px 10px;
+    font-size: 15px;
     border-radius: 15px 15px 15px 0;
     text-align: left;
     word-wrap: break-word;

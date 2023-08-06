@@ -1,6 +1,6 @@
 <template>
-    <div class="alert alert-warning alert-dismissible fade show mt-3" role="alert" v-if="show">
-        <strong>Bug alert!</strong> Tags on posts are currently random. Working on fix.
+    <div class="alert alert-primary alert-dismissible fade show m-1" role="alert" v-if="show">
+        <strong>Patch notes</strong> See all new features form the latest release
         <button type="button" class="btn-close" @click="dismiss" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 </template>

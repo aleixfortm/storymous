@@ -163,7 +163,7 @@ import FeedContainer from "../components/layout/FeedContainer.vue";
 import PostContainer from "@/components/layout/feedposts/PostContainer.vue";
 import ProfilePicture from '@/components/layout/ProfilePicture.vue';
 import ContinuestoryfeedContainer from '@/components/layout/feedposts/ContinuestoryfeedContainer.vue';
-import AstronautMessage from '@/components/AstronautMessage.vue';
+import AstronautMessage from '@/components/layout/messages/AstronautMessage.vue';
 
 export default {
     components: {

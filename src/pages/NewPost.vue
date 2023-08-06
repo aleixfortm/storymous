@@ -20,6 +20,15 @@
                 <div class="newstory_title">
                     <textarea id="body" v-model="formbody" placeholder="Prologue content" required></textarea>
                 </div>
+                <div class="tag-section">
+                  <div class="alert alert-light p-2 ml-3 mr-3 mt-1 mb-1 opacity-75" role="alert">
+                    <strong>Tags</strong> Choose as many as you see fit, but don't overdo it!
+                  </div>
+                  <div class="tag-list">
+                      <post-tag v-for="tag in availableTags" :key="tag" :clickable="true" :tag="tag" @selected="onSelected"></post-tag>
+                  </div>
+
+                </div>
                 <div class="buttonbox">
                   <button :class="{ 'postbutton': true, 'disabled': isPostButtonDisabled }" :disabled="isPostButtonDisabled" type="submit">Submit</button>
                 </div>
@@ -31,6 +40,7 @@
           </div>
           <span class="loader-text">Planting story seed...</span>
         </div>
+
     </feed-container>
   </template>
   
@@ -41,11 +51,13 @@ import { API_BASE_URL } from '../config';
 import FeedContainer from '@/components/layout/FeedContainer.vue';
 import axios from 'axios';
 import router from '@/router';
+import PostTag from '@/components/layout/PostTag.vue';
 
   export default {
     name: "NewPost",
     components: {
-      FeedContainer
+      FeedContainer,
+      PostTag
     },
     data() {
       return {
@@ -56,9 +68,19 @@ import router from '@/router';
         textareaHeight1: 0,
         loading: false,
         isPostButtonDisabled: false,
+        availableTags: ["sci-fi", "mystery", "chill", "short", "long", "medieval", "jungle", "horror", "historical", "fantasy", "world-building"],
+        selectedTags: [],
       };
     },
     methods: {
+      onSelected(tag, selected) {
+            if (selected) {
+                this.selectedTags.push(tag);
+            } else {
+                this.selectedTags.splice(this.selectedTags.indexOf(tag), 1);
+            }
+            console.log(this.selectedTags)
+      },
       submitForm() {
         const data_packet = {
           comment: this.formcomment,
@@ -125,6 +147,25 @@ import router from '@/router';
   </script>
 
 <style scoped>
+.tag-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    margin: 15px 10px 0px 10px;
+}
+
+.tag-title {
+  color: white;
+  margin: 0 0 2px 1px;
+}
+
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
+  margin: 7px 0px 0px 0px;
+}
+
 .extended-container {
     display: flex;
     flex-direction: column;
