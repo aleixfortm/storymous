@@ -2,7 +2,7 @@
   <div class="bg" @click="$emit('close')"></div>
   <dialog open>
     <div class="dialog-div"> <b>Log In</b> </div>
-    <div v-if="errorMessage" class="alert alert-danger m-0 mt-3" role="alert">
+    <div v-if="errorMessage" class="alert alert-danger m-0 mt-3 p-2" role="alert">
       Invalid credentials!
     </div>
     <form @submit.prevent="submitForm">

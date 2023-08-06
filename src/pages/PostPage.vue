@@ -51,6 +51,9 @@
               </div>
           </form>
       </div>
+      <div v-if="!isLoggedIn" class="alert alert-info mt-2 shadow p-2" role="alert">
+        <b>Log in</b> to write comments and continue storylines
+      </div>
       <div v-for="reply in replies" :key="reply._id">
         <template v-if="reply.type === 'comment'">
           <comment-container

@@ -92,7 +92,7 @@ class UserModel:
 
 
 class PostModel:
-    def __init__(self, username, content, comment, title, user_comments=None, color=None, status=None, 
+    def __init__(self, username, content, comment, title, tags, user_comments=None, color=None, status=None, 
                 views=None, chapters=None, _id=None, date=None) -> None:
         self._id = ObjectId(_id) if _id else ObjectId()
         self.username = username
@@ -106,6 +106,7 @@ class PostModel:
         self.views = views or 1
         self.chapters = chapters or {}
         self.type = "prologue"
+        self.tags = tags or []
         self.increase_num_started_stories()
 
     def quicksave_to_db(self):

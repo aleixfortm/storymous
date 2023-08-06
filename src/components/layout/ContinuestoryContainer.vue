@@ -98,7 +98,7 @@ export default {
     align-self: center;
     justify-self: center;
     margin: 0px 0px 0px 0px;
-
+    font-weight: bold;
 }
 
 .box2 {

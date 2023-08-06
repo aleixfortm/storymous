@@ -1,6 +1,9 @@
 <template>
     
     <feed-container :key="currentParameter">
+        <div v-if="!isLoggedIn" class="alert alert-info" role="alert">
+            <b>Log in</b> to follow other users
+        </div>
         <section v-if="ownProfile()" class="section_title">
             My profile
         </section>
@@ -103,7 +106,7 @@
             <div class="spinner-border text-light mb-3" style="width: 5rem; height: 5rem;" role="status">
                 <span class="visually-hidden">Loading...</span>
             </div>
-            <span class="loader-text">Harvesting user stories...</span>
+            <span class="loader-text">Fetching user stories...</span>
         </div>
         <div v-else-if="posts.length > 0">
             <div v-for="post in posts" :key="post._id.$oid">
@@ -119,6 +122,7 @@
                         :color="post.color"
                         :views="post.views"
                         :comments="post.user_comments"
+                        :tags="post.tags"
                         :feedMode="true">
                     </post-container>
                 </template>

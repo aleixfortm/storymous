@@ -59,14 +59,13 @@ export default {
     data() {
         return {
             outlineColors: ["red", "blue", "green", "yellow", "white", "purple", "pink", "orange", "salmon"],
-            tags: ["sci-fi", "short", "long", "medieval", "jungle", "horror", "historical", "fantasy", "world-building"]
         }
     },
     setup() {
         const router = useRouter();
         return { router: router };
     },
-    props: ["_id", "title", "content", "username", "postComment", "date", "picture", "color", "views", "comments", "feedMode"],
+    props: ["_id", "title", "content", "username", "postComment", "date", "picture", "color", "views", "comments", "feedMode", "tags"],
     methods: {
         formatStory(story) {
             const formattedStory = story.replace(/<br>/g, '\n')

@@ -6,7 +6,7 @@ from main import db_posts, db_users, db_comments, db_chapters
 from models import PostModel, UserModel, CommentModel, ChapterModel
 from flask_jwt_extended import jwt_required, get_jwt_identity, create_access_token
 from werkzeug.security import check_password_hash, generate_password_hash
-from config import COLOR_LIST, IMAGE_LIST
+from config import COLOR_LIST, IMAGE_LIST, TAG_LIST
 from pprint import pprint
 from datetime import timedelta
 import random
@@ -388,7 +388,7 @@ def new_chapter():
     # else send the previously stablished data packet
     return json_util.dumps(data_packet)
 
-'''
+
 # edit posts
 @bp_routes.route('/posts_edit', methods=["GET"])
 @jwt_required()
@@ -396,7 +396,9 @@ def posts_edit():
     cursor = list(db_posts.find())
     for post in cursor:
         query = {"_id": post["_id"]}
-        post["type"] = "prologue"
+        a = random.randint(2, 6)
+
+        post["tags"] = random.sample(TAG_LIST, a)
 
         db_posts.replace_one(query, post)
         
@@ -441,12 +443,13 @@ def chapters_edit():
     
     chapter_list = list(db_chapters.find())
 
-    for chapter in chapter_list:
-        chapter_query = {"_id": chapter["_id"]}
-        story_query = {"_id": chapter["story_id"]}
-        story_data = db_posts.find_one(story_query)
-        chapter["story_title"] = story_data["title"]
-        db_chapters.replace_one(chapter_query, chapter)
+    for post in chapter_list:
+        query = {"_id": post["_id"]}
+        a = random.randint(2, 6)
 
-    return "successful change"
-'''
+        post["tags"] = random.sample(TAG_LIST, a)
+
+        db_chapters.replace_one(query, post)
+        
+    return "Success"
+

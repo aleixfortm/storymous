@@ -96,7 +96,7 @@ export default {
 .story__upper {
     display: flex;
     margin: 5px 0 5px 0;
-
+    font-weight: bold;
 }   
 
 .story__title {
@@ -105,6 +105,7 @@ export default {
     align-self: center;
     justify-self: center;
     margin: 0px 0px 0px 0px;
+    font-weight: bold;
 }
 
 .origin {

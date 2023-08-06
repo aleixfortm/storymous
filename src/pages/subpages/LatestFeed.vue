@@ -19,6 +19,7 @@
             :color="post.color"
             :views="post.views"
             :comments="post.user_comments"
+            :tags="post.tags"
             :feedMode="true">
         </post-container>
       </template>

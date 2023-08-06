@@ -56,14 +56,13 @@ export default {
     data() {
         return {
             outlineColors: ["red", "blue", "green", "yellow", "white", "purple", "pink", "orange", "salmon"],
-            tags: ["mystery", "chill", "sci-fi"]
         }
     },
     setup() {
         const router = useRouter();
         return { router: router };
     },
-    props: ["_id", "content", "username", "postComment", "storyTitle", "color", "date", "picture", "chapterNum", "storyId", "parentChapterId", "chapterName"],
+    props: ["_id", "content", "username", "postComment", "storyTitle", "color", "date", "picture", "chapterNum", "storyId", "parentChapterId", "chapterName", "tags"],
     methods: {
         formatStory(story) {
             const formattedStory = story.replace(/<br>/g, '\n')

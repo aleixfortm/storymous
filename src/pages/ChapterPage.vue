@@ -1,5 +1,7 @@
 <template>
+
     <feed-container v-if="!loading">
+      
       <div class="story-container">
         <div v-for="chapter in chapterList" :key="chapter._id">
           <template v-if="chapter.type === 'prologue'">
@@ -61,6 +63,9 @@
                 </div>
             </div>
         </form>
+      </div>
+      <div v-if="!isLoggedIn" class="alert alert-info mt-3 shadow p-2" role="alert">
+        <b>Log in</b> to write comments and continue storylines
       </div>
       <span v-if="!loadingComments">
         <div v-for="reply in replies" :key="reply._id">

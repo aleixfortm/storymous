@@ -11,11 +11,14 @@
           </div>
           
           <div v-if="isLoggedIn === false" class="login-div">
+            <div class="material-symbols-outlined user-select-none icon" @click="goHome">home</div>
+            <div class="material-symbols-outlined user-select-none icon" @click="showNotifications">search</div>
             <button class="loginButton" @click="toggleDialog(); changeDialog('signin')">Log In</button>
           </div>
           <div v-else class="options">
-            <div class="material-symbols-outlined m-2 user-select-none icon" @click="goHome">home</div>
-            <div class="material-symbols-outlined m-1 user-select-none icon" @click="showNotifications">notifications</div>
+            <div class="material-symbols-outlined user-select-none icon" @click="goHome">home</div>
+            <div class="material-symbols-outlined user-select-none icon" @click="showNotifications">search</div>
+            <div class="material-symbols-outlined user-select-none icon" @click="showNotifications">notifications</div>
             <router-link :to="getProfileLink" class="userdata">
               <div class="username">@{{ currentUser }}</div>
               <img class="userimg" v-if="userFetchedPicture" :src="imgSource" alt="astronaut">
@@ -78,6 +81,7 @@ export default {
 .icon {
   color: rgba(245, 245, 245, 0.877);
   cursor: pointer;
+  margin: 0 0 0 14px;
   transition: 0.1s all;
 }
 

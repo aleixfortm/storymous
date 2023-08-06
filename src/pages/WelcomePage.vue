@@ -1,4 +1,5 @@
 <template>
+
     <feed-container class="homepage-top">
         <astronaut-message 
         :onomatopoeia="''" 
