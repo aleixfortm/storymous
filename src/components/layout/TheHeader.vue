@@ -7,14 +7,18 @@
             <router-link class="logoimgcontainer" to="/"><img class="logoimg" src="../../assets/img/tree2.jpeg" alt="treelogo"></router-link>
             <router-link to="/" class="header-title">Storymous</router-link>
           </div>
-          <search-bar></search-bar>
+          
           <div v-if="isLoggedIn === false" class="login-div">
             <button class="loginButton" @click="toggleDialog(); changeDialog('signin')">Log In</button>
           </div>
-          <router-link :to="getProfileLink" v-else class="userdata">
-                <div class="username">@{{ currentUser }}</div>
-                <img class="userimg" v-if="userFetchedPicture" :src="imgSource" alt="astronaut">
-          </router-link>
+          <div v-else class="options">
+            <span class="material-symbols-outlined">home</span>
+            <span class="material-symbols-outlined">notifications</span>
+            <router-link :to="getProfileLink" class="userdata">
+              <div class="username">@{{ currentUser }}</div>
+              <img class="userimg" v-if="userFetchedPicture" :src="imgSource" alt="astronaut">
+            </router-link>
+          </div>
       </nav>
   </header>
 </template>
@@ -24,7 +28,6 @@
 import { mapGetters } from 'vuex';
 import { useRouter } from 'vue-router';
 
-import SearchBar from "../SearchBar.vue";
 import SigninDialog from "@/components/SigninDialog.vue";
 import SignupDialog from "@/components/SignupDialog.vue";
 
@@ -40,7 +43,6 @@ export default {
     }
   },
   components: {
-    SearchBar,
     SigninDialog,
     SignupDialog
   },
@@ -70,6 +72,11 @@ export default {
 
 <style scoped>
 
+.options {
+  display: flex;
+  align-items: center;
+}
+
 .header-title {
   font-size: 26px;
   margin: 0 0 0 5px;
@@ -80,12 +87,8 @@ export default {
   text-decoration: underline;
 }
 
-  .no-underline {
-    text-decoration: none;
-  }
-
-.logo {
-  align-items: center;
+.no-underline {
+  text-decoration: none;
 }
 
 .logoimgcontainer {
@@ -103,13 +106,12 @@ export default {
 }
 
 .logoimg:hover {
-  filter: brightness(90%);
+  filter: brightness(85%);
 }
 
 .userdata {
   display: flex;
-  padding: 0 5px 0 5px;
-  height: 50px;
+  padding: 2px 5px 2px 0px;
   font-family: inherit;
   color: rgb(0, 255, 98);
   cursor: pointer;
@@ -127,7 +129,7 @@ export default {
 }
 
 .username {
-  height: 50px;
+  height: fit-content;
   margin: 0 10px 0 10px;
   color: rgb(185, 221, 255);
   font-weight: bold;
@@ -138,7 +140,7 @@ export default {
 }
 
 .userimg {
-  height: 85%;
+  height: 30px;
   width: auto;
   border-radius: 100%;
 }
@@ -148,6 +150,11 @@ div {
     align-items: center;
     justify-content: center;
     margin: 0 20px;
+}
+
+.logo {
+  align-items: center;
+  margin: 0 20px 0 5px;
 }
 
 header {
@@ -173,11 +180,8 @@ header a {
 }
 
 
-
-
-
 header nav {
-  width: 100%;
+  width: 800px;
   height: 100%;
   margin: auto;
   display: flex;
@@ -200,15 +204,13 @@ li {
 }
 
 .loginButton {
-  padding: 0;
-  width: fit-content;
-  height: 65%;
+  height: fit-content;
+  padding: 5px 6px;
   font-family: inherit;
   border: 0px solid #e5e3ff;
   color: rgb(0, 255, 98);
   cursor: pointer;
   font-size: 15px;
-  width: 80px;
   margin: 0 20px 0 20px;
   background-color: #ffffff1e;
   border-radius: 4px;

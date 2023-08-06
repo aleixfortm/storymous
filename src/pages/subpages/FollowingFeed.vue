@@ -13,6 +13,8 @@
                     :date="post.date"
                     :picture="post.picture"
                     :color="post.color"
+                    :comments="post.user_comments"
+                    :views="post.views"
                     :feedMode="true">
                 </post-container>
               </template>

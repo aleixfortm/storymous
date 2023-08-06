@@ -1,26 +1,33 @@
 <template>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,300,1,200" />
   <the-header></the-header>
+  
   <block-frame>
+    <alert-message></alert-message>
     <router-view :key="$route.params.id"></router-view>
   </block-frame>
+
   <div class="marg-bot"></div>
 </template>
 
 <script>
 import TheHeader from "./components/layout/TheHeader.vue";
 import BlockFrame from "./components/layout/BlockFrame.vue";
+import AlertMessage from "./components/layout/AlertMessage.vue";
+import 'bootstrap/dist/css/bootstrap.css';
 
 export default {
   components: {
     TheHeader,
     BlockFrame,
-
+    AlertMessage
   }
 }
 </script>
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono&display=swap');
+
 
 .marg-bot {
   margin: 15px;
@@ -32,6 +39,7 @@ export default {
 
 * {
   box-sizing: border-box;
+  line-height: 1.2;
 }
 
 html {
@@ -42,7 +50,7 @@ html {
 body {
   margin: 0;
   position: relative;
-
+  background-color: rgb(35, 42, 48);
 }
 
 .cur-def {

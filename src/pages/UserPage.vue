@@ -1,4 +1,5 @@
 <template>
+    
     <feed-container :key="currentParameter">
         <section v-if="ownProfile()" class="section_title">
             My profile
@@ -22,7 +23,8 @@
                         :class="{ following: isFollowing, disabled: isFollowButtonDisabled }" 
                         @click="followAction"
                         :disabled="isFollowButtonDisabled">
-                        {{ isFollowing ? 'Unfollow' : 'Follow' }}
+                        <div v-if="!isFollowing"><span class="material-symbols-outlined">person_add</span></div>
+                        <div v-else><span class="material-symbols-outlined">remove</span></div>
                     </button>
                 </div>
                 <div class="stats-container">
@@ -72,12 +74,12 @@
                 </div>
                 <div class="separator">
                     <div class="stats-bio">
-                        <b>Bio</b>
+                        <b class="bio-title">Bio</b>
                         <div class="bio-content">{{ userBio }}</div>
                     </div>
                     <div v-if="ownProfile() && isLoggedIn" class="miscbuttons">
-                        <button class="settingsbutton" @click="goToSettings">User settings</button>
-                        <button class="logoutbutton" @click="logout()">Log out</button>
+                        <button class="settingsbutton" @click="goToSettings"><span class="material-symbols-outlined margin1">settings</span>Settings</button>
+                        <button class="logoutbutton" @click="logout()"><span class="material-symbols-outlined margin1">logout</span>Log out</button>
                     </div>
                 </div>
             </div>
@@ -334,6 +336,10 @@ export default {
 </script>
 
 <style scoped>
+.bio-content {
+    color: black;
+}
+
 .tooltip {
   position: absolute;
   top: 125%;
@@ -518,7 +524,6 @@ export default {
     color: rgb(0, 255, 98);
     cursor: pointer;
     font-size: 15px;
-    width: 80px;
     margin: 10px 10px 10px 0;
     background-color: #59ff9138;
     border-radius: 4px;
@@ -541,15 +546,15 @@ export default {
 }
 
 .logoutbutton {
-    height: 30px;
+    display: flex;
+    height: fit-content;
     font-family: inherit;
     border: 0px solid #e5e3ff;
     color: rgb(255, 255, 255);
     cursor: pointer;
     font-size: 15px;
-    width: 85px;
     margin: 10px 10px 10px 20px;
-    background-color: #ff0000cc;
+    background-color: #ff0000af;
     border-radius: 4px;
     align-items: center;
     transition: all 0.1s;
@@ -560,15 +565,15 @@ export default {
 }
 
 .settingsbutton {
-    height: 30px;
+    display: flex;
     font-family: inherit;
     border: none;
     color: rgb(255, 255, 255);
     cursor: pointer;
     font-size: 15px;
-    width: 140px;
-    margin: 10px 10px 10px 0;
-    background-color: rgba(0, 0, 0, 0.459);
+    width: fit-content;
+    margin: 10px 0px 10px 0;
+    background-color: rgba(0, 0, 0, 0.342);
     border-radius: 4px;
     align-items: center;
     transition: all 0.1s;
@@ -689,8 +694,12 @@ export default {
     background-color: rgba(192, 192, 192, 0.192);
 }
 
+.bio-title {
+    color: black;
+}
+
 .stats-bio {
-    background-color: rgb(255, 255, 255);
+    background-color: whitesmoke;
     border-radius: 10px 10px 10px 10px;
     padding: 10px;
     margin: 20px 10px 15px 10px;

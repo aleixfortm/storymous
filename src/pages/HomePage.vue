@@ -1,6 +1,7 @@
 <template>
     <feed-container>
         <img src="../assets/img/storymous-forest-min.png" alt="storymous forest" class="testimage">
+
         <div class="create_newstory">
             <img class="postimage" v-if="userFetchedPicture" :src="imgSource" alt="profilepic">
             <router-link to="" class="story_form">
@@ -8,6 +9,7 @@
             </router-link>
         </div>
     </feed-container>
+    
     <div class="block">
         <div class="rectangle">
             <select-button @click="setSelectedTab('latest-feed')" :mode="selectedTab === 'following-feed' ? null : 'flat'">

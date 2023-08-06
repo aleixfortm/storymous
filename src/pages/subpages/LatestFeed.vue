@@ -1,4 +1,5 @@
 <template>
+  <feed-container>
     <div v-if="loading" class="loader-container">
         <div class="lds-facebook">
             <div></div>
@@ -42,18 +43,21 @@
         </continuestoryfeed-container>
       </template>
     </div>
+  </feed-container>
 </template>
 
 
 <script>
 import PostContainer from "@/components/layout/feedposts/PostContainer.vue";
 import ContinuestoryfeedContainer from "@/components/layout/feedposts/ContinuestoryfeedContainer.vue";
+import FeedContainer from "@/components/layout/FeedContainer.vue";
 
 export default {
     props: ["posts", "loading"],
     components: {
         PostContainer,
-        ContinuestoryfeedContainer
+        ContinuestoryfeedContainer,
+        FeedContainer
     },
     methods: {
         formatContent(text) {

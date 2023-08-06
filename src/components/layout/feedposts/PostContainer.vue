@@ -97,7 +97,6 @@ export default {
             return false
         }
     },
-    
 };
 </script>
 
@@ -167,7 +166,7 @@ export default {
     align-self: center;
     justify-self: center;
     margin: 0px 0px 0px 0px;
-
+    font-weight: bold;
 }
 
 .origin {
@@ -178,7 +177,6 @@ export default {
     border-radius: 1px;
     width: fit-content;
     box-shadow: 0px 0px 2px rgba(128, 128, 128, 0.568);
-    
 }
 
 .origin-container {
