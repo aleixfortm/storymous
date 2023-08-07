@@ -186,7 +186,7 @@ div {
 
 .logo {
   align-items: center;
-  margin: 0 20px 0 5px;
+  margin: 0 5px 0 5px;
 }
 
 header {
