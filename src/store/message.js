@@ -1,7 +1,7 @@
 export default {
     namespaced: true,
     state: {
-        messageLog: []
+        loginError: false
     },
     mutations: {
         // Mutation to set the loginError state to true

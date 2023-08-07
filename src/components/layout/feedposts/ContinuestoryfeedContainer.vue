@@ -133,7 +133,8 @@ export default {
             } else {
                 this.setLoginError()
             }
-        }
+        },
+
     },
 
     computed: {
