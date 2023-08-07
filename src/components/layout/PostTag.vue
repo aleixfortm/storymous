@@ -122,8 +122,8 @@ export default {
 }
 
 .thriller {
-  background-color: rgba(0, 162, 255, 0.322);
-  color: rgb(0, 204, 255);
+  background-color: rgba(0, 112, 177, 0.322);
+  color: rgb(255, 122, 122);
 }
 
 .young-adults {
@@ -187,8 +187,8 @@ export default {
 }
 
 .paranormal {
-  background-color: rgba(255, 255, 0, 0.274);
-  color: rgb(0, 0, 0);
+  background-color: rgba(185, 125, 125, 0.274);
+  color: rgb(202, 202, 202);
 }
 
 .crime {
