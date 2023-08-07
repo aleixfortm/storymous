@@ -142,6 +142,7 @@
                         :date="post.date"
                         :picture="post.picture"
                         :leaves="post.leaves"
+                        :views="post.views"
                         :tags="post.tags">
                     </continuestoryfeed-container>
                 </template>
@@ -628,8 +629,10 @@ export default {
 @media screen and (max-width: 700px) {
     .profile-box {
         flex-direction: column;
-        width: fit-content;
+        width: 100%;
         margin: auto;
+        align-items: center;
+        
     }
 
     .topblock {
