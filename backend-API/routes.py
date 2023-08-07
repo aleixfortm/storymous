@@ -255,6 +255,58 @@ def user_posts(user):
     return json_util.dumps(sorted_post_list[::-1])
 
 
+@bp_routes.route("/add_leaves_post", methods=["POST"])
+@jwt_required()
+def add_leaves_post():
+    data = request.json
+    PostModel.increase_leaves(data["post_id"], data["username"])
+
+    data_payload = {
+        "status": "Success",
+    }
+
+    return json_util.dumps(data_payload)
+
+
+@bp_routes.route("/add_leaves_chapter", methods=["POST"])
+@jwt_required()
+def add_leaves_chapter():
+    data = request.json
+    ChapterModel.increase_leaves(data["chapter_id"], data["username"])
+
+    data_payload = {
+        "status": "Success",
+    }
+
+    return json_util.dumps(data_payload)
+
+
+@bp_routes.route("/remove_leaves_post", methods=["POST"])
+@jwt_required()
+def remove_leaves_post():
+    data = request.json
+    PostModel.decrease_leaves(data["post_id"], data["username"])
+
+    data_payload = {
+        "status": "Success",
+    }
+
+    return json_util.dumps(data_payload)
+
+
+@bp_routes.route("/remove_leaves_chapter", methods=["POST"])
+@jwt_required()
+def remove_leaves_chapter():
+    data = request.json
+    ChapterModel.decrease_leaves(data["chapter_id"], data["username"])
+
+    data_payload = {
+        "status": "Success",
+    }
+
+    return json_util.dumps(data_payload)
+
+
 # get chapter by id
 @bp_routes.route("/chapter/<chapterId>", methods=["GET"])
 def chapter(chapterId):
@@ -262,6 +314,7 @@ def chapter(chapterId):
     # search for chapter data
     chapter_query = {"_id": ObjectId(chapterId)}
     chapter_data = db_chapters.find_one(chapter_query)
+    ChapterModel.increase_visits(chapterId)
 
     # find story prologue
     chapter_list = []
@@ -388,17 +441,14 @@ def new_chapter():
     # else send the previously stablished data packet
     return json_util.dumps(data_packet)
 
-
+'''
 # edit posts
 @bp_routes.route('/posts_edit', methods=["GET"])
-@jwt_required()
 def posts_edit():
     cursor = list(db_posts.find())
     for post in cursor:
         query = {"_id": post["_id"]}
-        a = random.randint(2, 6)
-
-        post["tags"] = random.sample(TAG_LIST, a)
+        post["leaves"] = []
 
         db_posts.replace_one(query, post)
         
@@ -440,16 +490,13 @@ def users_edit():
 # edit users
 @bp_routes.route('/chapters_edit', methods=["GET"])
 def chapters_edit():
-    
-    chapter_list = list(db_chapters.find())
+    cursor = list(db_chapters.find())
+    for chapter in cursor:
+        query = {"_id": chapter["_id"]}
+        chapter["views"] = 0
 
-    for post in chapter_list:
-        query = {"_id": post["_id"]}
-        a = random.randint(2, 6)
-
-        post["tags"] = random.sample(TAG_LIST, a)
-
-        db_chapters.replace_one(query, post)
+        db_chapters.replace_one(query, chapter)
         
     return "Success"
 
+'''

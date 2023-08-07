@@ -1,6 +1,6 @@
 <template>
     <div v-if="!clickable" class="tag-shape" :class="tag">{{ tag }}</div>
-    <div v-else @click="selectTag" class="tag-shape clickable" :class="[tag, selected ? 'tag-selected' : '']">
+    <div v-else @click="selectTag" class="clickable tag-shape" :class="[tag, selected ? 'tag-selected' : '']">
         <span class="material-symbols-outlined" v-if="selected">done</span>
         {{ tag }}
     </div>
@@ -34,6 +34,13 @@ export default {
 
 .clickable {
     cursor: pointer;
+    outline: 1px rgba(255, 255, 255, 0) solid;
+    height: 30px;
+    transition: 0.2s all;
+}
+
+.clickable:hover {
+  outline: 1px rgba(245, 245, 245, 0.877) solid;
 }
 
 .tag-shape {
@@ -50,6 +57,7 @@ export default {
 .tag-selected {
     outline: 1px rgba(255, 255, 255, 0.568) solid;
     padding-right: 10px;
+
 }
 
 .mystery {

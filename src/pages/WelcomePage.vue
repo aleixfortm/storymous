@@ -1,10 +1,9 @@
 <template>
-
     <feed-container class="homepage-top">
         <astronaut-message 
         :onomatopoeia="''" 
         :text="'In the depths of our galaxy lies a distant planet, where a mesmerizing forest thrives— a place where the ethereal story tree whispers secrets of cosmic wonders...'"
-        :flipped="true">
+        :flipped="false">
     </astronaut-message>
     </feed-container>
     <div class="block">
@@ -68,11 +67,6 @@ export default {
     computed: {
         ...mapGetters('auth', ['isLoggedIn']),
     },
-    methods: {
-        setSelectedTab(tab) {
-            this.selectedTab = tab;
-        },
-    }
 }
 
 </script>

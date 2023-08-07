@@ -92,7 +92,7 @@ class UserModel:
 
 
 class PostModel:
-    def __init__(self, username, content, comment, title, tags, user_comments=None, color=None, status=None, 
+    def __init__(self, username, content, comment, title, tags, user_comments=None, leaves=None, color=None, status=None, 
                 views=None, chapters=None, _id=None, date=None) -> None:
         self._id = ObjectId(_id) if _id else ObjectId()
         self.username = username
@@ -107,6 +107,7 @@ class PostModel:
         self.chapters = chapters or {}
         self.type = "prologue"
         self.tags = tags or []
+        self.leaves = leaves or []
         self.increase_num_started_stories()
 
     def quicksave_to_db(self):
@@ -122,7 +123,7 @@ class PostModel:
     def increase_num_started_stories(self):
         UserModel.update_started_story_count(self.username)
 
-    def increase_visits(post_id, ):
+    def increase_visits(post_id):
         db_posts.update_one({'_id': post_id}, {'$inc': {'views': 1}})
 
     @staticmethod
@@ -150,6 +151,16 @@ class PostModel:
         post_data["date"] = formatted_date
         
         return post_data
+    
+    @staticmethod
+    def increase_leaves(post_id, username):
+        db_posts.update_one({'_id': ObjectId(post_id)},
+                            {'$push': {'leaves': username}})
+        
+    @staticmethod
+    def decrease_leaves(post_id, username):
+        db_posts.update_one({"_id": ObjectId(post_id)},
+                                {"$pull": {"leaves": username}})
 
     @staticmethod
     def add_comment_id(post_id, comment_id):
@@ -158,7 +169,8 @@ class PostModel:
         
 
 class ChapterModel:
-    def __init__(self, story_id, username, chapter_name, chapter_num, parent_chapter_id, content, comment, story_title=None, continued_stories=None, color=None, status=None, date=None, _id=None):
+    def __init__(self, story_id, username, chapter_name, chapter_num, parent_chapter_id, content, comment, views=None, leaves=None, story_title=None, 
+                 continued_stories=None, color=None, status=None, date=None, tags=None, _id=None):
         self._id = ObjectId(_id) if _id else ObjectId()
         self.story_id = story_id
         self.parent_chapter_id = parent_chapter_id
@@ -173,6 +185,9 @@ class ChapterModel:
         self.continued_stories = continued_stories or []
         self.color = color or random.choice(COLOR_LIST)
         self.type = "chapter"
+        self.leaves = leaves or []
+        self.views = views or 0
+        self.tags = tags or []
         self.increase_num_started_stories()
     
     def quicksave_to_db(self):
@@ -190,6 +205,20 @@ class ChapterModel:
     def increase_num_started_stories(self):
         UserModel.update_continued_story_count(self.username)
 
+    @staticmethod
+    def increase_leaves(chapter_id, username):
+        db_chapters.update_one({'_id': ObjectId(chapter_id)},
+                                {'$push': {'leaves': username}})
+    
+    @staticmethod
+    def decrease_leaves(chapter_id, username):
+        db_chapters.update_one({"_id": ObjectId(chapter_id)},
+                                {"$pull": {"leaves": username}})
+    
+    @staticmethod
+    def increase_visits(chapter_id):
+        db_chapters.update_one({'_id': ObjectId(chapter_id)}, 
+                               {'$inc': {'views': 1}})
                     
 class CommentModel:
     def __init__(self, username, comment, status=None, _id=None, date=None):
@@ -201,7 +230,6 @@ class CommentModel:
         self.type = "comment"
     
     def quicksave_to_db(self):
-        db_posts
         db_comments.insert_one(self.__dict__)
     
     @staticmethod

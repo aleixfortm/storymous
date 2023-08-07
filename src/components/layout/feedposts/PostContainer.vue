@@ -3,28 +3,28 @@
 
     <div>
         <div :class="outlineClass">
-            <router-link to="" @click="navigateToPost" style="text-decoration: none;" >
-                <div class="origin-container">
+            <span>
+                <div class="origin-container" @click="navigateToPost">
                     <div class="origin">Started "<span style="font-weight: bold;">{{ title }}</span>"</div>
                 </div>
-                <div class="story__user-container">
+                <div class="story__user-container" @click="navigateToPost">
                     <div class="story__user-img-container">
-                        <router-link to="" @click.stop="navigateToUser" style="color: inherit; text-decoration: none;">
+                        <span @click.stop="navigateToUser">
                             <img :src="imgSource" v-if="picture" alt="pic" class="story__user-img">
-                        </router-link>
+                        </span>
                     </div> 
                     <div class="story__user-info-container">
                         <div class="story__user-comment-container"><div class="story__user-comment cur-def"> {{ postComment }} </div></div>
                         <div class="story__username cur-pnt"> 
-                            <router-link to="" @click.stop="navigateToUser" style="color: inherit; text-decoration: none;">
+                            <span @click.stop="navigateToUser">
                                 <span class="lower" style="color: whitesmoke;"><b>@</b></span><b class="story__user-name">{{ username }}</b>
-                            </router-link>
+                            </span>
                                 <span class="story__username-date lower cur-def">· {{ date }} </span>
                         </div>
                     </div>
                 </div>
                 <div class="separator"></div>
-                <article class="story__article">
+                <article class="story__article" @click="navigateToPost">
                     <div class="story__upper">
                         <h2 class="story__title "><span class="story_title highlight">PROLOGUE</span>{{ title.toUpperCase() }}</h2>
                     </div>
@@ -37,20 +37,28 @@
                     </p>
                 </article>
                 <div class="separator"></div>
-                <div class="story-stats">
-                    <div class="story-stats-section"><span class="material-symbols-outlined margin1">nest_eco_leaf</span>{{ likes }} N/A</div>
-                    <div class="story-stats-section"><span class="material-symbols-outlined margin1">bar_chart</span>{{ views }}</div>
-                    <div class="story-stats-section"><span class="material-symbols-outlined margin1">chat</span>{{ comments.length }}</div>
-                    <div class="story-stats-section"><span class="material-symbols-outlined margin1">share</span></div>
+                <div class="story-stats user-select-none">
+                    <div class="story-stats-section leaf" :class="[leavesMutable.includes(currentUser) ? 'includes-leaf' : '']" @click.prevent="increaseLeaves">
+                        <span class="material-symbols-outlined margin1 leaf-icon">
+                            nest_eco_leaf
+                        </span>
+                        {{ leavesMutable.length }}
+                    </div>
+                    <div class="story-stats-section view"><span class="material-symbols-outlined margin1 view-icon">bar_chart</span>{{ views }}</div>
+                    <div class="story-stats-section comment"><span class="material-symbols-outlined margin1 comment-icon">chat</span>{{ comments.length }}</div>
+                    <div class="story-stats-section share"><span class="material-symbols-outlined margin1 share-icon">share</span></div>
                 </div>
-            </router-link>
+            </span>
         </div>
     </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import { useRouter } from 'vue-router';
+import { API_BASE_URL } from '@/config';
 import PostTag from '../PostTag.vue';
+import axios from 'axios';
 
 export default {
     components: {
@@ -59,13 +67,15 @@ export default {
     data() {
         return {
             outlineColors: ["red", "blue", "green", "yellow", "white", "purple", "pink", "orange", "salmon"],
+            leavesMutable: this.leaves,
+            executed: false
         }
     },
     setup() {
         const router = useRouter();
         return { router: router };
     },
-    props: ["_id", "title", "content", "username", "postComment", "date", "picture", "color", "views", "comments", "feedMode", "tags"],
+    props: ["_id", "title", "content", "username", "postComment", "date", "picture", "color", "views", "comments", "feedMode", "tags", "leaves"],
     methods: {
         formatStory(story) {
             const formattedStory = story.replace(/<br>/g, '\n')
@@ -79,10 +89,51 @@ export default {
         },
         navigateToUser() {
             this.router.push('/user/' + this.username);
+        },
+        increaseLeaves() {
+            if (this.isLoggedIn && !this.executed) {
+                if (!this.leavesMutable.includes(this.currentUser)) { // leaves array does not include currentUser
+                    this.leavesMutable.push(this.currentUser)
+                    const data_packet = {
+                        post_id: this._id.$oid,
+                        username: this.currentUser
+                    }
+                    axios
+                        .post(`${API_BASE_URL}/add_leaves_post`, data_packet)
+                        .catch(error => {
+                            console.log(error);
+                        });
+                } else { //if array does include currentUser
+                    const index = this.leavesMutable.indexOf(this.currentUser);
+                    if (index !== -1) {
+                        this.leavesMutable.splice(index, 1);
+                    }
+                    const data_packet = {
+                        post_id: this._id.$oid,
+                        username: this.currentUser
+                    }
+                    axios
+                        .post(`${API_BASE_URL}/remove_leaves_post`, data_packet)
+                        .catch(error => {
+                            console.log(error);
+                        });
+                }
+                this.executed = true;
+
+            } else if (this.isLoggedIn && this.executed) { //executes if is logged in but has already made an API call
+                if (!this.leavesMutable.includes(this.currentUser)) { // leaves array does not include currentUser
+                    this.leavesMutable.push(this.currentUser)
+                } else {
+                    const index = this.leavesMutable.indexOf(this.currentUser);
+                    if (index !== -1) {
+                        this.leavesMutable.splice(index, 1);
+                    }
+                }
+            }
         }
     },
-
     computed: {
+        ...mapGetters('auth', ['isLoggedIn', 'currentUser', "userFetchedPicture", "colorFetched"]),
         imgSource() {
             return require('@/assets/img/' + this.picture);
         },
@@ -94,12 +145,52 @@ export default {
                 return true
             }
             return false
-        }
+        },
     },
 };
 </script>
 
 <style scoped>
+.leaf {
+    color: white;
+    transition: all 0.1s;
+}
+
+.leaf:hover .leaf-icon{
+    color: rgb(0, 255, 106);
+}
+
+.view {
+    color: white;
+    transition: all 0.1s;
+}
+
+.view:hover .view-icon{
+    color: rgb(131, 189, 255);
+}
+
+.comment {
+    color: white;
+    transition: all 0.1s;
+}
+
+.comment:hover .comment-icon {
+    color: rgb(255, 255, 108);
+}
+
+.share {
+    color: white;
+    transition: all 0.1s;
+}
+
+.share:hover .share-icon {
+    color: rgb(255, 109, 255);
+}
+
+.includes-leaf {
+    color: rgb(0, 255, 106);
+}
+
 .margin1 {
     margin-right: 2px;
 }

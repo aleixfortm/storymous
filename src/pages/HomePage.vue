@@ -1,5 +1,4 @@
 <template>
-    <success-message></success-message>
     <feed-container>
         
         <img src="../assets/img/storymous-forest-min.png" alt="storymous forest" class="testimage">
@@ -413,7 +412,7 @@ input[type="text"]::placeholder {
 }
 
 .postimage {
-    height: 55px;
+    height: 45px;
     border-radius: 100%;
     margin: 10px 10px;
     transition: all 0.1s;

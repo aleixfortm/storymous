@@ -89,7 +89,8 @@ import PostTag from '@/components/layout/PostTag.vue';
           comment: this.formcomment,
           title: this.formtitle,
           body: this.formbody,
-          username: this.currentUser
+          username: this.currentUser,
+          tags: this.selectedTags
         }
 
         this.loading = true;

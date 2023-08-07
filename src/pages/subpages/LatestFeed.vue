@@ -20,6 +20,7 @@
             :views="post.views"
             :comments="post.user_comments"
             :tags="post.tags"
+            :leaves="post.leaves"
             :feedMode="true">
         </post-container>
       </template>
@@ -38,6 +39,8 @@
             :postComment="post.comment"
             :date="post.date"
             :picture="post.picture"
+            :leaves="post.leaves"
+            :views="post.views"
             :tags="post.tags">
         </continuestoryfeed-container>
       </template>
