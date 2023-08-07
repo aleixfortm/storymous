@@ -1,11 +1,6 @@
-// this file executes after every page refresh // ----------
-
 import axios from 'axios';
 
-
-//export const API_BASE_URL = 'https://aleixfortm.pythonanywhere.com';
-//export const API_BASE_URL = 'http://127.0.0.1:5000';
-export const API_BASE_URL = 'http://192.168.1.44:5000';
-
+// Use the environment variable for API base URL
+export const API_BASE_URL = process.env.VUE_APP_API_BASE_URL;
 
 export default axios;

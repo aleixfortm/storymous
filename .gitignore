@@ -3,3 +3,6 @@ backend-API/config.py
 backend-API/venv
 backend-API/wvenv
 backend-API/__pycache__
+dist
+.env.production
+.env.development

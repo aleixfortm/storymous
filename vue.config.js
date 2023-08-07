@@ -1,16 +1,21 @@
-const { defineConfig } = require('@vue/cli-service')
+const { defineConfig } = require('@vue/cli-service');
+const CopyPlugin = require('copy-webpack-plugin');
 
 module.exports = defineConfig({
   publicPath: "/",
   outputDir: 'dist',
-  chainWebpack: config => {
-    config.plugin('copy').tap(([options]) => {
-      options.push({
-        from: 'CNAME',
-        to: config.output.get('path'),
-        toType: 'dir'
-      });
-      return [options];
-    });
+  configureWebpack: {
+    plugins: [
+      // Copy CNAME file to the build output directory
+      new CopyPlugin({
+        patterns: [
+          {
+            from: 'CNAME',
+            to: '.',
+            toType: 'dir'
+          }
+        ]
+      })
+    ]
   }
-})
+});
