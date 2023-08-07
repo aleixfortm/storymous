@@ -26,8 +26,8 @@
                         :class="{ following: isFollowing, disabled: isFollowButtonDisabled }" 
                         @click="followAction"
                         :disabled="isFollowButtonDisabled">
-                        <div v-if="!isFollowing"><span class="material-symbols-outlined">person_add</span></div>
-                        <div v-else><span class="material-symbols-outlined">remove</span></div>
+                        <div v-if="!isFollowing" class="d-flex align-items-center justify-content-center"><span class="material-symbols-outlined">person_add</span></div>
+                        <div v-else class="d-flex align-items-center justify-content-center"><span class="material-symbols-outlined">remove</span></div>
                     </button>
                 </div>
                 <div class="stats-container">
