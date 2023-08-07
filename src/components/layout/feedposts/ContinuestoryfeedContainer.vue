@@ -165,6 +165,10 @@ export default {
     color: rgb(0, 255, 106);
 }
 
+.includes-leaf {
+    color: rgb(0, 255, 106);
+}
+
 .view {
     color: white;
     transition: all 0.1s;
@@ -192,9 +196,7 @@ export default {
     color: rgb(255, 109, 255);
 }
 
-.includes-leaf {
-    color: rgb(0, 255, 106);
-}
+
 
 .story-stats {
     display: flex;
@@ -207,7 +209,7 @@ export default {
     display: flex;
     align-items: center;
     margin-right: 25px;
-    padding: 1px 6px 1px 1px;
+    padding: 1px 5px 1px 1px;
 }
 
 .story-stats-section:hover {

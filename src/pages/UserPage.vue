@@ -444,7 +444,7 @@ export default {
     color: rgb(0, 255, 98);
     cursor: pointer;
     font-size: 15px;
-    margin: 10px 10px 10px 0;
+    margin: 10px 10px 10px 10px;
     background-color: #59ff9138;
     border-radius: 4px;
     transition: all 0.1s;
@@ -569,7 +569,7 @@ export default {
     display: flex;
     flex-direction: row;
     width: 100%;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
     margin: 25px 0 0 0;
 }

@@ -1,7 +1,7 @@
 <template>
     <div v-if="!clickable" class="tag-shape user-select-none" :class="tag">{{ tag }}</div>
     <div v-else @click="selectTag" class="clickable tag-shape user-select-none" :class="[tag, selected ? 'tag-selected' : '']">
-        <span class="material-symbols-outlined" v-if="selected">done</span>
+        <span class="material-symbols-outlined neutral-class" v-if="selected">done</span>
         {{ tag }}
     </div>
 </template>
@@ -30,6 +30,10 @@ export default {
   'wght' 100,
   'GRAD' 0,
   'opsz' 0
+}
+
+.neutral-class {
+  color: white;
 }
 
 .clickable {
