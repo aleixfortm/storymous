@@ -3,7 +3,7 @@
   <the-header></the-header>
 
   <block-frame>
-    <error-message v-if="loginErrorState" :message="'You must log in to add a leaf to user posts'"></error-message>
+    <error-message :message="'Log in to add a leaf to user posts'"></error-message>
     <router-view :key="$route.params.id"></router-view>
   </block-frame>
 
@@ -11,8 +11,6 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-
 import TheHeader from "./components/layout/TheHeader.vue";
 import BlockFrame from "./components/layout/BlockFrame.vue";
 import 'bootstrap/dist/css/bootstrap.css';
@@ -24,12 +22,7 @@ export default {
     BlockFrame,
     ErrorMessage
   },
-  computed: {
-    ...mapGetters('message', ['loginError']),
-    loginErrorState() {
-      return this.loginError
-    }
-  },
+
 }
 </script>
 

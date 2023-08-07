@@ -12,11 +12,6 @@ export default {
             show: true
         }
     },
-    methods: {
-        dismiss() {
-            this.custom-c
-        }
-    }
 }
 </script>
 

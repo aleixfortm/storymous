@@ -6,21 +6,20 @@ export default {
     mutations: {
         // Mutation to set the loginError state to true
         SET_LOGIN_ERROR(state) {
-        state.logInError = true;
+        state.loginError = true;
         },
         // Mutation to set the loginError state to false
         RESET_LOGIN_ERROR(state) {
-        state.logInError = false;
+        state.loginError = false;
         }
     },
     actions: {
-        // Action to trigger the SET_LOGIN_ERROR mutation
         setLoginError({ commit }) {
-            if (!this.logInError) {
+            if (!this.loginError) {
                 commit('SET_LOGIN_ERROR');
                 setTimeout(() => {
                     commit('RESET_LOGIN_ERROR');
-                }, 3000)
+                }, 2500)
             }
 
         },
@@ -28,7 +27,7 @@ export default {
     getters: {
         // Getter to access the loginError state
         loginError(state) {
-          return state.logInError;
+          return state.loginError;
         }
     }
 };
