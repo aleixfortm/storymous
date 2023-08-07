@@ -51,6 +51,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex';
 import { mapGetters } from 'vuex';
 import { useRouter } from 'vue-router';
 import { API_BASE_URL } from '@/config';
@@ -74,6 +75,7 @@ export default {
     },
     props: ["_id", "content", "username", "postComment", "storyTitle", "color", "date", "picture", "chapterNum", "storyId", "parentChapterId", "chapterName", "tags", "leaves", "views"],
     methods: {
+        ...mapActions('message', ['setLoginError']),
         formatStory(story) {
             const formattedStory = story.replace(/<br>/g, '\n')
             if (formattedStory.length > 700 && this.feedMode) {
@@ -88,44 +90,48 @@ export default {
             this.router.push('/user/' + this.username);
         },
         increaseLeaves() {
-            if (this.isLoggedIn && !this.executed) {
-                if (!this.leavesMutable.includes(this.currentUser)) { // leaves array does not include currentUser
-                    this.leavesMutable.push(this.currentUser)
-                    const data_packet = {
-                        chapter_id: this._id.$oid,
-                        username: this.currentUser
+            if (this.isLoggedIn) {
+                if (!this.executed) {
+                    if (!this.leavesMutable.includes(this.currentUser)) { // leaves array does not include currentUser
+                        this.leavesMutable.push(this.currentUser)
+                        const data_packet = {
+                            chapter_id: this._id.$oid,
+                            username: this.currentUser
+                        }
+                        axios
+                            .post(`${API_BASE_URL}/add_leaves_chapter`, data_packet)
+                            .catch(error => {
+                                console.log(error);
+                            });
+                    } else { //if array does include currentUser
+                        const index = this.leavesMutable.indexOf(this.currentUser);
+                        if (index !== -1) {
+                            this.leavesMutable.splice(index, 1);
+                        }
+                        const data_packet = {
+                            chapter_id: this._id.$oid,
+                            username: this.currentUser
+                        }
+                        axios
+                            .post(`${API_BASE_URL}/remove_leaves_chapter`, data_packet)
+                            .catch(error => {
+                                console.log(error);
+                            });
                     }
-                    axios
-                        .post(`${API_BASE_URL}/add_leaves_chapter`, data_packet)
-                        .catch(error => {
-                            console.log(error);
-                        });
-                } else { //if array does include currentUser
-                    const index = this.leavesMutable.indexOf(this.currentUser);
-                    if (index !== -1) {
-                        this.leavesMutable.splice(index, 1);
-                    }
-                    const data_packet = {
-                        chapter_id: this._id.$oid,
-                        username: this.currentUser
-                    }
-                    axios
-                        .post(`${API_BASE_URL}/remove_leaves_chapter`, data_packet)
-                        .catch(error => {
-                            console.log(error);
-                        });
-                }
-                this.executed = true;
+                    this.executed = true;
 
-            } else if (this.isLoggedIn && this.executed) { //executes if is logged in but has already made an API call
-                if (!this.leavesMutable.includes(this.currentUser)) { // leaves array does not include currentUser
-                    this.leavesMutable.push(this.currentUser)
-                } else {
-                    const index = this.leavesMutable.indexOf(this.currentUser);
-                    if (index !== -1) {
-                        this.leavesMutable.splice(index, 1);
+                } else { //executes if is logged in but has already made an API call
+                    if (!this.leavesMutable.includes(this.currentUser)) { // leaves array does not include currentUser
+                        this.leavesMutable.push(this.currentUser)
+                    } else {
+                        const index = this.leavesMutable.indexOf(this.currentUser);
+                        if (index !== -1) {
+                            this.leavesMutable.splice(index, 1);
+                        }
                     }
                 }
+            } else {
+                this.setLoginError()
             }
         }
     },

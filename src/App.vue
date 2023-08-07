@@ -1,8 +1,9 @@
 <template>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
   <the-header></the-header>
-  
+
   <block-frame>
+    <error-message v-if="loginErrorState" :message="'You must log in to add a leaf to user posts'"></error-message>
     <router-view :key="$route.params.id"></router-view>
   </block-frame>
 
@@ -10,17 +11,25 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 import TheHeader from "./components/layout/TheHeader.vue";
 import BlockFrame from "./components/layout/BlockFrame.vue";
 import 'bootstrap/dist/css/bootstrap.css';
-//import AlertMessage from "./components/layout/messages/AlertMessage.vue";
+import ErrorMessage from "./components/layout/messages/ErrorMessage.vue";
 
 export default {
   components: {
     TheHeader,
     BlockFrame,
-  //  AlertMessage
-  }
+    ErrorMessage
+  },
+  computed: {
+    ...mapGetters('message', ['loginError']),
+    loginErrorState() {
+      return this.loginError
+    }
+  },
 }
 </script>
 
@@ -43,12 +52,13 @@ export default {
 
 html {
   font-family: "IBM Plex Mono", monospace;
-  background-color: rgb(35, 42, 48);
+  background-color: rgb(28, 33, 41);
 }
 
 body {
   margin: 0;
-  background-color: rgb(35, 42, 48);
+  background-color: rgb(31, 34, 36);
+  background-color: rgb(28, 33, 41);
 }
 
 .cur-def {
