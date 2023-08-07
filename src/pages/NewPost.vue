@@ -92,10 +92,11 @@ import PostTag from '@/components/layout/PostTag.vue';
           username: this.currentUser,
           tags: this.selectedTags
         }
-
+        console.log(data_packet)
         this.loading = true;
 
-        axios.post(`${API_BASE_URL}/new_post`, data_packet)
+        axios
+        .post(`${API_BASE_URL}/new_post`, data_packet)
         .then(response => {
             this.loading = false;
             const data = response.data;

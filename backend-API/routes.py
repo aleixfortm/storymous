@@ -142,7 +142,8 @@ def new_post():
         "comment": post.get("comment"),
         "title": post.get("title"),
         "content": post.get("body"),
-        "username": post.get("username")
+        "username": post.get("username"),
+        "tags": post.get("tags")
     }
 
     post_object = PostModel(**post_req_data)
