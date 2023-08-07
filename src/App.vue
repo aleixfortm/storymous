@@ -3,7 +3,6 @@
   <the-header></the-header>
   
   <block-frame>
-    <alert-message></alert-message>
     <router-view :key="$route.params.id"></router-view>
   </block-frame>
 
@@ -14,13 +13,13 @@
 import TheHeader from "./components/layout/TheHeader.vue";
 import BlockFrame from "./components/layout/BlockFrame.vue";
 import 'bootstrap/dist/css/bootstrap.css';
-import AlertMessage from "./components/layout/messages/AlertMessage.vue";
+//import AlertMessage from "./components/layout/messages/AlertMessage.vue";
 
 export default {
   components: {
     TheHeader,
     BlockFrame,
-    AlertMessage
+  //  AlertMessage
   }
 }
 </script>
