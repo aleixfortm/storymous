@@ -1,5 +1,4 @@
 <template>
-  
     <feed-container v-if="!loading">
       <disclaimer-message></disclaimer-message>    
       <div class="story-container">

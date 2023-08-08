@@ -1,6 +1,7 @@
 <template>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,300,1,200" />
     <feed-container v-if="!loading">
+      <disclaimer-message></disclaimer-message>
       <div class="story-container">
         <div class="main-title-container">
           <h2 class="main-title">{{ post.title.toUpperCase() }}</h2>
@@ -106,6 +107,7 @@ import FeedContainer from '@/components/layout/FeedContainer.vue';
 import ChapteredprologueContainer from "@/components/layout/ChapteredprologueContainer.vue";
 import WritechapterContainer from "@/components/layout/WritechapterContainer.vue";
 import AstronautMessage from "@/components/layout/messages/AstronautMessage.vue";
+import DisclaimerMessage from "@/components/layout/messages/DisclaimerMessage.vue";
 
 export default {
   components: {
@@ -114,7 +116,8 @@ export default {
     CommentContainer,
     ContinuestoryContainer,
     ChapteredprologueContainer,
-    WritechapterContainer
+    WritechapterContainer,
+    DisclaimerMessage
   },
   data() {
     return {
