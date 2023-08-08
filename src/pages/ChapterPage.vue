@@ -16,7 +16,7 @@
                       :class="[postData.leaves.includes(currentUser) ? 'includes-leaf-icon' : '']"
                       >nest_eco_leaf
                     </span>
-                    {{ totalLeaves }}
+                    {{ totalLeaves }} <!-- use postData.leaves.length for prologue stats only, or chapterList[chapterList.length - 1].leaves.length for last mounted chapter only-->
                 </div>
                 <div class="story-stats-section"><span class="material-symbols-outlined margin1">bar_chart</span>{{ postData.views }}</div>
                 <div class="story-stats-section"><span class="material-symbols-outlined margin1">chat</span>{{ postData.user_comments.length }}</div>
