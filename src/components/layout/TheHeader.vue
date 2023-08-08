@@ -20,6 +20,7 @@
             <div class="material-symbols-outlined user-select-none icon" @click="showNotifications">notifications</div>
             <router-link :to="getProfileLink" class="userdata">
               <img class="userimg" v-if="userFetchedPicture" :src="imgSource" alt="astronaut">
+              <img class="userimg" v-else src="@/assets/img/moon_default_avatar-min.png" alt="default avatar">
               <div class="user-data-container">
                 <div class="name-container">
                   <div class="username">@{{ currentUser }}</div>

@@ -5,7 +5,7 @@
 
         <div class="create_newstory">
             <img class="postimage" v-if="userFetchedPicture" :src="imgSource" alt="profilepic" @click="navigateToProfile">
-            <img class="postimage" v-else src="@/assets/img/default_avatar.png" alt="default avatar">
+            <img class="postimage" v-else src="@/assets/img/moon_default_avatar-min.png" alt="default avatar">
             <span class="story_form">
                 <input type="text" placeholder="Start new story" @click="navigateToNewPost">
             </span>

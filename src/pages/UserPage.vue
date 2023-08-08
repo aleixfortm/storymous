@@ -15,6 +15,10 @@
                 v-if="userPicture"
                 :picture="userPicture">
             </profile-picture>
+            <profile-picture
+                v-else
+                :picture="'moon_default_avatar-min.png'"
+            ></profile-picture>
             <div class="statsblock">
                 <div class="topblock">
                     <div class="name-color">
