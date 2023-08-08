@@ -7,7 +7,7 @@ import datetime, random, math
 
 
 class UserModel:
-    def __init__(self, username, email, password_hash, continued_stories=None, started_stories=None, comments=None, _id=None, bio=None, color=None, picture=None, following=None, followers=None, creation_date=None) -> None:
+    def __init__(self, username, email, password_hash, continued_stories=None, leaves=None, started_stories=None, comments=None, _id=None, bio=None, color=None, picture=None, following=None, followers=None, creation_date=None) -> None:
         self._id = ObjectId(_id) if _id else ObjectId()
         self.username = username
         self.email = email
@@ -21,6 +21,7 @@ class UserModel:
         self.started_stories = started_stories or 0
         self.continued_stories = continued_stories or 0
         self.comments = comments or 0
+        self.leaves = leaves or 0
 
     def get_id(self) -> str:
         return self._id
@@ -90,6 +91,15 @@ class UserModel:
         user_query = {"username": username}
         db_users.update_one(user_query, {"$inc": {"continued_stories": 1}})
 
+    @staticmethod
+    def increase_leaves(username):
+        db_users.update_one({'username': username},
+                            {'$inc': {'leaves': 1}})
+    @staticmethod
+    def decrease_leaves(username):
+        db_users.update_one({'username': username},
+                            {'$inc': {'leaves': -1}})
+
 
 class PostModel:
     def __init__(self, username, content, comment, title, tags, user_comments=None, leaves=None, color=None, status=None, 
@@ -144,7 +154,7 @@ class PostModel:
             formatted_date = f"Yesterday"
         elif days < 30:
             formatted_date = f"{days} days ago"
-        elif days > 30 and days < 365:
+        elif days < 365:
             formatted_date = f"{math.ceil(days/30)} months ago"
         else:
             formatted_date = f"{math.ceil(days/365)} years ago"

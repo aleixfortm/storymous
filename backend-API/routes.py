@@ -261,6 +261,7 @@ def user_posts(user):
 def add_leaves_post():
     data = request.json
     PostModel.increase_leaves(data["post_id"], data["username"])
+    UserModel.increase_leaves(data["username"])
 
     data_payload = {
         "status": "Success",
@@ -274,6 +275,7 @@ def add_leaves_post():
 def add_leaves_chapter():
     data = request.json
     ChapterModel.increase_leaves(data["chapter_id"], data["username"])
+    UserModel.increase_leaves(data["username"])
 
     data_payload = {
         "status": "Success",
@@ -287,6 +289,7 @@ def add_leaves_chapter():
 def remove_leaves_post():
     data = request.json
     PostModel.decrease_leaves(data["post_id"], data["username"])
+    UserModel.decrease_leaves(data["username"])
 
     data_payload = {
         "status": "Success",
@@ -300,6 +303,7 @@ def remove_leaves_post():
 def remove_leaves_chapter():
     data = request.json
     ChapterModel.decrease_leaves(data["chapter_id"], data["username"])
+    UserModel.decrease_leaves(data["username"])
 
     data_payload = {
         "status": "Success",
@@ -475,15 +479,25 @@ def comments_edit():
 @bp_routes.route('/users_edit', methods=["GET"])
 @jwt_required()
 def users_edit():
-    cursor = list(db_users.find())
-    for user in cursor:
-        #deleted = post.pop("pic_path", "not found")
-        query = {"username": user["username"]}
-        if user.get("followers") == None:
-            user["followers"] = []
-        if user.get("following") == None:
-            user["following"] = []
-        db_users.replace_one(query, user)
+
+    posts = list(db_posts.find())
+    chapters = list(db_chapters.find())
+    users = list(db_users.find())
+
+    for user in users:
+        times = 0
+        for post in posts:
+            if user["username"] == post["username"]:
+                times += len(post.get("leaves", []))
+        for chapter in chapters:
+            if user["username"] == chapter["username"]:
+                times += len(chapter.get("leaves", []))
+                print(chapter.get("leaves"))
+        user["leaves"] = times
+
+
+        main_query = {"username": user["username"]}
+        db_users.replace_one(main_query, user)
         
     return "successful change"
 
@@ -499,5 +513,4 @@ def chapters_edit():
         db_chapters.replace_one(query, chapter)
         
     return "Success"
-
 '''
