@@ -40,7 +40,7 @@
                         </div>
                         
                         <div class="count-block" @mouseover="showStoriesTooltip = true" @mouseout="showStoriesTooltip = false">
-                            <span class="material-symbols-outlined">history_edu</span>
+                            <span class="material-symbols-outlined">import_contacts</span>
                             <div class="separator-stat"></div>
                             <div class="count-block__num">{{ nStories }}</div>
                             <div v-if="showStoriesTooltip" class="popup">Stories written</div>
@@ -61,7 +61,7 @@
                 </div>
                 <div class="separator">
                     <div class="stats-bio">
-                        <b class="bio-title">Bio</b>
+                        <div class="bio-title">Bio<div class="separator-stat"></div><span class="material-symbols-outlined">history_edu</span></div>
                         <div class="bio-content">{{ userBio }}</div>
                     </div>
                     <div v-if="ownProfile() && isLoggedIn" class="miscbuttons">
@@ -329,7 +329,7 @@ export default {
 
 .popup {
   position: absolute;
-  top: 50px;
+  top: 45px;
   transform: translateX(-25%);
   background-color: rgba(255, 255, 255, 0.95);
   padding: 5px;
@@ -346,10 +346,10 @@ export default {
   position: absolute;
   left: 50%;
   bottom: 100%;
-  margin-left: -10px;
-  border-left: 10px solid transparent;
-  border-right: 10px solid transparent;
-  border-bottom: 10px solid rgba(255, 255, 255, 0.95);
+  margin-left: -6px;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-bottom: 6px solid rgba(255, 255, 255, 0.95);
   z-index: 999;
 }
 
@@ -602,6 +602,9 @@ export default {
 
 .bio-title {
     color: rgb(245, 245, 245);
+    display: flex;
+    align-items: center;
+    font-weight: bold;
 }
 
 .stats-bio {
