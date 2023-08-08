@@ -47,4 +47,8 @@ button:hover {
 .flat:active {
     background-color: #7b89a11e;
 }
+
+.null {
+  border-bottom: 2px solid rgba(158, 158, 158, 0.055);
+}
 </style>

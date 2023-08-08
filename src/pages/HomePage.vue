@@ -4,21 +4,21 @@
         <img src="../assets/img/storymous-forest-min.png" alt="storymous forest" class="testimage">
 
         <div class="create_newstory">
-            <img class="postimage" v-if="userFetchedPicture" :src="imgSource" alt="profilepic">
-            <router-link to="" class="story_form">
+            <img class="postimage" v-if="userFetchedPicture" :src="imgSource" alt="profilepic" @click="navigateToProfile">
+            <span class="story_form">
                 <input type="text" placeholder="Start new story" @click="navigateToNewPost">
-            </router-link>
+            </span>
         </div>
     </feed-container>
     
     <div class="block">
         <div class="rectangle">
-            <select-button @click="setSelectedTab('latest-feed')" :mode="selectedTab === 'following-feed' ? null : 'flat'">
+            <select-button @click="setSelectedTab('latest-feed')" :mode="selectedTab === 'following-feed' ? 'null' : 'flat'">
                 <div>Latest</div>
             </select-button>
         </div>
         <div class="rectangle">
-            <select-button @click="setSelectedTab('following-feed')" :mode="selectedTab === 'following-feed' ? 'flat' : null">
+            <select-button @click="setSelectedTab('following-feed')" :mode="selectedTab === 'following-feed' ? 'flat' : 'null'">
                 <div>Following</div>
             </select-button>
         </div>
@@ -90,6 +90,9 @@ export default {
         },
         navigateToNewPost() {
             this.router.push('/newpost');
+        },
+        navigateToProfile() {
+            return '/user/' + this.currentUser;
         }
     },
     computed: {
@@ -103,6 +106,10 @@ export default {
 
 
 <style scoped>
+.null {
+    color: rgba(245, 245, 245, 0.781);
+}
+
 .nomargin {
     padding: 0px 0px;
     margin: 0px;
@@ -214,7 +221,6 @@ export default {
 }
 
 .homepage-top {
-    /*background-color: rgba(90, 90, 90, 0.13);*/
     padding: 0px;
     border-radius: 10px;
     margin: 10px auto;
@@ -313,11 +319,11 @@ export default {
 
 @media (max-width: 565px) {
   .responsive-text {
-    font-size: 14px; /* Further adjusted font size for even smaller screens */
+    font-size: 14px;
   }
 
   .innermessagecontainer {
-    width: auto; /*360px*/
+    width: auto;
     background-color: white;
     padding: 10px 20px 10px 20px;
     border-radius: 20px 20px 0 20px;
@@ -343,7 +349,7 @@ export default {
     }
   .innermessagecontainer {
     margin: -25px 10px 50px 10px;
-    width: auto; /*360px*/
+    width: auto;
     background-color: white;
     padding: 10px 20px 10px 20px;
     border-radius: 20px 20px 0 20px;
@@ -371,7 +377,7 @@ form {
 input[type="text"] {
   background-color: #1d252e;
   border: none;
-  border-radius: 5px;
+  border-radius: 50px;
   font-size: 14px;
   font-weight: 500;
   height: 40px;
@@ -409,7 +415,7 @@ input[type="text"]::placeholder {
 }
 
 .postimage {
-    height: 45px;
+    height: 40px;
     border-radius: 100%;
     margin: 10px 10px;
     transition: all 0.1s;
