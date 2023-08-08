@@ -1,5 +1,5 @@
-import auth from './auth';
-import message from './message';
+import auth from './modules/auth';
+import message from './modules/message';
 
 
 import { createStore } from 'vuex'

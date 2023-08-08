@@ -1,7 +1,7 @@
 //import axios from 'axios';
 import router from '@/router'; // Import your Vue Router instance
-import axios from "../config"
-import { API_BASE_URL } from '../config';
+import axios from "../../config"
+import { API_BASE_URL } from '../../config';
 
 export default {
     namespaced: true,
@@ -91,6 +91,7 @@ export default {
         colorFetched: state => state.userData ? state.userData.color: null,
         nFetchedPosts: state => state.userData ? state.userData.started_stories + state.userData.continued_stories : 0,
         nFetchedFollowers: state => state.userData ? state.userData.followers : [],
-        nFetchedFollowing: state => state.userData ? state.userData.following : []
+        nFetchedFollowing: state => state.userData ? state.userData.following : [],
+        nFetchedLeaves: state => state.userData ? state.userData.leaves : 0,
     }
 }

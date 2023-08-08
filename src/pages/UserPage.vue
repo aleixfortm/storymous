@@ -32,25 +32,30 @@
                 </div>
                 <div class="stats-container">
                     <div class="stats">
-                        <div class="count-block">
+                        <div class="count-block" @mouseover="showLeavesTooltip = true" @mouseout="showLeavesTooltip = false">
                             <span class="material-symbols-outlined colored-icon">nest_eco_leaf</span>
                             <div class="separator-stat"></div>
                             <div class="count-block__num">{{ nLeaves }}</div>
+                            <div v-if="showLeavesTooltip" class="popup">Leaves received</div>
                         </div>
-                        <div class="count-block">
+                        
+                        <div class="count-block" @mouseover="showStoriesTooltip = true" @mouseout="showStoriesTooltip = false">
                             <span class="material-symbols-outlined">history_edu</span>
                             <div class="separator-stat"></div>
                             <div class="count-block__num">{{ nStories }}</div>
+                            <div v-if="showStoriesTooltip" class="popup">Stories written</div>
                         </div>
-                        <div class="count-block" @mouseover="followersMouseOver" @mouseout="followersMouseOut">
+                        <div class="count-block" @mouseover="showFollowersTooltip = true" @mouseout="showFollowersTooltip = false">
                             <span class="material-symbols-outlined">group</span>
                             <div class="separator-stat"></div>
                             <div class="count-block__num">{{ userFollowers.length }}</div>
+                            <div v-if="showFollowersTooltip" class="popup">Followers</div>
                         </div>
-                        <div class="count-block" @mouseover="followingMouseOver" @mouseout="followingsMouseOut">
+                        <div class="count-block" @mouseover="showFollowingTooltip = true" @mouseout="showFollowingTooltip = false">
                             <span class="material-symbols-outlined">group_add</span>
                             <div class="separator-stat"></div>
                             <div class="count-block__num">{{ userFollowing.length }}</div>
+                            <div v-if="showFollowingTooltip" class="popup">Following</div>
                         </div>
                     </div>
                 </div>
@@ -174,15 +179,14 @@ export default {
             userFollowing: 0,
             isFollowing: null,
             isFollowButtonDisabled: false,
-            hoveringStories: false,
-            hoveringFollowers: false,
-            hoveringFollowing: false,
-            tooltipY: 0,
-            tooltipX: 0
+            showLeavesTooltip: false,
+            showStoriesTooltip: false,
+            showFollowersTooltip: false,
+            showFollowingTooltip: false
         }
     },
     computed: {
-        ...mapGetters('auth', ['isLoggedIn', 'currentUser', "userFetchedPicture", "colorFetched", "userFetchedBio", "nFetchedPosts", "nFetchedFollowers", "nFetchedFollowing"]),
+        ...mapGetters('auth', ['isLoggedIn', 'currentUser', "userFetchedPicture", "colorFetched", "userFetchedBio", "nFetchedPosts", "nFetchedFollowers", "nFetchedFollowing", "nFetchedLeaves"]),
         currentParameter() {
             return this.$route.params.id; // Replace "parameter" with the actual name of your URL parameter
         },
@@ -204,20 +208,6 @@ export default {
     },
     methods: {
         ...mapActions('auth', ['logout']),
-        followersMouseOver(event) {
-            this.hoveringFollowers = true;
-            this.tooltipX = event.pageX
-            this.tooltipY = event.pageY + 30
-        },
-        followersMouseOut() {
-            this.hoveringFollowers = false;
-        },
-        followingMouseOver() {
-            this.hoveringFollowing = true;
-        },
-        followingsMouseOut() {
-            this.hoveringFollowing = false;
-        },
         ownProfile() {
             if (this.profileUsername === this.currentUser) {
                 return true;
@@ -271,6 +261,7 @@ export default {
                 this.nStories = this.nFetchedPosts;
                 this.userFollowers = this.nFetchedFollowers;
                 this.userFollowing = this.nFetchedFollowing;
+                this.nLeaves = this.nFetchedLeaves;
 
             axios
                 .get(`${API_BASE_URL}/posts/${this.profileUsername}`)
@@ -318,6 +309,7 @@ export default {
 </script>
 
 <style scoped>
+
 .colored-icon {
     color: rgb(0, 255, 106);
     font-variation-settings:
@@ -332,44 +324,42 @@ export default {
 }
 
 .bio-content {
-    color: black;
+    color: rgba(255, 255, 255, 0.836);
 }
 
-.tooltip {
+.popup {
   position: absolute;
-  top: 125%;
-  left: 50%;
-  transform: translateX(-50%);
-  background-color: rgba(39, 39, 39, 1);
-  padding: 10px;
-  border-radius: 5px;
-  font-size: 18px;
+  top: 50px;
+  transform: translateX(-25%);
+  background-color: rgba(255, 255, 255, 0.95);
+  padding: 5px;
+  border-radius: 2px;
+  font-size: 15px;
   text-align: start;
-  z-index: 10;
-  color: rgb(255, 255, 255);
-  box-shadow: 0 0 20px 3px rgba(0, 0, 0, 0.15);
+  z-index: 999;
+  color: rgb(0, 0, 0);
+  box-shadow: 0 0 20px 2px rgba(0, 0, 0, 0.5);
 }
 
-.tooltip::before {
+.popup::before {
   content: '';
   position: absolute;
   left: 50%;
-  bottom: 100%; /* Change 'top' to 'bottom' to move the triangle above the tooltip */
+  bottom: 100%;
   margin-left: -10px;
   border-left: 10px solid transparent;
   border-right: 10px solid transparent;
-  border-bottom: 10px solid rgba(39, 39, 39, 1); /* Use 'border-bottom' to create the triangle pointing upwards */
-  z-index: 2; /* Set a higher z-index to ensure the triangle appears above the tooltip */
+  border-bottom: 10px solid rgba(255, 255, 255, 0.95);
+  z-index: 999;
 }
 
 .disabled {
-  opacity: 0.5; /* or any other visual styling for disabled state */
-  pointer-events: none; /* disable pointer events */
-  cursor: default; /* set cursor to "not-allowed" */
+  opacity: 0.5; 
+  pointer-events: none; 
+  cursor: default;
 }
 
 .followbutton.following {
-  /* Button styles when following */
   background-color: #ff7b009c;
   color: #fffb00f6;
   text-align: center;
@@ -377,7 +367,6 @@ export default {
 }
 
 .followbutton.following:hover {
-  /* Button styles when following */
   background-color: #ff7b006e;
   color: #fffb00f6;
 }
@@ -590,8 +579,11 @@ export default {
     flex-direction: row;
     justify-content: space-between;
     margin: 10px 0px 0 0px;
+    border-radius: 2px;
+    padding: 5px;
     width: 100%;
     color: whitesmoke;
+
     transition: all 0.1s;
 }
 
@@ -609,15 +601,14 @@ export default {
 }
 
 .bio-title {
-    color: black;
+    color: rgb(245, 245, 245);
 }
 
 .stats-bio {
-    background-color: whitesmoke;
-    border-radius: 10px 10px 10px 10px;
+    background-color: #f5f5f51a;
+    border-radius: 5px;
     padding: 10px;
     margin: 20px 10px 15px 10px;
-    color: rgb(0, 0, 0);
 }
 
 @media screen and (max-width: 700px) {
