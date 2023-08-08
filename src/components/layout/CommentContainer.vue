@@ -1,4 +1,4 @@
-<template> to=""
+<template> 
     <div>
         <div class="comment__user-container">
             <div><img src="../../assets/img/reply_icon3.png" alt="reply icon" style="max-width: 25px; margin: 0 0px 0 0px; transform: scaleX(-1); "></div>

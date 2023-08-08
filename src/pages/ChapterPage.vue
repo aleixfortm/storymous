@@ -1,7 +1,7 @@
 <template>
-
+  
     <feed-container v-if="!loading">
-      
+      <disclaimer-message></disclaimer-message>    
       <div class="story-container">
         <div v-for="chapter in chapterList" :key="chapter._id">
           <template v-if="chapter.type === 'prologue'">
@@ -121,6 +121,7 @@ import axios from "axios";
 import { API_BASE_URL } from '../config';
 import { mapGetters } from 'vuex';
 
+import DisclaimerMessage from "@/components/layout/messages/DisclaimerMessage.vue";
 import FeedContainer from '@/components/layout/FeedContainer.vue';
 import ChapteredContainer from "@/components/layout/ChapteredContainer.vue";
 import ChapteredprologueContainer from "@/components/layout/ChapteredprologueContainer.vue";
@@ -137,7 +138,8 @@ export default {
     CommentContainer,
     ContinuestoryContainer,
     WritechapterContainer,
-    AstronautMessage
+    AstronautMessage,
+    DisclaimerMessage
   },
   data() {
     return {

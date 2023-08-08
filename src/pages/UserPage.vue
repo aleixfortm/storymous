@@ -31,19 +31,19 @@
                     </button>
                 </div>
                 <div class="stats-container">
-                    <div class="stats">
+                    <div class="stats user-select-none">
                         <div class="count-block" @mouseover="showLeavesTooltip = true" @mouseout="showLeavesTooltip = false">
                             <span class="material-symbols-outlined colored-icon">nest_eco_leaf</span>
                             <div class="separator-stat"></div>
                             <div class="count-block__num">{{ nLeaves }}</div>
-                            <div v-if="showLeavesTooltip" class="popup">Leaves received</div>
+                            <div v-if="showLeavesTooltip" class="popup">Leaves</div>
                         </div>
                         
                         <div class="count-block" @mouseover="showStoriesTooltip = true" @mouseout="showStoriesTooltip = false">
                             <span class="material-symbols-outlined">import_contacts</span>
                             <div class="separator-stat"></div>
                             <div class="count-block__num">{{ nStories }}</div>
-                            <div v-if="showStoriesTooltip" class="popup">Stories written</div>
+                            <div v-if="showStoriesTooltip" class="popup">Stories</div>
                         </div>
                         <div class="count-block" @mouseover="showFollowersTooltip = true" @mouseout="showFollowersTooltip = false">
                             <span class="material-symbols-outlined">group</span>
@@ -59,15 +59,13 @@
                         </div>
                     </div>
                 </div>
-                <div class="separator">
-                    <div class="stats-bio">
-                        <div class="bio-title">Bio<div class="separator-stat"></div><span class="material-symbols-outlined">history_edu</span></div>
-                        <div class="bio-content">{{ userBio }}</div>
-                    </div>
-                    <div v-if="ownProfile() && isLoggedIn" class="miscbuttons">
-                        <button class="settingsbutton" @click="goToSettings"><span class="material-symbols-outlined margin1">settings</span>Settings</button>
-                        <button class="logoutbutton" @click="logout()"><span class="material-symbols-outlined margin1">logout</span>Log out</button>
-                    </div>
+                <div class="stats-bio">
+                    <div class="bio-title">Bio<div class="separator-stat"></div><span class="material-symbols-outlined">history_edu</span></div>
+                    <div class="bio-content">{{ userBio }}</div>
+                </div>
+                <div v-if="ownProfile() && isLoggedIn" class="miscbuttons">
+                    <button class="settingsbutton" @click="goToSettings"><span class="material-symbols-outlined margin1">settings</span>Settings</button>
+                    <button class="logoutbutton" @click="logout()"><span class="material-symbols-outlined margin1">logout</span>Log out</button>
                 </div>
             </div>
         </section>
@@ -555,7 +553,7 @@ export default {
     width: 100%;
     justify-content: center;
     align-items: center;
-    margin: 25px 0 0 0;
+    margin: 0px 0 0 0;
 }
 
 
@@ -563,7 +561,9 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     height: fit-content;
+    margin: 10px 0;
     width: 340px;
     height: auto;
 }
@@ -630,6 +630,12 @@ export default {
     .statsblock {
         height: fit-content;
         margin: 15px 0 0 0;
+    }
+}
+
+@media screen and (max-width: 340px) {
+    .statsblock {
+        width: 100%;
     }
 }
 
