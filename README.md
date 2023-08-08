@@ -105,7 +105,7 @@
   - [x] Story tree as storymous logo 
   - [x] Pixel art themed site
   - [x] Following color patterns across components
-- [ ] User profiles
+- [x] User profiles
   - [x] Visiting user profiles
   - [x] Check profile stats (Following, Followers, Posts)
   - [x] User bio
@@ -116,8 +116,8 @@
     - [x] Changing bio
     - [x] Changing profile color scheme
   - [x] User posts feed
-  - [ ] Responsive user profile box
-  - [ ] Specific data visualization upon stat hover (e.g. show name of followers)
+  - [x] Responsive user profile box
+  - [x] Specific data visualization upon stat hover (e.g. show name of followers)
 - [ ] Story page
   - [x] Includes prologue
   - [x] Option to mount chapters on current storyline
