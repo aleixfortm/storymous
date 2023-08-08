@@ -6,12 +6,22 @@
         <div class="main-title-container">
           <h2 class="main-title">{{ post.title.toUpperCase() }}</h2>
         </div>
+        <div class="tag-section">
+            <post-tag v-for="tag in post.tags" :key="tag" :clickable="false" :tag="tag"></post-tag>
+        </div> 
         <div class="story-stats">
-            <div class="story-stats-section"><span class="material-symbols-outlined margin1">nest_eco_leaf</span>{{ post.leaves.length }}</div>
+            <div class="story-stats-section">
+              <span class="material-symbols-outlined margin1 leaf-icon" 
+                    :class="[post.leaves.includes(currentUser) ? 'includes-leaf-icon' : '']"
+                    >nest_eco_leaf
+                  </span>
+                  {{ post.leaves.length }}
+              </div>
             <div class="story-stats-section"><span class="material-symbols-outlined margin1">bar_chart</span>{{ post.views }}</div>
             <div class="story-stats-section"><span class="material-symbols-outlined margin1">chat</span>{{ post.user_comments.length }}</div>
             <div class="story-stats-section"><span class="material-symbols-outlined margin1">share</span></div>
-        </div>   
+        </div>
+
         <chapteredprologue-container
           v-if="post"
             :_id="post._id"
@@ -108,6 +118,7 @@ import ChapteredprologueContainer from "@/components/layout/ChapteredprologueCon
 import WritechapterContainer from "@/components/layout/WritechapterContainer.vue";
 import AstronautMessage from "@/components/layout/messages/AstronautMessage.vue";
 import DisclaimerMessage from "@/components/layout/messages/DisclaimerMessage.vue";
+import PostTag from "@/components/layout/PostTag.vue";
 
 export default {
   components: {
@@ -117,7 +128,8 @@ export default {
     ContinuestoryContainer,
     ChapteredprologueContainer,
     WritechapterContainer,
-    DisclaimerMessage
+    DisclaimerMessage,
+    PostTag
   },
   data() {
     return {
@@ -135,7 +147,6 @@ export default {
     axios
       .get(`${API_BASE_URL}/post/${postId}`)
       .then(response => {
-        console.log(response.data)
         this.post = response.data.post;
         this.replies = response.data.replies;
         this.loading = false;
@@ -190,6 +201,44 @@ export default {
 </script>
 
 <style scoped>
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 200,
+  'opsz' 48
+}
+
+.leaf {
+    color: white;
+    transition: all 0.1s;
+}
+
+.leaf-icon {
+    color: rgb(0, 255, 106);
+}
+
+.leaf:hover .leaf-icon{
+    color: rgb(0, 255, 106);
+}
+
+.includes-leaf {
+    color: rgb(0, 255, 106);
+}
+
+.includes-leaf-icon {
+    font-variation-settings:
+    'FILL' 1,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 200
+}
+.tag-section {
+    display: flex;
+    justify-content: center;
+    margin: -8px 7px 0px 7px;
+    flex-wrap: wrap;
+}
 .separator {
     border-top: rgba(245, 245, 245, 0.075) 1px solid;
     width: 95%;
