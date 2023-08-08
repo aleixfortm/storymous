@@ -62,13 +62,15 @@
 import PostContainer from "@/components/layout/feedposts/PostContainer.vue";
 import FeedContainer from "@/components/layout/FeedContainer.vue";
 import AstronautMessage from "@/components/layout/messages/AstronautMessage.vue";
+import ContinuestoryfeedContainer from "@/components/layout/feedposts/ContinuestoryfeedContainer.vue";
 
 export default {
     props: ["posts", "loading"],
     components: {
         PostContainer,
         FeedContainer,
-        AstronautMessage
+        AstronautMessage,
+        ContinuestoryfeedContainer
     },
     methods: {
         formatContent(text) {

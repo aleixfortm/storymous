@@ -33,45 +33,24 @@
                 <div class="stats-container">
                     <div class="stats">
                         <div class="count-block">
-                            <b>Stories</b>
+                            <span class="material-symbols-outlined colored-icon">nest_eco_leaf</span>
+                            <div class="separator-stat"></div>
+                            <div class="count-block__num">{{ nLeaves }}</div>
+                        </div>
+                        <div class="count-block">
+                            <span class="material-symbols-outlined">history_edu</span>
+                            <div class="separator-stat"></div>
                             <div class="count-block__num">{{ nStories }}</div>
-                            <div class="tooltip" v-if="hoveringStories">
-                                <div class="tooltip-data">
-                                    <div>something</div>
-                                </div>
-                            </div>
                         </div>
                         <div class="count-block" @mouseover="followersMouseOver" @mouseout="followersMouseOut">
-                            <b>Followers</b>
+                            <span class="material-symbols-outlined">group</span>
+                            <div class="separator-stat"></div>
                             <div class="count-block__num">{{ userFollowers.length }}</div>
-                            <div class="tooltip" v-if="hoveringFollowers">
-                                <div v-if="userFollowers.length > 0">
-                                    <div v-for="user in userFollowers" class="tooltip-data" :key="user">
-                                        <div >
-                                            {{ user }}
-                                        </div>
-                                    </div>
-                                </div>
-                                <div v-else>
-                                    *empty*
-                                </div>
-                            </div>
                         </div>
                         <div class="count-block" @mouseover="followingMouseOver" @mouseout="followingsMouseOut">
-                            <b>Following</b>
+                            <span class="material-symbols-outlined">group_add</span>
+                            <div class="separator-stat"></div>
                             <div class="count-block__num">{{ userFollowing.length }}</div>
-                            <div class="tooltip" v-if="hoveringFollowing">
-                                <div v-if="userFollowing.length > 0">
-                                    <div v-for="user in userFollowing" class="tooltip-data" :key="user">
-                                        <div v-if="userFollowing.length > 0">
-                                            {{ user }}
-                                        </div>
-                                    </div>
-                                </div>
-                                <div v-else>
-                                    *empty*
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -190,6 +169,7 @@ export default {
             userColor: "",
             userBio: "",
             nStories: 0,
+            nLeaves: 0,
             userFollowers: 0,
             userFollowing: 0,
             isFollowing: null,
@@ -316,6 +296,7 @@ export default {
                     this.nStories = userData.started_stories + userData.continued_stories;
                     this.userFollowers = userData.followers;
                     this.userFollowing = userData.following;
+                    this.nLeaves = userData.leaves;
                     this.loading = false;
 
                     if (this.isLoggedIn) {
@@ -337,6 +318,19 @@ export default {
 </script>
 
 <style scoped>
+.colored-icon {
+    color: rgb(0, 255, 106);
+    font-variation-settings:
+    'FILL' 1,
+    'wght' 600,
+    'GRAD' 0,
+    'opsz' 200
+}
+
+.separator-stat {
+    margin: 0 2px;
+}
+
 .bio-content {
     color: black;
 }
@@ -398,7 +392,8 @@ export default {
 
 .stats-container {
     width: 100%;
-    padding: 0 10px;
+    padding: 0 35px;
+
 }
 
 .centered {
@@ -594,7 +589,7 @@ export default {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin: 20px 0 0 0;
+    margin: 10px 0px 0 0px;
     width: 100%;
     color: whitesmoke;
     transition: all 0.1s;
@@ -603,15 +598,14 @@ export default {
 .count-block {
     position: relative;
     display: flex;
-    flex-direction: column;
-    background-color: rgba(151, 151, 151, 0.192);
     padding: 5px;
     border-radius: 8px;
+    align-items: center;
     cursor: pointer;
 }
 
 .count-block:hover {
-    background-color: rgba(192, 192, 192, 0.192);
+    background-color: rgba(121, 121, 121, 0.089);
 }
 
 .bio-title {
