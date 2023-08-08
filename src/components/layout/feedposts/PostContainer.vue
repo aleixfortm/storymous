@@ -246,7 +246,7 @@ export default {
 .story-stats-section {
     display: flex;
     align-items: center;
-    margin-right: 25px;
+    margin: 0 12px;
     padding: 1px 6px 1px 1px;
 }
 

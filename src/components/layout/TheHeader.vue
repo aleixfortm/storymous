@@ -2,7 +2,6 @@
   <signin-dialog v-if="dialogShown === true && dialog === 'signin'" @close="toggleDialog" @signup="changeDialog('signup')" :key="'signin'"></signin-dialog>
   <signup-dialog v-else-if="dialogShown === true && dialog === 'signup'" @close="toggleDialog" @signin="changeDialog('signin')" :key="'signup'"></signup-dialog>
 
-
   <header>
       <nav>
           <div class="logo">
@@ -20,8 +19,18 @@
             <div class="material-symbols-outlined user-select-none icon" @click="showNotifications">search</div>
             <div class="material-symbols-outlined user-select-none icon" @click="showNotifications">notifications</div>
             <router-link :to="getProfileLink" class="userdata">
-              <div class="username">@{{ currentUser }}</div>
               <img class="userimg" v-if="userFetchedPicture" :src="imgSource" alt="astronaut">
+              <div class="user-data-container">
+                <div class="name-container">
+                  <div class="username">@{{ currentUser }}</div>
+                </div>
+                <div class="leave-container">
+                  <div class="leave-data">
+                    <span class="material-symbols-outlined custom-i">nest_eco_leaf</span>
+                    <div class="leaves-num">{{ nFetchedLeaves }}</div>
+                  </div>
+                </div>
+              </div>  
             </router-link>
           </div>
       </nav>
@@ -66,7 +75,7 @@ export default {
     },
   },
   computed: {
-      ...mapGetters('auth', ['isLoggedIn', 'currentUser', "userFetchedPicture", "colorFetched"]),
+      ...mapGetters('auth', ['isLoggedIn', 'currentUser', "userFetchedPicture", "colorFetched", "nFetchedLeaves"]),
       getProfileLink() {
         return '/user/' + this.currentUser;
       },
@@ -78,6 +87,34 @@ export default {
 </script>
 
 <style scoped>
+.leaves-num {
+  margin: 0 0 0 -2px;
+}
+
+.user-data-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: 0;
+}
+
+.leave-container {
+  margin: -2px 0 -2px 0;
+}
+.leave-data {
+  display: flex;
+  justify-content: left;
+  align-items: left;
+  margin: 0;
+}
+
+.name-container {
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  margin: 0;
+}
+
 .icon {
   color: rgba(245, 245, 245, 0.877);
   cursor: pointer;
@@ -90,9 +127,9 @@ export default {
   cursor: pointer;
   font-variation-settings:
   'FILL' 1,
-  'wght' 500,
+  'wght' 300,
   'GRAD' 0,
-  'opsz' 48
+  'opsz' 40
 }
 
 .material-symbols-outlined {
@@ -102,6 +139,16 @@ export default {
   'GRAD' 0,
   'opsz' 48
 }
+
+.custom-i {
+  height: fit-content;
+  font-variation-settings:
+  'FILL' 1,
+  'wght' 200,
+  'GRAD' -25,
+  'opsz' 0
+}
+
 
 .options {
   display: flex;
@@ -143,7 +190,7 @@ export default {
 
 .userdata {
   display: flex;
-  padding: 2px 5px 2px 0px;
+  padding: 1px 0px 1px 4px;
   font-family: inherit;
   color: rgb(0, 255, 98);
   cursor: pointer;
@@ -162,7 +209,7 @@ export default {
 
 .username {
   height: fit-content;
-  margin: 0 10px 0 10px;
+  margin: 0 5px 0 5px;
   color: rgb(185, 221, 255);
   font-weight: bold;
 }
@@ -172,7 +219,7 @@ export default {
 }
 
 .userimg {
-  height: 30px;
+  height: 35px;
   width: auto;
   border-radius: 100%;
 }
@@ -264,5 +311,7 @@ li {
     display: none;
   }
 }
+
+
 
 </style>

@@ -21,7 +21,6 @@
             <div class="story-stats-section"><span class="material-symbols-outlined margin1">chat</span>{{ post.user_comments.length }}</div>
             <div class="story-stats-section"><span class="material-symbols-outlined margin1">share</span></div>
         </div>
-
         <chapteredprologue-container
           v-if="post"
             :_id="post._id"
@@ -248,14 +247,14 @@ export default {
 .story-stats {
     display: flex;
     color: whitesmoke;
-    margin: 5px 0 2px 5px;
+    margin: 5px 5px 2px 5px;
     justify-content: center;
 }
 
 .story-stats-section {
     display: flex;
     align-items: center;
-    margin-right: 25px;
+    margin: 0 12px;
     padding: 1px 6px 1px 1px;
 }
 

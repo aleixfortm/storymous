@@ -5,7 +5,22 @@
         <div v-for="chapter in chapterList" :key="chapter._id">
           <template v-if="chapter.type === 'prologue'">
             <div class="main-title-container">
-              <h2 class="main-title">{{ chapter.title.toUpperCase() }}</h2>
+                <h2 class="main-title">{{ chapter.title.toUpperCase() }}</h2>
+            </div>
+            <div class="tag-section">
+                <post-tag v-for="tag in chapter.tags" :key="tag" :clickable="false" :tag="tag"></post-tag>
+            </div> 
+            <div class="story-stats">
+              <div class="story-stats-section">
+                <span class="material-symbols-outlined margin1 leaf-icon" 
+                      :class="[postData.leaves.includes(currentUser) ? 'includes-leaf-icon' : '']"
+                      >nest_eco_leaf
+                    </span>
+                    {{ totalLeaves }}
+                </div>
+                <div class="story-stats-section"><span class="material-symbols-outlined margin1">bar_chart</span>{{ postData.views }}</div>
+                <div class="story-stats-section"><span class="material-symbols-outlined margin1">chat</span>{{ postData.user_comments.length }}</div>
+                <div class="story-stats-section"><span class="material-symbols-outlined margin1">share</span></div>
             </div>   
             <chapteredprologue-container
               :_id="chapter._id"
@@ -16,6 +31,7 @@
               :postComment="chapter.comment"
               :date="chapter.date"
               :picture="chapter.picture"
+              :feedMode="false"
               class="story__article1">
             </chapteredprologue-container>
           </template>
@@ -31,7 +47,6 @@
               :postComment="chapter.comment"
               :date="chapter.date"
               :picture="chapter.picture"
-              :tags="chapter.tags"
               class="story__article2">
             </chaptered-container>
           </template>
@@ -108,8 +123,8 @@
     <feed-container v-else>
       <div class="loader-container">
         <div class="spinner-border text-light mb-3" style="width: 5rem; height: 5rem;" role="status">
-                <span class="visually-hidden">Loading...</span>
-            </div>
+            <span class="visually-hidden">Loading...</span>
+        </div>
         <span class="loader-text">Adding chapters to main story...</span>
       </div>
     </feed-container>
@@ -128,6 +143,7 @@ import CommentContainer from "@/components/layout/CommentContainer.vue";
 import ContinuestoryContainer from "@/components/layout/ContinuestoryContainer.vue";
 import WritechapterContainer from "@/components/layout/WritechapterContainer.vue";
 import AstronautMessage from "@/components/layout/messages/AstronautMessage.vue";
+import PostTag from "@/components/layout/PostTag.vue";
 
 export default {
   components: {
@@ -138,7 +154,8 @@ export default {
     ContinuestoryContainer,
     WritechapterContainer,
     AstronautMessage,
-    DisclaimerMessage
+    DisclaimerMessage,
+    PostTag
   },
   data() {
     return {
@@ -149,7 +166,9 @@ export default {
       loading: true,
       replies: [],
       loadingComments: true,
-      showContinueContainer: false
+      showContinueContainer: false,
+      postData: {},
+      totalLeaves: 0
     }
   },
   mounted() {
@@ -157,19 +176,22 @@ export default {
     axios
       .get(`${API_BASE_URL}/chapter/${chapterId}`)
       .then(response => {
-        console.log(response.data)
         this.chapterList = response.data;
         this.loading = false;
-        const postId = this.chapterList[0]._id.$oid;
+        this.postData = this.chapterList[0];
+        this.totalLeaves += this.postData.leaves.length;
+
+        this.chapterList.forEach((chapter) => {
+          this.totalLeaves += chapter.leaves.length;
+        });
         axios
-          .get(`${API_BASE_URL}/post/${postId}`)
+          .get(`${API_BASE_URL}/post/${this.postData._id.$oid}`)
           .then(response => {
-            console.log(response.data)
             this.replies = response.data.replies;
             this.loadingComments = false;
           })
       })
-    
+      
   },
   computed: {
     ...mapGetters('auth', ['isLoggedIn', 'currentUser', "userFetchedPicture", "colorFetched"]),
@@ -199,7 +221,6 @@ export default {
         .post(`${API_BASE_URL}/new_comment`, data_packet)
         .then(response => {
           const dataPayload = response.data;
-          //const comment_data = dataPayload.data_payload;
 
           this.replies.unshift(dataPayload.comment_data); // Add the new comment to the beginning of the replies array
           this.formcomment = ''; // Clear the comment input field
@@ -219,6 +240,69 @@ export default {
 </script>
 
 <style scoped>
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 200,
+  'opsz' 48
+}
+
+.leaf {
+    color: white;
+    transition: all 0.1s;
+}
+
+.leaf-icon {
+    color: rgb(0, 255, 106);
+}
+
+.leaf:hover .leaf-icon{
+    color: rgb(0, 255, 106);
+}
+
+.includes-leaf {
+    color: rgb(0, 255, 106);
+}
+
+.includes-leaf-icon {
+    font-variation-settings:
+    'FILL' 1,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 200
+}
+.tag-section {
+    display: flex;
+    justify-content: center;
+    margin: -8px 7px 0px 7px;
+    flex-wrap: wrap;
+}
+.separator {
+    border-top: rgba(245, 245, 245, 0.075) 1px solid;
+    width: 95%;
+    margin: auto;
+}
+
+.story-stats {
+    display: flex;
+    color: whitesmoke;
+    margin: 5px 5px 2px 5px;
+    justify-content: center;
+}
+
+.story-stats-section {
+    display: flex;
+    align-items: center;
+    margin: 0 12px;
+    padding: 1px 6px 1px 1px;
+}
+
+.story-stats-section:hover {
+    background-color: rgba(194, 194, 194, 0.137);
+    border-radius: 10px;
+}
+
 .onomatopoeia {
     color: whitesmoke;
     font-weight: bold;
@@ -349,12 +433,12 @@ export default {
 }
 
 .story__article1:hover, .story__article2:hover {
-    background-color: rgba(105, 105, 105, 0.247);
+  background-color: rgba(105, 105, 105, 0.05);
 
 }
 
-.story__article:hover {
-    background-color: rgba(105, 105, 105, 0.247);
+.story__article1:hover {
+  background-color: rgba(105, 105, 105, 0.05);
 
 }
 
