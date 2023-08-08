@@ -356,9 +356,6 @@ export default {
     font-size: small;
 }
 }
-/*
-
-*/
 
 .story_form {
     width: 100%;

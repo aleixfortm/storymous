@@ -6,7 +6,7 @@
           <h2 class="main-title">{{ post.title.toUpperCase() }}</h2>
         </div>
         <div class="story-stats">
-            <div class="story-stats-section"><span class="material-symbols-outlined margin1">nest_eco_leaf</span>N/A</div>
+            <div class="story-stats-section"><span class="material-symbols-outlined margin1">nest_eco_leaf</span>{{ post.leaves.length }}</div>
             <div class="story-stats-section"><span class="material-symbols-outlined margin1">bar_chart</span>{{ post.views }}</div>
             <div class="story-stats-section"><span class="material-symbols-outlined margin1">chat</span>{{ post.user_comments.length }}</div>
             <div class="story-stats-section"><span class="material-symbols-outlined margin1">share</span></div>
@@ -224,7 +224,7 @@ export default {
 }
 
 .story__article:hover {
-    background-color: rgba(105, 105, 105, 0.247);
+    background-color: rgba(105, 105, 105, 0.041);
 
 }
 
@@ -281,7 +281,7 @@ export default {
 
 .story-container {
   border: hsla(0,0%,51%,.322) 1px solid;
-  border-radius: 10px 10px 0 0;
+  border-radius: 2px 2px 0 0;
   background-color: rgb(43, 43, 46);
 }
 

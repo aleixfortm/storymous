@@ -310,7 +310,7 @@ export default {
 
 .story-container {
   border: hsla(0,0%,51%,.322) 1px solid;
-  border-radius: 10px 10px 0 0;
+  border-radius: 2px 2px 0 0;
   background-color: rgb(43, 43, 46);
 }
 

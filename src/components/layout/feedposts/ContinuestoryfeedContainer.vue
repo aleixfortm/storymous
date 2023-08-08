@@ -37,7 +37,7 @@
                 <div class="separator"></div>
                 <div class="story-stats user-select-none">
                     <div class="story-stats-section leaf" :class="[leavesMutable.includes(currentUser) ? 'includes-leaf' : '']" @click.prevent="increaseLeaves">
-                        <span class="material-symbols-outlined margin1 leaf-icon" >
+                        <span class="material-symbols-outlined margin1 leaf-icon" :class="[leavesMutable.includes(currentUser) ? 'includes-leaf-icon' : '']">
                             nest_eco_leaf
                         </span>
                         {{ leavesMutable.length }}
@@ -157,9 +157,21 @@ export default {
 </script>
 
 <style scoped>
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 200,
+  'opsz' 48
+}
+
 .leaf {
     color: white;
     transition: all 0.1s;
+}
+
+.leaf-icon {
+    color: rgb(0, 255, 106);
 }
 
 .leaf:hover .leaf-icon{
@@ -168,6 +180,14 @@ export default {
 
 .includes-leaf {
     color: rgb(0, 255, 106);
+}
+
+.includes-leaf-icon {
+    font-variation-settings:
+    'FILL' 1,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 200
 }
 
 .view {

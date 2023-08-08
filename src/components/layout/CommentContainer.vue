@@ -1,17 +1,17 @@
-<template>
+<template> to=""
     <div>
         <div class="comment__user-container">
             <div><img src="../../assets/img/reply_icon3.png" alt="reply icon" style="max-width: 25px; margin: 0 0px 0 0px; transform: scaleX(-1); "></div>
             <div class="comment__user-img-container">
-                <router-link to="" @click.stop="navigateToUser">
+                <span @click.stop="navigateToUser">
                     <img :src="imgSource" v-if="picture" alt="Profile picture" class="comment__user-img">
-                </router-link>
+                </span>
             </div> 
             <div class="story__user-info-container">
                 <div class="comment__username cur-pnt"> 
-                    <router-link to="" @click.stop="navigateToUser" style="color: inherit; text-decoration: none;">
+                    <span @click.stop="navigateToUser" style="color: inherit; text-decoration: none;">
                         <span class="lower"><b>@</b></span><b class="story__user-name">{{ username }}</b>
-                    </router-link>
+                    </span>
                         <span class="comment__username-date lower cur-def">· {{ date }}</span>
                 </div>
                 <div class="comment__user-comment-container"><div class="comment__user-comment cur-def">{{ content }}</div></div>

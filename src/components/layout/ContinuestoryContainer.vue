@@ -1,20 +1,20 @@
 <template>
     <div class="background-story-reply2">
-        <router-link to="" @click="navigateToPost" style="text-decoration: none;" >
+        <span @click="navigateToPost" style="text-decoration: none;" >
             <div class="story__user-container2">
                 <div class="sum-icon-container2">
                     <img src="../../assets/img/plus_icon4.png" alt="Plus icon" class="sum-icon2">
                 </div>
                 <div class="story__user-img-container2">
-                    <router-link to="" @click.stop="navigateToUser" style="color: inherit; text-decoration: none;">
+                    <span @click.stop="navigateToUser" style="color: inherit; text-decoration: none;">
                         <img :src="imgSource" alt="pic" class="story__user-img2">
-                    </router-link>
+                    </span>
                 </div> 
                 <div class="story__user-info-container2">
                     <div class="story__username2 cur-pnt"> 
-                        <router-link to="" @click.stop="navigateToUser" style="color: inherit; text-decoration: none;">
+                        <span @click.stop="navigateToUser" style="color: inherit; text-decoration: none;">
                             <span class="lower" style="color: whitesmoke;"><b>@</b></span><b class="story__user-name2">{{ username }}</b>
-                        </router-link>
+                        </span>
                             <span class="story__username-date2 lower cur-def">· {{ date }} </span>
                     </div>
                     <div class="story__user-comment-container2"><div class="story__user-comment2 cur-def"> {{ postComment }} </div></div>
@@ -28,7 +28,7 @@
                     {{ formatStory(content) }}
                 </p>
             </article>
-        </router-link>
+        </span>
     </div>
 </template>
 

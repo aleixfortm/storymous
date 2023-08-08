@@ -1,18 +1,18 @@
 <template>
     <div>
         <div :class="outlineClass">
-            <router-link to="" @click="navigateToPost" style="text-decoration: none;" >
+            <span @click="navigateToPost" style="text-decoration: none;" >
                 <div class="story__user-container">
                     <div class="story__user-img-container">
-                        <router-link to="" @click.stop="navigateToUser" style="color: inherit; text-decoration: none;">
+                        <span @click.stop="navigateToUser" style="color: inherit; text-decoration: none;">
                             <img :src="imgSource" v-if="picture" alt="pic" class="story__user-img">
-                        </router-link>
+                        </span>
                     </div> 
                     <div class="story__user-info-container">
                         <div class="story__username cur-pnt"> 
-                            <router-link to="" @click.stop="navigateToUser" style="color: inherit; text-decoration: none;">
+                            <span @click.stop="navigateToUser" style="color: inherit; text-decoration: none;">
                                 <span class="lower" style="color: whitesmoke;"><b>@</b></span><b class="story__user-name">{{ username }}</b>
-                            </router-link>
+                            </span>
                                 <span class="story__username-date lower cur-def">· {{ date }} </span>
                         </div>
                     </div>
@@ -25,7 +25,7 @@
                         {{ formatStory(content) }}
                     </p>
                 </article>
-            </router-link>
+            </span>
         </div>
     </div>
 </template>
