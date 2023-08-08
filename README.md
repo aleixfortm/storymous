@@ -15,7 +15,64 @@
 <br>
 <br>
 
-[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/G2G7NPEM9)  <br>Time for a coffee? Help me maintain and improve the infrastructure cost of the project!
+<table align="center" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td align="center">
+      <!-- Replace YOUR_KOFI_BUTTON_CODE with your actual Ko-fi button code -->
+      <a href="https://ko-fi.com/G2G7NPEM9" target="_blank">
+        <img src="https://ko-fi.com/img/githubbutton_sm.svg" alt="ko-fi" />
+      </a>
+    </td>
+  </tr>
+</table>
+<p align="center"><strong>Time for a coffee? Help me improve the infrastructure cost of this project!</strong></p>
+
+## Preview 
+
+###  **<p align="center">Explore stories form the community</p>**
+<p align="center">
+  <img src="https://github.com/aleixfortm/storymous/assets/95043218/947572e2-b26c-455b-86cb-bdedb42dcc90" alt="storymous_tree" width="600" height="auto">
+</p>
+
+###  **<p align="center">Log in and start contributing</p>**
+<p align="center">
+  <img src="https://github.com/aleixfortm/storymous/assets/95043218/858a0395-2b66-4daf-9daa-2fae0e7074db" alt="storymous_tree" width="600" height="auto">
+</p>
+
+###  **<p align="center">Keep track of your stats and posts on your profile page</p>**
+<p align="center">
+  <img src="https://github.com/aleixfortm/storymous/assets/95043218/56b078c3-d0e4-471f-83ac-f3a95e82caed" alt="storymous_tree" width="600" height="auto">
+</p>
+
+###  **<p align="center">Visit user profiles and follow them</p>**
+<p align="center">
+  <img src="https://github.com/aleixfortm/storymous/assets/95043218/78ed9ddd-27fb-4643-aa9b-5270229c2134" alt="storymous_tree" width="600" height="auto">
+</p>
+
+###  **<p align="center">Customize your profile</p>**
+<p align="center">
+  <img src="https://github.com/aleixfortm/storymous/assets/95043218/ad629717-ea9a-4008-b40e-33c1c19d789e" alt="storymous_tree" width="600" height="auto">
+</p>
+
+###  **<p align="center">Start new stories and customize your post with tags and comments</p>**
+<p align="center">
+  <img src="https://github.com/aleixfortm/storymous/assets/95043218/2153bee4-a768-44ba-ad30-17707a9ff5b6" alt="storymous_tree" width="600" height="auto">
+</p>
+
+###  **<p align="center">Read stories, mount and write chapters, and create storylines</p>**
+<p align="center">
+  <img src="https://github.com/aleixfortm/storymous/assets/95043218/8e6e87fc-3f10-4b92-983b-be048518422c" alt="storymous_tree" width="600" height="auto">
+</p>
+
+###  **<p align="center">Write comments on storylines</p>**
+<p align="center">
+  <img src="https://github.com/aleixfortm/storymous/assets/95043218/032611a4-c875-4e87-814d-426884786162" alt="storymous_tree" width="600" height="auto">
+</p>
+
+
+
+
+
 
 
 
@@ -86,17 +143,8 @@
 - [x] <code>Solved!</code> User profile box is not fully responsive, and screens smaller than 400px display a bit eerie. Not urgent fix.
 
 
-## Preview 
 
-![set 1](https://github.com/aleixfortm/storymous/assets/95043218/5d768ff0-5682-44d0-93b1-b1fa6cea083a)
 
-![set2](https://github.com/aleixfortm/storymous/assets/95043218/0d88ab8f-ec67-4863-9f3f-3e3e757807c0)
-
-![set3](https://github.com/aleixfortm/storymous/assets/95043218/806b67d4-a5be-48c8-908e-90fe7648233a)
-
-![set4](https://github.com/aleixfortm/storymous/assets/95043218/ddfc9338-f102-493e-97d0-12abb4a53f71)
-
-![set5](https://github.com/aleixfortm/storymous/assets/95043218/333ba1ad-a6ec-4fb6-a900-735ea2026d67)
 
 
 ## Project setup
