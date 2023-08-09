@@ -28,7 +28,7 @@ export default {
     padding: 0px 5px;
     font-weight: bold;
     text-shadow: 0px 0px 1px rgba(0, 0, 0, 0.3);
-    background-color: rgb(0, 172, 77);
+    background-color: rgb(172, 0, 0);
     justify-content: center;
     height: 25px;
     cursor: pointer;
@@ -36,7 +36,7 @@ export default {
 }
 
 .button:hover {
-    background-color: rgba(0, 143, 64, 0.685);
+    background-color: rgba(139, 0, 0, 0.719);
 }
 
 .custom-margin {
@@ -49,7 +49,7 @@ export default {
     color: rgb(255, 255, 255);
     cursor: default;
     margin: 10px 10px 10px 0;
-    background-color: rgba(0, 143, 64, 0.685);
+    background-color: rgba(143, 0, 0, 0.685);
 }
 
 .submit {

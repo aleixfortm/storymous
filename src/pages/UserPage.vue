@@ -68,8 +68,16 @@
                     <div class="bio-content">{{ userBio }}</div>
                 </div>
                 <div v-if="ownProfile() && isLoggedIn" class="miscbuttons">
+                    <!--
                     <button class="settingsbutton" @click="goToSettings"><span class="material-symbols-outlined margin1">settings</span>Settings</button>
                     <button class="logoutbutton" @click="logout()"><span class="material-symbols-outlined margin1">logout</span>Log out</button>
+                    -->
+                    <settings-button :text="'SETTINGS'">
+                        <span class="material-symbols-outlined margin1">settings</span>
+                    </settings-button>
+                    <logout-button :text="'LOG OUT'">
+                        <span class="material-symbols-outlined margin1">logout</span>
+                    </logout-button>
                 </div>
             </div>
         </section>
@@ -153,6 +161,8 @@ import PostContainer from "@/components/layout/feedposts/PostContainer.vue";
 import ProfilePicture from '@/components/layout/ProfilePicture.vue';
 import ContinuestoryfeedContainer from '@/components/layout/feedposts/ContinuestoryfeedContainer.vue';
 import AstronautMessage from '@/components/layout/messages/AstronautMessage.vue';
+import SettingsButton from '@/components/layout/SettingsButton.vue';
+import LogoutButton from '@/components/layout/LogoutButton.vue';
 
 export default {
     components: {
@@ -160,7 +170,9 @@ export default {
         PostContainer,
         ProfilePicture,
         ContinuestoryfeedContainer,
-        AstronautMessage
+        AstronautMessage,
+        SettingsButton,
+        LogoutButton
     },
     setup() {
         const router = useRouter();
@@ -449,9 +461,9 @@ export default {
     height: 30px;
     align-items: center;
     justify-content: flex-end;
-    width: 80%;
+    width: 240px;
     align-self: end;
-    
+    justify-content: space-around;
 }
 
 .logoutbutton {

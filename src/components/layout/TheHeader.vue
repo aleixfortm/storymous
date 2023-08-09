@@ -1,7 +1,6 @@
 <template>
   <signin-dialog v-if="dialogShown === true && dialog === 'signin'" @close="toggleDialog" @signup="changeDialog('signup')" :key="'signin'"></signin-dialog>
   <signup-dialog v-else-if="dialogShown === true && dialog === 'signup'" @close="toggleDialog" @signin="changeDialog('signin')" :key="'signup'"></signup-dialog>
-
   <header>
       <nav>
           <div class="logo">
@@ -16,7 +15,7 @@
           </div>
           <div v-else class="options">
             <div class="material-symbols-outlined user-select-none icon" @click="goHome">home</div>
-            <div class="material-symbols-outlined user-select-none icon" @click="showNotifications">search</div>
+            <div class="material-symbols-outlined user-select-none icon" @click="newstoryShown = !newstoryShown">search</div>
             <div class="material-symbols-outlined user-select-none icon" @click="showNotifications">notifications</div>
             <router-link :to="getProfileLink" class="userdata">
               <img class="userimg" v-if="userFetchedPicture" :src="imgSource" alt="astronaut">
@@ -53,7 +52,8 @@ export default {
   data() {
     return {
       dialogShown: false,
-      dialog: 'signin'
+      dialog: 'signin',
+      newstoryShown: false
     }
   },
   components: {

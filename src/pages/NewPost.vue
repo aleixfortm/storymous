@@ -30,7 +30,7 @@
 
               </div>
               <div class="buttonbox">
-                <submit-button :text="'SUBMIT'" :margin="true" :buttonLoading="buttonLoading" :buttonType="'submit'" :color="'green'" @click="load">
+                <submit-button :text="'SUBMIT'" :margin="true" :buttonLoading="buttonLoading">
                   <span class="material-symbols-outlined">outgoing_mail</span>
                 </submit-button>
               </div>
@@ -102,12 +102,12 @@ export default {
         username: this.currentUser,
         tags: this.selectedTags
       }
-      this.loading = true;
+      this.buttonLoading = true;
 
       axios
       .post(`${API_BASE_URL}/new_post`, data_packet)
       .then(response => {
-          this.loading = false;
+          this.buttonLoading = false;
           const data = response.data;
           if (data.status === "Success") {
               router.push("/home")

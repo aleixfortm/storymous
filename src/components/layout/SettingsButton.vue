@@ -27,8 +27,8 @@ export default {
     border-radius: 4px;
     padding: 0px 5px;
     font-weight: bold;
-    text-shadow: 0px 0px 1px rgba(0, 0, 0, 0.3);
-    background-color: rgb(0, 172, 77);
+    text-shadow: 0px 0px 1px rgba(31, 31, 31, 0.3);
+    background-color: rgb(34, 34, 34);
     justify-content: center;
     height: 25px;
     cursor: pointer;
@@ -36,7 +36,7 @@ export default {
 }
 
 .button:hover {
-    background-color: rgba(0, 143, 64, 0.685);
+    background-color: rgba(58, 58, 58, 0.514);
 }
 
 .custom-margin {
