@@ -366,11 +366,13 @@ export default {
   color: #fffb00f6;
   text-align: center;
   width: auto;
+  margin: 0;
 }
 
 .followbutton.following:hover {
   background-color: #ff7b006e;
   color: #fffb00f6;
+  margin: 0;
 }
 
 .separator {
@@ -430,7 +432,7 @@ export default {
     color: rgb(0, 255, 98);
     cursor: pointer;
     font-size: 15px;
-    margin: 10px 10px 10px 10px;
+    margin: 0 0 0 8px;
     background-color: #59ff9138;
     border-radius: 4px;
     transition: all 0.1s;
@@ -449,6 +451,7 @@ export default {
     justify-content: flex-end;
     width: 80%;
     align-self: end;
+    
 }
 
 .logoutbutton {
@@ -503,7 +506,7 @@ export default {
     flex-direction: row;
     background-color: rgb(119 119 119 / 19%);
     padding: 10px;
-    border-radius: 10px;
+    border-radius: 5px;
 }
 
 .profile-box.salmon {
@@ -582,7 +585,7 @@ export default {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin: 10px 0px 0 0px;
+    margin: 5px 0px 0 0px;
     border-radius: 2px;
     padding: 5px;
     width: 100%;

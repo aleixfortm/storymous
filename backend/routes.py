@@ -143,7 +143,8 @@ def new_post():
         "title": post.get("title"),
         "content": post.get("body"),
         "username": post.get("username"),
-        "tags": post.get("tags")
+        "tags": post.get("tags"),
+        "leaves": [post.get("username")]
     }
 
     post_object = PostModel(**post_req_data)
@@ -426,7 +427,9 @@ def new_chapter():
         "chapter_name": data["title"],
         "chapter_num": data["chapterNum"],
         "content": data["body"],
-        "comment": data["comment"]
+        "comment": data["comment"],
+        "tags": data["tags"],
+        "leaves": [data["username"]]
     }
 
     # create chapter object from chapter model schema and save it to db

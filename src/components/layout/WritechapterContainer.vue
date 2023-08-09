@@ -11,7 +11,6 @@
                 </div>
             </div>
             <div class="newstory_title marginated">
-
                 <input id="title" class="title-for-story" v-model="formtitle" type="text" placeholder="Chapter name" required>
             </div>
             <div class="newstory_title">
@@ -26,13 +25,12 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import { API_BASE_URL } from '../../config';
-import axios from 'axios';
+import axios, { API_BASE_URL } from '../../config';
 import router from '@/router';
 
   export default {
     name: "NewPost",
-    props: ["chapterNum", "username", "postId", "postTitle", "parentChapterId"],
+    props: ["chapterNum", "username", "postId", "postTitle", "parentChapterId", "tags"],
     data() {
       return {
         formtitle: "",
@@ -61,10 +59,10 @@ import router from '@/router';
           storyId: this.postId.$oid,
           chapterNum: this.chapterNum,
           parentChapterId: parentIdCheck,
-          postTitle: this.postTitle
+          postTitle: this.postTitle,
+          tags: this.tags
         }
 
-        console.log(data_packet)
         axios.post(`${API_BASE_URL}/new_chapter`, data_packet)
         .then(response => {
             this.loading = false;

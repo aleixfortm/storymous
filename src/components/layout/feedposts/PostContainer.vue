@@ -46,7 +46,6 @@
                     </div>
                     <div class="story-stats-section view"><span class="material-symbols-outlined margin1 view-icon">bar_chart</span>{{ views }}</div>
                     <div class="story-stats-section comment"><span class="material-symbols-outlined margin1 comment-icon">chat</span>{{ comments.length }}</div>
-                    <div class="story-stats-section share"><span class="material-symbols-outlined margin1 share-icon">share</span></div>
                 </div>
             </span>
         </div>

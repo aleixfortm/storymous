@@ -61,7 +61,8 @@
           :username="currentUser"
           :postId="chapterList[0]._id"
           :postTitle="chapterList[0].title"
-          :parentChapterId="chapterList[chapterList.length - 1]._id">
+          :parentChapterId="chapterList[chapterList.length - 1]._id"
+          :tags="chapterList[0].tags">
         </writechapter-container>
         </span>   
       </div>
