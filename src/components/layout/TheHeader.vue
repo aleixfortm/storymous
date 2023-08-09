@@ -294,7 +294,8 @@ li {
   margin: 0 20px 0 20px;
   background-color: #ffffff1e;
   border-radius: 4px;
-  transition: all 0.1s;
+  font-weight: bold;
+  transition: all 0.2s;
 }
 
 .loginButton:hover {
