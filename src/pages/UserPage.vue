@@ -68,14 +68,10 @@
                     <div class="bio-content">{{ userBio }}</div>
                 </div>
                 <div v-if="ownProfile() && isLoggedIn" class="miscbuttons">
-                    <!--
-                    <button class="settingsbutton" @click="goToSettings"><span class="material-symbols-outlined margin1">settings</span>Settings</button>
-                    <button class="logoutbutton" @click="logout()"><span class="material-symbols-outlined margin1">logout</span>Log out</button>
-                    -->
-                    <settings-button :text="'SETTINGS'">
+                    <settings-button :text="'SETTINGS'" @click="goToSettings">
                         <span class="material-symbols-outlined margin1">settings</span>
                     </settings-button>
-                    <logout-button :text="'LOG OUT'">
+                    <logout-button :text="'LOG OUT'" @click="logout()">
                         <span class="material-symbols-outlined margin1">logout</span>
                     </logout-button>
                 </div>
