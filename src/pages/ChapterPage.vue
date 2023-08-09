@@ -51,9 +51,9 @@
             </chaptered-container>
           </template>
         </div>
-        <span v-if="isLoggedIn">
+        <div v-if="isLoggedIn">
           <div class="add-story-container" @click="toggleContinueContainer">
-            <h2 class="add-story"> WRITE CHAPTER {{ chapterList[chapterList.length - 1].chapter_num + 1 }} FOR THIS STORYLINE</h2>
+            <h2 class="add-story"> WRITE <span class="highlight1">CHAPTER</span> <span class="highlight1 margin-s">{{ chapterList[chapterList.length - 1].chapter_num + 1 }}</span> FOR THIS STORYLINE</h2>
           </div>
           <writechapter-container
           v-if="showContinueContainer"
@@ -64,7 +64,7 @@
           :parentChapterId="chapterList[chapterList.length - 1]._id"
           :tags="chapterList[0].tags">
         </writechapter-container>
-        </span>   
+      </div>   
       </div>
       <div class="add-comment-box" v-if="isLoggedIn">
         <form @submit.prevent="submitComment">
@@ -74,7 +74,9 @@
                 </div>
                 <textarea id="comment" v-model="formcomment" placeholder="Add a comment..." rows="1" :style="{ height: textareaHeight }" required></textarea>
                 <div class="buttonbox">
-                  <button class="postbutton" type="submit">Comment</button>
+                  <comment-button :text="'COMMENT'" :margin="true">
+                    <span class="material-symbols-outlined">chat_bubble</span>
+                  </comment-button>
                 </div>
             </div>
         </form>
@@ -145,6 +147,7 @@ import ContinuestoryContainer from "@/components/layout/ContinuestoryContainer.v
 import WritechapterContainer from "@/components/layout/WritechapterContainer.vue";
 import AstronautMessage from "@/components/layout/messages/AstronautMessage.vue";
 import PostTag from "@/components/layout/PostTag.vue";
+import CommentButton from "@/components/layout/CommentButton.vue";
 
 export default {
   components: {
@@ -156,7 +159,8 @@ export default {
     WritechapterContainer,
     AstronautMessage,
     DisclaimerMessage,
-    PostTag
+    PostTag,
+    CommentButton
   },
   data() {
     return {
@@ -241,6 +245,17 @@ export default {
 </script>
 
 <style scoped>
+.margin-s {
+  margin-left: -6px;
+}
+
+.highlight1 {
+  background-color: bisque;
+    color: black;
+    border-radius: 2px;
+    padding: 0 3px;
+}
+
 .material-symbols-outlined {
   font-variation-settings:
   'FILL' 0,
@@ -356,13 +371,13 @@ export default {
     text-align: center;
     border-top: 1px rgba(129, 129, 129, 0.322) solid;
     padding: 2px 0 0 0;
-    background-color: rgba(88, 110, 98, 0.349);
+    background-color: rgba(85, 85, 85, 0.753);
     user-select: none;
     transition: 0.2s all;
 }
 
 .add-story-container:hover {
-  background-color: rgba(105, 105, 105, 0.247);
+  background-color: rgba(122, 122, 122, 0.247);
   cursor: pointer;
 }
 
@@ -374,6 +389,7 @@ export default {
 .add-story {
     color: rgb(255, 255, 255);
     font-size: 16px;
+    font-weight: bold;
     margin: 10px 0px 10px 0px;
 
 }
@@ -529,6 +545,8 @@ background-color: #94949425;
 .buttonbox {
   align-self: stretch;
   display: flex;
+  justify-content: center;
+  align-items: center;
   }
 
   .postimage {

@@ -17,8 +17,15 @@
                 <textarea id="body" v-model="formbody" placeholder="Chapter content" required></textarea>
             </div>
             <div class="buttonbox">
+              <submit-button :text="'SUBMIT'" :buttonLoading="loading" :margin="true">
+                <span class="material-symbols-outlined">outgoing_mail</span>
+              </submit-button>
+            </div>
+            <!--
+            <div class="buttonbox">
                 <button :class="{ 'postbutton': true, 'disabled': isPostButtonDisabled }" :disabled="isPostButtonDisabled" type="submit">Submit</button>
             </div>
+            -->
         </form>
     </div>
 </template>
@@ -27,9 +34,13 @@
 import { mapGetters } from 'vuex';
 import axios, { API_BASE_URL } from '../../config';
 import router from '@/router';
+import SubmitButton from './SubmitButton.vue';
 
   export default {
     name: "NewPost",
+    components: {
+      SubmitButton
+    },
     props: ["chapterNum", "username", "postId", "postTitle", "parentChapterId", "tags"],
     data() {
       return {
