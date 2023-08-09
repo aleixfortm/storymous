@@ -3,6 +3,9 @@
   <dialog open>
     <div class="dialog-div"> <b>Sign Up</b> </div>
     <span v-if="errorMessage" class="error-message">User already exists</span>
+    <!--
+    <span class="p-1">You are now creating a new account</span>
+    -->
     <form @submit.prevent="submitForm">
         <div class="form--control">
             <input 
@@ -44,11 +47,10 @@
           @blur="passTwoFocused  = false" 
           id="repeatPassword" name="repeatPassword" type="password" ref="repeatPasswordInput" placeholder="Repeat password">
           <span v-if="passTwoFocused" class="requirements" :class="requirementsPassTwo">Passwords match</span>
-          <span v-else class="requirements" :class="requirementsPassTwo"></span> 
         </div>
         <div>
             <button type="submit" class="button" :disabled="!validateForm()">
-            <span v-if="!loading">Sign Up</span>
+            <span v-if="!loading">Create account</span>
             <span v-else>
               <div class="spinner-border spinner-border-sm" role="status">
                 <span class="visually-hidden">Loading...</span>

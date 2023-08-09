@@ -68,9 +68,6 @@ export default {
             return require('../../assets/img/' + this.picture);
         },
     },
-    mounted() {
-
-    }
 };
 </script>
 
