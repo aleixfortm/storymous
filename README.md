@@ -15,16 +15,13 @@
 <br>
 <br>
 
-<table align="center" border="0" cellspacing="0" cellpadding="0">
-  <tr>
-    <td align="center">
-      <!-- Replace YOUR_KOFI_BUTTON_CODE with your actual Ko-fi button code -->
-      <a href="https://ko-fi.com/G2G7NPEM9" target="_blank">
-        <img src="https://ko-fi.com/img/githubbutton_sm.svg" alt="ko-fi" />
-      </a>
-    </td>
-  </tr>
-</table>
+
+<div align="center">
+  <a href="https://ko-fi.com/G2G7NPEM9" target="_blank">
+    <img src="https://ko-fi.com/img/githubbutton_sm.svg" alt="ko-fi" />
+  </a>
+</div>
+
 <p align="center"><strong>Time for a coffee? Help me improve the infrastructure cost of this project!</strong></p>
 
 ## Preview 
