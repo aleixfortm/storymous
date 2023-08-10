@@ -17,7 +17,7 @@
                     @mouseout="showLeavesTooltip = false">
                 <span class="material-symbols-outlined margin1 leaf-icon" :class="[postData.leaves.includes(currentUser) ? 'includes-leaf-icon' : '']">nest_eco_leaf</span>
                 <span>{{ totalLeaves }}</span>
-                <small-tooltip :condition="showLeavesTooltip" :text="'Leaves'" :top="'35px'"></small-tooltip>
+                <small-tooltip :condition="showLeavesTooltip" :text="'Storyline leaves'" :top="'35px'"></small-tooltip>
               </div>
               <div class="story-stats-section" @mouseover="showViewsTooltip = true" @mouseout="showViewsTooltip = false">
                 <span class="material-symbols-outlined margin1">bar_chart</span>
@@ -66,8 +66,7 @@
         </div>
         <div v-if="isLoggedIn">
           <div class="add-story-container" @click="toggleContinueContainer">
-            
-            <h2 class="add-story">CONTINUE STORYLINE -> <span class="highlight1">CHAPTER</span>
+            <h2 class="add-story d-flex align-items-center">CONTINUE STORYLINE <span class="material-symbols-outlined margin-arrow">arrow_forward</span>  <span class="highlight1">CHAPTER</span>
             <span class="highlight1 m-1">{{ chapterList[chapterList.length - 1].chapter_num + 1 }}</span>
             </h2>
           </div>
@@ -267,6 +266,10 @@ export default {
 </script>
 
 <style scoped>
+.margin-arrow {
+  margin: 0px 4px;
+}
+
 .margin-s {
   margin-left: -6px;
 }
@@ -280,7 +283,7 @@ export default {
 
 .material-symbols-outlined {
   font-variation-settings:
-  'FILL' 0,
+  'FILL' 1,
   'wght' 400,
   'GRAD' 200,
   'opsz' 48

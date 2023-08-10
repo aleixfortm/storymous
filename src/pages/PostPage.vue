@@ -16,7 +16,7 @@
                   @mouseout="showLeavesTooltip = false">
               <span class="material-symbols-outlined margin1 leaf-icon" :class="[post.leaves.includes(currentUser) ? 'includes-leaf-icon' : '']">nest_eco_leaf</span>
               <span>{{ post.leaves.length }}</span>
-              <small-tooltip :condition="showLeavesTooltip" :text="'Leaves'" :top="'35px'"></small-tooltip>
+              <small-tooltip :condition="showLeavesTooltip" :text="'Storyline leaves'" :top="'35px'"></small-tooltip>
             </div>
             <div class="story-stats-section" @mouseover="showViewsTooltip = true" @mouseout="showViewsTooltip = false">
               <span class="material-symbols-outlined margin1">bar_chart</span>
@@ -25,8 +25,8 @@
             </div>
             <div class="story-stats-section" @mouseover="showChaptersTooltip = true" @mouseout="showChaptersTooltip = false">
               <span class="material-symbols-outlined margin1">call_split</span>
-              <span>{{ addedChapters }}</span>
-              <small-tooltip :condition="showChaptersTooltip" :text="'Chapters'" :top="'35px'"></small-tooltip>
+              <span>0</span>
+              <small-tooltip :condition="showChaptersTooltip" :text="'Mounted chapters'" :top="'35px'"></small-tooltip>
             </div>
             <div class="story-stats-section" @mouseover="showCommentsTooltip = true" @mouseout="showCommentsTooltip = false">
               <span class="material-symbols-outlined margin1">chat</span>
@@ -49,11 +49,10 @@
         </chapteredprologue-container>
         <span v-if="isLoggedIn">
           <div class="add-story-container" @click="toggleContinueContainer">
-            <h2 class="add-story">
-              START NEW STORYLINE -> 
+            <h2 class="add-story d-flex align-items-center">
+              START NEW STORYLINE <span class="material-symbols-outlined margin-arrow">arrow_forward</span> 
               <span class="highlight1 m-1">CHAPTER</span>
               <span class="highlight1">1</span>
-              
             </h2>
           </div>
           <writechapter-container
@@ -234,6 +233,10 @@ export default {
 </script>
 
 <style scoped>
+.margin-arrow {
+  margin: 0px 4px;
+}
+
 .margin-s {
   margin-left: -6px;
 }
@@ -259,7 +262,7 @@ export default {
 }
 
 .leaf-icon {
-    color: white;
+    color: rgb(0, 255, 106);
 }
 
 .leaf:hover .leaf-icon{

@@ -350,13 +350,11 @@ export default {
   color: #fffb00f6;
   text-align: center;
   width: auto;
-  margin: 0;
 }
 
 .followbutton.following:hover {
   background-color: #ff7b006e;
   color: #fffb00f6;
-  margin: 0;
 }
 
 .separator {
