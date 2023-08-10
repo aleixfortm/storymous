@@ -21,9 +21,7 @@
                   <textarea id="body" v-model="formbody" placeholder="Prologue content" required></textarea>
               </div>
               <div class="tag-section">
-                <div class="alert alert-light p-1 ml-3 mr-3 mt-1 mb-1 opacity-75" role="alert">
-                  <strong>Tags</strong> Select tags to show on your post
-                </div>
+                <tags-message></tags-message>
                 <div class="tag-list">
                     <post-tag v-for="tag in availableTags" :key="tag" :clickable="isClickable" :reachedMax="reachedMax" :tag="tag" @selected="onSelected"></post-tag>
                 </div>
@@ -54,13 +52,15 @@ import FeedContainer from '@/components/layout/FeedContainer.vue';
 import axios from 'axios';
 import router from '@/router';
 import PostTag from '@/components/layout/PostTag.vue';
+import TagsMessage from '@/components/layout/messages/TagsMessage.vue';
 
 export default {
   name: "NewPost",
   components: {
     FeedContainer,
     PostTag,
-    SubmitButton
+    SubmitButton,
+    TagsMessage
   },
   data() {
     return {
@@ -204,7 +204,7 @@ export default {
 .pollancre {
   padding: 1px 0 0 0;
   background-color: rgb(119 119 119 / 19%);
-  border-radius: 10px;
+  border-radius: 4px;
 }
 
 .image_box {

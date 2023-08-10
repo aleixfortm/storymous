@@ -1,6 +1,6 @@
 <template>
     <feed-container v-if="!loading">
-      <disclaimer-message></disclaimer-message>    
+      <info-message></info-message>    
       <div class="story-container">
         <div v-for="chapter in chapterList" :key="chapter._id">
           <template v-if="chapter.type === 'prologue'">
@@ -96,9 +96,9 @@
             </div>
         </form>
       </div>
-      <div v-if="!isLoggedIn" class="alert alert-info mt-3 shadow p-2" role="alert">
-        <b>Log in</b> to write comments and continue storylines
-      </div>
+
+      <login-message v-if="!isLoggedIn" :text="'to comment and continue storylines'"></login-message>
+
       <span v-if="!loadingComments">
         <div v-for="reply in replies" :key="reply._id">
           <template v-if="reply.type === 'comment'">
@@ -153,7 +153,6 @@ import axios from "axios";
 import { API_BASE_URL } from '../config';
 import { mapGetters } from 'vuex';
 
-import DisclaimerMessage from "@/components/layout/messages/DisclaimerMessage.vue";
 import FeedContainer from '@/components/layout/FeedContainer.vue';
 import ChapteredContainer from "@/components/layout/ChapteredContainer.vue";
 import ChapteredprologueContainer from "@/components/layout/ChapteredprologueContainer.vue";
@@ -164,6 +163,8 @@ import AstronautMessage from "@/components/layout/messages/AstronautMessage.vue"
 import PostTag from "@/components/layout/PostTag.vue";
 import CommentButton from "@/components/layout/CommentButton.vue";
 import SmallTooltip from "@/components/layout/SmallTooltip.vue";
+import InfoMessage from "@/components/layout/messages/InfoMessage.vue";
+import LoginMessage from "@/components/layout/messages/LoginMessage.vue";
 
 export default {
   components: {
@@ -174,10 +175,11 @@ export default {
     ContinuestoryContainer,
     WritechapterContainer,
     AstronautMessage,
-    DisclaimerMessage,
     PostTag,
     CommentButton,
-    SmallTooltip
+    SmallTooltip,
+    InfoMessage,
+    LoginMessage
   },
   data() {
     return {

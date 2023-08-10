@@ -1,7 +1,7 @@
 <template>
     <div class="boxy" role="alert">
-        <strong>How to <u>mount</u> and <u>unmount</u> chapters</strong> 
-        <div class="text">Look for a chapter in the replies section and select it to mount it. To unmount it, click on the previous chapter mounted.</div>
+        <strong>Tags </strong> 
+        <span class="text">Select suitable tags to show on your story</span>
     </div>
 </template>
 
@@ -13,7 +13,7 @@
     border-radius: 3px;
     opacity: 0.9;
     padding: 5px;
-    margin: 0 1px 8px 0px;
+    margin: 15px 1px 5px 0px;
 }
 
 .text {

@@ -10,13 +10,21 @@
           
           <div v-if="isLoggedIn === false" class="login-div">
             <div class="material-symbols-outlined user-select-none icon" @click="goHome">home</div>
+            <!--
             <div class="material-symbols-outlined user-select-none icon" @click="showNotifications">search</div>
+            -->
             <button class="loginButton" @click="toggleDialog(); changeDialog('signin')">Log In</button>
           </div>
           <div v-else class="options">
+            <!--
             <div class="material-symbols-outlined user-select-none icon" @click="goHome">home</div>
             <div class="material-symbols-outlined user-select-none icon" @click="newstoryShown = !newstoryShown">search</div>
-            <div class="material-symbols-outlined user-select-none icon" @click="showNotifications">notifications</div>
+            -->
+            <div class="icon-container-t" @mouseover="showSoonTooltip = true" @mouseout="showSoonTooltip = false">
+              <div class="material-symbols-outlined user-select-none icon" @click="showNotifications">notifications</div>
+              <small-tooltip :condition="showSoonTooltip" :text="'Coming soon!'" :top="'35px'" :transform="'translateX(10%)'"></small-tooltip>
+            </div>
+            
             <router-link :to="getProfileLink" class="userdata">
               <img class="userimg" v-if="userFetchedPicture" :src="imgSource" alt="astronaut">
               <img class="userimg" v-else src="@/assets/img/moon_default_avatar-min.png" alt="default avatar">
@@ -43,6 +51,7 @@ import { mapGetters } from 'vuex';
 import { useRouter } from 'vue-router';
 import SigninDialog from "@/components/SigninDialog.vue";
 import SignupDialog from "@/components/SignupDialog.vue";
+import SmallTooltip from './SmallTooltip.vue';
 
 export default {
   setup() {
@@ -53,12 +62,14 @@ export default {
     return {
       dialogShown: false,
       dialog: 'signin',
-      newstoryShown: false
+      newstoryShown: false,
+      showSoonTooltip: false
     }
   },
   components: {
     SigninDialog,
-    SignupDialog
+    SignupDialog,
+    SmallTooltip
   },
   methods: {
     toggleDialog() {
@@ -88,6 +99,11 @@ export default {
 </script>
 
 <style scoped>
+.icon-container-t {
+  position: relative;
+  margin: 0;
+}
+
 .leaves-num {
   margin: 0 0 0 -2px;
 }
@@ -118,7 +134,9 @@ export default {
 
 .icon {
   color: rgba(245, 245, 245, 0.877);
+  position: relative;
   cursor: pointer;
+  font-size: 24px;
   margin: 0 0 0 14px;
   transition: 0.1s all;
 }
@@ -308,7 +326,7 @@ li {
   margin: 0;
 }
 
-@media (max-width: 500px) {
+@media (max-width: 420px) {
   .header-title {
     display: none;
   }

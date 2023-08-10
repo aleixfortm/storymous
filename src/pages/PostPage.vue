@@ -1,7 +1,7 @@
 <template>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,300,1,200" />
     <feed-container v-if="!loading">
-      <disclaimer-message></disclaimer-message>
+      <info-message></info-message>
       <div class="story-container">
         <div class="main-title-container">
           <h2 class="main-title">{{ post.title.toUpperCase() }}</h2>
@@ -65,6 +65,7 @@
         </writechapter-container>
         </span>   
       </div>
+      
       <div class="add-comment-box" v-if="isLoggedIn">
         <form @submit.prevent="submitComment">
             <div class="newstory_comment">
@@ -80,9 +81,9 @@
             </div>
         </form>
       </div>
-      <div v-if="!isLoggedIn" class="alert alert-info mt-2 shadow p-2" role="alert">
-        <b>Log in</b> to write comments and continue storylines
-      </div>
+      
+      <login-message v-if="!isLoggedIn" :text="'to comment and continue storylines'"></login-message>
+      
       <div v-for="reply in replies" :key="reply._id">
         <template v-if="reply.type === 'comment'">
           <comment-container
@@ -135,10 +136,11 @@ import FeedContainer from '@/components/layout/FeedContainer.vue';
 import ChapteredprologueContainer from "@/components/layout/ChapteredprologueContainer.vue";
 import WritechapterContainer from "@/components/layout/WritechapterContainer.vue";
 import AstronautMessage from "@/components/layout/messages/AstronautMessage.vue";
-import DisclaimerMessage from "@/components/layout/messages/DisclaimerMessage.vue";
 import PostTag from "@/components/layout/PostTag.vue";
 import SmallTooltip from "@/components/layout/SmallTooltip.vue";
 import CommentButton from "@/components/layout/CommentButton.vue";
+import InfoMessage from "@/components/layout/messages/InfoMessage.vue";
+import LoginMessage from "@/components/layout/messages/LoginMessage.vue";
 
 export default {
   components: {
@@ -148,10 +150,11 @@ export default {
     ContinuestoryContainer,
     ChapteredprologueContainer,
     WritechapterContainer,
-    DisclaimerMessage,
     PostTag,
     SmallTooltip,
-    CommentButton
+    CommentButton,
+    InfoMessage,
+    LoginMessage
   },
   data() {
     return {

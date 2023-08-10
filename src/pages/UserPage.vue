@@ -1,9 +1,7 @@
 <template>
     
     <feed-container :key="currentParameter">
-        <div v-if="!isLoggedIn" class="alert alert-info" role="alert">
-            <b>Log in</b> to follow other users
-        </div>
+        <login-message v-if="!isLoggedIn" :text="'to follow other users'"></login-message>
         <section v-if="ownProfile()" class="section_title">
             My profile
         </section>
@@ -160,6 +158,7 @@ import AstronautMessage from '@/components/layout/messages/AstronautMessage.vue'
 import SettingsButton from '@/components/layout/SettingsButton.vue';
 import LogoutButton from '@/components/layout/LogoutButton.vue';
 import SmallTooltip from '@/components/layout/SmallTooltip.vue';
+import LoginMessage from '@/components/layout/messages/LoginMessage.vue';
 
 export default {
     components: {
@@ -170,7 +169,8 @@ export default {
         AstronautMessage,
         SettingsButton,
         LogoutButton,
-        SmallTooltip
+        SmallTooltip,
+        LoginMessage
     },
     setup() {
         const router = useRouter();
