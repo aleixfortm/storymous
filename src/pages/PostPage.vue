@@ -10,7 +10,7 @@
             <post-tag v-for="tag in post.tags" :key="tag" :clickable="false" :tag="tag"></post-tag>
         </div> 
         <div class="story-stats">
-            <div class="story-stats-section">
+            <div class="story-stats-section" :class="[post.leaves.includes(currentUser) ? 'includes-leaf-icon' : '']">
               <span class="material-symbols-outlined margin1 leaf-icon" 
                     :class="[post.leaves.includes(currentUser) ? 'includes-leaf-icon' : '']"
                     >nest_eco_leaf
@@ -202,7 +202,7 @@ export default {
 <style scoped>
 .material-symbols-outlined {
   font-variation-settings:
-  'FILL' 0,
+  'FILL' 1,
   'wght' 400,
   'GRAD' 200,
   'opsz' 48
@@ -214,7 +214,7 @@ export default {
 }
 
 .leaf-icon {
-    color: rgb(0, 255, 106);
+    color: white;
 }
 
 .leaf:hover .leaf-icon{
@@ -226,11 +226,7 @@ export default {
 }
 
 .includes-leaf-icon {
-    font-variation-settings:
-    'FILL' 1,
-    'wght' 400,
-    'GRAD' 0,
-    'opsz' 200
+    color: rgb(0, 255, 106);
 }
 .tag-section {
     display: flex;

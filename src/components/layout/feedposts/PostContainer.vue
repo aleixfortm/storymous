@@ -158,7 +158,7 @@ export default {
 <style scoped>
 .material-symbols-outlined {
   font-variation-settings:
-  'FILL' 0,
+  'FILL' 1,
   'wght' 400,
   'GRAD' 200,
   'opsz' 48
@@ -170,11 +170,11 @@ export default {
 }
 
 .leaf-icon {
-    color: rgb(0, 255, 106);
+    color: white;
 }
 
 .leaf:hover .leaf-icon{
-    color: rgb(0, 255, 106);
+    color: rgb(0, 255, 76);
 }
 
 .includes-leaf {
@@ -182,11 +182,7 @@ export default {
 }
 
 .includes-leaf-icon {
-    font-variation-settings:
-    'FILL' 1,
-    'wght' 400,
-    'GRAD' 0,
-    'opsz' 200
+    color: rgb(0, 255, 106);
 }
 
 .view {
