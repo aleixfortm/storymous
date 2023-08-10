@@ -40,26 +40,26 @@
                             <span class="material-symbols-outlined colored-icon">nest_eco_leaf</span>
                             <div class="separator-stat"></div>
                             <div class="count-block__num">{{ nLeaves }}</div>
-                            <div v-if="showLeavesTooltip" class="popup">Leaves</div>
+                            <small-tooltip :condition="showLeavesTooltip" :text="'Leaves'"></small-tooltip>
                         </div>
                         
                         <div class="count-block" @mouseover="showStoriesTooltip = true" @mouseout="showStoriesTooltip = false">
                             <span class="material-symbols-outlined">import_contacts</span>
                             <div class="separator-stat"></div>
                             <div class="count-block__num">{{ nStories }}</div>
-                            <div v-if="showStoriesTooltip" class="popup">Stories</div>
+                            <small-tooltip :condition="showStoriesTooltip" :text="'Stories'"></small-tooltip>
                         </div>
                         <div class="count-block" @mouseover="showFollowersTooltip = true" @mouseout="showFollowersTooltip = false">
                             <span class="material-symbols-outlined">group</span>
                             <div class="separator-stat"></div>
                             <div class="count-block__num">{{ userFollowers.length }}</div>
-                            <div v-if="showFollowersTooltip" class="popup">Followers</div>
+                            <small-tooltip :condition="showFollowersTooltip" :text="'Followers'"></small-tooltip>
                         </div>
                         <div class="count-block" @mouseover="showFollowingTooltip = true" @mouseout="showFollowingTooltip = false">
                             <span class="material-symbols-outlined">group_add</span>
                             <div class="separator-stat"></div>
                             <div class="count-block__num">{{ userFollowing.length }}</div>
-                            <div v-if="showFollowingTooltip" class="popup">Following</div>
+                            <small-tooltip :condition="showFollowingTooltip" :text="'Following'"></small-tooltip>
                         </div>
                     </div>
                 </div>
@@ -159,6 +159,7 @@ import ContinuestoryfeedContainer from '@/components/layout/feedposts/Continuest
 import AstronautMessage from '@/components/layout/messages/AstronautMessage.vue';
 import SettingsButton from '@/components/layout/SettingsButton.vue';
 import LogoutButton from '@/components/layout/LogoutButton.vue';
+import SmallTooltip from '@/components/layout/SmallTooltip.vue';
 
 export default {
     components: {
@@ -168,7 +169,8 @@ export default {
         ContinuestoryfeedContainer,
         AstronautMessage,
         SettingsButton,
-        LogoutButton
+        LogoutButton,
+        SmallTooltip
     },
     setup() {
         const router = useRouter();
@@ -335,32 +337,6 @@ export default {
 
 .bio-content {
     color: rgba(255, 255, 255, 0.836);
-}
-
-.popup {
-  position: absolute;
-  top: 45px;
-  transform: translateX(-25%);
-  background-color: rgba(255, 255, 255, 0.95);
-  padding: 5px;
-  border-radius: 2px;
-  font-size: 15px;
-  text-align: start;
-  z-index: 999;
-  color: rgb(0, 0, 0);
-  box-shadow: 0 0 20px 2px rgba(0, 0, 0, 0.5);
-}
-
-.popup::before {
-  content: '';
-  position: absolute;
-  left: 50%;
-  bottom: 100%;
-  margin-left: -6px;
-  border-left: 6px solid transparent;
-  border-right: 6px solid transparent;
-  border-bottom: 6px solid rgba(255, 255, 255, 0.95);
-  z-index: 999;
 }
 
 .disabled {

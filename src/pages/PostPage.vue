@@ -9,17 +9,30 @@
         <div class="tag-section">
             <post-tag v-for="tag in post.tags" :key="tag" :clickable="false" :tag="tag"></post-tag>
         </div> 
-        <div class="story-stats">
-            <div class="story-stats-section" :class="[post.leaves.includes(currentUser) ? 'includes-leaf-icon' : '']">
-              <span class="material-symbols-outlined margin1 leaf-icon" 
-                    :class="[post.leaves.includes(currentUser) ? 'includes-leaf-icon' : '']"
-                    >nest_eco_leaf
-                  </span>
-                  {{ post.leaves.length }}
-              </div>
-            <div class="story-stats-section"><span class="material-symbols-outlined margin1">bar_chart</span>{{ post.views }}</div>
-            <div class="story-stats-section"><span class="material-symbols-outlined margin1">chat</span>{{ post.user_comments.length }}</div>
-            <div class="story-stats-section"><span class="material-symbols-outlined margin1">share</span></div>
+        <div class="story-stats user-select-none">
+            <div class="story-stats-section" 
+                  :class="[post.leaves.includes(currentUser) ? 'includes-leaf-icon' : '']" 
+                  @mouseover="showLeavesTooltip = true" 
+                  @mouseout="showLeavesTooltip = false">
+              <span class="material-symbols-outlined margin1 leaf-icon" :class="[post.leaves.includes(currentUser) ? 'includes-leaf-icon' : '']">nest_eco_leaf</span>
+              <span>{{ post.leaves.length }}</span>
+              <small-tooltip :condition="showLeavesTooltip" :text="'Leaves'"></small-tooltip>
+            </div>
+            <div class="story-stats-section" @mouseover="showViewsTooltip = true" @mouseout="showViewsTooltip = false">
+              <span class="material-symbols-outlined margin1">bar_chart</span>
+              <span>{{ post.views }}</span>
+              <small-tooltip :condition="showViewsTooltip" :text="'Views'"></small-tooltip>
+            </div>
+            <div class="story-stats-section" @mouseover="showChaptersTooltip = true" @mouseout="showChaptersTooltip = false">
+              <span class="material-symbols-outlined margin1">call_split</span>
+              <span>{{ addedChapters }}</span>
+              <small-tooltip :condition="showChaptersTooltip" :text="'Chapters'"></small-tooltip>
+            </div>
+            <div class="story-stats-section" @mouseover="showCommentsTooltip = true" @mouseout="showCommentsTooltip = false">
+              <span class="material-symbols-outlined margin1">chat</span>
+              <span>{{ post.user_comments.length }}</span>
+              <small-tooltip :condition="showCommentsTooltip" :text="'Comments'"></small-tooltip>
+            </div>
         </div>
         <chapteredprologue-container
           v-if="post"
@@ -118,6 +131,7 @@ import WritechapterContainer from "@/components/layout/WritechapterContainer.vue
 import AstronautMessage from "@/components/layout/messages/AstronautMessage.vue";
 import DisclaimerMessage from "@/components/layout/messages/DisclaimerMessage.vue";
 import PostTag from "@/components/layout/PostTag.vue";
+import SmallTooltip from "@/components/layout/SmallTooltip.vue";
 
 export default {
   components: {
@@ -128,7 +142,8 @@ export default {
     ChapteredprologueContainer,
     WritechapterContainer,
     DisclaimerMessage,
-    PostTag
+    PostTag,
+    SmallTooltip
   },
   data() {
     return {
@@ -138,7 +153,12 @@ export default {
       continuedStory: null,
       textareaHeight: null,
       loading: true,
-      showContinueContainer: false
+      showContinueContainer: false,
+      addedChapters: 0,
+      showLeavesTooltip: false,
+      showViewsTooltip: false,
+      showChaptersTooltip: false,
+      showCommentsTooltip:false
     }
   },
   mounted() {
@@ -148,6 +168,11 @@ export default {
       .then(response => {
         this.post = response.data.post;
         this.replies = response.data.replies;
+        this.replies.forEach(reply => {
+          if (reply.type !== "comment") {
+            this.addedChapters += 1
+          }
+        })
         this.loading = false;
       })
   },
@@ -248,10 +273,12 @@ export default {
 }
 
 .story-stats-section {
+    position: relative;
     display: flex;
     align-items: center;
     margin: 0 12px;
     padding: 1px 6px 1px 1px;
+    cursor: pointer;
 }
 
 .story-stats-section:hover {
