@@ -11,7 +11,9 @@
             </span>
         </div>
     </feed-container>
-    
+
+    <!--Place selector here!-->
+
     <div class="block">
         <div class="rectangle">
             <select-button @click="setSelectedTab('latest-feed')" :mode="selectedTab === 'following-feed' ? 'null' : 'flat'">
@@ -42,6 +44,7 @@ import SelectButton from "../components/SelectButton.vue";
 import LatestFeed from "../pages/subpages/LatestFeed.vue";
 import FollowingFeed from "../pages/subpages/FollowingFeed.vue";
 import SuccessMessage from '@/components/layout/messages/SuccessMessage.vue';
+import ButtonblockSelector from '@/components/layout/ButtonblockSelector.vue';
 
 
 export default {
@@ -50,7 +53,8 @@ export default {
         SelectButton,
         LatestFeed,
         FollowingFeed,
-        SuccessMessage
+        SuccessMessage,
+        ButtonblockSelector
     },
     setup() {
         const router = useRouter();

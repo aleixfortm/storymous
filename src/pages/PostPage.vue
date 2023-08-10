@@ -83,7 +83,7 @@
       </div>
       
       <login-message v-if="!isLoggedIn" :text="'to comment and continue storylines'"></login-message>
-      
+      <buttonblock-selector></buttonblock-selector>
       <div v-for="reply in replies" :key="reply._id">
         <template v-if="reply.type === 'comment'">
           <comment-container
@@ -141,6 +141,7 @@ import SmallTooltip from "@/components/layout/SmallTooltip.vue";
 import CommentButton from "@/components/layout/CommentButton.vue";
 import InfoMessage from "@/components/layout/messages/InfoMessage.vue";
 import LoginMessage from "@/components/layout/messages/LoginMessage.vue";
+import ButtonblockSelector from "@/components/layout/ButtonblockSelector.vue";
 
 export default {
   components: {
@@ -154,7 +155,8 @@ export default {
     SmallTooltip,
     CommentButton,
     InfoMessage,
-    LoginMessage
+    LoginMessage,
+    ButtonblockSelector
   },
   data() {
     return {
