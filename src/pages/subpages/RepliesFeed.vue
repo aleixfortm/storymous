@@ -2,28 +2,28 @@
     <feed-container v-if="!loading">
         <div v-for="reply in replies" :key="reply._id">
             <template v-if="reply.type === 'comment'">
-            <comment-container
-                :_id="reply._id"
-                :content="reply.comment"
-                :username="reply.username"
-                :date="reply.date"
-                :picture="reply.picture"
-            ></comment-container>
+                <comment-container
+                    :_id="reply._id"
+                    :content="reply.comment"
+                    :username="reply.username"
+                    :date="reply.date"
+                    :picture="reply.picture"
+                ></comment-container>
             </template>
-            <template v-else>
-            <continuestory-container
-                :_id="reply._id"
-                :storyId="reply.story_id"
-                :parentChapterId="reply.parent_chapter_id"
-                :content="reply.content"
-                :chapterName="reply.chapter_name"
-                :chapterNum="reply.chapter_num"
-                :username="reply.username"
-                :postComment="reply.comment"
-                :date="reply.date"
-                :picture="reply.picture"
-                :tags="reply.tags"
-            ></continuestory-container>
+            <template v-else-if="reply.type === 'chapter' && !chapterList.some(obj => obj._id.$oid === reply._id.$oid)">
+                <continuestory-container
+                    :_id="reply._id"
+                    :storyId="reply.story_id"
+                    :parentChapterId="reply.parent_chapter_id"
+                    :content="reply.content"
+                    :chapterName="reply.chapter_name"
+                    :chapterNum="reply.chapter_num"
+                    :username="reply.username"
+                    :postComment="reply.comment"
+                    :date="reply.date"
+                    :picture="reply.picture"
+                    :tags="reply.tags"
+                ></continuestory-container>
             </template>
         </div>
         <astronaut-message v-if="replies.length == 0" 
@@ -48,7 +48,7 @@ import AstronautMessage from '@/components/layout/messages/AstronautMessage.vue'
 import FeedContainer from '@/components/layout/FeedContainer.vue';
 
 export default {
-    props: ["replies", "loading"],
+    props: ["replies", "loading", "chapterList"],
     components: {
         CommentContainer,
         ContinuestoryContainer,

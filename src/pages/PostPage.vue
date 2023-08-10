@@ -86,7 +86,7 @@
       <buttonblock-selector :homePage="false" @selected-tab="handleSelectedTab"></buttonblock-selector>
 
       <transition name="fade" mode="out-in">
-        <component :is="selectedTab" :loading="loading" :replies="replies" :chapterList="chapterList"></component>
+        <component :is="selectedTab" :loading="loading" :replies="replies" :chapterList="[]"></component>
       </transition>
 
     </feed-container>
@@ -206,8 +206,7 @@ export default {
             this.selectedTab = "chapters-feed"
           } else {
             this.selectedTab = "comments-feed"
-          }
-            
+          }           
         }
   },
   watch: {
