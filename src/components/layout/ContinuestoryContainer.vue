@@ -44,7 +44,13 @@ export default {
     props: ["_id", "content", "username", "postComment", "date", "picture", "chapterNum", "storyId", "parentChapterId", "chapterName", "tags"],
     methods: {
         formatStory(story) {
-            return story.replace(/<br>/g, '\n');
+            story = story.replace(/<br>/g, '\n');
+            if (story.length > 300) {
+                //return story.substring(0, 500) + '...';
+                return story
+            }
+            return story
+            
         },
         ...mapActions("emitdata", ["emitData"]),
         navigateToPost() {
@@ -192,18 +198,6 @@ export default {
     max-width: fit-content;
     word-wrap: break-word;
 }
-
-.story__user-comment2 {
-    margin-top: 0px;
-    font-weight: bold;
-    color: black;
-    background-color: #faf8f8;
-    padding: 5px 10px;
-    text-align: left;
-    word-wrap: break-word;
-    width: auto;
-}
-
 .story__user-info-container2 {
     display: flex;
     flex-direction: column;
@@ -250,7 +244,7 @@ export default {
 }
 
 .story__user-img2 {
-    width: 50px;
+    width: 45px;
     height: auto;
     border-radius: 100%;
     margin-bottom: 2px;
@@ -278,34 +272,20 @@ export default {
 }
 
 .story__user-comment2 {
-    margin-top: 0px;
     font-weight: bold;
     color: black;
     background-color: #faf8f8;
-    padding: 5px 10px;
-    border-radius: 15px 15px 15px 0;
-    text-align: left;
-    word-wrap: break-word;
-    width: auto;
-}
-
-.story__username2 {
-    margin: 0px 0px 5px 0;
-}
-
-
-
-.story__user-comment2 {
-    margin-top: 0px;
-    font-weight: bold;
-    font-size: 14px;
-    color: black;
-    background-color: #faf8f8;
-    padding: 5px 10px;
+    padding: 3px 10px;
     border-radius: 0px 15px 15px 15px;
     text-align: left;
     word-wrap: break-word;
     width: auto;
+    font-size: 15px;
+    margin: 2px 5px 0 0;
+}
+
+.story__username2 {
+    margin: 0px 0px 5px 0;
 }
 
 .story__user-info-container2 {

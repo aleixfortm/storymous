@@ -66,7 +66,7 @@ export default {
     padding: 5px 0px 6px 0;
     display: flex;
     flex-direction: row;
-    background-color: rgba(110, 110, 110, 0.199);
+    background-color: rgba(110, 110, 110, 0);
     border-radius: 10px;
     margin: 8px 0 0 0;
 }
@@ -106,7 +106,7 @@ export default {
 }
 
 .comment__username {
-    margin: 0px 0px 5px 0;
+    margin: 0px 0px 0px 0;
     color: whitesmoke;
 }
 
@@ -122,16 +122,16 @@ export default {
 
 .comment__user-comment {
     font-weight: bold;
-    font-size: 14px;
+    font-size: 15px;
     color: black;
     background-color: #faf8f8;
-    padding: 5px 10px;
+    padding: 3px 10px;
     border-radius: 0 15px 15px 15px;
     text-align: left;
     word-wrap: break-word;
     hyphens: auto;
     width: auto;
-    margin: 0 5px 0 0;
+    margin: 2px 5px 0 0;
 }
 
 .comment__user-img-container {
@@ -142,7 +142,7 @@ export default {
 
 
 .comment__user-img {
-    width: 50px;
+    width: 45px;
     height: auto;
     border-radius: 100%;
     border: 0px solid whitesmoke;
