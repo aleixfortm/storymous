@@ -16,22 +16,22 @@
                   @mouseout="showLeavesTooltip = false">
               <span class="material-symbols-outlined margin1 leaf-icon" :class="[post.leaves.includes(currentUser) ? 'includes-leaf-icon' : '']">nest_eco_leaf</span>
               <span>{{ post.leaves.length }}</span>
-              <small-tooltip :condition="showLeavesTooltip" :text="'Leaves'"></small-tooltip>
+              <small-tooltip :condition="showLeavesTooltip" :text="'Leaves'" :top="'35px'"></small-tooltip>
             </div>
             <div class="story-stats-section" @mouseover="showViewsTooltip = true" @mouseout="showViewsTooltip = false">
               <span class="material-symbols-outlined margin1">bar_chart</span>
               <span>{{ post.views }}</span>
-              <small-tooltip :condition="showViewsTooltip" :text="'Views'"></small-tooltip>
+              <small-tooltip :condition="showViewsTooltip" :text="'Views'" :top="'35px'"></small-tooltip>
             </div>
             <div class="story-stats-section" @mouseover="showChaptersTooltip = true" @mouseout="showChaptersTooltip = false">
               <span class="material-symbols-outlined margin1">call_split</span>
               <span>{{ addedChapters }}</span>
-              <small-tooltip :condition="showChaptersTooltip" :text="'Chapters'"></small-tooltip>
+              <small-tooltip :condition="showChaptersTooltip" :text="'Chapters'" :top="'35px'"></small-tooltip>
             </div>
             <div class="story-stats-section" @mouseover="showCommentsTooltip = true" @mouseout="showCommentsTooltip = false">
               <span class="material-symbols-outlined margin1">chat</span>
               <span>{{ post.user_comments.length }}</span>
-              <small-tooltip :condition="showCommentsTooltip" :text="'Comments'"></small-tooltip>
+              <small-tooltip :condition="showCommentsTooltip" :text="'Comments'" :top="'35px'"></small-tooltip>
             </div>
         </div>
         <chapteredprologue-container
@@ -49,7 +49,12 @@
         </chapteredprologue-container>
         <span v-if="isLoggedIn">
           <div class="add-story-container" @click="toggleContinueContainer">
-            <h2 class="add-story"> WRITE CHAPTER 1 (START NEW STORYLINE)</h2>
+            <h2 class="add-story">
+              START NEW STORYLINE -> 
+              <span class="highlight1 m-1">CHAPTER</span>
+              <span class="highlight1">1</span>
+              
+            </h2>
           </div>
           <writechapter-container
           v-if="showContinueContainer"
@@ -61,18 +66,20 @@
         </writechapter-container>
         </span>   
       </div>
-      <div class="pollancre" v-if="isLoggedIn">
-          <form @submit.prevent="submitComment">
-              <div class="newstory_comment">
-                  <div class="image_box">
-                      <img class="postimage" :src="imgSource" alt="profilepic">
-                  </div>
-                  <textarea id="comment" v-model="formcomment" placeholder="Add a comment..." rows="1" :style="{ height: textareaHeight }" required></textarea>
-                  <div class="buttonbox">
-                    <button class="postbutton" type="submit">Comment</button>
-                  </div>
-              </div>
-          </form>
+      <div class="add-comment-box" v-if="isLoggedIn">
+        <form @submit.prevent="submitComment">
+            <div class="newstory_comment">
+                <div class="image_box">
+                    <img class="postimage" :src="imgSource" alt="profilepic">
+                </div>
+                <textarea id="comment" v-model="formcomment" placeholder="Add a comment..." rows="1" :style="{ height: textareaHeight }" required></textarea>
+                <div class="buttonbox">
+                  <comment-button :text="'COMMENT'" :margin="true">
+                    <span class="material-symbols-outlined">chat_bubble</span>
+                  </comment-button>
+                </div>
+            </div>
+        </form>
       </div>
       <div v-if="!isLoggedIn" class="alert alert-info mt-2 shadow p-2" role="alert">
         <b>Log in</b> to write comments and continue storylines
@@ -132,6 +139,7 @@ import AstronautMessage from "@/components/layout/messages/AstronautMessage.vue"
 import DisclaimerMessage from "@/components/layout/messages/DisclaimerMessage.vue";
 import PostTag from "@/components/layout/PostTag.vue";
 import SmallTooltip from "@/components/layout/SmallTooltip.vue";
+import CommentButton from "@/components/layout/CommentButton.vue";
 
 export default {
   components: {
@@ -143,7 +151,8 @@ export default {
     WritechapterContainer,
     DisclaimerMessage,
     PostTag,
-    SmallTooltip
+    SmallTooltip,
+    CommentButton
   },
   data() {
     return {
@@ -225,6 +234,17 @@ export default {
 </script>
 
 <style scoped>
+.margin-s {
+  margin-left: -6px;
+}
+
+.highlight1 {
+  background-color: bisque;
+    color: black;
+    border-radius: 2px;
+    padding: 0 3px;
+}
+
 .material-symbols-outlined {
   font-variation-settings:
   'FILL' 1,
@@ -326,13 +346,13 @@ export default {
     text-align: center;
     border-top: 1px rgba(129, 129, 129, 0.322) solid;
     padding: 2px 0 0 0;
-    background-color: rgba(86, 175, 123, 0.349);
+    background-color: rgba(85, 85, 85, 0.753);
     user-select: none;
     transition: 0.2s all;
 }
 
 .add-story-container:hover {
-  background-color: rgba(105, 105, 105, 0.247);
+  background-color: rgba(122, 122, 122, 0.247);
   cursor: pointer;
 }
 
@@ -344,14 +364,10 @@ export default {
 .add-story {
     color: rgb(255, 255, 255);
     font-size: 16px;
+    font-weight: bold;
     margin: 10px 0px 10px 0px;
 
 }
-
-.border-top {
-  border-top: solid 1px rgba(129, 129, 129, 0.322) 1px solid;
-}
-
 
 .story-container {
   border: hsla(0,0%,51%,.322) 1px solid;
@@ -373,53 +389,6 @@ export default {
     justify-content: center;
     flex-direction: column;
     align-items: center;
-}
-
-.postbutton {
-height: 35px;
-font-family: inherit;
-border: 0px solid #e5e3ff;
-color: rgb(0, 255, 98);
-cursor: pointer;
-font-size: 15px;
-width: 80px;
-margin: 0px 5px 7px 0;
-background-color: #ffffff1e;
-border-radius: 4px;
-align-self: flex-end;
-}
-
-.postbutton:hover {
-background-color: #94949425;
-}
-
-#comment {
-  background-color: #ffffff;
-    border: none;
-    border-radius: 10px 10px 10px 10px;
-    font-size: 14px;
-    font-weight: 500;
-    outline: none;
-    padding: 8px 8px 8px 20px; /* add left padding */
-    width: 100%;
-    font: inherit;
-    color: rgb(0, 0, 0);
-    resize: none;
-    overflow: auto;
-    box-sizing: border-box;
-    margin: 0 5px 0px 0;
-    height: 100%;
-}
-
-#comment:hover {
-  background-color: rgb(224, 224, 224);
-}
-
-.pollancre {
-  padding: 1px 0 0 0;
-  background-color: rgb(119 119 119 / 19%);
-  border-radius: 10px;
-  margin: 5px 0 12px 0;
 }
 
 .newstory_comment {
@@ -445,17 +414,48 @@ background-color: #94949425;
 .buttonbox {
   align-self: stretch;
   display: flex;
-  }
+  justify-content: center;
+  align-items: center;
+}
 
-  .postimage {
-    height: 50px;
-    border-radius: 100%;
-    margin: 0px 8px 0 10px;
-    cursor: pointer;
-    transition: all 0.1s;
+.postimage {
+  height: 50px;
+  border-radius: 100%;
+  margin: 0px 8px 0 10px;
+  cursor: pointer;
+  transition: all 0.1s;
 }
 
 .postimage:hover {  
   filter: brightness(85%);
+}
+
+#comment {
+  background-color: #ffffff;
+    border: none;
+    border-radius: 10px 10px 10px 10px;
+    font-size: 14px;
+    font-weight: 500;
+    outline: none;
+    padding: 8px 8px 8px 20px; /* add left padding */
+    width: 100%;
+    font: inherit;
+    color: rgb(0, 0, 0);
+    resize: none;
+    overflow: auto;
+    box-sizing: border-box;
+    margin: 0 5px 0px 0;
+    height: 100%;
+}
+
+#comment:hover {
+  background-color: rgb(224, 224, 224);
+}
+
+.add-comment-box {
+  padding: 1px 0 0 0;
+  background-color: rgb(119 119 119 / 19%);
+  border-radius: 10px;
+  margin: 10px 0 12px 0;
 }
 </style>

@@ -40,26 +40,26 @@
                             <span class="material-symbols-outlined colored-icon">nest_eco_leaf</span>
                             <div class="separator-stat"></div>
                             <div class="count-block__num">{{ nLeaves }}</div>
-                            <small-tooltip :condition="showLeavesTooltip" :text="'Leaves'"></small-tooltip>
+                            <small-tooltip :condition="showLeavesTooltip" :text="'Leaves'" :top="'45px'"></small-tooltip>
                         </div>
                         
                         <div class="count-block" @mouseover="showStoriesTooltip = true" @mouseout="showStoriesTooltip = false">
                             <span class="material-symbols-outlined">import_contacts</span>
                             <div class="separator-stat"></div>
                             <div class="count-block__num">{{ nStories }}</div>
-                            <small-tooltip :condition="showStoriesTooltip" :text="'Stories'"></small-tooltip>
+                            <small-tooltip :condition="showStoriesTooltip" :text="'Stories'" :top="'45px'"></small-tooltip>
                         </div>
                         <div class="count-block" @mouseover="showFollowersTooltip = true" @mouseout="showFollowersTooltip = false">
                             <span class="material-symbols-outlined">group</span>
                             <div class="separator-stat"></div>
                             <div class="count-block__num">{{ userFollowers.length }}</div>
-                            <small-tooltip :condition="showFollowersTooltip" :text="'Followers'"></small-tooltip>
+                            <small-tooltip :condition="showFollowersTooltip" :text="'Followers'" :top="'45px'"></small-tooltip>
                         </div>
                         <div class="count-block" @mouseover="showFollowingTooltip = true" @mouseout="showFollowingTooltip = false">
                             <span class="material-symbols-outlined">group_add</span>
                             <div class="separator-stat"></div>
                             <div class="count-block__num">{{ userFollowing.length }}</div>
-                            <small-tooltip :condition="showFollowingTooltip" :text="'Following'"></small-tooltip>
+                            <small-tooltip :condition="showFollowingTooltip" :text="'Following'" :top="'45px'"></small-tooltip>
                         </div>
                     </div>
                 </div>

@@ -10,17 +10,30 @@
             <div class="tag-section">
                 <post-tag v-for="tag in chapter.tags" :key="tag" :clickable="false" :tag="tag"></post-tag>
             </div> 
-            <div class="story-stats">
-              <div class="story-stats-section">
-                <span class="material-symbols-outlined margin1 leaf-icon" 
-                      :class="[postData.leaves.includes(currentUser) ? 'includes-leaf-icon' : '']"
-                      >nest_eco_leaf
-                    </span>
-                    {{ totalLeaves }} <!-- use postData.leaves.length for prologue stats only, or chapterList[chapterList.length - 1].leaves.length for last mounted chapter only-->
-                </div>
-                <div class="story-stats-section"><span class="material-symbols-outlined margin1">bar_chart</span>{{ postData.views }}</div>
-                <div class="story-stats-section"><span class="material-symbols-outlined margin1">chat</span>{{ postData.user_comments.length }}</div>
-                <div class="story-stats-section"><span class="material-symbols-outlined margin1">share</span></div>
+            <div class="story-stats user-select-none">
+              <div class="story-stats-section" 
+                    :class="[postData.leaves.includes(currentUser) ? 'includes-leaf-icon' : '']" 
+                    @mouseover="showLeavesTooltip = true" 
+                    @mouseout="showLeavesTooltip = false">
+                <span class="material-symbols-outlined margin1 leaf-icon" :class="[postData.leaves.includes(currentUser) ? 'includes-leaf-icon' : '']">nest_eco_leaf</span>
+                <span>{{ totalLeaves }}</span>
+                <small-tooltip :condition="showLeavesTooltip" :text="'Leaves'" :top="'35px'"></small-tooltip>
+              </div>
+              <div class="story-stats-section" @mouseover="showViewsTooltip = true" @mouseout="showViewsTooltip = false">
+                <span class="material-symbols-outlined margin1">bar_chart</span>
+                <span>{{ postData.views }}</span>
+                <small-tooltip :condition="showViewsTooltip" :text="'Views'" :top="'35px'"></small-tooltip>
+              </div>
+              <div class="story-stats-section" @mouseover="showChaptersTooltip = true" @mouseout="showChaptersTooltip = false">
+                <span class="material-symbols-outlined margin1">call_split</span>
+                <span> {{ chapterList[chapterList.length - 1].chapter_num }} </span>
+                <small-tooltip :condition="showChaptersTooltip" :text="'Mounted chapters'" :top="'35px'"></small-tooltip>
+              </div>
+              <div class="story-stats-section" @mouseover="showCommentsTooltip = true" @mouseout="showCommentsTooltip = false">
+                <span class="material-symbols-outlined margin1">chat</span>
+                <span>{{ postData.user_comments.length }}</span>
+                <small-tooltip :condition="showCommentsTooltip" :text="'Comments'" :top="'35px'"></small-tooltip>
+              </div>
             </div>   
             <chapteredprologue-container
               :_id="chapter._id"
@@ -53,7 +66,10 @@
         </div>
         <div v-if="isLoggedIn">
           <div class="add-story-container" @click="toggleContinueContainer">
-            <h2 class="add-story"> WRITE <span class="highlight1">CHAPTER</span> <span class="highlight1 margin-s">{{ chapterList[chapterList.length - 1].chapter_num + 1 }}</span> FOR THIS STORYLINE</h2>
+            
+            <h2 class="add-story">CONTINUE STORYLINE -> <span class="highlight1">CHAPTER</span>
+            <span class="highlight1 m-1">{{ chapterList[chapterList.length - 1].chapter_num + 1 }}</span>
+            </h2>
           </div>
           <writechapter-container
           v-if="showContinueContainer"
@@ -148,6 +164,7 @@ import WritechapterContainer from "@/components/layout/WritechapterContainer.vue
 import AstronautMessage from "@/components/layout/messages/AstronautMessage.vue";
 import PostTag from "@/components/layout/PostTag.vue";
 import CommentButton from "@/components/layout/CommentButton.vue";
+import SmallTooltip from "@/components/layout/SmallTooltip.vue";
 
 export default {
   components: {
@@ -160,7 +177,8 @@ export default {
     AstronautMessage,
     DisclaimerMessage,
     PostTag,
-    CommentButton
+    CommentButton,
+    SmallTooltip
   },
   data() {
     return {
@@ -173,7 +191,11 @@ export default {
       loadingComments: true,
       showContinueContainer: false,
       postData: {},
-      totalLeaves: 0
+      totalLeaves: 0,
+      showLeavesTooltip: false,
+      showChaptersTooltip: false,
+      showCommentsTooltip: false,
+      showViewsTooltip: false
     }
   },
   mounted() {
@@ -308,10 +330,12 @@ export default {
 }
 
 .story-stats-section {
+    position: relative;
     display: flex;
     align-items: center;
     margin: 0 12px;
     padding: 1px 6px 1px 1px;
+    cursor: pointer;
 }
 
 .story-stats-section:hover {
@@ -547,7 +571,7 @@ background-color: #94949425;
   display: flex;
   justify-content: center;
   align-items: center;
-  }
+}
 
   .postimage {
     height: 50px;

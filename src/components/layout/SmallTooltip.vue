@@ -1,17 +1,16 @@
 <template>
-    <div v-if="condition" class="popup">{{ text }}</div>
+    <div v-if="condition" class="popup" :style="{ 'top': top }" >{{ text }}</div>
 </template>
 
 <script>
 export default {
-    props: ["condition", "text"]
+    props: ["condition", "text", "top"]
 }
 </script>
 
 <style scoped>
 .popup {
   position: absolute;
-  top: 45px;
   transform: translateX(-25%);
   background-color: rgba(255, 255, 255, 0.95);
   padding: 5px;
