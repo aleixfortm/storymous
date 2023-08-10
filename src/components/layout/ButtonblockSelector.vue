@@ -2,19 +2,47 @@
     <div v-if="homePage">
         <div class="block">
             <div class="rectangle">
-                <select-button @click="setSelectedTab('latest-feed')" :mode="selectedTab === 'following-feed' ? 'null' : 'flat'">
+                <select-button 
+                @click="setSelectedTab1('latest-feed')" 
+                :mode="selectedTab1 === 'following-feed' ? 'null' : 'flat'"
+                :selected="selectedTab1 === 'latest-feed'">
                     <div>Latest</div>
                 </select-button>
             </div>
             <div class="rectangle">
-                <select-button @click="setSelectedTab('following-feed')" :mode="selectedTab === 'following-feed' ? 'flat' : 'null'">
+                <select-button @click="setSelectedTab1('following-feed')" 
+                :mode="selectedTab1 === 'following-feed' ? 'flat' : 'null'"
+                :selected="selectedTab1 === 'following-feed'">
                     <div>Following</div>
                 </select-button>
             </div>
         </div>
     </div>
     <div v-else>
-        
+        <div class="block">
+            <div class="rectangle short">
+                <select-button 
+                @click="setSelectedTab2('all')" 
+                :mode="selectedTab2 === 'all' ? 'flat' : 'null'"
+                :selected="selectedTab2 === 'all'">
+                    <div class="text">All</div>
+                </select-button>
+            </div>
+            <div class="rectangle">
+                <select-button @click="setSelectedTab2('chapters')" 
+                :mode="selectedTab2 === 'chapters' ? 'flat' : 'null'"
+                :selected="selectedTab2 === 'chapters'">
+                    <div class="text">Chapters</div>
+                </select-button>
+            </div>
+            <div class="rectangle">
+                <select-button @click="setSelectedTab2('comments')" 
+                :mode="selectedTab2 === 'comments' ? 'flat' : 'null'"
+                :selected="selectedTab2 === 'comments'">
+                    <div class="text">Comments</div>
+                </select-button>
+            </div>
+        </div>
     </div>
 </template>
 
@@ -24,11 +52,41 @@ import SelectButton from '../SelectButton.vue';
 export default {
     components: {
         SelectButton
+    },
+    props: ["homePage"],
+    data() {
+        return {
+            selectedTab1: 'latest-feed',
+            selectedTab2: 'all'
+        }
+    },
+    methods: {
+        setSelectedTab1(tab) {
+            console.log("poll")
+            this.selectedTab1 = tab
+            this.$emit('selected-tab', tab);
+        },
+        setSelectedTab2(tab) {
+            this.selectedTab2 = tab
+            this.$emit('selected-tab', tab);
+        }
+    },
+    mounted() {
+        if (this.homePage) {
+            this.$emit('selected-tab', this.selectedTab1);
+        } else {
+            this.$emit('selected-tab', this.selectedTab2);
+        }
+        
     }
 }
 </script>
 
 <style scoped>
+.text {
+    font-size: 25px;
+}
+
 .block {
   margin: 20px 0 0 0;
   width: 100%;
@@ -42,6 +100,18 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: all 0.1s;
+  transition: all 0.2s;
+}
+
+.null {
+    color: rgba(245, 245, 245, 0.781);
+}
+
+.short {
+    width: 70%;
+}
+
+@media (max-width: 520px) {
+
 }
 </style>

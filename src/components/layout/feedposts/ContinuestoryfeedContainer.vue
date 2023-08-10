@@ -72,7 +72,7 @@ export default {
         const router = useRouter();
         return { router: router };
     },
-    props: ["_id", "content", "username", "postComment", "storyTitle", "color", "date", "picture", "chapterNum", "storyId", "parentChapterId", "chapterName", "tags", "leaves", "views"],
+    props: ["_id", "content", "username", "postComment", "storyTitle", "color", "date", "picture", "chapterNum", "storyId", "parentChapterId", "chapterName", "tags", "leaves", "views", "feedMode"],
     methods: {
         ...mapActions('message', ['setLoginError']),
         formatStory(story) {

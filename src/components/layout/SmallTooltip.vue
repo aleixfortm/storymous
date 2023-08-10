@@ -18,7 +18,7 @@ export default {
   border-radius: 2px;
   font-size: 15px;
   text-align: start;
-  z-index: 999;
+  z-index: 10;
   color: rgb(0, 0, 0);
   box-shadow: 0 0 20px 2px rgba(0, 0, 0, 0.5);
 }

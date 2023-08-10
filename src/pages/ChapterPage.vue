@@ -165,6 +165,9 @@ import CommentButton from "@/components/layout/CommentButton.vue";
 import SmallTooltip from "@/components/layout/SmallTooltip.vue";
 import InfoMessage from "@/components/layout/messages/InfoMessage.vue";
 import LoginMessage from "@/components/layout/messages/LoginMessage.vue";
+import RepliesFeed from "./subpages/RepliesFeed.vue";
+import ChaptersFeed from "./subpages/ChaptersFeed.vue";
+import CommentsFeed from "./subpages/CommentsFeed.vue";
 
 export default {
   components: {
@@ -179,7 +182,10 @@ export default {
     CommentButton,
     SmallTooltip,
     InfoMessage,
-    LoginMessage
+    LoginMessage,
+    RepliesFeed,
+    ChaptersFeed,
+    CommentsFeed
   },
   data() {
     return {
@@ -277,6 +283,16 @@ export default {
 </script>
 
 <style scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.1s;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0.1;
+}
+
 .margin-arrow {
   margin: 0px 4px;
 }

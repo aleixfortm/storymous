@@ -11,24 +11,12 @@
             </span>
         </div>
     </feed-container>
-
-    <!--Place selector here!-->
-
-    <div class="block">
-        <div class="rectangle">
-            <select-button @click="setSelectedTab('latest-feed')" :mode="selectedTab === 'following-feed' ? 'null' : 'flat'">
-                <div>Latest</div>
-            </select-button>
-        </div>
-        <div class="rectangle">
-            <select-button @click="setSelectedTab('following-feed')" :mode="selectedTab === 'following-feed' ? 'flat' : 'null'">
-                <div>Following</div>
-            </select-button>
-        </div>
-    </div>
-
-    <component :is="selectedTab" :posts="posts" :loading="loading"></component>
-
+    
+    <buttonblock-selector :homePage="true" @selected-tab="handleSelectedTab"></buttonblock-selector>
+    
+    <transition name="fade" mode="out-in">
+        <component :is="selectedTab" :posts="posts" :loading="loading" :key="selectedTab"></component>
+    </transition>
 </template>
 
 
@@ -63,14 +51,14 @@ export default {
     data() {
         return {
             posts: {},
-            selectedTab: 'latest-feed',
             openDialog: true,
             userLogged: true,
             text: " ",
             showCharacter: true,
             loading: true,
             loggedOutLoading: false,
-            loggedOutImageLoaded: false
+            loggedOutImageLoaded: false,
+            selectedTab: 'latest-feed',
         }
     },
     mounted() {
@@ -90,14 +78,14 @@ export default {
         }
     },
     methods: {
-        setSelectedTab(tab) {
-            this.selectedTab = tab;
-        },
         navigateToNewPost() {
             this.router.push('/newpost');
         },
         navigateToProfile() {
             return '/user/' + this.currentUser;
+        },
+        handleSelectedTab(tab) {
+            this.selectedTab = tab;
         }
     },
     computed: {
@@ -111,6 +99,16 @@ export default {
 
 
 <style scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.1s;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0.1;
+}
+
 .null {
     color: rgba(245, 245, 245, 0.781);
 }

@@ -1,18 +1,22 @@
 <template>
-    <feed-container class="homepage-top">
-        <astronaut-message 
+    <astronaut-message 
+        class="astro"
         :onomatopoeia="''" 
         :text="'In the depths of our galaxy lies a distant planet, where a mesmerizing forest thrives— a place where the ethereal story tree whispers secrets of cosmic wonders...'"
         :flipped="false">
     </astronaut-message>
-    </feed-container>
+
     <div class="block">
         <div class="rectangle">
-            <select-button @click="setSelectedTab('latest-feed')" :mode="selectedTab === 'following-feed' ? null : 'flat'">
+            <select-button 
+            @click="setSelectedTab('latest-feed')" 
+            :mode="selectedTab === 'following-feed' ? null : 'flat'"
+            :selected="true">
                 <div>Explore</div>
             </select-button>
         </div>
     </div>
+
     <latest-feed :posts="posts" :loading="loading"></latest-feed>
 </template>
 
@@ -23,14 +27,12 @@ import { API_BASE_URL } from '../config';
 
 import axios from 'axios';
 
-import FeedContainer from "../components/layout/FeedContainer.vue"
 import SelectButton from "../components/SelectButton.vue";
 import LatestFeed from "../pages/subpages/LatestFeed.vue";
 import AstronautMessage from '@/components/layout/messages/AstronautMessage.vue';
 
 export default {
     components: {
-        FeedContainer,
         SelectButton,
         LatestFeed,
         AstronautMessage
@@ -72,6 +74,10 @@ export default {
 </script>
 
 <style scoped>
+.astro {
+    margin-top: -5px;
+}
+
 .nomargin {
     padding: 0px 0px;
     margin: 0px;
@@ -183,7 +189,6 @@ export default {
 }
 
 .homepage-top {
-    /*background-color: rgba(90, 90, 90, 0.13);*/
     padding: 0px;
     border-radius: 10px;
     margin: 10px auto;

@@ -66,7 +66,8 @@
         </span>   
       </div>
       
-      <div class="add-comment-box" v-if="isLoggedIn">
+      <login-message v-if="!isLoggedIn" :text="'to comment and continue storylines'"></login-message>
+      <div class="add-comment-box" v-else>
         <form @submit.prevent="submitComment">
             <div class="newstory_comment">
                 <div class="image_box">
@@ -81,39 +82,12 @@
             </div>
         </form>
       </div>
-      
-      <login-message v-if="!isLoggedIn" :text="'to comment and continue storylines'"></login-message>
-      <buttonblock-selector></buttonblock-selector>
-      <div v-for="reply in replies" :key="reply._id">
-        <template v-if="reply.type === 'comment'">
-          <comment-container
-            :_id="reply._id"
-            :content="reply.comment"
-            :username="reply.username"
-            :date="reply.date"
-            :picture="reply.picture"
-          ></comment-container>
-        </template>
-        <template v-else>
-          <continuestory-container
-            :_id="reply._id"
-            :storyId="reply.story_id"
-            :parentChapterId="reply.parent_chapter_id"
-            :content="reply.content"
-            :chapterName="reply.chapter_name"
-            :chapterNum="reply.chapter_num"
-            :username="reply.username"
-            :postComment="reply.comment"
-            :date="reply.date"
-            :picture="reply.picture"
-            :tags="reply.tags"
-          ></continuestory-container>
-        </template>
-      </div>
-      <astronaut-message v-if="replies.length == 0" 
-        :onomatopoeia="'crick crick'" 
-        :text="'No comments or chapters have been written for this story yet. You can be the first, hurry up!'">
-      </astronaut-message>
+      <buttonblock-selector :homePage="false" @selected-tab="handleSelectedTab"></buttonblock-selector>
+
+      <transition name="fade" mode="out-in">
+        <component :is="selectedTab" :loading="loading" :replies="replies"></component>
+      </transition>
+
     </feed-container>
     <feed-container v-else>
       <div class="loader-container">
@@ -130,25 +104,22 @@ import axios from "axios";
 import { API_BASE_URL } from '../config';
 import { mapGetters } from 'vuex';
 
-import CommentContainer from "@/components/layout/CommentContainer.vue";
-import ContinuestoryContainer from "../components/layout/ContinuestoryContainer.vue";
 import FeedContainer from '@/components/layout/FeedContainer.vue';
 import ChapteredprologueContainer from "@/components/layout/ChapteredprologueContainer.vue";
 import WritechapterContainer from "@/components/layout/WritechapterContainer.vue";
-import AstronautMessage from "@/components/layout/messages/AstronautMessage.vue";
 import PostTag from "@/components/layout/PostTag.vue";
 import SmallTooltip from "@/components/layout/SmallTooltip.vue";
 import CommentButton from "@/components/layout/CommentButton.vue";
 import InfoMessage from "@/components/layout/messages/InfoMessage.vue";
 import LoginMessage from "@/components/layout/messages/LoginMessage.vue";
 import ButtonblockSelector from "@/components/layout/ButtonblockSelector.vue";
+import RepliesFeed from "./subpages/RepliesFeed.vue";
+import ChaptersFeed from "./subpages/ChaptersFeed.vue";
+import CommentsFeed from "./subpages/CommentsFeed.vue";
 
 export default {
   components: {
     FeedContainer,
-    AstronautMessage,
-    CommentContainer,
-    ContinuestoryContainer,
     ChapteredprologueContainer,
     WritechapterContainer,
     PostTag,
@@ -156,7 +127,10 @@ export default {
     CommentButton,
     InfoMessage,
     LoginMessage,
-    ButtonblockSelector
+    ButtonblockSelector,
+    RepliesFeed,
+    ChaptersFeed,
+    CommentsFeed
   },
   data() {
     return {
@@ -171,7 +145,8 @@ export default {
       showLeavesTooltip: false,
       showViewsTooltip: false,
       showChaptersTooltip: false,
-      showCommentsTooltip:false
+      showCommentsTooltip:false,
+      selectedTab: 'replies-feed',
     }
   },
   mounted() {
@@ -196,7 +171,7 @@ export default {
     }
   },
   methods: {
-    adjustTextareaHeight() {
+        adjustTextareaHeight() {
           const textarea = this.$el.querySelector('#comment');
           textarea.style.height = 'auto';
           textarea.style.height = textarea.scrollHeight + 'px';
@@ -206,7 +181,6 @@ export default {
           this.showContinueContainer = !this.showContinueContainer
         },
         submitComment() {
-
           const data_packet = {
             username: this.currentUser,
             comment: this.formcomment,
@@ -217,14 +191,22 @@ export default {
             .post(`${API_BASE_URL}/new_comment`, data_packet)
             .then(response => {
               const dataPayload = response.data;
-              //const comment_data = dataPayload.data_payload;
-
-              this.replies.unshift(dataPayload.comment_data); // Add the new comment to the beginning of the replies array
-              this.formcomment = ''; // Clear the comment input field
+              this.replies.unshift(dataPayload.comment_data);
+              this.formcomment = '';
             })
             .catch(error => {
               console.log(error);
             });
+        },
+        handleSelectedTab(tab) {
+          if (tab === "all") {
+            this.selectedTab = "replies-feed";
+          } else if (tab === "chapters") {
+            this.selectedTab = "chapters-feed"
+          } else {
+            this.selectedTab = "comments-feed"
+          }
+            
         }
   },
   watch: {
@@ -238,6 +220,16 @@ export default {
 </script>
 
 <style scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.1s;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0.1;
+}
+
 .margin-arrow {
   margin: 0px 4px;
 }

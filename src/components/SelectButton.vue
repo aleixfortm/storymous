@@ -1,5 +1,5 @@
 <template>
-    <button :type="type" :class="mode">
+    <button :type="type" :class="[mode, { selected }]">
         <slot></slot>
     </button>
 </template>
@@ -7,7 +7,7 @@
 
 <script>
 export default {
-  props: ["type", "mode"]
+  props: ["type", "mode", "selected"]
 }
 </script>
 
@@ -31,16 +31,20 @@ button {
   color: white;
   cursor: pointer;
   font-size: 25px;
-  transition: 0.1s all;
+  transition: 0.2s all;
 }
 
 button:hover {
     background-color: #7b89a11e;
 }
 
+button:active {
+  background-color: rgba(255, 255, 255, 0);
+}
 
 .flat {
     border-bottom: 2px solid rgb(4, 255, 150);
+    transition: 0.3s all;
 }
 
 .flat:hover,
@@ -50,5 +54,14 @@ button:hover {
 
 .null {
   border-bottom: 2px solid rgba(158, 158, 158, 0.055);
+  transition: 0.3s all;
+}
+
+.null:active {
+  border-bottom: 2px solid rgb(255, 255, 255);
+}
+
+button.selected:hover {
+  background-color: #5130ad00;
 }
 </style>

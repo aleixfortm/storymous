@@ -8,7 +8,7 @@
 <style scoped>
 
 div {
-    margin-top: 20px;
+    margin-top: 8px;
     height: fit-content;
     width: 100%;
 
