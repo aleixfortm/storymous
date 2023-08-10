@@ -21,8 +21,8 @@
               </div>
               <div class="story-stats-section" @mouseover="showViewsTooltip = true" @mouseout="showViewsTooltip = false">
                 <span class="material-symbols-outlined margin1">bar_chart</span>
-                <span>{{ postData.views }}</span>
-                <small-tooltip :condition="showViewsTooltip" :text="'Views'" :top="'35px'"></small-tooltip>
+                <span>{{ highestViews }}</span>
+                <small-tooltip :condition="showViewsTooltip" :text="'Highest views'" :top="'35px'"></small-tooltip>
               </div>
               <div class="story-stats-section" @mouseover="showChaptersTooltip = true" @mouseout="showChaptersTooltip = false">
                 <span class="material-symbols-outlined margin1">call_split</span>
@@ -194,7 +194,8 @@ export default {
       showLeavesTooltip: false,
       showChaptersTooltip: false,
       showCommentsTooltip: false,
-      showViewsTooltip: false
+      showViewsTooltip: false,
+      highestViews: 0
     }
   },
   mounted() {
@@ -203,13 +204,21 @@ export default {
       .get(`${API_BASE_URL}/chapter/${chapterId}`)
       .then(response => {
         this.chapterList = response.data;
-        this.loading = false;
+        this.chapterList.forEach((chapter) => {
+          if (chapter.views > this.highestViews) {
+            this.highestViews = chapter.views;
+          }
+        });
+
         this.postData = this.chapterList[0];
         this.totalLeaves += this.postData.leaves.length;
 
         this.chapterList.forEach((chapter) => {
           this.totalLeaves += chapter.leaves.length;
         });
+
+        this.loading = false;
+
         axios
           .get(`${API_BASE_URL}/post/${this.postData._id.$oid}`)
           .then(response => {

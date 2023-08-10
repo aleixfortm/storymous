@@ -21,7 +21,7 @@
             <div class="story-stats-section" @mouseover="showViewsTooltip = true" @mouseout="showViewsTooltip = false">
               <span class="material-symbols-outlined margin1">bar_chart</span>
               <span>{{ post.views }}</span>
-              <small-tooltip :condition="showViewsTooltip" :text="'Views'" :top="'35px'"></small-tooltip>
+              <small-tooltip :condition="showViewsTooltip" :text="'Highest views'" :top="'35px'"></small-tooltip>
             </div>
             <div class="story-stats-section" @mouseover="showChaptersTooltip = true" @mouseout="showChaptersTooltip = false">
               <span class="material-symbols-outlined margin1">call_split</span>
