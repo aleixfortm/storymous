@@ -81,7 +81,9 @@
         </writechapter-container>
       </div>   
       </div>
-      <div class="add-comment-box" v-if="isLoggedIn">
+
+      <login-message v-if="!isLoggedIn" :text="'to comment and continue storylines'"></login-message>
+      <div class="add-comment-box" v-else>
         <form @submit.prevent="submitComment">
             <div class="newstory_comment">
                 <div class="image_box">
@@ -97,46 +99,12 @@
         </form>
       </div>
 
-      <login-message v-if="!isLoggedIn" :text="'to comment and continue storylines'"></login-message>
+      <buttonblock-selector :homePage="false" @selected-tab="handleSelectedTab"></buttonblock-selector>
 
-      <span v-if="!loadingComments">
-        <div v-for="reply in replies" :key="reply._id">
-          <template v-if="reply.type === 'comment'">
-            <comment-container
-              :_id="reply._id"
-              :content="reply.comment"
-              :username="reply.username"
-              :date="reply.date"
-              :picture="reply.picture"
-            ></comment-container>
-          </template>
-          <template v-else-if="reply.type === 'chapter' && !chapterList.some(obj => obj._id.$oid === reply._id.$oid)">
-            <continuestory-container
-              :_id="reply._id"
-              :storyId="reply.story_id"
-              :parentChapterId="reply.parent_chapter_id"
-              :content="reply.content"
-              :chapterName="reply.chapter_name"
-              :chapterNum="reply.chapter_num"
-              :username="reply.username"
-              :postComment="reply.comment"
-              :date="reply.date"
-              :picture="reply.picture"
-              :tags="reply.tags"
-            ></continuestory-container>
-          </template>
-        </div>
-        <astronaut-message v-if="replies.length == chapterList[chapterList.length - 1].chapter_num" class="imagecontainer"
-        :onomatopoeia="'crick crick'"
-        :text="'No comments or chapters have been written for this story yet. You can be the first, hurry up!'">
-        </astronaut-message>
-      </span>
-      <div v-else class="loader-container" style="margin-top: -8px">
-        <div class="spinner-border text-light mb-3" style="width: 5rem; height: 5rem;" role="status">
-                <span class="visually-hidden">Loading...</span>
-            </div>
-        <span class="loader-text">Harvesting comments from story...</span>
-      </div>
+      <transition name="fade" mode="out-in">
+        <component :is="selectedTab" :loading="loading" :replies="replies" :chapterList="[]"></component>
+      </transition>
+
     </feed-container>
     <feed-container v-else>
       <div class="loader-container">
@@ -168,6 +136,7 @@ import LoginMessage from "@/components/layout/messages/LoginMessage.vue";
 import RepliesFeed from "./subpages/RepliesFeed.vue";
 import ChaptersFeed from "./subpages/ChaptersFeed.vue";
 import CommentsFeed from "./subpages/CommentsFeed.vue";
+import ButtonblockSelector from "@/components/layout/ButtonblockSelector.vue";
 
 export default {
   components: {
@@ -185,7 +154,8 @@ export default {
     LoginMessage,
     RepliesFeed,
     ChaptersFeed,
-    CommentsFeed
+    CommentsFeed,
+    ButtonblockSelector
   },
   data() {
     return {
@@ -203,7 +173,8 @@ export default {
       showChaptersTooltip: false,
       showCommentsTooltip: false,
       showViewsTooltip: false,
-      highestViews: 0
+      highestViews: 0,
+      selectedTab: 'replies-feed'
     }
   },
   mounted() {
@@ -271,7 +242,17 @@ export default {
         .catch(error => {
           console.log(error);
         });
-    }
+    },
+    handleSelectedTab(tab) {
+          if (tab === "all") {
+            this.selectedTab = "replies-feed";
+          } else if (tab === "chapters") {
+            this.selectedTab = "chapters-feed"
+          } else {
+            this.selectedTab = "comments-feed"
+          }
+            
+        }
   },
   watch: {
     formcomment() {

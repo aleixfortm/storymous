@@ -82,10 +82,11 @@
             </div>
         </form>
       </div>
+
       <buttonblock-selector :homePage="false" @selected-tab="handleSelectedTab"></buttonblock-selector>
 
       <transition name="fade" mode="out-in">
-        <component :is="selectedTab" :loading="loading" :replies="replies"></component>
+        <component :is="selectedTab" :loading="loading" :replies="replies" :chapterList="chapterList"></component>
       </transition>
 
     </feed-container>
