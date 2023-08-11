@@ -1,7 +1,7 @@
 <template>
     <feed-container v-if="!loading">
         <div v-for="reply in replies" :key="reply._id">
-            <template v-if="reply.type !== 'comment'">
+            <template v-if="reply.type === 'chapter' && !chapterList.some(obj => obj._id.$oid === reply._id.$oid)">
                 <continuestory-container
                     :_id="reply._id"
                     :storyId="reply.story_id"
@@ -17,7 +17,7 @@
                 ></continuestory-container>
             </template>
         </div>
-        <astronaut-message v-if="replies.length == 0" 
+        <astronaut-message v-if="replies.length > 0" 
             :onomatopoeia="'crick crick'" 
             :text="'No comments or chapters have been written for this story yet. You can be the first, hurry up!'">
         </astronaut-message>
@@ -38,11 +38,18 @@ import AstronautMessage from '@/components/layout/messages/AstronautMessage.vue'
 import FeedContainer from '@/components/layout/FeedContainer.vue';
 
 export default {
-    props: ["replies", "loading"],
+    props: ["replies", "loading", "chapterList"],
     components: {
         ContinuestoryContainer,
         AstronautMessage,
         FeedContainer
+    },
+    computed: {
+        hasValidReplies() {
+            return this.replies.some(reply => {
+                return reply.type === 'chapter' && !this.chapterList.some(obj => obj._id === reply._id);
+            });
+        }
     }
 }
 </script>
