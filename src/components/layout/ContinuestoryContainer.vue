@@ -191,7 +191,8 @@ export default {
 .story__user-img-container2 {
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
+    justify-content: flex-start;
+
 }
 
 .story__user-comment-container2 {
