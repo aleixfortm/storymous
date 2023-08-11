@@ -96,7 +96,7 @@ export default {
                 const data_packet = {
                     post_id: this._id.$oid,
                     username: this.currentUser,
-                    usernane_receiver: this.username
+                    username_receiver: this.username
                 }
                 if (!this.executed) {
                     if (!this.leavesMutable.includes(this.currentUser)) { // leaves array does not include currentUser

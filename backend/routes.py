@@ -449,53 +449,52 @@ def new_chapter():
     # else send the previously stablished data packet
     return json_util.dumps(data_packet)
 
+
 """
+from collections import Counter
 # edit posts
-@bp_routes.route('/posts_edit', methods=["GET"])
+@bp_routes.route('/edit_stuff', methods=["GET"])
 def posts_edit():
-    cursor = list(db_posts.find())
-    for post in cursor:
-        query = {"_id": post["_id"]}
-        post["leaves"] = []
+    user_counter = Counter()
+    
+    posts = list(db_posts.find())
+    for post in posts:
+        user_counter[post["username"]] += len(post["leaves"])
 
-        db_posts.replace_one(query, post)
-        
-    return "Success"
+    chapters = list(db_chapters.find())
+    for chapter in chapters:
+        user_counter[chapter["username"]] += len(chapter["leaves"])
 
-
-# edit posts
-@bp_routes.route('/comments_edit', methods=["GET"])
-@jwt_required()
-def comments_edit():
-    comment_list = list(db_comments.find())
-    for comment in comment_list:
-        query = {"_id": comment["_id"]}
-
-        comment["type"] = "comment"
-
-        db_comments.replace_one(query, comment)
-        
-    return "Success"
-
-
-# edit users
-@bp_routes.route('/users_edit', methods=["GET"])
-def users_edit():
-
-    db_users.update_one({"username": "Lil_Metro"}, {"$set": {"password_hash": generate_password_hash("momo//**")}})
-        
-    return "successful change"
-
-
-# edit users
-@bp_routes.route('/chapters_edit', methods=["GET"])
-def chapters_edit():
-    cursor = list(db_chapters.find())
-    for chapter in cursor:
-        query = {"_id": chapter["_id"]}
-        chapter["views"] = 0
-
-        db_chapters.replace_one(query, chapter)
+    user_dict = dict(user_counter)
+    for user, leaves_count in user_counter.items():
+        query = {"username": user}
+        update_data = {"$set": {"leaves": leaves_count}}
+        db_users.update_one(query, update_data)
         
     return "Success"
 """
+
+from collections import Counter
+# edit posts
+@bp_routes.route('/edit_stuff', methods=["GET"])
+def edit_stuff():
+    
+    chapter_data = {
+        "story_id": ObjectId("64396be8852aaec5dc1e4bfd"),
+        "parent_chapter_id": ObjectId("64d61c7fc3f9a7a1f6f0ac7d"),
+        "date": "2023-06-14T20:36:12.490426",
+        "username": "benetti",
+        "chapter_name": "The quest of CSGO pt.5",
+        "chapter_num": 4,
+        "content": "You know that feeling when good things are happenin' to you and you feel like you don't deserve it? That's me sitting in gold nova 2 right now... FUCK NO!!! I'M THE BEST!! I'm at my prime, when i thought i hit the cieling and i wasn't gettin' out of silver, BOOM! nova 1, and even when i thought that was it, DOUBLE BOOM! gold nova 2!! I have no words to describe my feelings, thankful for my pals who have been there when i was rock bottom and happy for all those haters who never gave me a chance! I'm coming for you S1mple!!",
+        "comment": '“The harder the conflict, the greater the triumph.” - George Washington',
+        "tags": ["fantasy", "young-adults", "humor", "chill"],
+        "leaves": ["pixelated", "poll3", "astonished_98", "stoupeaks", "benetti"],
+        "views": 160
+    }
+
+    chapter_obj = ChapterModel(**chapter_data)
+    chapter_obj.quicksave_to_db()
+
+        
+    return "Success"

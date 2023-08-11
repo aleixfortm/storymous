@@ -61,7 +61,8 @@
           :username="currentUser"
           :postId="post._id"
           :postTitle="post.title"
-          :parentChapterId="null">
+          :parentChapterId="null"
+          :tags="post.tags">
         </writechapter-container>
         </span>   
       </div>

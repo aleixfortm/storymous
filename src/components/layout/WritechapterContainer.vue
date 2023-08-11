@@ -21,11 +21,6 @@
                 <span class="material-symbols-outlined">outgoing_mail</span>
               </submit-button>
             </div>
-            <!--
-            <div class="buttonbox">
-                <button :class="{ 'postbutton': true, 'disabled': isPostButtonDisabled }" :disabled="isPostButtonDisabled" type="submit">Submit</button>
-            </div>
-            -->
         </form>
     </div>
 </template>
