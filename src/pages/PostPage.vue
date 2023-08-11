@@ -1,7 +1,10 @@
 <template>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,300,1,200" />
+    
     <feed-container v-if="!loading">
+      <tree-container></tree-container>
       <info-message></info-message>
+      
       <div class="story-container">
         <div class="main-title-container">
           <h2 class="main-title">{{ post.title.toUpperCase() }}</h2>
@@ -118,6 +121,7 @@ import ButtonblockSelector from "@/components/layout/ButtonblockSelector.vue";
 import RepliesFeed from "./subpages/RepliesFeed.vue";
 import ChaptersFeed from "./subpages/ChaptersFeed.vue";
 import CommentsFeed from "./subpages/CommentsFeed.vue";
+import TreeContainer from "@/components/layout/TreeContainer.vue";
 
 export default {
   components: {
@@ -132,7 +136,8 @@ export default {
     ButtonblockSelector,
     RepliesFeed,
     ChaptersFeed,
-    CommentsFeed
+    CommentsFeed,
+    TreeContainer
   },
   data() {
     return {

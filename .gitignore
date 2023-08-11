@@ -6,3 +6,4 @@ backend/__pycache__
 dist
 .env.production
 .env.development
+public
