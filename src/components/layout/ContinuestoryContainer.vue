@@ -240,10 +240,6 @@ export default {
     text-decoration: underline 2px;
 }
 
-.story__username2 {
-    margin: 0px 0px 5px 0;
-}
-
 .story__user-img2 {
     width: 45px;
     height: auto;
@@ -286,7 +282,7 @@ export default {
 }
 
 .story__username2 {
-    margin: 0px 0px 5px 0;
+    margin: 0px 0px 0px 0;
 }
 
 .story__user-info-container2 {
