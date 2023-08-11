@@ -93,13 +93,15 @@ export default {
         },
         increaseLeaves() {
             if (this.isLoggedIn) {
+                const data_packet = {
+                    post_id: this._id.$oid,
+                    username: this.currentUser,
+                    usernane_receiver: this.username
+                }
                 if (!this.executed) {
                     if (!this.leavesMutable.includes(this.currentUser)) { // leaves array does not include currentUser
                         this.leavesMutable.push(this.currentUser)
-                        const data_packet = {
-                            post_id: this._id.$oid,
-                            username: this.currentUser
-                        }
+                        
                         axios
                             .post(`${API_BASE_URL}/add_leaves_post`, data_packet)
                             .catch(error => {
@@ -109,10 +111,6 @@ export default {
                         const index = this.leavesMutable.indexOf(this.currentUser);
                         if (index !== -1) {
                             this.leavesMutable.splice(index, 1);
-                        }
-                        const data_packet = {
-                            post_id: this._id.$oid,
-                            username: this.currentUser
                         }
                         axios
                             .post(`${API_BASE_URL}/remove_leaves_post`, data_packet)

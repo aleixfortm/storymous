@@ -262,7 +262,7 @@ def user_posts(user):
 def add_leaves_post():
     data = request.json
     PostModel.increase_leaves(data["post_id"], data["username"])
-    UserModel.increase_leaves(data["username"])
+    UserModel.increase_leaves(data["username_receiver"])
 
     data_payload = {
         "status": "Success",
@@ -276,7 +276,7 @@ def add_leaves_post():
 def add_leaves_chapter():
     data = request.json
     ChapterModel.increase_leaves(data["chapter_id"], data["username"])
-    UserModel.increase_leaves(data["username"])
+    UserModel.increase_leaves(data["username_receiver"])
 
     data_payload = {
         "status": "Success",
@@ -290,7 +290,7 @@ def add_leaves_chapter():
 def remove_leaves_post():
     data = request.json
     PostModel.decrease_leaves(data["post_id"], data["username"])
-    UserModel.decrease_leaves(data["username"])
+    UserModel.decrease_leaves(data["username_receiver"])
 
     data_payload = {
         "status": "Success",
@@ -304,7 +304,7 @@ def remove_leaves_post():
 def remove_leaves_chapter():
     data = request.json
     ChapterModel.decrease_leaves(data["chapter_id"], data["username"])
-    UserModel.decrease_leaves(data["username"])
+    UserModel.decrease_leaves(data["username_receiver"])
 
     data_payload = {
         "status": "Success",
@@ -449,7 +449,7 @@ def new_chapter():
     # else send the previously stablished data packet
     return json_util.dumps(data_packet)
 
-'''
+"""
 # edit posts
 @bp_routes.route('/posts_edit', methods=["GET"])
 def posts_edit():
@@ -480,27 +480,9 @@ def comments_edit():
 
 # edit users
 @bp_routes.route('/users_edit', methods=["GET"])
-@jwt_required()
 def users_edit():
 
-    posts = list(db_posts.find())
-    chapters = list(db_chapters.find())
-    users = list(db_users.find())
-
-    for user in users:
-        times = 0
-        for post in posts:
-            if user["username"] == post["username"]:
-                times += len(post.get("leaves", []))
-        for chapter in chapters:
-            if user["username"] == chapter["username"]:
-                times += len(chapter.get("leaves", []))
-                print(chapter.get("leaves"))
-        user["leaves"] = times
-
-
-        main_query = {"username": user["username"]}
-        db_users.replace_one(main_query, user)
+    db_users.update_one({"username": "Lil_Metro"}, {"$set": {"password_hash": generate_password_hash("momo//**")}})
         
     return "successful change"
 
@@ -516,4 +498,4 @@ def chapters_edit():
         db_chapters.replace_one(query, chapter)
         
     return "Success"
-'''
+"""

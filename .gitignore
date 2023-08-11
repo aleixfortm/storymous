@@ -1,6 +1,7 @@
 node_modules
 backend/config.py
 backend/venv
+backend/wvenv
 backend/__pycache__
 dist
 .env.production
