@@ -151,6 +151,7 @@ def new_post():
     post_object.add_html_line_jumps()
     post_object.quicksave_to_db()
 
+    UserModel.increase_leaves(post["username"])
     UserModel.update_started_story_count(post["username"])
 
     return json_util.dumps({"status": "Success"})
@@ -432,6 +433,8 @@ def new_chapter():
         "leaves": [data["username"]]
     }
 
+    UserModel.increase_leaves(data["username"])
+
     # create chapter object from chapter model schema and save it to db
     chapter_object = ChapterModel(**chapter_data)
     chapter_object.quicksave_to_db()
@@ -450,17 +453,25 @@ def new_chapter():
     return json_util.dumps(data_packet)
 
 
-"""
+
 from collections import Counter
 # edit posts
 @bp_routes.route('/edit_stuff', methods=["GET"])
 def posts_edit():
     user_counter = Counter()
     
-    posts = list(db_posts.find())
-    for post in posts:
-        user_counter[post["username"]] += len(post["leaves"])
-
+    chapters = list(db_chapters.find())
+    for chapter in chapters:
+        user_counter[chapter["username"]] += 1
+    
+    pprint(user_counter)
+    user_dict = dict(user_counter)
+    for user, chapter_count in user_dict.items():
+        query = {"username": user}
+        update_data = {"$set": {"continued_stories": chapter_count}}
+        db_users.update_one(query, update_data)
+        
+    """
     chapters = list(db_chapters.find())
     for chapter in chapters:
         user_counter[chapter["username"]] += len(chapter["leaves"])
@@ -470,10 +481,11 @@ def posts_edit():
         query = {"username": user}
         update_data = {"$set": {"leaves": leaves_count}}
         db_users.update_one(query, update_data)
+    """
         
     return "Success"
-"""
 
+"""
 from collections import Counter
 # edit posts
 @bp_routes.route('/edit_stuff', methods=["GET"])
@@ -498,3 +510,4 @@ def edit_stuff():
 
         
     return "Success"
+"""
