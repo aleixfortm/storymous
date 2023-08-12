@@ -119,8 +119,15 @@ export default {
 } 
 
 .box {
-    outline: rgba(255, 255, 255, 0.226) 1px solid;
+    outline: rgba(255, 255, 255, 0.103) 1px solid;
     background-color: rgb(43, 43, 46);
+    margin: auto 1px;
+    margin-top: 1px;
+    transition: 0s all;
+}
+
+.box:hover {
+    outline: rgba(255, 255, 255, 0.308) 1px solid;
 }
 
 .highlight {
@@ -228,6 +235,7 @@ export default {
     font-size: 12px;
     color: whitesmoke;
     font-weight: normal;
+    word-break: keep-all;
 }
 
 .story__user-name {

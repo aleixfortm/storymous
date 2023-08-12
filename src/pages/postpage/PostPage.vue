@@ -4,74 +4,8 @@
       <!--
       <tree-chart :json="data" :class="{landscape: landscape.length}" @click-node="clickNode" class="tree"></tree-chart>
       -->
-      <br>
+      <post-info :data="infoData"></post-info>
       <post-section v-for="chapter in chapters" :key="chapter.ide" :chapter="chapter"></post-section>
-      <br>
-      <div class="story-container">
-        <div class="main-title-container">
-          <h2 class="main-title">{{ post.title.toUpperCase() }}</h2>
-        </div>
-        <div class="tag-section">
-            <post-tag v-for="tag in post.tags" :key="tag" :clickable="false" :tag="tag"></post-tag>
-        </div> 
-        <div class="story-stats user-select-none">
-            <div class="story-stats-section" 
-                  :class="[post.leaves.includes(currentUser) ? 'includes-leaf-icon' : '']" 
-                  @mouseover="showLeavesTooltip = true" 
-                  @mouseout="showLeavesTooltip = false">
-              <span class="material-symbols-outlined margin1 leaf-icon" :class="[post.leaves.includes(currentUser) ? 'includes-leaf-icon' : '']">nest_eco_leaf</span>
-              <span>{{ post.leaves.length }}</span>
-              <small-tooltip :condition="showLeavesTooltip" :text="'Storyline leaves'" :top="'35px'"></small-tooltip>
-            </div>
-            <div class="story-stats-section" @mouseover="showViewsTooltip = true" @mouseout="showViewsTooltip = false">
-              <span class="material-symbols-outlined margin1">bar_chart</span>
-              <span>{{ post.views }}</span>
-              <small-tooltip :condition="showViewsTooltip" :text="'Highest views'" :top="'35px'"></small-tooltip>
-            </div>
-            <div class="story-stats-section" @mouseover="showChaptersTooltip = true" @mouseout="showChaptersTooltip = false">
-              <span class="material-symbols-outlined margin1">call_split</span>
-              <span>0</span>
-              <small-tooltip :condition="showChaptersTooltip" :text="'Mounted chapters'" :top="'35px'"></small-tooltip>
-            </div>
-            <div class="story-stats-section" @mouseover="showCommentsTooltip = true" @mouseout="showCommentsTooltip = false">
-              <span class="material-symbols-outlined margin1">chat</span>
-              <span>{{ post.user_comments.length }}</span>
-              <small-tooltip :condition="showCommentsTooltip" :text="'Comments'" :top="'35px'"></small-tooltip>
-            </div>
-        </div>
-        <chapteredprologue-container
-          v-if="post"
-            :_id="post._id"
-            :title="post.title"
-            :content="post.content"
-            :username="post.username"
-            :postComment="post.comment"
-            :date="post.date"
-            :picture="post.picture"
-            :color="post.color"
-            :feedMode="false"
-            class="story__article">
-        </chapteredprologue-container>
-        <span v-if="isLoggedIn">
-          <div class="add-story-container" @click="toggleContinueContainer">
-            <h2 class="add-story d-flex align-items-center">
-              START NEW STORYLINE <span class="material-symbols-outlined margin-arrow">arrow_forward</span> 
-              <span class="highlight1 m-1">CHAPTER</span>
-              <span class="highlight1">1</span>
-            </h2>
-          </div>
-          <writechapter-container
-          v-if="showContinueContainer"
-          :chapterNum="1"
-          :username="currentUser"
-          :postId="post._id"
-          :postTitle="post.title"
-          :parentChapterId="null"
-          :tags="post.tags">
-        </writechapter-container>
-        </span>   
-      </div>
-      
       <login-message v-if="!isLoggedIn" :text="'to comment and continue storylines'"></login-message>
       <div class="add-comment-box" v-else>
         <form @submit.prevent="submitComment">
@@ -88,7 +22,7 @@
             </div>
         </form>
       </div>
-
+      
       <buttonblock-selector :homePage="false" @selected-tab="handleSelectedTab"></buttonblock-selector>
 
       <transition name="fade" mode="out-in">
@@ -125,6 +59,7 @@ import RepliesFeed from "./RepliesFeed.vue";
 import ChaptersFeed from "./ChaptersFeed.vue";
 import CommentsFeed from "./CommentsFeed.vue";
 import TreeChart from "@/components/TreeChart.vue";
+import PostInfo from "./PostInfo.vue";
 
 export default {
   components: {
@@ -141,7 +76,8 @@ export default {
     ChaptersFeed,
     CommentsFeed,
     TreeChart,
-    PostSection
+    PostSection,
+    PostInfo
   },
   data() {
     return {
@@ -158,6 +94,13 @@ export default {
       showChaptersTooltip: false,
       showCommentsTooltip:false,
       selectedTab: 'replies-feed',
+      infoData: {
+        title: "THE QUEST OF CSGO",
+        tags: ["chill", "sci-fi", "short"],
+        leaves: ["stoupeaks", "benetti"],
+        views: 230,
+        user_comments: []
+      },
       landscape: [],
       data: {
           name: '@benetti Prologue',
@@ -462,14 +405,12 @@ export default {
     justify-content: center;
     align-items: center;
     text-align: center;
-
 }
 
 .main-title {
     color: bisque;
     font-size: 25px;
     margin: 10px 0px 10px 0px;
-
 }
 
 .add-story-container {
