@@ -26,5 +26,11 @@ db_comments = mongo.db.comments
 db_chapters = mongo.db.chapters
 
 # register blueprints
-from routes import bp_routes
-app.register_blueprint(bp_routes)
+from routes.posts import bp_posts
+app.register_blueprint(bp_posts)
+
+from routes.users import bp_users
+app.register_blueprint(bp_users)
+
+from routes.edits import bp_edits
+app.register_blueprint(bp_edits)
