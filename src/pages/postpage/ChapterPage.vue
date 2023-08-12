@@ -110,12 +110,7 @@
 
     </feed-container>
     <feed-container v-else>
-      <div class="loader-container">
-        <div class="spinner-border text-light mb-3" style="width: 5rem; height: 5rem;" role="status">
-            <span class="visually-hidden">Loading...</span>
-        </div>
-        <span class="loader-text">Adding chapters to main story...</span>
-      </div>
+      <loader-component :text="'Adding chapters to main story...'"></loader-component>
     </feed-container>
 </template>
 
@@ -140,6 +135,7 @@ import RepliesFeed from "./RepliesFeed.vue";
 import ChaptersFeed from "./ChaptersFeed.vue";
 import CommentsFeed from "./CommentsFeed.vue";
 import ButtonblockSelector from "@/components/UIcomponents/ButtonblockSelector.vue";
+import LoaderComponent from "@/components/UIcomponents/LoaderComponent.vue";
 
 export default {
   components: {
@@ -158,7 +154,8 @@ export default {
     RepliesFeed,
     ChaptersFeed,
     CommentsFeed,
-    ButtonblockSelector
+    ButtonblockSelector,
+    LoaderComponent
   },
   data() {
     return {

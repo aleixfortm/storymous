@@ -49,12 +49,7 @@
             ></astronaut-message>
           </div>
         </span>
-        <span v-else class="loader-container">
-          <div class="spinner-border text-light mb-3" style="width: 5rem; height: 5rem;" role="status">
-                <span class="visually-hidden">Loading...</span>
-            </div>
-            <span class="loader-text">Looking for your friends...</span>
-        </span>
+        <loader-component v-else :text="'Looking for your friends...'"></loader-component>
     </feed-container>
 </template>
 
@@ -63,6 +58,7 @@ import PostContainer from "@/components/feedposts/PostContainer.vue";
 import FeedContainer from "@/components/frames/FeedContainer.vue";
 import AstronautMessage from "@/components/messages/AstronautMessage.vue";
 import ContinuestoryfeedContainer from "@/components/feedposts/ContinuestoryfeedContainer.vue";
+import LoaderComponent from "@/components/UIcomponents/LoaderComponent.vue";
 
 export default {
     props: ["posts", "loading"],
@@ -70,7 +66,8 @@ export default {
         PostContainer,
         FeedContainer,
         AstronautMessage,
-        ContinuestoryfeedContainer
+        ContinuestoryfeedContainer,
+        LoaderComponent
     },
     methods: {
         formatContent(text) {
@@ -79,21 +76,3 @@ export default {
     }
 }
 </script>
-
-<style scoped>
-.loader-text {
-    background-color: whitesmoke;
-    color: rgb(0, 0, 0);
-    padding: 5px 10px;
-    border-radius: 15px;
-    font-weight: bold;
-}
-
-.loader-container {
-    margin: 40px 0 0 0;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-}
-</style>

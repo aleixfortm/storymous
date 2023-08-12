@@ -76,12 +76,7 @@
             </div>
         </section>
         <section class="profile-box centered" v-else>
-            <div v-if="loading" class="loader-container">
-                <div class="spinner-border text-light mb-3" style="width: 5rem; height: 5rem;" role="status">
-                    <span class="visually-hidden">Loading...</span>
-                </div>
-            <span class="loader-text">Spotting authors nearby...</span>
-        </div>
+            <loader-component v-if="loading" :text="'Spotting authors nearby...'"></loader-component>
         </section>
 
         <section v-if="ownProfile()" class="section_title">
@@ -90,12 +85,9 @@
         <section v-else class="section_title">
             {{ profileUsername }}'s posts
         </section>
-        <div v-if="loading" class="loader-container">
-            <div class="spinner-border text-light mb-3" style="width: 5rem; height: 5rem;" role="status">
-                <span class="visually-hidden">Loading...</span>
-            </div>
-            <span class="loader-text">Fetching user stories...</span>
-        </div>
+
+        <loader-component v-if="loading" :text="'Fetching user stories...'"></loader-component>
+        
         <div v-else-if="posts.length > 0">
             <div v-for="post in posts" :key="post._id.$oid">
                 <template v-if="post.type === 'prologue'">
@@ -159,6 +151,7 @@ import SettingsButton from '@/components/UIcomponents/buttons/SettingsButton.vue
 import LogoutButton from '@/components/UIcomponents/buttons/LogoutButton.vue';
 import SmallTooltip from '@/components/UIcomponents/SmallTooltip.vue';
 import LoginMessage from "@/components/messages/LoginMessage.vue"
+import LoaderComponent from '@/components/UIcomponents/LoaderComponent.vue';
 
 export default {
     components: {
@@ -170,7 +163,8 @@ export default {
         SettingsButton,
         LogoutButton,
         SmallTooltip,
-        LoginMessage
+        LoginMessage,
+        LoaderComponent
     },
     setup() {
         const router = useRouter();
@@ -375,22 +369,6 @@ export default {
     justify-content: center;
     align-items: center;
     height: 300px
-}
-
-.loader-text {
-    background-color: whitesmoke;
-    color: rgb(0, 0, 0);
-    padding: 5px 10px;
-    border-radius: 15px;
-    font-weight: bold;
-}
-
-.loader-container {
-    margin: 40px 0 0 0;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
 }
 
 .name-color {

@@ -1,11 +1,6 @@
 <template>
   <feed-container>
-    <div v-if="loading" class="loader-container">
-      <div class="spinner-border text-light mb-3" style="width: 5rem; height: 5rem;" role="status">
-        <span class="visually-hidden">Loading...</span>
-      </div>
-      <span class="loader-text">Loading stories...</span>
-    </div>
+    <loader-component v-if="loading" :text="'Loading stories...'"></loader-component>
     <div v-else v-for="post in posts.latest" :key="post._id">
       <template v-if="post.type === 'prologue'">
         <post-container
@@ -53,13 +48,15 @@
 import PostContainer from "@/components/feedposts/PostContainer.vue";
 import ContinuestoryfeedContainer from "@/components/feedposts/ContinuestoryfeedContainer.vue";
 import FeedContainer from "@/components/frames/FeedContainer.vue";
+import LoaderComponent from "@/components/UIcomponents/LoaderComponent.vue";
 
 export default {
     props: ["posts", "loading"],
     components: {
         PostContainer,
         ContinuestoryfeedContainer,
-        FeedContainer
+        FeedContainer,
+        LoaderComponent
     },
     methods: {
         formatContent(text) {
@@ -72,22 +69,3 @@ export default {
 }
 
 </script>
-
-<style>
-.loader-text {
-    background-color: whitesmoke;
-    color: rgb(0, 0, 0);
-    padding: 5px 10px;
-    border-radius: 15px;
-    font-weight: bold;
-}
-
-.loader-container {
-    margin: 40px 0 0 0;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
-}
-
-</style>

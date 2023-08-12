@@ -34,12 +34,7 @@
               </div>
           </form>
       </div>
-      <div v-else class="loader-container">
-        <div class="spinner-border spinner-border-sm" style="width: 5rem; height: 5rem;" role="status">
-          <span class="visually-hidden">Loading...</span>
-        </div>
-        <span class="loader-text">Planting story seed...</span>
-      </div>
+      <loader-component v-else :text="'Planting story seed...'"></loader-component>
   </feed-container>
 </template>
   
@@ -53,6 +48,7 @@ import SubmitButton from '@/components/UIcomponents/buttons/SubmitButton.vue';
 import FeedContainer from '@/components/frames/FeedContainer.vue';
 import PostTag from '@/components/UIcomponents/PostTag.vue';
 import TagsMessage from '@/components/messages/TagsMessage.vue';
+import LoaderComponent from '@/components/UIcomponents/LoaderComponent.vue';
 
 export default {
   name: "NewPost",
@@ -60,7 +56,8 @@ export default {
     FeedContainer,
     PostTag,
     SubmitButton,
-    TagsMessage
+    TagsMessage,
+    LoaderComponent
   },
   data() {
     return {
