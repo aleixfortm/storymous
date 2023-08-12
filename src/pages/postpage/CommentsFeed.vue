@@ -27,9 +27,9 @@
 </template>
 
 <script>
-import CommentContainer from '@/components/layout/CommentContainer.vue';
-import AstronautMessage from '@/components/layout/messages/AstronautMessage.vue';
-import FeedContainer from '@/components/layout/FeedContainer.vue';
+import CommentContainer from '@/components/postreplies/CommentContainer.vue';
+import AstronautMessage from '@/components/messages/AstronautMessage.vue';
+import FeedContainer from '@/components/frames/FeedContainer.vue';
 
 export default {
     props: ["replies", "loading"],

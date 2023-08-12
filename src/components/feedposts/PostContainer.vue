@@ -1,20 +1,22 @@
 <template>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,300,1,200" />
+
     <div>
         <div :class="outlineClass">
             <span>
-                <div class="origin-container">
-                    <div class="origin">Contributed to "<span style="font-weight: bold;">{{storyTitle}}</span>"</div>
+                <div class="origin-container" @click="navigateToPost">
+                    <div class="origin">Started "<span style="font-weight: bold;">{{ title }}</span>"</div>
                 </div>
                 <div class="story__user-container" @click="navigateToPost">
                     <div class="story__user-img-container">
-                        <span @click.stop="navigateToUser" style="color: inherit; text-decoration: none;">
+                        <span @click.stop="navigateToUser">
                             <img :src="imgSource" v-if="picture" alt="pic" class="story__user-img">
                         </span>
                     </div> 
                     <div class="story__user-info-container">
                         <div class="story__user-comment-container"><div class="story__user-comment cur-def"> {{ postComment }} </div></div>
                         <div class="story__username cur-pnt"> 
-                            <span @click.stop="navigateToUser" style="color: inherit; text-decoration: none;">
+                            <span @click.stop="navigateToUser">
                                 <span class="lower" style="color: whitesmoke;"><b>@</b></span><b class="story__user-name">{{ username }}</b>
                             </span>
                                 <span class="story__username-date lower cur-def">· {{ date }} </span>
@@ -22,16 +24,16 @@
                     </div>
                 </div>
                 <div class="separator"></div>
-                <article class="story__article" @click="navigateToPost" >
+                <article class="story__article" @click="navigateToPost">
                     <div class="story__upper">
-                        <h2 class="story__title "><span class="story_title highlight1">CHAPTER</span><span class="story_title highlight">{{ chapterNum }}</span>{{ chapterName.toUpperCase() }}</h2>
+                        <h2 class="story__title "><span class="story_title highlight">PROLOGUE</span>{{ title.toUpperCase() }}</h2>
                     </div>
                     <div class="tag-section">
                         <post-tag v-for="tag in tags" :key="tag" :clickable="false" :tag="tag"></post-tag>
-                    </div> 
+                    </div>
                     <p class="story__content">
                         {{ formatStory(content) }}
-                        <b v-if="checkLength" class="readmore-button"><em>Read more</em></b>
+                        <b v-if="feedMode && checkLength" class="readmore-button"><em>Read more</em></b>
                     </p>
                 </article>
                 <div class="separator"></div>
@@ -43,6 +45,7 @@
                         {{ leavesMutable.length }}
                     </div>
                     <div class="story-stats-section view"><span class="material-symbols-outlined margin1 view-icon">bar_chart</span>{{ views }}</div>
+                    <div class="story-stats-section comment"><span class="material-symbols-outlined margin1 comment-icon">chat</span>{{ comments.length }}</div>
                 </div>
             </span>
         </div>
@@ -50,16 +53,17 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
 import { mapGetters } from 'vuex';
+import { mapActions } from "vuex";
 import { useRouter } from 'vue-router';
 import { API_BASE_URL } from '@/config';
-import PostTag from '../PostTag.vue';
 import axios from 'axios';
+
+import PostTag from "@/components/UIcomponents/PostTag.vue"
 
 export default {
     components: {
-        PostTag
+        PostTag,
     },
     data() {
         return {
@@ -72,7 +76,7 @@ export default {
         const router = useRouter();
         return { router: router };
     },
-    props: ["_id", "content", "username", "postComment", "storyTitle", "color", "date", "picture", "chapterNum", "storyId", "parentChapterId", "chapterName", "tags", "leaves", "views", "feedMode"],
+    props: ["_id", "title", "content", "username", "postComment", "date", "picture", "color", "views", "comments", "feedMode", "tags", "leaves"],
     methods: {
         ...mapActions('message', ['setLoginError']),
         formatStory(story) {
@@ -83,7 +87,7 @@ export default {
             return formattedStory
         },
         navigateToPost() {
-            this.router.push('/chapter/' + this._id.$oid);
+            this.router.push('/post/' + this._id.$oid);
         },
         navigateToUser() {
             this.router.push('/user/' + this.username);
@@ -91,7 +95,7 @@ export default {
         increaseLeaves() {
             if (this.isLoggedIn) {
                 const data_packet = {
-                    chapter_id: this._id.$oid,
+                    post_id: this._id.$oid,
                     username: this.currentUser,
                     username_receiver: this.username
                 }
@@ -100,7 +104,7 @@ export default {
                         this.leavesMutable.push(this.currentUser)
                         
                         axios
-                            .post(`${API_BASE_URL}/add_leaves_chapter`, data_packet)
+                            .post(`${API_BASE_URL}/add_leaves_post`, data_packet)
                             .catch(error => {
                                 console.log(error);
                             });
@@ -110,7 +114,7 @@ export default {
                             this.leavesMutable.splice(index, 1);
                         }
                         axios
-                            .post(`${API_BASE_URL}/remove_leaves_chapter`, data_packet)
+                            .post(`${API_BASE_URL}/remove_leaves_post`, data_packet)
                             .catch(error => {
                                 console.log(error);
                             });
@@ -130,10 +134,8 @@ export default {
             } else {
                 this.setLoginError()
             }
-        },
-
+        }
     },
-
     computed: {
         ...mapGetters('auth', ['isLoggedIn', 'currentUser', "userFetchedPicture", "colorFetched"]),
         imgSource() {
@@ -147,9 +149,8 @@ export default {
                 return true
             }
             return false
-        }
+        },
     },
-    
 };
 </script>
 
@@ -168,11 +169,11 @@ export default {
 }
 
 .leaf-icon {
-    color: rgb(255, 255, 255);
+    color: white;
 }
 
 .leaf:hover .leaf-icon{
-    color: rgb(0, 255, 106);
+    color: rgb(0, 255, 76);
 }
 
 .includes-leaf {
@@ -181,11 +182,6 @@ export default {
 
 .includes-leaf-icon {
     color: rgb(0, 255, 106);
-    font-variation-settings:
-    'FILL' 1,
-    'wght' 400,
-    'GRAD' 200,
-    'opsz' 200
 }
 
 .view {
@@ -194,7 +190,7 @@ export default {
 }
 
 .view:hover .view-icon{
-    color: rgb(0, 204, 255);
+    color: rgb(131, 189, 255);
 }
 
 .comment {
@@ -216,6 +212,23 @@ export default {
 }
 
 
+.margin1 {
+    margin-right: 2px;
+}
+
+.margin2 {
+    margin-right: 5px;
+}
+
+.user-out {
+    padding: 5px 5px 0 5px;
+}
+
+.separator {
+    border-top: rgba(245, 245, 245, 0.075) 1px solid;
+    width: 95%;
+    margin: auto;
+}
 
 .story-stats {
     display: flex;
@@ -236,30 +249,6 @@ export default {
     border-radius: 10px;
 }
 
-.highlight {
-    background-color: bisque;
-    color: black;
-    border-radius: 2px;
-    padding: 0 3px;
-    margin: 0 8px 0 0px;
-    font-size: 17px;
-}
-
-.highlight1 {
-    background-color: bisque;
-    color: black;
-    border-radius: 2px;
-    padding: 0 3px;
-    margin: 0 4px 0 0px;
-    font-size: 17px;
-}
-
-.separator {
-    border-top: rgba(245, 245, 245, 0.075) 1px solid;
-    width: 95%;
-    margin: auto;
-}
-
 .tag-section {
     display: flex;
     justify-content: left;
@@ -267,9 +256,19 @@ export default {
     flex-wrap: wrap;
 }
 
+.highlight {
+    background-color: bisque;
+    color: black;
+    border-radius: 2px;
+    padding: 0 3px;
+    margin: 0 10px 0 0px;
+    font-size: 17px;
+}
+
 .story__upper {
     display: flex;
     margin: 2px 0 5px 0;
+
 }   
 
 .story__title {
@@ -289,13 +288,21 @@ export default {
     border-radius: 1px;
     width: fit-content;
     box-shadow: 0px 0px 2px rgba(128, 128, 128, 0.568);
-    
 }
 
 .origin-container {
     display: flex;
     justify-content: flex-start;
     margin: 2px 5px 0 5px;
+}
+
+.story__article {
+    padding: 5px 10px 5px 10px;
+    border-radius: 2px;
+    cursor: pointer;
+    transition: all 0s;
+    background-color: rgb(43, 43, 46);
+    color: #d3d3d3
 }
 
 .outline {
@@ -308,18 +315,10 @@ export default {
     background-color: rgb(43, 43, 46);
     transition: 0.2s all;
 }
+
 .outline:hover {
     border: 1px rgb(190, 190, 190) solid;
     cursor: pointer;
-}
-
-.story__article {
-    padding: 5px 10px 5px 10px;
-    border-radius: 2px;
-    cursor: pointer;
-    transition: all 0s;
-    background-color: rgb(43, 43, 46);
-    color: #d3d3d3;
 }
 
 .story__user-container {
@@ -339,18 +338,6 @@ export default {
     word-wrap: break-word;
 }
 
-.story__user-comment {
-    margin-top: 0px;
-    font-weight: bold;
-    color: black;
-    background-color: #faf8f8;
-    padding: 5px 10px;
-    border-radius: 15px 15px 15px 0;
-    text-align: left;
-    word-wrap: break-word;
-    hyphens: auto;
-    width: auto;
-}
 
 .story__user-info-container {
     display: flex;
@@ -445,11 +432,11 @@ export default {
 
 .story__user-comment {
     margin-top: 0px;
+    font-size: 15px;
     font-weight: bold;
     color: black;
-    background-color: rgba(255, 255, 255, 0.88);
+    background-color: #faf8f8;
     padding: 3px 10px;
-    font-size: 15px;
     border-radius: 15px 15px 15px 0;
     text-align: left;
     word-wrap: break-word;

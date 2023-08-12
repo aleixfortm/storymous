@@ -45,14 +45,14 @@
   
 <script>
 import { mapGetters } from 'vuex';
-import { API_BASE_URL } from '../config';
-
-import SubmitButton from '@/components/layout/SubmitButton.vue';
-import FeedContainer from '@/components/layout/FeedContainer.vue';
+import { API_BASE_URL } from '../../config';
 import axios from 'axios';
 import router from '@/router';
-import PostTag from '@/components/layout/PostTag.vue';
-import TagsMessage from '@/components/layout/messages/TagsMessage.vue';
+
+import SubmitButton from '@/components/UIcomponents/buttons/SubmitButton.vue';
+import FeedContainer from '@/components/frames/FeedContainer.vue';
+import PostTag from '@/components/UIcomponents/PostTag.vue';
+import TagsMessage from '@/components/messages/TagsMessage.vue';
 
 export default {
   name: "NewPost",
@@ -151,7 +151,7 @@ export default {
   computed: {
     ...mapGetters('auth', ['currentUser', "userFetchedPicture", "colorFetched", "userFetchedBio", "nFetchedPosts", "nFetchedFollowers", "nFetchedFollowing"]),
     imgSource() {
-        return require('../assets/img/' + this.userFetchedPicture);
+        return require('@/assets/img/' + this.userFetchedPicture);
       },
       postButtonText() {
           return this.isPostButtonDisabled ? "Submitted" : "Submit?"

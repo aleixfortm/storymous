@@ -23,13 +23,12 @@
 <script>
 import { mapGetters } from 'vuex';
 import { useRouter } from 'vue-router';
-import { API_BASE_URL } from '../config';
-
+import { API_BASE_URL } from '../../config';
 import axios from 'axios';
 
-import SelectButton from "../components/SelectButton.vue";
-import LatestFeed from "../pages/subpages/LatestFeed.vue";
-import AstronautMessage from '@/components/layout/messages/AstronautMessage.vue';
+import SelectButton from '@/components/UIcomponents/buttons/SelectButton.vue';
+import LatestFeed from './LatestFeed.vue';
+import AstronautMessage from '@/components/messages/AstronautMessage.vue';
 
 export default {
     components: {

@@ -147,18 +147,18 @@
 <script>
 import { mapActions, mapGetters } from 'vuex';
 import { useRouter } from 'vue-router';
-import { API_BASE_URL } from '../config';
+import { API_BASE_URL } from '../../config';
 import axios from 'axios';
 
-import FeedContainer from "../components/layout/FeedContainer.vue";
-import PostContainer from "@/components/layout/feedposts/PostContainer.vue";
-import ProfilePicture from '@/components/layout/ProfilePicture.vue';
-import ContinuestoryfeedContainer from '@/components/layout/feedposts/ContinuestoryfeedContainer.vue';
-import AstronautMessage from '@/components/layout/messages/AstronautMessage.vue';
-import SettingsButton from '@/components/layout/SettingsButton.vue';
-import LogoutButton from '@/components/layout/LogoutButton.vue';
-import SmallTooltip from '@/components/layout/SmallTooltip.vue';
-import LoginMessage from '@/components/layout/messages/LoginMessage.vue';
+import FeedContainer from "../../components/frames/FeedContainer.vue";
+import PostContainer from "@/components/feedposts/PostContainer.vue";
+import ProfilePicture from '@/components/UIcomponents/ProfilePicture.vue';
+import ContinuestoryfeedContainer from '@/components/feedposts/ContinuestoryfeedContainer.vue';
+import AstronautMessage from '@/components/messages/AstronautMessage.vue';
+import SettingsButton from '@/components/UIcomponents/buttons/SettingsButton.vue';
+import LogoutButton from '@/components/UIcomponents/buttons/LogoutButton.vue';
+import SmallTooltip from '@/components/UIcomponents/SmallTooltip.vue';
+import LoginMessage from "@/components/messages/LoginMessage.vue"
 
 export default {
     components: {
@@ -203,7 +203,7 @@ export default {
             return this.$route.params.id; // Replace "parameter" with the actual name of your URL parameter
         },
         imgSource() {
-            return require('../assets/img/' + this.userColor);
+            return require('@/assets/img/' + this.userColor);
         },
         profileBoxClass() {
             return `profile-box ${this.userColor}`;

@@ -3,7 +3,7 @@
         <span @click="navigateToPost" style="text-decoration: none;" >
             <div class="story__user-container2">
                 <div class="sum-icon-container2">
-                    <img src="../../assets/img/plus_icon4.png" alt="Plus icon" class="sum-icon2">
+                    <img src="@/assets/img/plus_icon4.png" alt="Plus icon" class="sum-icon2">
                 </div>
                 <div class="story__user-img-container2">
                     <span @click.stop="navigateToUser" style="color: inherit; text-decoration: none;">
@@ -71,7 +71,7 @@ export default {
     },
     computed: {
         imgSource() {
-            return require('../../assets/img/' + this.picture);
+            return require('@/assets/img/' + this.picture);
         },
     },
 };

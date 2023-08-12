@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import SelectButton from "./SelectButton.vue";
+import SelectButton from "@/components/UIcomponents/buttons/SelectButton.vue";
 import { mapActions, mapGetters } from 'vuex';
 
 export default {

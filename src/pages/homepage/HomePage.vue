@@ -1,7 +1,7 @@
 <template>
     <feed-container>
         
-        <img src="../assets/img/storymous-forest-min.png" alt="storymous forest" class="testimage">
+        <img src="@/assets/img/storymous-forest-min.png" alt="storymous forest" class="testimage">
 
         <div class="create_newstory">
             <img class="postimage" v-if="userFetchedPicture" :src="imgSource" alt="profilepic" @click="navigateToProfile">
@@ -23,16 +23,16 @@
 <script>
 import { mapGetters } from 'vuex';
 import { useRouter } from 'vue-router';
-import { API_BASE_URL } from '../config';
+import { API_BASE_URL } from '../../config';
 
 import axios from 'axios';
 
-import FeedContainer from "../components/layout/FeedContainer.vue"
-import SelectButton from "../components/SelectButton.vue";
-import LatestFeed from "../pages/subpages/LatestFeed.vue";
-import FollowingFeed from "../pages/subpages/FollowingFeed.vue";
-import SuccessMessage from '@/components/layout/messages/SuccessMessage.vue';
-import ButtonblockSelector from '@/components/layout/ButtonblockSelector.vue';
+import FeedContainer from '@/components/frames/FeedContainer.vue';
+import SelectButton from '@/components/UIcomponents/buttons/SelectButton.vue';
+import LatestFeed from './LatestFeed.vue';
+import FollowingFeed from './FollowingFeed.vue';
+import SuccessMessage from '@/components/messages/SuccessMessage.vue';
+import ButtonblockSelector from '@/components/UIcomponents/ButtonblockSelector.vue';
 
 
 export default {
@@ -91,7 +91,7 @@ export default {
     computed: {
         ...mapGetters('auth', ['isLoggedIn', 'currentUser', "userFetchedPicture", "colorFetched"]),
         imgSource() {
-            return require("../assets/img/" + this.userFetchedPicture);
+            return require("@/assets/img/" + this.userFetchedPicture);
         },
     }
 }

@@ -27,9 +27,9 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import axios, { API_BASE_URL } from '../../config';
+import axios, { API_BASE_URL } from '@/config';
 import router from '@/router';
-import SubmitButton from './SubmitButton.vue';
+import SubmitButton from '../UIcomponents/buttons/SubmitButton.vue';
 
   export default {
     name: "NewPost",
@@ -116,7 +116,7 @@ import SubmitButton from './SubmitButton.vue';
     computed: {
       ...mapGetters('auth', ['currentUser', "userFetchedPicture", "colorFetched", "userFetchedBio", "nFetchedPosts", "nFetchedFollowers", "nFetchedFollowing"]),
       imgSource() {
-          return require('../../assets/img/' + this.userFetchedPicture);
+          return require('@/assets/img/' + this.userFetchedPicture);
         },
         postButtonText() {
             return this.isPostButtonDisabled ? "Submitted" : "Submit?"

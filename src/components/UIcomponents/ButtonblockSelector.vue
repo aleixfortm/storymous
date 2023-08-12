@@ -47,7 +47,7 @@
 </template>
 
 <script>
-import SelectButton from '../SelectButton.vue';
+import SelectButton from './buttons/SelectButton.vue';
 
 export default {
     components: {

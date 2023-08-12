@@ -64,8 +64,9 @@
 </template>
 
 <script>
-import SelectButton from "./SelectButton.vue";
 import { mapActions } from "vuex";
+
+import SelectButton from "@/components/UIcomponents/buttons/SelectButton.vue"
 
 export default {
   emits: ["close"],

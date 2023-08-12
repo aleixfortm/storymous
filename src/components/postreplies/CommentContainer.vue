@@ -1,7 +1,7 @@
 <template> 
     <div>
         <div class="comment__user-container">
-            <div><img src="../../assets/img/reply_icon3.png" alt="reply icon" style="max-width: 25px; margin: 0 0px 0 0px; transform: scaleX(-1); "></div>
+            <div><img src="@/assets/img/reply_icon3.png" alt="reply icon" style="max-width: 25px; margin: 0 0px 0 0px; transform: scaleX(-1); "></div>
             <div class="comment__user-img-container">
                 <span @click.stop="navigateToUser">
                     <img :src="imgSource" v-if="picture" alt="Profile picture" class="comment__user-img">
@@ -44,7 +44,7 @@ export default {
     },
     computed: {
         imgSource() {
-            return require('../../assets/img/' + this.picture);
+            return require('@/assets/img/' + this.picture);
         },
     },
     

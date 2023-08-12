@@ -11,10 +11,11 @@
 </template>
 
 <script>
-import TheHeader from "./components/layout/TheHeader.vue";
-import BlockFrame from "./components/layout/BlockFrame.vue";
 import 'bootstrap/dist/css/bootstrap.css';
-import ErrorMessage from "./components/layout/messages/ErrorMessage.vue";
+
+import TheHeader from "@/components/UIcomponents/TheHeader.vue";
+import BlockFrame from "@/components/frames/BlockFrame.vue";
+import ErrorMessage from "@/components/messages/ErrorMessage.vue";
 
 export default {
   components: {

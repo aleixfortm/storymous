@@ -4,7 +4,7 @@
   <header>
       <nav>
           <div class="logo">
-            <router-link class="logoimgcontainer" to="/"><img class="logoimg" src="../../assets/img/tree2.jpeg" alt="treelogo"></router-link>
+            <router-link class="logoimgcontainer" to="/"><img class="logoimg" src="@/assets/img/tree2.jpeg" alt="treelogo"></router-link>
             <router-link to="/" class="header-title">Storymous</router-link>
           </div>
           
@@ -49,8 +49,8 @@
 <script>
 import { mapGetters } from 'vuex';
 import { useRouter } from 'vue-router';
-import SigninDialog from "@/components/SigninDialog.vue";
-import SignupDialog from "@/components/SignupDialog.vue";
+import SigninDialog from "@/components/dialogs/SigninDialog.vue";
+import SignupDialog from "@/components/dialogs/SignupDialog.vue";
 import SmallTooltip from './SmallTooltip.vue';
 
 export default {
@@ -92,7 +92,7 @@ export default {
         return '/user/' + this.currentUser;
       },
       imgSource() {
-            return require("../../assets/img/" + this.userFetchedPicture);
+            return require("@/assets/img/" + this.userFetchedPicture);
         }
   }
 };

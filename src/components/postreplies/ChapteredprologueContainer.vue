@@ -57,7 +57,7 @@ export default {
 
     computed: {
         imgSource() {
-            return require('../../assets/img/' + this.picture);
+            return require('@/assets/img/' + this.picture);
         },
         outlineClass() {
             return `outline ${this.color}`;

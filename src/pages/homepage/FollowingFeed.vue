@@ -59,10 +59,10 @@
 </template>
 
 <script>
-import PostContainer from "@/components/layout/feedposts/PostContainer.vue";
-import FeedContainer from "@/components/layout/FeedContainer.vue";
-import AstronautMessage from "@/components/layout/messages/AstronautMessage.vue";
-import ContinuestoryfeedContainer from "@/components/layout/feedposts/ContinuestoryfeedContainer.vue";
+import PostContainer from "@/components/feedposts/PostContainer.vue";
+import FeedContainer from "@/components/frames/FeedContainer.vue";
+import AstronautMessage from "@/components/messages/AstronautMessage.vue";
+import ContinuestoryfeedContainer from "@/components/feedposts/ContinuestoryfeedContainer.vue";
 
 export default {
     props: ["posts", "loading"],

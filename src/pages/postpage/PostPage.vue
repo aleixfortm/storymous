@@ -105,21 +105,21 @@
 
 <script>
 import axios from "axios";
-import { API_BASE_URL } from '../config';
+import { API_BASE_URL } from '../../config';
 import { mapGetters } from 'vuex';
 
-import FeedContainer from '@/components/layout/FeedContainer.vue';
-import ChapteredprologueContainer from "@/components/layout/ChapteredprologueContainer.vue";
-import WritechapterContainer from "@/components/layout/WritechapterContainer.vue";
-import PostTag from "@/components/layout/PostTag.vue";
-import SmallTooltip from "@/components/layout/SmallTooltip.vue";
-import CommentButton from "@/components/layout/CommentButton.vue";
-import InfoMessage from "@/components/layout/messages/InfoMessage.vue";
-import LoginMessage from "@/components/layout/messages/LoginMessage.vue";
-import ButtonblockSelector from "@/components/layout/ButtonblockSelector.vue";
-import RepliesFeed from "./subpages/RepliesFeed.vue";
-import ChaptersFeed from "./subpages/ChaptersFeed.vue";
-import CommentsFeed from "./subpages/CommentsFeed.vue";
+import FeedContainer from '@/components/frames/FeedContainer.vue';
+import ChapteredprologueContainer from "@/components/postreplies/ChapteredprologueContainer.vue";
+import WritechapterContainer from "@/components/postreplies/WritechapterContainer.vue";
+import PostTag from "@/components/UIcomponents/PostTag.vue";
+import SmallTooltip from "@/components/UIcomponents/SmallTooltip.vue";
+import CommentButton from "@/components/UIcomponents/buttons/CommentButton.vue";
+import InfoMessage from "@/components/messages/InfoMessage.vue";
+import LoginMessage from "@/components/messages/LoginMessage.vue";
+import ButtonblockSelector from "@/components/UIcomponents/ButtonblockSelector.vue";
+import RepliesFeed from "./RepliesFeed.vue";
+import ChaptersFeed from "./ChaptersFeed.vue";
+import CommentsFeed from "./CommentsFeed.vue";
 import TreeChart from "@/components/TreeChart.vue";
 
 export default {
@@ -214,7 +214,7 @@ export default {
   computed: {
     ...mapGetters('auth', ['isLoggedIn', 'currentUser', "userFetchedPicture", "colorFetched"]),
     imgSource() {
-       return require("../assets/img/" + this.userFetchedPicture);
+       return require("@/assets/img/" + this.userFetchedPicture);
     },
   },
   methods: {

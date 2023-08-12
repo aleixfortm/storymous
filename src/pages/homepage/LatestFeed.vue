@@ -50,9 +50,9 @@
 
 
 <script>
-import PostContainer from "@/components/layout/feedposts/PostContainer.vue";
-import ContinuestoryfeedContainer from "@/components/layout/feedposts/ContinuestoryfeedContainer.vue";
-import FeedContainer from "@/components/layout/FeedContainer.vue";
+import PostContainer from "@/components/feedposts/PostContainer.vue";
+import ContinuestoryfeedContainer from "@/components/feedposts/ContinuestoryfeedContainer.vue";
+import FeedContainer from "@/components/frames/FeedContainer.vue";
 
 export default {
     props: ["posts", "loading"],

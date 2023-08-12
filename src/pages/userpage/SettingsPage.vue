@@ -42,12 +42,12 @@
 import axios from "axios";
 import { useRouter } from 'vue-router';
 import { mapGetters } from 'vuex';
-import { API_BASE_URL } from '../config';
+import { API_BASE_URL } from '../../config';
 
-import PictureSetting from '../pages/subpages/PictureSetting.vue';
-import ColorSetting from './subpages/ColorSetting.vue';
-import BioSetting from './subpages/BioSetting.vue';
-import FeedContainer from '@/components/layout/FeedContainer.vue';
+import PictureSetting from './PictureSetting.vue';
+import ColorSetting from './ColorSetting.vue';
+import BioSetting from './BioSetting.vue';
+import FeedContainer from '@/components/frames/FeedContainer.vue';
 import store from "@/store";
 
 export default {

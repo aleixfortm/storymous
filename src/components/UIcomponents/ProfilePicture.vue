@@ -9,7 +9,7 @@ export default {
     props: ["picture"],
     computed: {
         imgSource() {
-            return require("../../assets/img/" + this.picture);
+            return require("@/assets/img/" + this.picture);
         }
     }
 }
