@@ -22,7 +22,7 @@
   </a>
 </div>
 
-<p align="center"><strong>Time for a coffee? Help me improve the infrastructure cost of this project!</strong></p>
+<p align="center"><strong>Time for a coffee? Help me maintain the infrastructure cost of this project!</strong></p>
 
 ## Preview 
 
