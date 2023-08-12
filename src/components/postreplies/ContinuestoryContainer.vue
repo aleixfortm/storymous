@@ -198,13 +198,7 @@ export default {
 .story__user-comment-container2 {
     max-width: fit-content;
     word-wrap: break-word;
-}
-.story__user-info-container2 {
-    display: flex;
-    flex-direction: column;
-    margin: 0 0 0 5px;
-    width: fit-content;
-    justify-content: flex-start;
+
 }
 
 .story__content2 {
@@ -253,21 +247,6 @@ export default {
     filter: brightness(85%);
 }
 
-.story__user-img-container2 {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-}
-
-
-.story__user-info-container2 {
-    display: flex;
-    flex-direction: column;
-    margin: 0 0 0 5px;
-    width: fit-content;
-    justify-content: space-between;
-}
-
 .story__user-comment2 {
     font-weight: bold;
     color: black;
@@ -282,16 +261,15 @@ export default {
 }
 
 .story__username2 {
-    margin: 0px 0px 0px 0;
+    margin: 0px 0px 1px 0;
 }
 
 .story__user-info-container2 {
     display: flex;
     flex-direction: column;
-    margin: 0 0 0 5px;
+    margin: 0 0 0px 5px;
     width: fit-content;
-    justify-content: flex-start;
+    justify-content: space-between;
 }
-
 
 </style>
