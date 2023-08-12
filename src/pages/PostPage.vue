@@ -3,7 +3,7 @@
     
     <feed-container v-if="!loading">
       <info-message></info-message>
-      
+      <tree-chart :json="data" :class="{landscape: landscape.length}" @click-node="clickNode" class="tree"></tree-chart>
       <div class="story-container">
         <div class="main-title-container">
           <h2 class="main-title">{{ post.title.toUpperCase() }}</h2>
@@ -120,6 +120,7 @@ import ButtonblockSelector from "@/components/layout/ButtonblockSelector.vue";
 import RepliesFeed from "./subpages/RepliesFeed.vue";
 import ChaptersFeed from "./subpages/ChaptersFeed.vue";
 import CommentsFeed from "./subpages/CommentsFeed.vue";
+import TreeChart from "@/components/TreeChart.vue";
 
 export default {
   components: {
@@ -135,6 +136,7 @@ export default {
     RepliesFeed,
     ChaptersFeed,
     CommentsFeed,
+    TreeChart
   },
   data() {
     return {
@@ -151,6 +153,47 @@ export default {
       showChaptersTooltip: false,
       showCommentsTooltip:false,
       selectedTab: 'replies-feed',
+      landscape: [],
+      data: {
+          name: '@benetti Prologue',
+          image_url: require("@/assets/img/astronaut_saloon.jpeg"),
+          class: ["rootNode"],
+          children: [
+          {
+              name: 'Chapter 1',
+              image_url: require("@/assets/img/astronaut_reading.jpeg")
+          },
+          {
+              name: 'Chapter 1',
+              image_url: require("@/assets/img/astronaut_saloon.jpeg"),
+              children: [
+              {
+                  name: 'Chapter 2',
+                  image_url: require("@/assets/img/astronaut_saloon.jpeg"),
+                  children: [
+                      {
+                          name: 'Chapter 3',
+                          image_url: require("@/assets/img/astronaut_saloon.jpeg"),
+                          children: [
+                  {
+                  name: 'Chapter 4',
+                  image_url: require("@/assets/img/astronaut_saloon.jpeg"),
+                  children: [
+                    {
+                        name: 'Chapter 5',
+                        image_url: require("@/assets/img/astronaut_saloon.jpeg"),
+                        
+                    },
+                  ]
+              },
+            ]
+                      },
+                  ]
+              },
+              ]
+          }
+          ]
+      }
     }
   },
   mounted() {
@@ -172,7 +215,7 @@ export default {
     ...mapGetters('auth', ['isLoggedIn', 'currentUser', "userFetchedPicture", "colorFetched"]),
     imgSource() {
        return require("../assets/img/" + this.userFetchedPicture);
-    }
+    },
   },
   methods: {
         adjustTextareaHeight() {
@@ -223,6 +266,11 @@ export default {
 </script>
 
 <style scoped>
+.tree {
+  margin-top: 25px;
+}
+
+
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.1s;
