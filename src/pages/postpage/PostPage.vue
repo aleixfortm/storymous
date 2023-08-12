@@ -1,9 +1,12 @@
 <template>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,300,1,200" />
-    
     <feed-container v-if="!loading">
       <info-message></info-message>
+      <!--
       <tree-chart :json="data" :class="{landscape: landscape.length}" @click-node="clickNode" class="tree"></tree-chart>
+      -->
+      <br>
+      <post-section v-for="chapter in chapters" :key="chapter.ide" :chapter="chapter"></post-section>
+      <br>
       <div class="story-container">
         <div class="main-title-container">
           <h2 class="main-title">{{ post.title.toUpperCase() }}</h2>
@@ -108,8 +111,9 @@ import axios from "axios";
 import { API_BASE_URL } from '../../config';
 import { mapGetters } from 'vuex';
 
+import PostSection from "./PostSection.vue";
 import FeedContainer from '@/components/frames/FeedContainer.vue';
-import ChapteredprologueContainer from "@/components/postreplies/ChapteredprologueContainer.vue";
+import ChapteredprologueContainer from "./ChapteredprologueContainer.vue";
 import WritechapterContainer from "@/components/postreplies/WritechapterContainer.vue";
 import PostTag from "@/components/UIcomponents/PostTag.vue";
 import SmallTooltip from "@/components/UIcomponents/SmallTooltip.vue";
@@ -136,7 +140,8 @@ export default {
     RepliesFeed,
     ChaptersFeed,
     CommentsFeed,
-    TreeChart
+    TreeChart,
+    PostSection
   },
   data() {
     return {
@@ -193,7 +198,85 @@ export default {
               ]
           }
           ]
-      }
+      },
+      chapters: [ 
+          {
+              isExpandedInfo: false,
+              ide: 123,
+              type: "prologue",
+              title: "Title",
+              content: "Content sdfsdafdsa dsf dsafdsa dasf dsfdas fdsf dsf dsaf dsafdsa fdsaf dsa fdsf ds dsfds fds sd fdsf dsf dsfds fds fds fdsfdsfsdafsdf dsf dsfds ds fdsf dsf dsfdsf sdfdsf dsf dsfdsfdsaf dsfds fdsfdsfsdfds fsdf sdfdsfds fd",
+              username: "stoupeaks",
+              postComment: "This is a big project",
+              date: "2 days ago",
+              picture: "astronaut_reading.jpeg",
+          },
+          {
+              isExpandedInfo: false,
+              ide: 1234,
+              type: "chapter",
+              title: "Title 2 HAHAHA",
+              content: "Content sdfsdafdsa dsf dsafdsa dasf dsfdas fdsf dsf dsaf dsafdsa fdsaf dsa fdsf ds dsfds fds sd fdsf dsf dsfds fds fds fdsfdsfsdafsdf dsf dsfds ds fdsf dsf dsfdsf sdfdsf dsf dsfdsfdsaf dsfds fdsfdsfsdfds fsdf sdfdsfds fd DSFD SAFDS FSAD DS FDSF SDAF DS FSDF DS FDSAF DSF SDAF S",
+              username: "benetti",
+              postComment: "This is a big project",
+              date: "Now",
+              picture: "astronaut_saloon.jpeg",
+              color: "blue",
+              feedMode: false
+          },
+          {
+              isExpandedInfo: false,
+              ide: 1234,
+              type: "chapter",
+              title: "Title 2 HAHAHA",
+              content: "Content sdfsdafdsa dsf dsafdsa dasf dsfdas fdsf dsf dsaf dsafdsa fdsaf dsa fdsf ds dsfds fds sd fdsf dsf dsfds fds fds fdsfdsfsdafsdf dsf dsfds ds fdsf dsf dsfdsf sdfdsf dsf dsfdsfdsaf dsfds fdsfdsfsdfds fsdf sdfdsfds fd DSFD SAFDS FSAD DS FDSF SDAF DS FSDF DS FDSAF DSF SDAF S",
+              username: "benetti",
+              postComment: "This is a big project",
+              date: "Now",
+              picture: "astronaut_saloon.jpeg",
+              color: "blue",
+              feedMode: false
+          },
+          {
+              isExpandedInfo: false,
+              ide: 1234,
+              type: "chapter",
+              title: "Title 2 HAHAHA",
+              content: "Content sdfsdafdsa dsf dsafdsa dasf dsfdas fdsf dsf dsaf dsafdsa fdsaf dsa fdsf ds dsfds fds sd fdsf dsf dsfds fds fds fdsfdsfsdafsdf dsf dsfds ds fdsf dsf dsfdsf sdfdsf dsf dsfdsfdsaf dsfds fdsfdsfsdfds fsdf sdfdsfds fd DSFD SAFDS FSAD DS FDSF SDAF DS FSDF DS FDSAF DSF SDAF S",
+              username: "benetti",
+              postComment: "This is a big project",
+              date: "Now",
+              picture: "astronaut_saloon.jpeg",
+              color: "blue",
+              feedMode: false
+          },
+          {
+              isExpandedInfo: false,
+              ide: 1234,
+              type: "chapter",
+              title: "Title 2 HAHAHA",
+              content: "Content sdfsdafdsa dsf dsafdsa dasf dsfdas fdsf dsf dsaf dsafdsa fdsaf dsa fdsf ds dsfds fds sd fdsf dsf dsfds fds fds fdsfdsfsdafsdf dsf dsfds ds fdsf dsf dsfdsf sdfdsf dsf dsfdsfdsaf dsfds fdsfdsfsdfds fsdf sdfdsfds fd DSFD SAFDS FSAD DS FDSF SDAF DS FSDF DS FDSAF DSF SDAF S",
+              username: "benetti",
+              postComment: "This is a big project",
+              date: "Now",
+              picture: "astronaut_saloon.jpeg",
+              color: "blue",
+              feedMode: false
+          },
+          {
+              isExpandedInfo: false,
+              ide: 1234,
+              type: "chapter",
+              title: "Title 2 HAHAHA",
+              content: "Content sdfsdafdsa dsf dsafdsa dasf dsfdas fdsf dsf dsaf dsafdsa fdsaf dsa fdsf ds dsfds fds sd fdsf dsf dsfds fds fds fdsfdsfsdafsdf dsf dsfds ds fdsf dsf dsfdsf sdfdsf dsf dsfdsfdsaf dsfds fdsfdsfsdfds fsdf sdfdsfds fd DSFD SAFDS FSAD DS FDSF SDAF DS FSDF DS FDSAF DSF SDAF S",
+              username: "benetti",
+              postComment: "This is a big project",
+              date: "Now",
+              picture: "astronaut_saloon.jpeg",
+              color: "blue",
+              feedMode: false
+          }
+      ]
     }
   },
   mounted() {

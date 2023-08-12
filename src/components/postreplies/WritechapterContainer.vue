@@ -27,7 +27,7 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import axios, { API_BASE_URL } from '@/config';
+import axios, { API_BASE_URL } from '../../config';
 import router from '@/router';
 import SubmitButton from '../UIcomponents/buttons/SubmitButton.vue';
 

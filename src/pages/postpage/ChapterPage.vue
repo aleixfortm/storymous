@@ -1,6 +1,9 @@
 <template>
     <feed-container v-if="!loading">
-      <info-message></info-message>    
+      <info-message></info-message>
+      <!--
+      <tree-chart :json="data" :class="{landscape: landscape.length}" @click-node="clickNode" class="tree"></tree-chart>
+      -->    
       <div class="story-container">
         <div v-for="chapter in chapterList" :key="chapter._id">
           <template v-if="chapter.type === 'prologue'">
@@ -123,7 +126,7 @@ import { mapGetters } from 'vuex';
 
 import FeedContainer from '@/components/frames/FeedContainer.vue';
 import ChapteredContainer from "@/components/postreplies/ChapteredContainer.vue";
-import ChapteredprologueContainer from "@/components/postreplies/ChapteredprologueContainer.vue";
+import ChapteredprologueContainer from "./ChapteredprologueContainer.vue";
 import CommentContainer from "@/components/postreplies/CommentContainer.vue";
 import ContinuestoryContainer from "@/components/postreplies/ContinuestoryContainer.vue";
 import WritechapterContainer from "@/components/postreplies/WritechapterContainer.vue";
