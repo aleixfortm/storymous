@@ -185,10 +185,6 @@ export default {
   text-decoration: underline;
 }
 
-.no-underline {
-  text-decoration: none;
-}
-
 .logoimgcontainer {
   align-items: center;
   justify-content: center;
@@ -306,19 +302,19 @@ li {
   padding: 5px 6px;
   font-family: inherit;
   border: 0px solid #e5e3ff;
-  color: rgb(0, 255, 98);
+  color: rgb(0, 255, 0);
   cursor: pointer;
   font-size: 15px;
   margin: 0 20px 0 20px;
-  background-color: #ffffff1e;
+  background-color: rgba(0, 145, 55, 0.726);
   border-radius: 4px;
   font-weight: bold;
   transition: all 0.2s;
 }
 
 .loginButton:hover {
-    background-color: #a5a5a51e;
-    color: rgb(0, 255, 55);
+    background-color: rgba(0, 128, 49, 0.452);
+    color: rgb(0, 255, 98);
 }
 
 .login-div {

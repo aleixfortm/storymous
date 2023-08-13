@@ -1,10 +1,12 @@
 <template>
     <feed-container v-if="!loading">
       <info-message></info-message>
-      <!--
-      <tree-chart :json="data" :class="{landscape: landscape.length}" @click-node="clickNode" class="tree"></tree-chart>
-      -->
+
+      
       <post-info :data="infoData"></post-info>
+      <draggable-environment>
+        <tree-chart :json="data" :class="{landscape: landscape.length}" @click-node="clickNode" class="tree"></tree-chart>
+      </draggable-environment>
       <post-section v-for="chapter in chapters" :key="chapter.ide" :chapter="chapter"></post-section>
       <login-message v-if="!isLoggedIn" :text="'to comment and continue storylines'"></login-message>
       
@@ -41,6 +43,7 @@ import CommentsFeed from "./CommentsFeed.vue";
 import TreeChart from "@/components/TreeChart.vue";
 import PostInfo from "./PostInfo.vue";
 import LoaderComponent from "@/components/UIcomponents/LoaderComponent.vue";
+import DraggableEnvironment from "@/components/UIcomponents/DraggableEnvironment.vue";
 
 export default {
   components: {
@@ -59,7 +62,8 @@ export default {
     TreeChart,
     PostSection,
     PostInfo,
-    LoaderComponent
+    LoaderComponent,
+    DraggableEnvironment
   },
   data() {
     return {
@@ -110,7 +114,19 @@ export default {
                   ]
               },
               ]
-          }
+          },
+          {
+              name: 'Chapter 1',
+              image_url: require("@/assets/img/astronaut_reading.jpeg")
+          },
+          {
+              name: 'Chapter 1',
+              image_url: require("@/assets/img/astronaut_reading.jpeg")
+          },
+          {
+              name: 'Chapter 1',
+              image_url: require("@/assets/img/astronaut_reading.jpeg")
+          },
           ]
       },
       chapters: [ 
