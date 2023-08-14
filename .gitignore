@@ -8,3 +8,4 @@ dist
 .env.production
 .env.development
 public
+pyrun.ps1

@@ -91,10 +91,10 @@ export default {
 <style>
 .draggable-container {
     width: 100%;
-    height: 400px;
+    height: 92vh;
     overflow: hidden;
     position: relative;
-    border: 1px solid white;
-    background-color: rgb(29, 29, 29);
+    border: 1px solid rgba(255, 255, 255, 0.459);
+    background-color: rgba(29, 29, 29, 0.315);
 }
 </style>

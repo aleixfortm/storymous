@@ -38,7 +38,7 @@
             <div v-if="!isExpandedInfo" class="expand-button"><div class="material-symbols-outlined expand-icon">expand_more</div></div>
             <div v-else class="expand-button"><div class="material-symbols-outlined expand-icon">keyboard_control_key</div></div>
         </div>
-        <article v-if="isExpandedInfo" class="story__article">
+        <article v-if="isExpandedInfo" class="story__article" :class="{ 'expanded': isExpandedInfo }">
             <div class="story__upper">
                 <h2 class="story__title "><span class="story_title highlight">{{ chapter.type.toUpperCase() }}</span>{{ chapter.title.toUpperCase() }}</h2>
             </div>      
@@ -176,7 +176,9 @@ export default {
     transition: all 0.2s;
     color: #d3d3d3;
     padding: 5px 10px 10px 10px;
+    transition: height 1s ease;
 }
+
 
 
 .story__user-container {

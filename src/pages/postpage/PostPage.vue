@@ -1,21 +1,24 @@
 <template>
     <feed-container v-if="!loading">
-      <info-message></info-message>
+      <template v-if="!showEnv">
+        <info-message></info-message>
 
-      
-      <post-info :data="infoData"></post-info>
-      <draggable-environment>
-        <tree-chart :json="data" :class="{landscape: landscape.length}" @click-node="clickNode" class="tree"></tree-chart>
-      </draggable-environment>
-      <post-section v-for="chapter in chapters" :key="chapter.ide" :chapter="chapter"></post-section>
-      <login-message v-if="!isLoggedIn" :text="'to comment and continue storylines'"></login-message>
-      
-      <buttonblock-selector :homePage="false" @selected-tab="handleSelectedTab"></buttonblock-selector>
+        <post-info :data="infoData"></post-info>
+        
+        <post-section v-for="chapter in chapters" :key="chapter.ide" :chapter="chapter"></post-section>
+        <login-message v-if="!isLoggedIn" :text="'to comment and continue storylines'"></login-message>
+        
+        <buttonblock-selector :homePage="false" @selected-tab="handleSelectedTab"></buttonblock-selector>
 
-      <transition name="fade" mode="out-in">
-        <component :is="selectedTab" :loading="loading" :replies="replies" :chapterList="[]"></component>
-      </transition>
-
+        <transition name="fade" mode="out-in">
+          <component :is="selectedTab" :loading="loading" :replies="replies" :chapterList="[]"></component>
+        </transition>
+      </template>
+      <template v-else>
+        <draggable-environment>
+          <tree-chart :json="data" :class="{landscape: landscape.length}" @click-node="clickNode" class="tree"></tree-chart>
+        </draggable-environment>
+      </template>
     </feed-container>
     <feed-container v-else>
       <loader-component :text="'Harvesting story from story tree'"></loader-component>
@@ -68,6 +71,7 @@ export default {
   data() {
     return {
       loading: true,
+      showEnv: false,
       selectedTab: 'replies-feed',
       infoData: {
         title: "THE QUEST OF CSGO",

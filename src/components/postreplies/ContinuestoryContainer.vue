@@ -23,10 +23,17 @@
             <article class="story__article2">
                 <div class="story__upper">
                     <h2 class="story__title "><span class="story_title highlight">CHAPTER {{ chapterNum }}</span>{{ chapterName.toUpperCase() }}</h2>
-                </div>  
-                <p class="story__content2">
-                    {{ formatStory(content) }}
-                </p>
+                </div>
+                <template v-if="isExtendable">
+                    <p v-if="!isExtended" class="story__content2">
+                        {{ formatStory(content).substring(0, 170) + '...' }}
+                        <br>
+                        <span @click.stop="extend" class="readmore">Read more</span>
+                    </p>
+                    <p v-else class="story__content2">
+                        {{ formatStory(content) }}
+                    </p>
+                </template>
             </article>
         </span>
     </div>
@@ -41,16 +48,20 @@ export default {
         const router = useRouter();
         return { router: router };
     },
+    data() {
+        return {
+            isExtendable: true,
+            isExtended: false
+        }
+    },
     props: ["_id", "content", "username", "postComment", "date", "picture", "chapterNum", "storyId", "parentChapterId", "chapterName", "tags"],
     methods: {
         formatStory(story) {
             story = story.replace(/<br>/g, '\n');
             if (story.length > 300) {
-                //return story.substring(0, 500) + '...';
                 return story
             }
             return story
-            
         },
         ...mapActions("emitdata", ["emitData"]),
         navigateToPost() {
@@ -67,6 +78,9 @@ export default {
         },
         navigateToUser() {
             this.router.push('/user/' + this.username);
+        },
+        extend() {
+            this.isExtended = true
         }
     },
     computed: {
@@ -78,7 +92,13 @@ export default {
 </script>
 
 <style scoped>
-
+.readmore {
+    font-weight: bold;
+    font-style: italic;
+}
+.readmore:hover {
+    text-decoration: underline;
+}
 
 .highlight {
     background-color: bisque;
@@ -104,46 +124,6 @@ export default {
     font-weight: bold;
 }
 
-.box2 {
-    display: flex;
-    flex-direction: column;
-}
-
-.box1 {
-    display: flex;
-    flex-direction: row;
-}
-
-.origin {
-    background-color: rgba(160, 255, 157, 0.753);
-    font-weight: bold;
-    color: rgb(3, 83, 0);
-    font-size: 14px;
-    padding: 1px 5px;
-    border-radius: 3px;
-    width: fit-content;
-    box-shadow: 0px 0px 5px 0px rgba(13, 255, 0, 0.568);
-    margin: 0 10px 0 0;
-}
-
-.unmountable {
-    background-color: rgb(255, 125, 125);
-    color: rgb(121, 24, 0);
-    box-shadow: 0px 0px 5px 0px rgba(255, 130, 130, 0.568);
-}
-
-.end {
-    background-color: rgb(192, 165, 255);
-    color: rgb(141, 0, 184);
-    box-shadow: 0px 0px 5px 0px rgba(164, 125, 255, 0.568);
-}
-
-.origin-container {
-    display: flex;
-    justify-content: flex-start;
-    margin: 1px 5px 5px 2px;
-}
-
 .sum-icon-container2 {
     margin: 5px 3px 0 0;
 }
@@ -154,7 +134,7 @@ export default {
 }
 
 .background-story-reply2 {
-    background-color: rgba(110, 110, 110, 0.199);
+    background-color: rgb(46, 46, 53);
     padding: 5px;
     margin: 8px 0 0 0;
     border-radius: 10px;
@@ -181,7 +161,6 @@ export default {
     text-align: left;
 }
 
-
 .story__user-container2 {
     padding: 0px 5px 2px 0px;
     display: flex;
@@ -205,16 +184,6 @@ export default {
     text-align: left;
     margin: 2px 0;
     white-space: pre-wrap;
-}
-
-.readmore-button {
-    white-space: nowrap;
-    font-weight: bolder;
-    color: #dddddd;
-}
-
-.readmore-button2:hover {
-    text-decoration: underline 2px;
 }
 
 .story__username-date2 {
@@ -271,5 +240,4 @@ export default {
     width: fit-content;
     justify-content: space-between;
 }
-
 </style>
