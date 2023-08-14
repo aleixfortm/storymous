@@ -35,3 +35,6 @@ app.register_blueprint(bp_users)
 
 from routes.edits import bp_edits
 app.register_blueprint(bp_edits)
+
+from routes.chapters import bp_chapters
+app.register_blueprint(bp_chapters)

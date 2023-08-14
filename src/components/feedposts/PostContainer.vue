@@ -45,7 +45,6 @@
                         {{ leavesMutable.length }}
                     </div>
                     <div class="story-stats-section view"><span class="material-symbols-outlined margin1 view-icon">bar_chart</span>{{ views }}</div>
-                    <div class="story-stats-section comment"><span class="material-symbols-outlined margin1 comment-icon">chat</span>{{ comments.length }}</div>
                 </div>
             </span>
         </div>
@@ -67,7 +66,6 @@ export default {
     },
     data() {
         return {
-            outlineColors: ["red", "blue", "green", "yellow", "white", "purple", "pink", "orange", "salmon"],
             leavesMutable: this.leaves,
             executed: false
         }
@@ -76,7 +74,7 @@ export default {
         const router = useRouter();
         return { router: router };
     },
-    props: ["_id", "title", "content", "username", "postComment", "date", "picture", "color", "views", "comments", "feedMode", "tags", "leaves"],
+    props: ["_id", "title", "content", "username", "postComment", "date", "picture", "color", "views", "feedMode", "tags", "leaves"],
     methods: {
         ...mapActions('message', ['setLoginError']),
         formatStory(story) {
@@ -151,6 +149,9 @@ export default {
             return false
         },
     },
+    mounted() {
+        console.log("mounted")
+    }
 };
 </script>
 

@@ -4,11 +4,11 @@ from bson.objectid import ObjectId
 import datetime, random, math
 
 class Chapter:
-    def __init__(self, username, content, story_id, chapter_num, comment, title, parent_id, tags, leaves=None, status=None, 
+    def __init__(self, username, content, story_id, chapter_num, comment, title, tags, parent_id=None, leaves=None, status=None, 
                 views=None, _id=None, created_at=None) -> None:
         self._id = ObjectId(_id) if _id else ObjectId()
         self.story_id = ObjectId(story_id)
-        self.parent_id = ObjectId(parent_id) or None
+        self.parent_id = None
         self.username = username
         self.created_at = created_at or datetime.datetime.now().isoformat()
         self.status = status or "active"

@@ -4,6 +4,8 @@ from flask_pymongo import ObjectId
 from flask import Blueprint, jsonify
 from main import db_posts, db_users, db_comments, db_chapters
 from models.models import PostModel, UserModel, CommentModel, ChapterModel
+from models.chapter import Chapter
+from models.story import Story
 from flask_jwt_extended import jwt_required, get_jwt_identity, create_access_token
 from werkzeug.security import check_password_hash, generate_password_hash
 from pprint import pprint
@@ -15,6 +17,14 @@ post_dict = {}
 
 # create blueprint
 bp_posts = Blueprint('posts', __name__)
+
+
+def add_to_db(post_list):
+    for post in post_list:
+        if post["type"] == "chapter":
+
+            chapter_obj = Chapter(_id=post["_id"], story_id=story_id, created_at=post["date"], username=post["username"], title=post["title"], content=post["content"], comment=post["comment"], views=post["views"], tags=post["tags"], leaves=post["leaves"], chapter_num=0)
+            chapter_obj.save_to_db()
 
 
 # sanity check route
@@ -83,6 +93,8 @@ def posts():
     post_list = list(db_posts.find())
     post_list.extend(list(db_chapters.find()))
     sorted_post_list = sorted(post_list, key=lambda x: x["date"])
+
+    #add_to_db(post_list)
 
     for post in sorted_post_list:
         PostModel.format_date_data(post)
@@ -202,6 +214,9 @@ def remove_leaves_chapter():
     }
 
     return json_util.dumps(data_payload)
+
+
+### NO MORE FROM HERE ###
 
 
 # get chapter by id

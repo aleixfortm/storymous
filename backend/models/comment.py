@@ -4,7 +4,7 @@ from bson.objectid import ObjectId
 from typing import List
 import datetime
 
-class CommentModel:
+class Comment:
     def __init__(self, username, comment, status=None, _id=None, date=None):
         self._id = ObjectId(_id) if _id else ObjectId()
         self.username = username
