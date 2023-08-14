@@ -61,16 +61,6 @@
   <img src="https://github.com/aleixfortm/storymous/assets/95043218/8e6e87fc-3f10-4b92-983b-be048518422c" alt="storymous_tree" width="600" height="auto">
 </p>
 
-###  **<p align="center">Write comments on storylines</p>**
-<p align="center">
-  <img src="https://github.com/aleixfortm/storymous/assets/95043218/032611a4-c875-4e87-814d-426884786162" alt="storymous_tree" width="600" height="auto">
-</p>
-
-
-
-
-
-
 
 
 ## Features 
