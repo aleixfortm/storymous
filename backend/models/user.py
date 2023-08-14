@@ -5,13 +5,14 @@ from config import COLOR_LIST, IMAGE_LIST
 from typing import Dict, List
 import datetime, random, math
 
-class UserModel:
-    def __init__(self, username, email, password_hash, continued_stories=None, leaves=None, started_stories=None, comments=None, _id=None, bio=None, color=None, picture=None, following=None, followers=None, creation_date=None) -> None:
+class User:
+    def __init__(self, username, email, password_hash, continued_stories=None, leaves=None, started_stories=None, comments=None, _id=None, bio=None, 
+                 color=None, picture=None, following=None, followers=None, created_at=None) -> None:
         self._id = ObjectId(_id) if _id else ObjectId()
         self.username = username
         self.email = email
         self.password_hash = password_hash
-        self.creation_date = creation_date or datetime.datetime.now().isoformat()
+        self.created_at = created_at or datetime.datetime.now().isoformat()
         self.picture = picture or random.choice(IMAGE_LIST)
         self.color = color or random.choice(COLOR_LIST)
         self.bio = bio or f"Yo! I'm {self.username} and I love Storymous! Follow me to stay up to date with my content :^)"
@@ -22,17 +23,11 @@ class UserModel:
         self.comments = comments or 0
         self.leaves = leaves or 0
 
-    def get_id(self) -> str:
-        return self._id
-
     def check_password(self, password: str) -> bool:
         return check_password_hash(self.password_hash, password)
     
     def quicksave_to_db(self) -> None:
         db_users.insert_one(self.__dict__)
-
-    def replace_user(self) -> None:
-        db_users.replace_one({"_id": self._id}, self.__dict__)
         
     # retrieve user data by username
     @staticmethod
@@ -74,13 +69,6 @@ class UserModel:
         db_users.update_one(filter_query, update_operation)
 
     @staticmethod
-    def update_post_count_general(username) -> None:
-        user_query = {"username": username}
-        n_posts = len(list(db_posts.find(user_query)))
-        new_value = {"$set": {"started_stories": n_posts}}
-        db_users.update_one(user_query, new_value)
-
-    @staticmethod
     def update_started_story_count(username) -> None:
         user_query = {"username": username}
         db_users.update_one(user_query, {"$inc": {"started_stories": 1}})
@@ -98,3 +86,7 @@ class UserModel:
     def decrease_leaves(username):
         db_users.update_one({'username': username},
                             {'$inc': {'leaves': -1}})
+    @staticmethod
+    def find_picture(username: str) -> str:
+        retrieved_data = db_users.find_one({"username": username}, {"picture": 1})
+        return retrieved_data["picture"]

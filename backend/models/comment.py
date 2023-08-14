@@ -1,5 +1,7 @@
-from main import db_users, db_posts, db_comments, db_chapters
+from main import db_comments, db_stories
+from models.user import User
 from bson.objectid import ObjectId
+from typing import List
 import datetime
 
 class CommentModel:
@@ -15,24 +17,14 @@ class CommentModel:
         db_comments.insert_one(self.__dict__)
     
     @staticmethod
-    def add_to_parent(parent_id, comment):
-        post_query = {"_id": ObjectId(parent_id)}
-        db_posts.update_one(post_query, {"$addToSet": {"user_comments": ObjectId(comment["_id"])}})
-
-    @staticmethod
-    def find_docs_in_db(id_list):
-        comments_list = []
-        for _id in id_list:
-            comments_list.append(db_comments.find_one({"_id": ObjectId(_id)}))
-
-        return comments_list
+    def add_to_parent(story_id, comment_id):
+        story_query = {"_id": ObjectId(story_id)}
+        db_stories.update_one(story_query, {"$addToSet": {"comments": ObjectId(comment_id["_id"])}})
     
     @staticmethod
-    def add_pic_to_comments(comments):
+    def add_pic_to_comments(comments: List) -> List:
         for comment in comments:
             username = comment["username"]
-            user_data = db_users.find_one({"username": username})
-            pic_path = user_data["pic_path"]
-            comment["pic_path"] = pic_path
+            comment["pic_path"] = User.find_picture(username)
         
         return comments

@@ -1,9 +1,8 @@
 from flask import Flask
 from flask_cors import CORS
 from flask_pymongo import PyMongo
-from config import MONGODB_URI, SECRET_KEY
+from config import MONGODB_URI, SECRET_KEY, ALLOWED_ORIGIN
 from flask_jwt_extended import JWTManager
-from config import ALLOWED_ORIGIN
 
 # instantiate the app
 app = Flask(__name__)
@@ -24,6 +23,8 @@ db_users = mongo.db.users
 db_posts = mongo.db.posts
 db_comments = mongo.db.comments
 db_chapters = mongo.db.chapters
+db_chapters2 = mongo.db.chapters2
+db_stories = mongo.db.stories
 
 # register blueprints
 from routes.posts import bp_posts
