@@ -2,7 +2,7 @@ from flask import jsonify, request
 from bson import json_util
 from flask_pymongo import ObjectId
 from flask import Blueprint, jsonify
-from main import db_users, db_comments, db_chapters
+from main import db_users, db_comments, db_chapters, db_stories
 from models.chapter import Chapter
 from models.user import User
 from models.comment import Comment
@@ -109,6 +109,8 @@ def chapter(chapterId):
     chapter_data["picture"] = user_data["picture"]
     Chapter.increase_visits(chapterId)
     storyline = [chapter_data]
+    story_query = {"_id": chapter_data["story_id"]}
+    story_data = db_stories.find_one(story_query)
 
     # add every parent chapter to the list
     while True:
@@ -121,8 +123,20 @@ def chapter(chapterId):
         if chapter_data["parent_id"] == None:
             break
     
+    # see what chapter ids have not been added yet
+    to_query_chapter_ids = [
+        chapter_id for chapter_id in story_data["chapters"]
+        if not any(chapter_id == mounted_chapter["_id"] for mounted_chapter in storyline)
+    ]
+
+    not_mounted_chapters = list(db_chapters.find({"_id": {"$in": to_query_chapter_ids}}))
+
+    comments = list(db_comments.find({"_id": {"$in": story_data["comments"]}}))
+
     data_packet = {
-        "chapters": storyline
+        "mountedChapters": storyline,
+        "allChapters": not_mounted_chapters,
+        "comments": comments
     }
 
     return json_util.dumps(data_packet)

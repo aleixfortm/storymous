@@ -3,7 +3,7 @@
         <div @click="expandInfo" class="story__expand-container user-select-none">
             <div v-if="!isExpandedInfo" class="story__user-container align-items-center">
                 <div class="story__upper">
-                    <h2 class="story__title "><span class="story_title highlight">CHAPTER</span><span class="story_title highlight">{{ chapter.chapter_num }}</span></h2>
+                    <h2 class="story__title "><span class="story_title highlight">CHAPTER</span><span class="story_title highlight margin-minus">{{ chapter.chapter_num }}</span></h2>
                 </div> 
                 <div class="story__user-img-container">
                     <span @click="navigateToUser" style="color: inherit; text-decoration: none;">
@@ -40,7 +40,7 @@
         </div>
         <article v-if="isExpandedInfo" class="story__article" :class="{ 'expanded': isExpandedInfo }">
             <div class="story__upper">
-                <h2 class="story__title "><span class="story_title highlight">CHAPTER</span><span class="story_title highlight">{{ chapter.chapter_num }}</span>{{ chapter.title.toUpperCase() }}</h2>
+                <h2 class="story__title "><span class="story_title highlight">CHAPTER</span><span class="story_title highlight margin-minus">{{ chapter.chapter_num }}</span>{{ chapter.title.toUpperCase() }}</h2>
             </div>      
             <p class="story__content">
                 {{ formatStory(chapter.content) }}
@@ -94,6 +94,9 @@ export default {
 </script>
 
 <style scoped>
+.margin-minus {
+    margin-left: -7px;
+}
 
 .expand-button {
     color: white;
@@ -132,7 +135,7 @@ export default {
     color: black;
     border-radius: 2px;
     padding: 0 3px;
-    margin: 0 8px 0 0px;
+    margin-right: 10px;
     font-size: 17px;
 }
 

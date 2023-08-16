@@ -26,7 +26,7 @@
                 <div class="separator"></div>
                 <article class="story__article" @click="navigateToPost">
                     <div class="story__upper">
-                        <h2 class="story__title "><span class="story_title highlight">CHAPTER</span><span class="story_title highlight">{{ chapterNum }}</span>{{ title.toUpperCase() }}</h2>
+                        <h2 class="story__title "><span class="story_title highlight">CHAPTER</span><span class="story_title highlight margin-minus">{{ chapterNum }}</span>{{ title.toUpperCase() }}</h2>
                     </div>
                     <div class="tag-section">
                         <post-tag v-for="tag in tags" :key="tag" :clickable="false" :tag="tag"></post-tag>
@@ -85,7 +85,7 @@ export default {
             return formattedStory
         },
         navigateToPost() {
-            this.router.push('/post/' + this._id.$oid);
+            this.router.push('/chapter/' + this._id.$oid);
         },
         navigateToUser() {
             this.router.push('/user/' + this.username);
@@ -102,7 +102,7 @@ export default {
                         this.leavesMutable.push(this.currentUser)
                         
                         axios
-                            .post(`${API_BASE_URL}/add_leaves_post`, data_packet)
+                            .post(`${API_BASE_URL}/add_leaves_chapter`, data_packet)
                             .catch(error => {
                                 console.log(error);
                             });
@@ -112,7 +112,7 @@ export default {
                             this.leavesMutable.splice(index, 1);
                         }
                         axios
-                            .post(`${API_BASE_URL}/remove_leaves_post`, data_packet)
+                            .post(`${API_BASE_URL}/remove_leaves_chapter`, data_packet)
                             .catch(error => {
                                 console.log(error);
                             });
@@ -153,6 +153,10 @@ export default {
 </script>
 
 <style scoped>
+.margin-minus {
+    margin-left: -7px;
+}
+
 .material-symbols-outlined {
   font-variation-settings:
   'FILL' 1,
@@ -259,7 +263,7 @@ export default {
     color: black;
     border-radius: 2px;
     padding: 0 3px;
-    margin: 0 10px 0 0px;
+    margin-right: 10px;
     font-size: 17px;
 }
 
@@ -371,7 +375,7 @@ export default {
 }
 
 .readmore-button:hover {
-    text-decoration: underline 2px;
+    text-decoration: underline;
 }
 
 .story__username-date {
