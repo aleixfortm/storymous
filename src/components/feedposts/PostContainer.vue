@@ -26,7 +26,7 @@
                 <div class="separator"></div>
                 <article class="story__article" @click="navigateToPost">
                     <div class="story__upper">
-                        <h2 class="story__title "><span class="story_title highlight">PROLOGUE</span>{{ title.toUpperCase() }}</h2>
+                        <h2 class="story__title "><span class="story_title highlight">CHAPTER</span><span class="story_title highlight">{{ chapterNum }}</span>{{ title.toUpperCase() }}</h2>
                     </div>
                     <div class="tag-section">
                         <post-tag v-for="tag in tags" :key="tag" :clickable="false" :tag="tag"></post-tag>
@@ -74,7 +74,7 @@ export default {
         const router = useRouter();
         return { router: router };
     },
-    props: ["_id", "title", "content", "username", "postComment", "date", "picture", "color", "views", "feedMode", "tags", "leaves"],
+    props: ["_id", "title", "content", "username", "postComment", "date", "picture", "color", "views", "feedMode", "tags", "leaves", "chapterNum"],
     methods: {
         ...mapActions('message', ['setLoginError']),
         formatStory(story) {

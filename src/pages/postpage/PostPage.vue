@@ -5,18 +5,23 @@
 
         <post-info :data="infoData"></post-info>
         
-        <post-section v-for="chapter in chapters" :key="chapter.ide" :chapter="chapter"></post-section>
+        <post-section 
+          v-for="chapter, index in mountedChapters" 
+          :key="chapter._id.$oid" 
+          :chapter="chapter" 
+          :startExpanded="index === mountedChapters.length - 1">
+        </post-section>
         <login-message v-if="!isLoggedIn" :text="'to comment and continue storylines'"></login-message>
         
         <buttonblock-selector :homePage="false" @selected-tab="handleSelectedTab"></buttonblock-selector>
 
         <transition name="fade" mode="out-in">
-          <component :is="selectedTab" :loading="loading" :replies="replies" :chapterList="[]"></component>
+          <component :is="selectedTab" :loading="loading" :replies="[]" :chapterList="[]"></component>
         </transition>
       </template>
       <template v-else>
         <draggable-environment>
-          <tree-chart :json="data" :class="{landscape: landscape.length}" @click-node="clickNode" class="tree"></tree-chart>
+          <tree-chart :json="treeData" :class="{landscape: landscape.length}" @click-node="clickNode" class="tree"></tree-chart>
         </draggable-environment>
       </template>
     </feed-container>
@@ -71,6 +76,7 @@ export default {
   data() {
     return {
       loading: true,
+      mountedChapters: null,
       showEnv: false,
       selectedTab: 'replies-feed',
       infoData: {
@@ -81,7 +87,7 @@ export default {
         user_comments: []
       },
       landscape: [],
-      data: {
+      treeData: {
           name: '@benetti Prologue',
           image_url: require("@/assets/img/astronaut_saloon.jpeg"),
           class: ["rootNode"],
@@ -133,98 +139,15 @@ export default {
           },
           ]
       },
-      chapters: [ 
-          {
-              isExpandedInfo: false,
-              ide: 123,
-              type: "prologue",
-              title: "Title",
-              content: "Content sdfsdafdsa dsf dsafdsa dasf dsfdas fdsf dsf dsaf dsafdsa fdsaf dsa fdsf ds dsfds fds sd fdsf dsf dsfds fds fds fdsfdsfsdafsdf dsf dsfds ds fdsf dsf dsfdsf sdfdsf dsf dsfdsfdsaf dsfds fdsfdsfsdfds fsdf sdfdsfds fd",
-              username: "stoupeaks",
-              postComment: "This is a big project",
-              date: "2 days ago",
-              picture: "astronaut_reading.jpeg",
-          },
-          {
-              isExpandedInfo: false,
-              ide: 1234,
-              type: "chapter",
-              title: "Title 2 HAHAHA",
-              content: "Content sdfsdafdsa dsf dsafdsa dasf dsfdas fdsf dsf dsaf dsafdsa fdsaf dsa fdsf ds dsfds fds sd fdsf dsf dsfds fds fds fdsfdsfsdafsdf dsf dsfds ds fdsf dsf dsfdsf sdfdsf dsf dsfdsfdsaf dsfds fdsfdsfsdfds fsdf sdfdsfds fd DSFD SAFDS FSAD DS FDSF SDAF DS FSDF DS FDSAF DSF SDAF S",
-              username: "benetti",
-              postComment: "This is a big project",
-              date: "Now",
-              picture: "astronaut_saloon.jpeg",
-              color: "blue",
-              feedMode: false
-          },
-          {
-              isExpandedInfo: false,
-              ide: 1234,
-              type: "chapter",
-              title: "Title 2 HAHAHA",
-              content: "Content sdfsdafdsa dsf dsafdsa dasf dsfdas fdsf dsf dsaf dsafdsa fdsaf dsa fdsf ds dsfds fds sd fdsf dsf dsfds fds fds fdsfdsfsdafsdf dsf dsfds ds fdsf dsf dsfdsf sdfdsf dsf dsfdsfdsaf dsfds fdsfdsfsdfds fsdf sdfdsfds fd DSFD SAFDS FSAD DS FDSF SDAF DS FSDF DS FDSAF DSF SDAF S",
-              username: "benetti",
-              postComment: "This is a big project",
-              date: "Now",
-              picture: "astronaut_saloon.jpeg",
-              color: "blue",
-              feedMode: false
-          },
-          {
-              isExpandedInfo: false,
-              ide: 1234,
-              type: "chapter",
-              title: "Title 2 HAHAHA",
-              content: "Content sdfsdafdsa dsf dsafdsa dasf dsfdas fdsf dsf dsaf dsafdsa fdsaf dsa fdsf ds dsfds fds sd fdsf dsf dsfds fds fds fdsfdsfsdafsdf dsf dsfds ds fdsf dsf dsfdsf sdfdsf dsf dsfdsfdsaf dsfds fdsfdsfsdfds fsdf sdfdsfds fd DSFD SAFDS FSAD DS FDSF SDAF DS FSDF DS FDSAF DSF SDAF S",
-              username: "benetti",
-              postComment: "This is a big project",
-              date: "Now",
-              picture: "astronaut_saloon.jpeg",
-              color: "blue",
-              feedMode: false
-          },
-          {
-              isExpandedInfo: false,
-              ide: 1234,
-              type: "chapter",
-              title: "Title 2 HAHAHA",
-              content: "Content sdfsdafdsa dsf dsafdsa dasf dsfdas fdsf dsf dsaf dsafdsa fdsaf dsa fdsf ds dsfds fds sd fdsf dsf dsfds fds fds fdsfdsfsdafsdf dsf dsfds ds fdsf dsf dsfdsf sdfdsf dsf dsfdsfdsaf dsfds fdsfdsfsdfds fsdf sdfdsfds fd DSFD SAFDS FSAD DS FDSF SDAF DS FSDF DS FDSAF DSF SDAF S",
-              username: "benetti",
-              postComment: "This is a big project",
-              date: "Now",
-              picture: "astronaut_saloon.jpeg",
-              color: "blue",
-              feedMode: false
-          },
-          {
-              isExpandedInfo: false,
-              ide: 1234,
-              type: "chapter",
-              title: "Title 2 HAHAHA",
-              content: "Content sdfsdafdsa dsf dsafdsa dasf dsfdas fdsf dsf dsaf dsafdsa fdsaf dsa fdsf ds dsfds fds sd fdsf dsf dsfds fds fds fdsfdsfsdafsdf dsf dsfds ds fdsf dsf dsfdsf sdfdsf dsf dsfdsfdsaf dsfds fdsfdsfsdfds fsdf sdfdsfds fd DSFD SAFDS FSAD DS FDSF SDAF DS FSDF DS FDSAF DSF SDAF S",
-              username: "benetti",
-              postComment: "This is a big project",
-              date: "Now",
-              picture: "astronaut_saloon.jpeg",
-              color: "blue",
-              feedMode: false
-          }
-      ]
     }
   },
   mounted() {
-    const postId = this.$route.params.id;
+    const chapterId = this.$route.params.id;
     axios
-      .get(`${API_BASE_URL}/post/${postId}`)
+      .get(`${API_BASE_URL}/chapter/${chapterId}`)
       .then(response => {
-        this.post = response.data.post;
-        this.replies = response.data.replies;
-        this.replies.forEach(reply => {
-          if (reply.type !== "comment") {
-            this.addedChapters += 1
-          }
-        })
+        this.mountedChapters = response.data.chapters;
+        console.log(this.mountedChapters)
         this.loading = false;
       })
   },

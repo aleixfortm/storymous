@@ -97,6 +97,37 @@ def posts_logged_in(requested_user):
     return json_util.dumps(chapter_dict)
 
 
+# get chapter by id
+@bp_chapters.route("/chapter/<chapterId>", methods=["GET"])
+def chapter(chapterId):
+
+    # search for chapter data
+    chapter_query = {"_id": ObjectId(chapterId)}
+    chapter_data = db_chapters.find_one(chapter_query)
+    user_data = User.find_by_username(chapter_data["username"])
+    chapter_data["created_at"] = Chapter.format_date_data(chapter_data["created_at"])
+    chapter_data["picture"] = user_data["picture"]
+    Chapter.increase_visits(chapterId)
+    storyline = [chapter_data]
+
+    # add every parent chapter to the list
+    while True:
+        parent_chapter_query = {"_id": chapter_data["parent_id"]}
+        chapter_data = db_chapters.find_one(parent_chapter_query)
+        user_data = User.find_by_username(chapter_data["username"])
+        chapter_data["created_at"] = Chapter.format_date_data(chapter_data["created_at"])
+        chapter_data["picture"] = user_data["picture"]
+        storyline.insert(0, chapter_data)
+        if chapter_data["parent_id"] == None:
+            break
+    
+    data_packet = {
+        "chapters": storyline
+    }
+
+    return json_util.dumps(data_packet)
+
+
 # get user posts
 @bp_chapters.route("/chapters/<requested_user>", methods=["GET"])
 def user_posts(requested_user):
