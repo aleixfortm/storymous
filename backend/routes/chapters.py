@@ -130,8 +130,16 @@ def chapter(chapterId):
     ]
 
     not_mounted_chapters = list(db_chapters.find({"_id": {"$in": to_query_chapter_ids}}))
+    for chapter in not_mounted_chapters:
+        user_data = User.find_by_username(chapter["username"])
+        chapter["picture"] = user_data["picture"]
+        chapter["created_at"] = Chapter.format_date_data(chapter["created_at"])
 
     comments = list(db_comments.find({"_id": {"$in": story_data["comments"]}}))
+    for comment in comments:
+        user_data = User.find_by_username(comment["username"])
+        comment["picture"] = user_data["picture"]
+        comment["date"] = Chapter.format_date_data(comment["date"])
 
     data_packet = {
         "mountedChapters": storyline,

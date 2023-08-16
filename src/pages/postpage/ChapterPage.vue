@@ -16,7 +16,7 @@
         <buttonblock-selector :homePage="false" @selected-tab="handleSelectedTab"></buttonblock-selector>
 
         <transition name="fade" mode="out-in">
-          <component :is="selectedTab" :loading="loading" :replies="[]" :chapterList="[]"></component>
+          <component :is="selectedTab" :loading="loading" :replies="[]" :comments="comments" :chapters="chapters"></component>
         </transition>
       </template>
       <template v-else>

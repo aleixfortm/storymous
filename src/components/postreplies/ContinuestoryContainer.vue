@@ -13,25 +13,25 @@
                 <div class="story__user-info-container2">
                     <div class="story__username2 cur-pnt"> 
                         <span @click.stop="navigateToUser" style="color: inherit; text-decoration: none;">
-                            <span class="lower" style="color: whitesmoke;"><b>@</b></span><b class="story__user-name2">{{ username }}</b>
+                            <span class="lower" style="color: whitesmoke;"><b>@</b></span><b class="story__user-name2">{{ chapter.username }}</b>
                         </span>
-                            <span class="story__username-date2 lower cur-def">· {{ date }} </span>
+                            <span class="story__username-date2 lower cur-def">· {{ chapter.created_at }} </span>
                     </div>
-                    <div class="story__user-comment-container2"><div class="story__user-comment2 cur-def"> {{ postComment }} </div></div>
+                    <div class="story__user-comment-container2"><div class="story__user-comment2 cur-def"> {{ chapter.comment }} </div></div>
                 </div>
             </div>
             <article class="story__article2">
                 <div class="story__upper">
-                    <h2 class="story__title "><span class="story_title highlight">CHAPTER {{ chapterNum }}</span>{{ chapterName.toUpperCase() }}</h2>
+                    <h2 class="story__title "><span class="story_title highlight">CHAPTER {{ chapter.chapterNum }}</span>{{ chapter.title.toUpperCase() }}</h2>
                 </div>
                 <template v-if="isExtendable">
                     <p v-if="!isExtended" class="story__content2">
-                        {{ formatStory(content).substring(0, 170) + '...' }}
+                        {{ formatStory(chapter.content).substring(0, 170) + '...' }}
                         <br>
                         <span @click.stop="extend" class="readmore">Read more</span>
                     </p>
                     <p v-else class="story__content2">
-                        {{ formatStory(content) }}
+                        {{ formatStory(chapter.content) }}
                     </p>
                 </template>
             </article>
@@ -54,7 +54,7 @@ export default {
             isExtended: false
         }
     },
-    props: ["_id", "content", "username", "postComment", "date", "picture", "chapterNum", "storyId", "parentChapterId", "chapterName", "tags"],
+    props: ["chapter"],
     methods: {
         formatStory(story) {
             story = story.replace(/<br>/g, '\n');
@@ -66,18 +66,18 @@ export default {
         ...mapActions("emitdata", ["emitData"]),
         navigateToPost() {
             const dataToEmit =  {
-                _id: this._id,
-                content: this.content,
-                username: this.username,
-                postComment: this.postComment,
-                date: this.date,
-                picture: this.picture
+                _id: this.chapter._id,
+                content: this.chapter.content,
+                username: this.chapter.username,
+                postComment: this.chapter.postComment,
+                date: this.chapter.date,
+                picture: this.chapter.picture
             };
             this.emitData(dataToEmit);
-            this.router.push('/chapter/' + this._id.$oid);
+            this.router.push('/chapter/' + this.chapter._id.$oid);
         },
         navigateToUser() {
-            this.router.push('/user/' + this.username);
+            this.router.push('/user/' + this.chapter.username);
         },
         extend() {
             this.isExtended = true
@@ -85,7 +85,7 @@ export default {
     },
     computed: {
         imgSource() {
-            return require('@/assets/img/' + this.picture);
+            return require('@/assets/img/' + this.chapter.picture);
         },
     },
 };
