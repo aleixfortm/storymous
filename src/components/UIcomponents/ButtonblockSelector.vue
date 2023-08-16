@@ -20,12 +20,11 @@
     </div>
     <div v-else>
         <div class="block">
-            <div class="rectangle short">
-                <select-button 
-                @click="setSelectedTab2('all')" 
-                :mode="selectedTab2 === 'all' ? 'flat' : 'null'"
-                :selected="selectedTab2 === 'all'">
-                    <div class="text">All</div>
+            <div class="rectangle">
+                <select-button @click="setSelectedTab2('comments')" 
+                :mode="selectedTab2 === 'comments' ? 'flat' : 'null'"
+                :selected="selectedTab2 === 'comments'">
+                    <div class="text">Comments</div>
                 </select-button>
             </div>
             <div class="rectangle">
@@ -34,14 +33,7 @@
                 :selected="selectedTab2 === 'chapters'">
                     <div class="text">Chapters</div>
                 </select-button>
-            </div>
-            <div class="rectangle">
-                <select-button @click="setSelectedTab2('comments')" 
-                :mode="selectedTab2 === 'comments' ? 'flat' : 'null'"
-                :selected="selectedTab2 === 'comments'">
-                    <div class="text">Comments</div>
-                </select-button>
-            </div>
+            </div>      
         </div>
     </div>
 </template>
@@ -57,7 +49,7 @@ export default {
     data() {
         return {
             selectedTab1: 'latest-feed',
-            selectedTab2: 'all'
+            selectedTab2: 'comments'
         }
     },
     methods: {

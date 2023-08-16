@@ -29,8 +29,5 @@ export default {
         FeedContainer,
         LoaderComponent
     },
-    mounted() {
-        console.log("mountes successfully")
-    }
 }
 </script>

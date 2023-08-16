@@ -36,7 +36,7 @@
                 </div>
             </div>
             <div v-if="!isExpandedInfo" class="expand-button"><div class="material-symbols-outlined expand-icon">expand_more</div></div>
-            <div v-else class="expand-button"><div class="material-symbols-outlined expand-icon">keyboard_control_key</div></div>
+            <div v-else class="expand-button margin1"><div class="material-symbols-outlined expand-icon">expand_less</div></div>
         </div>
         <article v-if="isExpandedInfo" class="story__article" :class="{ 'expanded': isExpandedInfo }">
             <div class="story__upper">
@@ -96,6 +96,10 @@ export default {
 <style scoped>
 .margin-minus {
     margin-left: -7px;
+}
+
+.margin1 {
+    margin-left: 5px;
 }
 
 .expand-button {

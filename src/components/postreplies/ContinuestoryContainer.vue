@@ -22,7 +22,7 @@
             </div>
             <article class="story__article2">
                 <div class="story__upper">
-                    <h2 class="story__title "><span class="story_title highlight">CHAPTER {{ chapter.chapterNum }}</span>{{ chapter.title.toUpperCase() }}</h2>
+                    <h2 class="story__title "><span class="story_title highlight">CHAPTER</span><span class="story_title highlight margin-minus">{{ chapter.chapter_num }}</span>{{ chapter.title.toUpperCase() }}</h2>
                 </div>
                 <template v-if="isExtendable">
                     <p v-if="!isExtended" class="story__content2">
@@ -92,6 +92,10 @@ export default {
 </script>
 
 <style scoped>
+.margin-minus {
+    margin-left: -7px;
+}
+
 .readmore {
     font-weight: bold;
     font-style: italic;
@@ -105,7 +109,7 @@ export default {
     color: black;
     border-radius: 2px;
     padding: 0 3px;
-    margin: 0 8px 0 0px;
+    margin-right: 10px;
     font-size: 17px;
 }
 
@@ -200,7 +204,7 @@ export default {
 }
 
 .story__user-name2:hover {
-    text-decoration: underline 2px;
+    text-decoration: underline;
 }
 
 .story__user-img2 {

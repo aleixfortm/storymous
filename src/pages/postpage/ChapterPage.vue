@@ -16,7 +16,7 @@
         <buttonblock-selector :homePage="false" @selected-tab="handleSelectedTab"></buttonblock-selector>
 
         <transition name="fade" mode="out-in">
-          <component :is="selectedTab" :loading="loading" :replies="[]" :comments="comments" :chapters="chapters"></component>
+          <component :is="selectedTab" :loading="loading" :comments="comments" :chapters="chapters"></component>
         </transition>
       </template>
       <template v-else>
@@ -79,7 +79,7 @@ export default {
       chapters: [],
       comments: [],
       showEnv: false,
-      selectedTab: 'replies-feed',
+      selectedTab: 'comments-feed',
       infoData: {
         title: "THE QUEST OF CSGO",
         tags: ["chill"],
@@ -150,9 +150,6 @@ export default {
         this.mountedChapters = response.data.mountedChapters;
         this.chapters = response.data.allChapters;
         this.comments = response.data.comments;
-        console.log(this.mountedChapters)
-        console.log(this.chapters)
-        console.log(this.comments)
         this.loadingReplies = false;
         this.loading = false;
     })
@@ -164,15 +161,13 @@ export default {
     },
   },
   methods: {
-        handleSelectedTab(tab) {
-          if (tab === "all") {
-            this.selectedTab = "replies-feed";
-          } else if (tab === "chapters") {
-            this.selectedTab = "chapters-feed"
-          } else {
-            this.selectedTab = "comments-feed"
-          }           
-        }
+    handleSelectedTab(tab) {
+      if (tab === "chapters") {
+        this.selectedTab = "chapters-feed"
+      } else {
+        this.selectedTab = "comments-feed"
+      }           
+    }
   },
 }
 </script>
