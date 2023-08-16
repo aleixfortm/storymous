@@ -13,7 +13,12 @@
             :startExpanded="index === mountedChapters.length - 1">
           </post-section>
         </TransitionGroup>
-        <login-message v-if="!isLoggedIn" :text="'to comment and continue storylines'"></login-message>
+
+        <div class="buttons-container">
+          <unmount-button v-if="mountedChapters.length > 1" @click="unmountChapter" :text="unmountButtonText" class="unmount-button"></unmount-button>
+        </div>
+
+        <login-message v-if="!isLoggedIn" :text="'to add comments and continue storylines'"></login-message>
         
         <buttonblock-selector :homePage="false" @selected-tab="handleSelectedTab"></buttonblock-selector>
 
@@ -53,6 +58,7 @@ import TreeChart from "@/components/TreeChart.vue";
 import PostInfo from "./PostInfo.vue";
 import LoaderComponent from "@/components/UIcomponents/LoaderComponent.vue";
 import DraggableEnvironment from "@/components/UIcomponents/DraggableEnvironment.vue";
+import UnmountButton from "@/components/UIcomponents/buttons/UnmountButton.vue";
 
 export default {
   components: {
@@ -71,7 +77,8 @@ export default {
     PostSection,
     PostInfo,
     LoaderComponent,
-    DraggableEnvironment
+    DraggableEnvironment,
+    UnmountButton
   },
   data() {
     return {
@@ -166,6 +173,10 @@ export default {
     imgSource() {
        return require("@/assets/img/" + this.userFetchedPicture);
     },
+    unmountButtonText() {
+      return "Unmount"
+      //return "Unmount chapter " + (this.mountedChapters.length - 1)
+    }
   },
   methods: {
     handleSelectedTab(tab) {
@@ -185,12 +196,28 @@ export default {
       } else {
         console.log("Chapter not found");
       }
+    },
+    unmountChapter() {
+      if (this.mountedChapters.length > 1){
+        this.mountedChapters.pop()
+        const lastChapterId = this.mountedChapters[this.mountedChapters.length - 1]._id.$oid;
+        this.mountableChapters = this.chapters.filter(chapter => chapter.parent_id.$oid === lastChapterId);
+      }
+      
     }
   },
 }
 </script>
 
 <style scoped>
+.buttons-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.unmount-button {
+  margin: 5px 0 0 0;
+}
 
 ul {
   padding: 0;
@@ -199,7 +226,7 @@ ul {
 
 .list-enter-active,
 .list-leave-active {
-  transition: all 0.5s ease;
+  transition: all 0.4s ease;
 }
 .list-enter-from,
 .list-leave-to {
@@ -217,5 +244,11 @@ ul {
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0.1;
+}
+
+@media (max-width: 700px) {
+  .unmount-button {
+    margin: 5px 5px 0 0;
+  }
 }
 </style>

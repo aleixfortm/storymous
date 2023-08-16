@@ -1,6 +1,6 @@
 <template>
     <div class="background-story-reply2">
-        <span @click="navigateToPost" style="text-decoration: none;" >
+        <span @click="emitSelectedData" style="text-decoration: none;" >
             <div class="story__user-container2">
                 <div class="sum-icon-container2">
                     <img src="@/assets/img/plus_icon4.png" alt="Plus icon" class="sum-icon2">
@@ -78,8 +78,7 @@ export default {
             this.router.push('/chapter/' + this.chapter._id.$oid);
         },
         */
-        navigateToPost() {
-            console.log(this.chapter._id)
+        emitSelectedData() {
             this.$emit("selected-chapter", this.chapter._id);
         },
         navigateToUser() {
