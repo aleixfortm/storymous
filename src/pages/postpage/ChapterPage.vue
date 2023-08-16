@@ -4,19 +4,21 @@
         <info-message></info-message>
 
         <post-info :data="infoData"></post-info>
-        
-        <post-section 
-          v-for="chapter, index in mountedChapters" 
-          :key="chapter._id.$oid" 
-          :chapter="chapter" 
-          :startExpanded="index === mountedChapters.length - 1">
-        </post-section>
+
+        <TransitionGroup name="list" tag="ul">
+          <post-section 
+            v-for="chapter, index in mountedChapters" 
+            :key="chapter._id.$oid" 
+            :chapter="chapter" 
+            :startExpanded="index === mountedChapters.length - 1">
+          </post-section>
+        </TransitionGroup>
         <login-message v-if="!isLoggedIn" :text="'to comment and continue storylines'"></login-message>
         
         <buttonblock-selector :homePage="false" @selected-tab="handleSelectedTab"></buttonblock-selector>
 
         <transition name="fade" mode="out-in">
-          <component :is="selectedTab" :loading="loading" :comments="comments" :chapters="mountableChapters"></component>
+          <component :is="selectedTab" :loading="loading" :comments="comments" :chapters="mountableChapters" @selected-chapter="handleSelectedChapter"></component>
         </transition>
       </template>
       <template v-else>
@@ -172,12 +174,39 @@ export default {
       } else {
         this.selectedTab = "comments-feed"
       }           
+    },
+    handleSelectedChapter(data) {
+      // find chapter in chapters that contains the emitted _id
+      const foundChapter = this.chapters.find(chapter => chapter._id === data);
+      if (foundChapter) {
+        this.mountedChapters.push(foundChapter)
+        const lastChapterId = this.mountedChapters[this.mountedChapters.length - 1]._id.$oid;
+        this.mountableChapters = this.chapters.filter(chapter => chapter.parent_id.$oid === lastChapterId);
+      } else {
+        console.log("Chapter not found");
+      }
     }
   },
 }
 </script>
 
 <style scoped>
+
+ul {
+  padding: 0;
+  margin: 0;
+}
+
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.5s ease;
+}
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
+}
+
 .tree {
   margin-top: 25px;
 }

@@ -2,6 +2,7 @@
     <feed-container v-if="!loading">
         <div v-for="chapter in chapters" :key="chapter._id">
             <continuestory-container
+                @selected-chapter="emitSelectedChapter"
                 :chapter="chapter"
             ></continuestory-container>
         </div>
@@ -29,5 +30,10 @@ export default {
         FeedContainer,
         LoaderComponent
     },
+    methods: {
+        emitSelectedChapter(data) {
+            this.$emit("selected-chapter", data);
+        }
+    }
 }
 </script>

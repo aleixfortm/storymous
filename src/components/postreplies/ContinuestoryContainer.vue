@@ -64,6 +64,7 @@ export default {
             return story
         },
         ...mapActions("emitdata", ["emitData"]),
+        /*
         navigateToPost() {
             const dataToEmit =  {
                 _id: this.chapter._id,
@@ -75,6 +76,11 @@ export default {
             };
             this.emitData(dataToEmit);
             this.router.push('/chapter/' + this.chapter._id.$oid);
+        },
+        */
+        navigateToPost() {
+            console.log(this.chapter._id)
+            this.$emit("selected-chapter", this.chapter._id);
         },
         navigateToUser() {
             this.router.push('/user/' + this.chapter.username);
