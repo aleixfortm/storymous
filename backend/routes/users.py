@@ -80,7 +80,7 @@ def user(user):
     sorted_chapter_list = sorted(chapter_list, key=lambda x: x["created_at"])
 
     for chapter in sorted_chapter_list:
-        Chapter.format_date_data(chapter["created_at"])
+        chapter["created_at"] = Chapter.format_date_data(chapter["created_at"])
         user_data = db_users.find_one({"username": chapter["username"]})
         chapter["picture"] = user_data["picture"]
     

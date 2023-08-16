@@ -33,6 +33,7 @@
                     </div>
                     <p class="story__content">
                         {{ formatStory(content) }}
+                        <br>
                         <b v-if="feedMode && checkLength" class="readmore-button"><em>Read more</em></b>
                     </p>
                 </article>

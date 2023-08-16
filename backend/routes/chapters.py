@@ -9,8 +9,7 @@ from models.comment import Comment
 from models.story import Story
 from flask_jwt_extended import jwt_required, get_jwt_identity, create_access_token
 from pprint import pprint
-from datetime import timedelta
-import random
+
 
 # create blueprint
 bp_chapters = Blueprint('chapters', __name__)
@@ -28,14 +27,31 @@ def new_chapter():
         "username": chapter.get("username"),
         "tags": chapter.get("tags"),
         "chapter_num": chapter.get("chapterNum") or 0,
-        "leaves": [chapter.get("username")]
+        "leaves": [chapter.get("username")],
+        "story_id": chapter.get("story_id"),
+        "parent_id": chapter.get("parent_id")
     }
 
-    chapter_object = Chapter(**chapter_data)
-    chapter_object.save_to_db()
-    # increase written story count of user
-    chapter_object.increase_user_written_stories() # author leaf is automatically added when creating the object
-    User.increase_leaves(chapter["username"])
+    # if no story_id (new story), 
+    if not chapter_data.get("story_id"):
+        # create a new Story instance
+        story_object = Story(title=chapter_data["title"])
+        # update chapter_data object
+        chapter_data["story_id"] = story_object._id
+        # create Chapter instance with updated story_id values and save it do db
+        chapter_object = Chapter(**chapter_data)
+        # add chapter _id to story
+        story_object.chapters = [chapter_object._id]
+        # increase written story count of user
+        chapter_object.increase_user_written_stories() # author leaf is automatically added when creating the object
+        # increase amount of leaves of author, as they are automatically added
+        User.increase_leaves(chapter_object.username)
+        # save both instances to db
+        chapter_object.save_to_db()
+        story_object.save_to_db()
+
+    else:
+        pass
 
     return json_util.dumps({"status": "Success"})
 
