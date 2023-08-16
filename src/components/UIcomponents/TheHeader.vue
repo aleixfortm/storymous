@@ -302,19 +302,18 @@ li {
   padding: 5px 6px;
   font-family: inherit;
   border: 0px solid #e5e3ff;
-  color: rgb(0, 255, 0);
+  color: rgb(0, 255, 98);
   cursor: pointer;
   font-size: 15px;
   margin: 0 20px 0 20px;
-  background-color: rgba(0, 145, 55, 0.726);
+  background-color: rgb(69, 97, 80);
   border-radius: 4px;
   font-weight: bold;
   transition: all 0.2s;
 }
 
 .loginButton:hover {
-    background-color: rgba(0, 128, 49, 0.452);
-    color: rgb(0, 255, 98);
+    background-color: rgba(255, 255, 255, 0.144);
 }
 
 .login-div {
