@@ -32,12 +32,7 @@
         </astronaut-message>
     </feed-container>
     <feed-container v-else>
-      <div class="loader-container">
-        <div class="spinner-border text-light mb-3" style="width: 5rem; height: 5rem;" role="status">
-          <span class="visually-hidden">Loading...</span>
-        </div>
-          <span class="loader-text">Harvesting story from story tree</span>
-      </div>
+        <loader-component :text="'Harvesting story from story tree...'"></loader-component>
     </feed-container>
 </template>
 
@@ -46,6 +41,7 @@ import CommentContainer from '@/components/postreplies/CommentContainer.vue';
 import ContinuestoryContainer from '@/components/postreplies/ContinuestoryContainer.vue';
 import AstronautMessage from '@/components/messages/AstronautMessage.vue';
 import FeedContainer from '@/components/frames/FeedContainer.vue';
+import LoaderComponent from '@/components/UIcomponents/LoaderComponent.vue';
 
 export default {
     props: ["replies", "loading", "chapterList"],
@@ -53,7 +49,8 @@ export default {
         CommentContainer,
         ContinuestoryContainer,
         AstronautMessage,
-        FeedContainer
+        FeedContainer,
+        LoaderComponent
     }
 }
 </script>

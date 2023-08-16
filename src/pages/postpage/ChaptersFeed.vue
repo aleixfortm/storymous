@@ -23,12 +23,7 @@
         </astronaut-message>
     </feed-container>
     <feed-container v-else>
-      <div class="loader-container">
-        <div class="spinner-border text-light mb-3" style="width: 5rem; height: 5rem;" role="status">
-          <span class="visually-hidden">Loading...</span>
-        </div>
-          <span class="loader-text">Harvesting chapters...</span>
-      </div>
+        <loader-component :text="'Harvesting chapters...'"></loader-component>
     </feed-container>
 </template>
 
@@ -36,13 +31,15 @@
 import ContinuestoryContainer from '@/components/postreplies/ContinuestoryContainer.vue';
 import AstronautMessage from '@/components/messages/AstronautMessage.vue';
 import FeedContainer from '@/components/frames/FeedContainer.vue';
+import LoaderComponent from '@/components/UIcomponents/LoaderComponent.vue';
 
 export default {
     props: ["replies", "loading", "chapterList"],
     components: {
         ContinuestoryContainer,
         AstronautMessage,
-        FeedContainer
+        FeedContainer,
+        LoaderComponent
     },
     computed: {
         hasValidReplies() {

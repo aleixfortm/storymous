@@ -76,12 +76,7 @@
             </div>
         </section>
         <section class="profile-box centered" v-else>
-            <div v-if="loading" class="loader-container">
-                <div class="spinner-border text-light mb-3" style="width: 5rem; height: 5rem;" role="status">
-                    <span class="visually-hidden">Loading...</span>
-                </div>
-            <span class="loader-text">Spotting authors nearby...</span>
-        </div>
+            <loader-component v-if="loading" :text="'Spotting authors nearby...'"></loader-component>
         </section>
 
         <section v-if="ownProfile()" class="section_title">
@@ -90,57 +85,31 @@
         <section v-else class="section_title">
             {{ profileUsername }}'s posts
         </section>
-        <div v-if="loading" class="loader-container">
-            <div class="spinner-border text-light mb-3" style="width: 5rem; height: 5rem;" role="status">
-                <span class="visually-hidden">Loading...</span>
-            </div>
-            <span class="loader-text">Fetching user stories...</span>
-        </div>
+
+        <loader-component v-if="loading" :text="'Fetching user stories'"></loader-component>
+        
         <div v-else-if="posts.length > 0">
             <div v-for="post in posts" :key="post._id.$oid">
-                <template v-if="post.type === 'prologue'">
-                    <post-container
-                        :_id="post._id"
-                        :title="post.title"
-                        :content="post.content"
-                        :username="post.username"
-                        :postComment="post.comment"
-                        :date="post.date"
-                        :picture="post.picture"
-                        :color="post.color"
-                        :views="post.views"
-                        :comments="post.user_comments"
-                        :tags="post.tags"
-                        :leaves="post.leaves"
-                        :feedMode="true">
-                    </post-container>
-                </template>
-                <template v-else>
-                    <continuestoryfeed-container
-                        :_id="post._id"
-                        :storyId="post.story_id"
-                        :parentChapterId="post.parent_chapter_id"
-                        :content="post.content"
-                        :chapterName="post.chapter_name"
-                        :chapterNum="post.chapter_num"
-                        :username="post.username"
-                        :color="post.color"
-                        :storyTitle="post.story_title"
-                        :postComment="post.comment"
-                        :date="post.date"
-                        :picture="post.picture"
-                        :leaves="post.leaves"
-                        :views="post.views"
-                        :tags="post.tags">
-                    </continuestoryfeed-container>
-                </template>
-                </div>
+                <post-container
+                    :_id="post._id"
+                    :title="post.title"
+                    :content="post.content"
+                    :username="post.username"
+                    :postComment="post.comment"
+                    :date="post.created_at"
+                    :picture="post.picture"
+                    :views="post.views"
+                    :tags="post.tags"
+                    :leaves="post.leaves"
+                    :feedMode="true">
+                </post-container>
             </div>
-            <div v-else>
-            <astronaut-message :onomatopoeia="'crick crick'"
-            :text="'Countless tales have been told since the beginning of time, yet none have borne their signature. What might they be doing?'"></astronaut-message>
         </div>
-    </feed-container>
+        <div v-else>
+            <astronaut-message :onomatopoeia="'crick crick'"
+                :text="'Countless tales have been told since the beginning of time, yet none have borne their signature. What might they be doing?'"></astronaut-message>
+            </div>
+        </feed-container>
 
 </template>
 
@@ -153,24 +122,24 @@ import axios from 'axios';
 import FeedContainer from "../../components/frames/FeedContainer.vue";
 import PostContainer from "@/components/feedposts/PostContainer.vue";
 import ProfilePicture from '@/components/UIcomponents/ProfilePicture.vue';
-import ContinuestoryfeedContainer from '@/components/feedposts/ContinuestoryfeedContainer.vue';
 import AstronautMessage from '@/components/messages/AstronautMessage.vue';
 import SettingsButton from '@/components/UIcomponents/buttons/SettingsButton.vue';
 import LogoutButton from '@/components/UIcomponents/buttons/LogoutButton.vue';
 import SmallTooltip from '@/components/UIcomponents/SmallTooltip.vue';
 import LoginMessage from "@/components/messages/LoginMessage.vue"
+import LoaderComponent from '@/components/UIcomponents/LoaderComponent.vue';
 
 export default {
     components: {
         FeedContainer,
         PostContainer,
         ProfilePicture,
-        ContinuestoryfeedContainer,
         AstronautMessage,
         SettingsButton,
         LogoutButton,
         SmallTooltip,
-        LoginMessage
+        LoginMessage,
+        LoaderComponent
     },
     setup() {
         const router = useRouter();
@@ -276,7 +245,7 @@ export default {
                 this.nLeaves = this.nFetchedLeaves;
 
             axios
-                .get(`${API_BASE_URL}/posts/${this.profileUsername}`)
+                .get(`${API_BASE_URL}/chapters/${this.profileUsername}`)
                 .then(response => {
                     const data = response.data;
                     console.log(data)
@@ -375,22 +344,6 @@ export default {
     justify-content: center;
     align-items: center;
     height: 300px
-}
-
-.loader-text {
-    background-color: whitesmoke;
-    color: rgb(0, 0, 0);
-    padding: 5px 10px;
-    border-radius: 15px;
-    font-weight: bold;
-}
-
-.loader-container {
-    margin: 40px 0 0 0;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    align-items: center;
 }
 
 .name-color {

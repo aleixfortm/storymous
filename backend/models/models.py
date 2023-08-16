@@ -202,10 +202,6 @@ class ChapterModel:
     
     def quicksave_to_db(self):
         db_chapters.insert_one(self.__dict__)
-
-    def add_record_to_main_story(self):
-        query = {"_id": self.story_id}
-        db_posts.find_one()
     
     def get_story_title(self):
         query = {"_id": self.story_id}

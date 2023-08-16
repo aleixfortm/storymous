@@ -3,10 +3,11 @@ from bson import json_util
 from flask_pymongo import ObjectId
 from flask import Blueprint, jsonify
 from main import db_posts, db_users, db_comments, db_chapters
-from models import PostModel, UserModel, CommentModel, ChapterModel
+from models.models import PostModel, UserModel, CommentModel, ChapterModel
+from models.chapter import Chapter
+from models.story import Story
 from flask_jwt_extended import jwt_required, get_jwt_identity, create_access_token
 from werkzeug.security import check_password_hash, generate_password_hash
-from config import COLOR_LIST, IMAGE_LIST, TAG_LIST
 from pprint import pprint
 from datetime import timedelta
 import random
@@ -15,126 +16,16 @@ import random
 post_dict = {}
 
 # create blueprint
-bp_routes = Blueprint('routes', __name__)
-
+bp_posts = Blueprint('posts', __name__)
 
 # sanity check route
-@bp_routes.route('/ping', methods=['GET'])
+@bp_posts.route('/ping', methods=['GET'])
 def ping_pong():
     return jsonify('pong!')
 
 
-# sign up sequence
-@bp_routes.route("/signup", methods=["POST"])
-def signup():
-    credentials = request.json
-    username = credentials.get("username")
-    password = credentials.get('password')
-    email = credentials.get("email")
-    
-    # check if username and email exist already
-    username_query = {"username": username}
-    username_result = db_users.find_one(username_query)
-    email_query = {"email": email}
-    email_result = db_users.find_one(email_query)
-    # return error request if user exists
-    data_packet = {}
-    if username_result:
-        data_packet["status"] = "Username already exists"
-        return json_util.dumps(data_packet), 401
-    elif email_result:
-        data_packet["status"] = "Email already exists"
-        return json_util.dumps(data_packet), 401
-    
-    # generate password hash from user password
-    hashed_password = generate_password_hash(password)
-    # generate user object
-    user_object = UserModel(username=username, password_hash=hashed_password, email=email)
-    user_object.quicksave_to_db()
-
-    data_packet["status"] = "Success"
-    return json_util.dumps(data_packet), 201
-
-
-# log in sequence
-@bp_routes.route('/login', methods=['POST'])
-def login():
-    credentials = request.json
-    username = credentials.get('username')
-    password = credentials.get('password')
-
-    # retrieve user data from db
-    username_query = {"username": username}
-    user_data = db_users.find_one(username_query)
-    # return error if non-existent
-    if not user_data:
-        return jsonify({'status': 'Invalid username'}), 401
-    # check password
-    hashed_password = user_data.get("password_hash")
-    if not check_password_hash(hashed_password, password):
-        return jsonify({'status': 'Incorrect password'}), 401
-    
-    # User authenticated
-    access_token = create_access_token(identity=username, expires_delta=timedelta(hours=1))  # Generate JWT token
-    # get user data
-    retrieved_user_data = db_users.find_one({"username": username})
-    # return data packet
-    return json_util.dumps({"token": access_token,
-                            "user_data": retrieved_user_data,
-                            "status": "Success"}), 200
-
-
-# load user data
-@bp_routes.route("/user/<user>", methods=["GET"])
-def user(user):
-    post_list = list(db_posts.find({"username": user}))
-    post_list.extend(list(db_chapters.find({"username": user})))
-    sorted_post_list = sorted(post_list, key=lambda x: x["date"])
-
-    for post in sorted_post_list:
-        PostModel.format_date_data(post)
-        user_fetched_data = db_users.find_one({"username": post["username"]})
-        post["picture"] = user_fetched_data["picture"]
-    
-    user_data = db_users.find_one({"username": user})
-    
-    data_packet = {
-        "user_data": user_data,
-        "posts": sorted_post_list[::-1]
-    }
-
-    return json_util.dumps(data_packet)
-
-
-# load user data
-@bp_routes.route("/settings/<user>", methods=["GET"])
-def get_settings(user):
-    user_data = db_users.find_one({"username": user})
-    settings_data = {
-        "color": user_data["color"],
-        "bio": user_data["bio"],
-        "picture": user_data["picture"]
-    }
-
-    return json_util.dumps(settings_data)
-
-
-# follow updates
-@bp_routes.route('/follow', methods=['POST'])
-@jwt_required()
-def follow():
-    data = request.json
-    if data.get("action") == "follow":
-        UserModel.add_follower(data.get("user_being_followed"), data.get("user_follows"))
-        return json_util.dumps("Success")
-    
-    else:
-        UserModel.remove_follower(data.get("user_being_followed"), data.get("user_follows"))
-        return json_util.dumps("Success")
-
-
 # create new post sequence
-@bp_routes.route('/new_post', methods=['POST'])
+@bp_posts.route('/new_post', methods=['POST'])
 @jwt_required()
 def new_post():
     post = request.json
@@ -158,7 +49,7 @@ def new_post():
 
 
 # create new comment sequence
-@bp_routes.route('/new_comment', methods=['POST'])
+@bp_posts.route('/new_comment', methods=['POST'])
 @jwt_required()
 def new_pcomment():
     comment = request.json
@@ -188,11 +79,13 @@ def new_pcomment():
 
 
 # get all posts
-@bp_routes.route('/posts', methods=["GET"])
+@bp_posts.route('/posts', methods=["GET"])
 def posts():
     post_list = list(db_posts.find())
     post_list.extend(list(db_chapters.find()))
     sorted_post_list = sorted(post_list, key=lambda x: x["date"])
+
+    #add_to_db(post_list)
 
     for post in sorted_post_list:
         PostModel.format_date_data(post)
@@ -206,7 +99,7 @@ def posts():
 
 
 # get all posts
-@bp_routes.route('/homepage_posts/<user>', methods=["GET"])
+@bp_posts.route('/homepage_posts/<user>', methods=["GET"])
 def posts_logged_in(user):
 
     post_list = list(db_posts.find())
@@ -243,7 +136,7 @@ def posts_logged_in(user):
 
 
 # get user posts
-@bp_routes.route("/posts/<user>", methods=["GET"])
+@bp_posts.route("/posts/<user>", methods=["GET"])
 def user_posts(user):
 
     post_list = list(db_posts.find({"username": user}))
@@ -258,7 +151,7 @@ def user_posts(user):
     return json_util.dumps(sorted_post_list[::-1])
 
 
-@bp_routes.route("/add_leaves_post", methods=["POST"])
+@bp_posts.route("/add_leaves_post", methods=["POST"])
 @jwt_required()
 def add_leaves_post():
     data = request.json
@@ -272,7 +165,7 @@ def add_leaves_post():
     return json_util.dumps(data_payload)
 
 
-@bp_routes.route("/add_leaves_chapter", methods=["POST"])
+@bp_posts.route("/add_leaves_chapter", methods=["POST"])
 @jwt_required()
 def add_leaves_chapter():
     data = request.json
@@ -286,7 +179,7 @@ def add_leaves_chapter():
     return json_util.dumps(data_payload)
 
 
-@bp_routes.route("/remove_leaves_post", methods=["POST"])
+@bp_posts.route("/remove_leaves_post", methods=["POST"])
 @jwt_required()
 def remove_leaves_post():
     data = request.json
@@ -300,7 +193,7 @@ def remove_leaves_post():
     return json_util.dumps(data_payload)
 
 
-@bp_routes.route("/remove_leaves_chapter", methods=["POST"])
+@bp_posts.route("/remove_leaves_chapter", methods=["POST"])
 @jwt_required()
 def remove_leaves_chapter():
     data = request.json
@@ -314,8 +207,11 @@ def remove_leaves_chapter():
     return json_util.dumps(data_payload)
 
 
+### NO MORE FROM HERE ###
+
+
 # get chapter by id
-@bp_routes.route("/chapter/<chapterId>", methods=["GET"])
+@bp_posts.route("/chapter/<chapterId>", methods=["GET"])
 def chapter(chapterId):
 
     # search for chapter data
@@ -352,7 +248,7 @@ def chapter(chapterId):
 
 
 # get post by id
-@bp_routes.route("/post/<postId>", methods=["GET"])
+@bp_posts.route("/post/<postId>", methods=["GET"])
 def post(postId):
 
     post_data = {}
@@ -393,29 +289,7 @@ def post(postId):
     return json_util.dumps(post_data)
 
 
-@bp_routes.route("/update_settings", methods=["POST"])
-@jwt_required()
-def update_user_settings():
-    data = request.json
-    user_query = {"username": data["username"]}
-    updated_settings = {
-        "$set": {
-            "picture": data["selectedImage"],
-            "bio": data["selectedBio"],
-            "color": data["selectedColor"]
-        }
-    }
-    db_users.update_one(user_query, updated_settings)
-
-    fetched_user_data = db_users.find_one({"username": data["username"]})
-
-    return json_util.dumps({
-        "status": "Success",
-        "updated_user_data": fetched_user_data
-    })
-
-
-@bp_routes.route("/new_chapter", methods=["POST"])
+@bp_posts.route("/new_chapter", methods=["POST"])
 @jwt_required()
 def new_chapter():
 
@@ -452,62 +326,3 @@ def new_chapter():
     # else send the previously stablished data packet
     return json_util.dumps(data_packet)
 
-
-
-from collections import Counter
-# edit posts
-@bp_routes.route('/edit_stuff', methods=["GET"])
-def posts_edit():
-    user_counter = Counter()
-    
-    chapters = list(db_chapters.find())
-    for chapter in chapters:
-        user_counter[chapter["username"]] += 1
-    
-    pprint(user_counter)
-    user_dict = dict(user_counter)
-    for user, chapter_count in user_dict.items():
-        query = {"username": user}
-        update_data = {"$set": {"continued_stories": chapter_count}}
-        db_users.update_one(query, update_data)
-        
-    """
-    chapters = list(db_chapters.find())
-    for chapter in chapters:
-        user_counter[chapter["username"]] += len(chapter["leaves"])
-
-    user_dict = dict(user_counter)
-    for user, leaves_count in user_counter.items():
-        query = {"username": user}
-        update_data = {"$set": {"leaves": leaves_count}}
-        db_users.update_one(query, update_data)
-    """
-        
-    return "Success"
-
-"""
-from collections import Counter
-# edit posts
-@bp_routes.route('/edit_stuff', methods=["GET"])
-def edit_stuff():
-    
-    chapter_data = {
-        "story_id": ObjectId("64396be8852aaec5dc1e4bfd"),
-        "parent_chapter_id": ObjectId("64d61c7fc3f9a7a1f6f0ac7d"),
-        "date": "2023-06-14T20:36:12.490426",
-        "username": "benetti",
-        "chapter_name": "The quest of CSGO pt.5",
-        "chapter_num": 4,
-        "content": "You know that feeling when good things are happenin' to you and you feel like you don't deserve it? That's me sitting in gold nova 2 right now... FUCK NO!!! I'M THE BEST!! I'm at my prime, when i thought i hit the cieling and i wasn't gettin' out of silver, BOOM! nova 1, and even when i thought that was it, DOUBLE BOOM! gold nova 2!! I have no words to describe my feelings, thankful for my pals who have been there when i was rock bottom and happy for all those haters who never gave me a chance! I'm coming for you S1mple!!",
-        "comment": '“The harder the conflict, the greater the triumph.” - George Washington',
-        "tags": ["fantasy", "young-adults", "humor", "chill"],
-        "leaves": ["pixelated", "poll3", "astonished_98", "stoupeaks", "benetti"],
-        "views": 160
-    }
-
-    chapter_obj = ChapterModel(**chapter_data)
-    chapter_obj.quicksave_to_db()
-
-        
-    return "Success"
-"""

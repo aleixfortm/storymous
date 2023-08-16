@@ -66,7 +66,7 @@ export default {
             this.router.push('/');
         } else {
             axios
-                .get(`${API_BASE_URL}/homepage_posts/${this.currentUser}`)
+                .get(`${API_BASE_URL}/homepage_chapters/${this.currentUser}`)
                 .then(response => {
                     this.posts = response.data;
                     this.loading = false;

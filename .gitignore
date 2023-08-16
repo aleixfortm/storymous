@@ -3,7 +3,10 @@ backend/config.py
 backend/venv
 backend/wvenv
 backend/__pycache__
+backend/routes/__pycache__
+backend/models/__pycache__
 dist
 .env.production
 .env.development
 public
+pyrun.ps1

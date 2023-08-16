@@ -17,7 +17,7 @@
         </div>
     </div>
 
-    <latest-feed :posts="posts" :loading="loading"></latest-feed>
+    <latest-feed :posts="chapters" :loading="loading"></latest-feed>
 </template>
 
 <script>
@@ -42,7 +42,7 @@ export default {
     },
     data() {
         return {
-            posts: {},
+            chapters: [],
             openDialog: true,
             userLogged: false,
             text: " ",
@@ -55,10 +55,11 @@ export default {
             this.router.push("/home")
         } else {
             axios
-            .get(`${API_BASE_URL}/posts`)
+            .get(`${API_BASE_URL}/chapters`)
             .then(response => {
-                this.posts = response.data;
+                this.chapters = response.data;
                 this.loading = false;
+                console.log(this.chapters)
             })
             .catch(error => {
                 console.log(error);
