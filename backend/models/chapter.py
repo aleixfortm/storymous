@@ -8,7 +8,7 @@ class Chapter:
                 views=None, _id=None, created_at=None) -> None:
         self._id = ObjectId(_id) if _id else ObjectId()
         self.story_id = ObjectId(story_id)
-        self.parent_id = None
+        self.parent_id = ObjectId(parent_id) if parent_id else None
         self.username = username
         self.created_at = created_at or datetime.datetime.now().isoformat()
         self.status = status or "active"
@@ -27,7 +27,7 @@ class Chapter:
             User.update_continued_story_count(self.username)
     
     def save_to_db(self) -> None:
-         db_chapters.insert_one(self.__dict__)
+        db_chapters.insert_one(self.__dict__)
     
     @staticmethod
     def increase_visits(chapter_id) -> None:

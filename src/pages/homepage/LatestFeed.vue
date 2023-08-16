@@ -8,6 +8,7 @@
             :content="post.content"
             :username="post.username"
             :postComment="post.comment"
+            :chapterNum="post.chapter_num"
             :date="post.created_at"
             :picture="post.picture"
             :views="post.views"

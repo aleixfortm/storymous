@@ -4,11 +4,12 @@ from typing import Dict, List
 import datetime, random, math
 
 class Story:
-    def __init__(self, comments=None, chapters=None, _id=None, created_at=None) -> None:
+    def __init__(self, title, comments=None, chapters=None, _id=None, created_at=None) -> None:
         self._id = self._id = ObjectId(_id) if _id else ObjectId()
         self.created_at = created_at or datetime.datetime.now().isoformat()
         self.chapters = chapters or []
         self.comments = comments or []
+        self.title = title
 
     def save_to_db(self) -> str:
         result = db_stories.insert_one(self.__dict__)

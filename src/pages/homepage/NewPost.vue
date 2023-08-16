@@ -102,7 +102,7 @@ export default {
       this.buttonLoading = true;
 
       axios
-      .post(`${API_BASE_URL}/new_post`, data_packet)
+      .post(`${API_BASE_URL}/new_chapter`, data_packet)
       .then(response => {
           this.buttonLoading = false;
           const data = response.data;
@@ -116,17 +116,17 @@ export default {
         });
     },
     adjustTextareaHeight() {
-        const textarea = this.$el.querySelector('#comment');
-        textarea.style.height = 'auto';
-        textarea.style.height = textarea.scrollHeight + 'px';
-        this.textareaHeight = textarea.style.height;
-      },
-      adjustTextareaHeight1() {
-        const textarea1 = this.$el.querySelector('#body');
-        textarea1.style.height = 'auto';
-        textarea1.style.height = textarea1.scrollHeight + 'px';
-        this.textareaHeight1 = textarea1.style.height;
-      },
+      const textarea = this.$el.querySelector('#comment');
+      textarea.style.height = 'auto';
+      textarea.style.height = textarea.scrollHeight + 'px';
+      this.textareaHeight = textarea.style.height;
+    },
+    adjustTextareaHeight1() {
+      const textarea1 = this.$el.querySelector('#body');
+      textarea1.style.height = 'auto';
+      textarea1.style.height = textarea1.scrollHeight + 'px';
+      this.textareaHeight1 = textarea1.style.height;
+    },
 
   },
   watch: {

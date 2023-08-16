@@ -2,15 +2,14 @@ from flask import jsonify, request
 from bson import json_util
 from flask_pymongo import ObjectId
 from flask import Blueprint, jsonify
-from main import db_users, db_comments, db_chapters
+from main import db_users, db_comments, db_chapters, db_stories
 from models.chapter import Chapter
 from models.user import User
 from models.comment import Comment
 from models.story import Story
 from flask_jwt_extended import jwt_required, get_jwt_identity, create_access_token
 from pprint import pprint
-from datetime import timedelta
-import random
+
 
 # create blueprint
 bp_chapters = Blueprint('chapters', __name__)
@@ -28,14 +27,31 @@ def new_chapter():
         "username": chapter.get("username"),
         "tags": chapter.get("tags"),
         "chapter_num": chapter.get("chapterNum") or 0,
-        "leaves": [chapter.get("username")]
+        "leaves": [chapter.get("username")],
+        "story_id": chapter.get("story_id"),
+        "parent_id": chapter.get("parent_id")
     }
 
-    chapter_object = Chapter(**chapter_data)
-    chapter_object.save_to_db()
-    # increase written story count of user
-    chapter_object.increase_user_written_stories() # author leaf is automatically added when creating the object
-    User.increase_leaves(chapter["username"])
+    # if no story_id (new story), 
+    if not chapter_data.get("story_id"):
+        # create a new Story instance
+        story_object = Story(title=chapter_data["title"])
+        # update chapter_data object
+        chapter_data["story_id"] = story_object._id
+        # create Chapter instance with updated story_id values and save it do db
+        chapter_object = Chapter(**chapter_data)
+        # add chapter _id to story
+        story_object.chapters = [chapter_object._id]
+        # increase written story count of user
+        chapter_object.increase_user_written_stories() # author leaf is automatically added when creating the object
+        # increase amount of leaves of author, as they are automatically added
+        User.increase_leaves(chapter_object.username)
+        # save both instances to db
+        chapter_object.save_to_db()
+        story_object.save_to_db()
+
+    else:
+        pass
 
     return json_util.dumps({"status": "Success"})
 
@@ -95,6 +111,59 @@ def posts_logged_in(requested_user):
     chapter_dict["following"] = sorted_chapters[::-1]
 
     return json_util.dumps(chapter_dict)
+
+
+# get chapter by id
+@bp_chapters.route("/chapter/<chapterId>", methods=["GET"])
+def chapter(chapterId):
+
+    # search for chapter data
+    chapter_query = {"_id": ObjectId(chapterId)}
+    chapter_data = db_chapters.find_one(chapter_query)
+    user_data = User.find_by_username(chapter_data["username"])
+    chapter_data["created_at"] = Chapter.format_date_data(chapter_data["created_at"])
+    chapter_data["picture"] = user_data["picture"]
+    Chapter.increase_visits(chapterId)
+    storyline = [chapter_data]
+    story_query = {"_id": chapter_data["story_id"]}
+    story_data = db_stories.find_one(story_query)
+
+    # add every parent chapter to the list
+    while True:
+        parent_chapter_query = {"_id": chapter_data["parent_id"]}
+        chapter_data = db_chapters.find_one(parent_chapter_query)
+        user_data = User.find_by_username(chapter_data["username"])
+        chapter_data["created_at"] = Chapter.format_date_data(chapter_data["created_at"])
+        chapter_data["picture"] = user_data["picture"]
+        storyline.insert(0, chapter_data)
+        if chapter_data["parent_id"] == None:
+            break
+    
+    # see what chapter ids have not been added yet
+    to_query_chapter_ids = [
+        chapter_id for chapter_id in story_data["chapters"]
+        if not any(chapter_id == mounted_chapter["_id"] for mounted_chapter in storyline)
+    ]
+
+    not_mounted_chapters = list(db_chapters.find({"_id": {"$in": to_query_chapter_ids}}))
+    for chapter in not_mounted_chapters:
+        user_data = User.find_by_username(chapter["username"])
+        chapter["picture"] = user_data["picture"]
+        chapter["created_at"] = Chapter.format_date_data(chapter["created_at"])
+
+    comments = list(db_comments.find({"_id": {"$in": story_data["comments"]}}))
+    for comment in comments:
+        user_data = User.find_by_username(comment["username"])
+        comment["picture"] = user_data["picture"]
+        comment["date"] = Chapter.format_date_data(comment["date"])
+
+    data_packet = {
+        "mountedChapters": storyline,
+        "allChapters": not_mounted_chapters,
+        "comments": comments
+    }
+
+    return json_util.dumps(data_packet)
 
 
 # get user posts

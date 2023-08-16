@@ -10,6 +10,7 @@
                   :username="post.username"
                   :postComment="post.comment"
                   :date="post.created_at"
+                  :chapterNum="post.chapter_num"
                   :picture="post.picture"
                   :views="post.views"
                   :tags="post.tags"
