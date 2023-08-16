@@ -4,19 +4,26 @@
         <info-message></info-message>
 
         <post-info :data="infoData"></post-info>
-        
-        <post-section 
-          v-for="chapter, index in mountedChapters" 
-          :key="chapter._id.$oid" 
-          :chapter="chapter" 
-          :startExpanded="index === mountedChapters.length - 1">
-        </post-section>
-        <login-message v-if="!isLoggedIn" :text="'to comment and continue storylines'"></login-message>
+
+        <TransitionGroup name="list" tag="ul">
+          <post-section 
+            v-for="chapter, index in mountedChapters" 
+            :key="chapter._id.$oid" 
+            :chapter="chapter" 
+            :startExpanded="index === mountedChapters.length - 1">
+          </post-section>
+        </TransitionGroup>
+
+        <div class="buttons-container">
+          <unmount-button v-if="mountedChapters.length > 1" @click="unmountChapter" :text="unmountButtonText" class="unmount-button"></unmount-button>
+        </div>
+
+        <login-message v-if="!isLoggedIn" :text="'to add comments and continue storylines'"></login-message>
         
         <buttonblock-selector :homePage="false" @selected-tab="handleSelectedTab"></buttonblock-selector>
 
         <transition name="fade" mode="out-in">
-          <component :is="selectedTab" :loading="loading" :comments="comments" :chapters="mountableChapters"></component>
+          <component :is="selectedTab" :loading="loading" :comments="comments" :chapters="mountableChapters" @selected-chapter="handleSelectedChapter"></component>
         </transition>
       </template>
       <template v-else>
@@ -51,6 +58,7 @@ import TreeChart from "@/components/TreeChart.vue";
 import PostInfo from "./PostInfo.vue";
 import LoaderComponent from "@/components/UIcomponents/LoaderComponent.vue";
 import DraggableEnvironment from "@/components/UIcomponents/DraggableEnvironment.vue";
+import UnmountButton from "@/components/UIcomponents/buttons/UnmountButton.vue";
 
 export default {
   components: {
@@ -69,7 +77,8 @@ export default {
     PostSection,
     PostInfo,
     LoaderComponent,
-    DraggableEnvironment
+    DraggableEnvironment,
+    UnmountButton
   },
   data() {
     return {
@@ -153,7 +162,6 @@ export default {
         this.comments = response.data.comments;
         this.loadingReplies = false;
         this.loading = false;
-
         // make mountableChapters be all those that its parent_id equal to the id of the last mountedChapter object
         const lastChapterId = this.mountedChapters[this.mountedChapters.length - 1]._id.$oid;
         this.mountableChapters = this.chapters.filter(chapter => chapter.parent_id.$oid === lastChapterId);
@@ -164,6 +172,10 @@ export default {
     imgSource() {
        return require("@/assets/img/" + this.userFetchedPicture);
     },
+    unmountButtonText() {
+      return "Unmount"
+      //return "Unmount chapter " + (this.mountedChapters.length - 1)
+    }
   },
   methods: {
     handleSelectedTab(tab) {
@@ -172,12 +184,55 @@ export default {
       } else {
         this.selectedTab = "comments-feed"
       }           
+    },
+    handleSelectedChapter(data) {
+      // find chapter in chapters that contains the emitted _id
+      const foundChapter = this.chapters.find(chapter => chapter._id === data);
+      if (foundChapter) {
+        this.mountedChapters.push(foundChapter)
+        const lastChapterId = this.mountedChapters[this.mountedChapters.length - 1]._id.$oid;
+        this.mountableChapters = this.chapters.filter(chapter => chapter.parent_id.$oid === lastChapterId);
+      } else {
+        console.log("Chapter not found");
+      }
+    },
+    unmountChapter() {
+      if (this.mountedChapters.length > 1) {
+        this.mountedChapters.pop()
+        const lastChapterId = this.mountedChapters[this.mountedChapters.length - 1]._id.$oid;
+        this.mountableChapters = this.chapters.filter(chapter => chapter.parent_id.$oid === lastChapterId);
+      }
+      
     }
   },
 }
 </script>
 
 <style scoped>
+.buttons-container {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.unmount-button {
+  margin: 5px 0 0 0;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+}
+
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.4s ease;
+}
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+  transform: translateX(30px);
+}
+
 .tree {
   margin-top: 25px;
 }
@@ -188,5 +243,11 @@ export default {
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0.1;
+}
+
+@media (max-width: 700px) {
+  .unmount-button {
+    margin: 5px 5px 0 0;
+  }
 }
 </style>

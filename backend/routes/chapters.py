@@ -129,24 +129,23 @@ def chapter(chapterId):
     story_data = db_stories.find_one(story_query)
 
     # add every parent chapter to the list
-    while True:
-        parent_chapter_query = {"_id": chapter_data["parent_id"]}
-        chapter_data = db_chapters.find_one(parent_chapter_query)
-        user_data = User.find_by_username(chapter_data["username"])
-        chapter_data["created_at"] = Chapter.format_date_data(chapter_data["created_at"])
-        chapter_data["picture"] = user_data["picture"]
-        storyline.insert(0, chapter_data)
-        if chapter_data["parent_id"] == None:
-            break
+    if chapter_data["parent_id"]:
+        while True:
+            parent_chapter_query = {"_id": chapter_data["parent_id"]}
+            chapter_data = db_chapters.find_one(parent_chapter_query)
+            user_data = User.find_by_username(chapter_data["username"])
+            chapter_data["created_at"] = Chapter.format_date_data(chapter_data["created_at"])
+            chapter_data["picture"] = user_data["picture"]
+            storyline.insert(0, chapter_data)
+            if chapter_data["parent_id"] == None:
+                break
     
-    # see what chapter ids have not been added yet
-    to_query_chapter_ids = [
-        chapter_id for chapter_id in story_data["chapters"]
-        if not any(chapter_id == mounted_chapter["_id"] for mounted_chapter in storyline)
-    ]
-
-    not_mounted_chapters = list(db_chapters.find({"_id": {"$in": to_query_chapter_ids}}))
-    for chapter in not_mounted_chapters:
+    # query all chapters present in chapters list of story instance, but exclude those whose parent_id is None (chapter 0)
+    all_chapters = list(db_chapters.find(
+        {"_id": {"$in": story_data["chapters"]},
+        "parent_id": {"$ne": None}
+    }))
+    for chapter in all_chapters:
         user_data = User.find_by_username(chapter["username"])
         chapter["picture"] = user_data["picture"]
         chapter["created_at"] = Chapter.format_date_data(chapter["created_at"])
@@ -159,7 +158,7 @@ def chapter(chapterId):
 
     data_packet = {
         "mountedChapters": storyline,
-        "allChapters": not_mounted_chapters,
+        "allChapters": all_chapters,
         "comments": comments
     }
 

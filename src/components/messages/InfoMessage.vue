@@ -1,7 +1,7 @@
 <template>
     <div class="boxy" role="alert">
         <strong>How to <u>mount</u> and <u>unmount</u> chapters</strong> 
-        <div class="text">Look for a chapter in the replies section and select one to mount it. To unmount it, click on the previous chapter mounted.</div>
+        <div class="text">Look for a chapter in the chapters section (bottom) and click one to mount it. To unmount, click on "Unmount" button.</div>
     </div>
 </template>
 

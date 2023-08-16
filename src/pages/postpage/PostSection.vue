@@ -99,7 +99,7 @@ export default {
 }
 
 .margin1 {
-    margin-left: 5px;
+    margin-left: 10px;
 }
 
 .expand-button {
