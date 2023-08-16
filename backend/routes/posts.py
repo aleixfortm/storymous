@@ -18,15 +18,6 @@ post_dict = {}
 # create blueprint
 bp_posts = Blueprint('posts', __name__)
 
-
-def add_to_db(post_list):
-    for post in post_list:
-        if post["type"] == "chapter":
-
-            chapter_obj = Chapter(_id=post["_id"], story_id=story_id, created_at=post["date"], username=post["username"], title=post["title"], content=post["content"], comment=post["comment"], views=post["views"], tags=post["tags"], leaves=post["leaves"], chapter_num=0)
-            chapter_obj.save_to_db()
-
-
 # sanity check route
 @bp_posts.route('/ping', methods=['GET'])
 def ping_pong():

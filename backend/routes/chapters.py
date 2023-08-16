@@ -2,7 +2,7 @@ from flask import jsonify, request
 from bson import json_util
 from flask_pymongo import ObjectId
 from flask import Blueprint, jsonify
-from main import db_users, db_comments, db_stories, db_chapters2
+from main import db_users, db_comments, db_chapters
 from models.chapter import Chapter
 from models.user import User
 from models.comment import Comment
@@ -15,7 +15,6 @@ import random
 # create blueprint
 bp_chapters = Blueprint('chapters', __name__)
 
-    
 
 # create new chapter
 @bp_chapters.route('/new_chapter', methods=['POST'])
@@ -45,14 +44,14 @@ def new_chapter():
 @bp_chapters.route('/chapters', methods=["GET"])
 def chapters():
 
-    chapter_list = list(db_chapters2.find())
+    chapter_list = list(db_chapters.find())
     sorted_chapters = sorted(chapter_list, key=lambda x: x["created_at"])
 
     for chapter in sorted_chapters:
-        Chapter.format_date_data(chapter["created_at"])
+        chapter["created_at"] = Chapter.format_date_data(chapter["created_at"])
         user = db_users.find_one({"username": chapter["username"]})
         chapter["picture"] = user["picture"]
-    
+
     chapter_dict = {}
     chapter_dict["latest"] = sorted_chapters[::-1]
     chapter_dict["following"] = []
@@ -64,11 +63,11 @@ def chapters():
 @bp_chapters.route('/homepage_chapters/<requested_user>', methods=["GET"])
 def posts_logged_in(requested_user):
 
-    chapter_list = list(db_chapters2.find())
+    chapter_list = list(db_chapters.find())
     sorted_chapters = sorted(chapter_list, key=lambda x: x["created_at"])
 
     for chapter in sorted_chapters:
-        Chapter.format_date_data(chapter["created_at"])
+        chapter["created_at"] = Chapter.format_date_data(chapter["created_at"])
         user = db_users.find_one({"username": chapter["username"]})
         chapter["picture"] = user["picture"]
     
@@ -85,11 +84,11 @@ def posts_logged_in(requested_user):
 
     # if the user follows other users
     following_query = {"username": {"$in": user["following"]}}
-    chapter_list = list(db_chapters2.find(following_query))
+    chapter_list = list(db_chapters.find(following_query))
     sorted_chapters = sorted(chapter_list, key=lambda x: x["created_at"])
 
     for chapter in sorted_chapters:
-        Chapter.format_date_data(chapter["created_at"])
+        chapter["created_at"] = Chapter.format_date_data(chapter["created_at"])
         user = User.find_by_username(chapter["username"])
         chapter["picture"] = user["picture"]
 
@@ -102,11 +101,11 @@ def posts_logged_in(requested_user):
 @bp_chapters.route("/chapters/<requested_user>", methods=["GET"])
 def user_posts(requested_user):
 
-    chapter_list = list(db_chapters2.find({"username": requested_user}))
+    chapter_list = list(db_chapters.find({"username": requested_user}))
     sorted_chapters = sorted(chapter_list, key=lambda x: x["created_at"])
 
     for chapter in sorted_chapters:
-        Chapter.format_date_data(chapter["created_at"])
+        chapter["created_at"] = Chapter.format_date_data(chapter["created_at"])
         user_dict = User.find_by_username(chapter["username"])
         chapter["picture"] = user_dict["picture"]
         

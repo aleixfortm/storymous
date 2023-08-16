@@ -1,6 +1,6 @@
 <template>
   <feed-container>
-    <loader-component v-if="loading" :text="'Loading stories...'"></loader-component>
+    <loader-component v-if="loading" :text="'Loading stories'"></loader-component>
     <div v-else v-for="post in posts.latest" :key="post._id">
         <post-container
             :_id="post._id"
@@ -11,12 +11,10 @@
             :date="post.created_at"
             :picture="post.picture"
             :views="post.views"
-            :comments="post.user_comments"
             :tags="post.tags"
             :leaves="post.leaves"
             :feedMode="true">
         </post-container>
-
     </div>
   </feed-container>
 </template>

@@ -1,14 +1,13 @@
 from flask import jsonify, request
 from bson import json_util
-from flask_pymongo import ObjectId
 from flask import Blueprint, jsonify
-from main import db_posts, db_users, db_comments, db_chapters
-from models.models import PostModel, UserModel, CommentModel, ChapterModel
+from main import db_users, db_chapters
+from models.chapter import Chapter
+from models.user import User
 from flask_jwt_extended import jwt_required, get_jwt_identity, create_access_token
 from werkzeug.security import check_password_hash, generate_password_hash
-from pprint import pprint
 from datetime import timedelta
-import random
+
 
 # create blueprint
 bp_users = Blueprint('users', __name__)
@@ -27,6 +26,7 @@ def signup():
     username_result = db_users.find_one(username_query)
     email_query = {"email": email}
     email_result = db_users.find_one(email_query)
+
     # return error request if user exists
     data_packet = {}
     if username_result:
@@ -76,20 +76,19 @@ def login():
 # load user data
 @bp_users.route("/user/<user>", methods=["GET"])
 def user(user):
-    post_list = list(db_posts.find({"username": user}))
-    post_list.extend(list(db_chapters.find({"username": user})))
-    sorted_post_list = sorted(post_list, key=lambda x: x["date"])
+    chapter_list = list(db_chapters.find({"username": user}))
+    sorted_chapter_list = sorted(chapter_list, key=lambda x: x["created_at"])
 
-    for post in sorted_post_list:
-        PostModel.format_date_data(post)
-        user_fetched_data = db_users.find_one({"username": post["username"]})
-        post["picture"] = user_fetched_data["picture"]
+    for chapter in sorted_chapter_list:
+        Chapter.format_date_data(chapter["created_at"])
+        user_data = db_users.find_one({"username": chapter["username"]})
+        chapter["picture"] = user_data["picture"]
     
     user_data = db_users.find_one({"username": user})
     
     data_packet = {
         "user_data": user_data,
-        "posts": sorted_post_list[::-1]
+        "posts": sorted_chapter_list[::-1]
     }
 
     return json_util.dumps(data_packet)
@@ -113,14 +112,14 @@ def get_settings(user):
 def follow():
     data = request.json
     if data.get("action") == "follow":
-        UserModel.add_follower(data.get("user_being_followed"), data.get("user_follows"))
+        User.add_follower(data.get("user_being_followed"), data.get("user_follows"))
         return json_util.dumps("Success")
     
     else:
-        UserModel.remove_follower(data.get("user_being_followed"), data.get("user_follows"))
+        User.remove_follower(data.get("user_being_followed"), data.get("user_follows"))
         return json_util.dumps("Success")
     
-
+# update user settings
 @bp_users.route("/update_settings", methods=["POST"])
 @jwt_required()
 def update_user_settings():

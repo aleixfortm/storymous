@@ -64,7 +64,6 @@ export default {
     },
     data() {
         return {
-            outlineColors: ["red", "blue", "green", "yellow", "white", "purple", "pink", "orange", "salmon"],
             leavesMutable: this.leaves,
             executed: false
         }

@@ -1,4 +1,4 @@
-from main import db_chapters2
+from main import  db_chapters
 from models.user import User
 from bson.objectid import ObjectId
 import datetime, random, math
@@ -27,11 +27,11 @@ class Chapter:
             User.update_continued_story_count(self.username)
     
     def save_to_db(self) -> None:
-        db_chapters2.insert_one(self.__dict__)
+         db_chapters.insert_one(self.__dict__)
     
     @staticmethod
     def increase_visits(chapter_id) -> None:
-        db_chapters2.update_one({'_id': ObjectId(chapter_id)}, {'$inc': {'views': 1}})
+         db_chapters.update_one({'_id': ObjectId(chapter_id)}, {'$inc': {'views': 1}})
     
     @staticmethod
     def format_date_data(date: str) -> str:
@@ -60,10 +60,10 @@ class Chapter:
     
     @staticmethod
     def increase_leaves(chapter_id, username):
-        db_chapters2.update_one({'_id': ObjectId(chapter_id)},
+         db_chapters.update_one({'_id': ObjectId(chapter_id)},
                             {'$push': {'leaves': username}})
         
     @staticmethod
     def decrease_leaves(chapter_id, username):
-        db_chapters2.update_one({"_id": ObjectId(chapter_id)},
+         db_chapters.update_one({"_id": ObjectId(chapter_id)},
                                 {"$pull": {"leaves": username}})

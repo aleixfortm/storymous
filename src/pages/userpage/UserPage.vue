@@ -86,53 +86,30 @@
             {{ profileUsername }}'s posts
         </section>
 
-        <loader-component v-if="loading" :text="'Fetching user stories...'"></loader-component>
+        <loader-component v-if="loading" :text="'Fetching user stories'"></loader-component>
         
         <div v-else-if="posts.length > 0">
             <div v-for="post in posts" :key="post._id.$oid">
-                <template v-if="post.type === 'prologue'">
-                    <post-container
-                        :_id="post._id"
-                        :title="post.title"
-                        :content="post.content"
-                        :username="post.username"
-                        :postComment="post.comment"
-                        :date="post.date"
-                        :picture="post.picture"
-                        :color="post.color"
-                        :views="post.views"
-                        :comments="post.user_comments"
-                        :tags="post.tags"
-                        :leaves="post.leaves"
-                        :feedMode="true">
-                    </post-container>
-                </template>
-                <template v-else>
-                    <continuestoryfeed-container
-                        :_id="post._id"
-                        :storyId="post.story_id"
-                        :parentChapterId="post.parent_chapter_id"
-                        :content="post.content"
-                        :chapterName="post.chapter_name"
-                        :chapterNum="post.chapter_num"
-                        :username="post.username"
-                        :color="post.color"
-                        :storyTitle="post.story_title"
-                        :postComment="post.comment"
-                        :date="post.date"
-                        :picture="post.picture"
-                        :leaves="post.leaves"
-                        :views="post.views"
-                        :tags="post.tags">
-                    </continuestoryfeed-container>
-                </template>
-                </div>
+                <post-container
+                    :_id="post._id"
+                    :title="post.title"
+                    :content="post.content"
+                    :username="post.username"
+                    :postComment="post.comment"
+                    :date="post.created_at"
+                    :picture="post.picture"
+                    :views="post.views"
+                    :tags="post.tags"
+                    :leaves="post.leaves"
+                    :feedMode="true">
+                </post-container>
             </div>
-            <div v-else>
-            <astronaut-message :onomatopoeia="'crick crick'"
-            :text="'Countless tales have been told since the beginning of time, yet none have borne their signature. What might they be doing?'"></astronaut-message>
         </div>
-    </feed-container>
+        <div v-else>
+            <astronaut-message :onomatopoeia="'crick crick'"
+                :text="'Countless tales have been told since the beginning of time, yet none have borne their signature. What might they be doing?'"></astronaut-message>
+            </div>
+        </feed-container>
 
 </template>
 
@@ -145,7 +122,6 @@ import axios from 'axios';
 import FeedContainer from "../../components/frames/FeedContainer.vue";
 import PostContainer from "@/components/feedposts/PostContainer.vue";
 import ProfilePicture from '@/components/UIcomponents/ProfilePicture.vue';
-import ContinuestoryfeedContainer from '@/components/feedposts/ContinuestoryfeedContainer.vue';
 import AstronautMessage from '@/components/messages/AstronautMessage.vue';
 import SettingsButton from '@/components/UIcomponents/buttons/SettingsButton.vue';
 import LogoutButton from '@/components/UIcomponents/buttons/LogoutButton.vue';
@@ -158,7 +134,6 @@ export default {
         FeedContainer,
         PostContainer,
         ProfilePicture,
-        ContinuestoryfeedContainer,
         AstronautMessage,
         SettingsButton,
         LogoutButton,
@@ -270,7 +245,7 @@ export default {
                 this.nLeaves = this.nFetchedLeaves;
 
             axios
-                .get(`${API_BASE_URL}/posts/${this.profileUsername}`)
+                .get(`${API_BASE_URL}/chapters/${this.profileUsername}`)
                 .then(response => {
                     const data = response.data;
                     console.log(data)

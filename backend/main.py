@@ -20,15 +20,12 @@ mongo = PyMongo(app)
 
 # create collection instances
 db_users = mongo.db.users
-db_posts = mongo.db.posts
 db_comments = mongo.db.comments
 db_chapters = mongo.db.chapters
-db_chapters2 = mongo.db.chapters2
 db_stories = mongo.db.stories
+db_posts = mongo.db.chapters
 
 # register blueprints
-from routes.posts import bp_posts
-app.register_blueprint(bp_posts)
 
 from routes.users import bp_users
 app.register_blueprint(bp_users)

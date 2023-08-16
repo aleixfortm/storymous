@@ -1,4 +1,4 @@
-from main import db_users, db_posts, db_comments, db_chapters
+from main import db_users, db_comments, db_chapters
 from werkzeug.security import check_password_hash
 from bson.objectid import ObjectId
 from config import COLOR_LIST, IMAGE_LIST
@@ -32,7 +32,7 @@ class User:
     # retrieve user data by username
     @staticmethod
     def find_by_username(username: str) -> Dict:
-        return db_users.find_one({'_id': username})
+        return db_users.find_one({'username': username})
 
     # retrieve user data by email
     @staticmethod

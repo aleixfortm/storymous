@@ -148,9 +148,6 @@ export default {
             }
             return false
         },
-    },
-    mounted() {
-        console.log("mounted")
     }
 };
 </script>
@@ -391,7 +388,7 @@ export default {
 }
 
 .story__user-name:hover {
-    text-decoration: underline 2px;
+    text-decoration: underline;
 }
 
 .story__username {
