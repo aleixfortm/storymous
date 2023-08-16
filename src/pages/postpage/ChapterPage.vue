@@ -16,7 +16,7 @@
         <buttonblock-selector :homePage="false" @selected-tab="handleSelectedTab"></buttonblock-selector>
 
         <transition name="fade" mode="out-in">
-          <component :is="selectedTab" :loading="loading" :comments="comments" :chapters="chapters"></component>
+          <component :is="selectedTab" :loading="loading" :comments="comments" :chapters="mountableChapters"></component>
         </transition>
       </template>
       <template v-else>
@@ -76,6 +76,7 @@ export default {
       loading: true,
       loadingReplies: true,
       mountedChapters: [],
+      mountableChapters: [],
       chapters: [],
       comments: [],
       showEnv: false,
@@ -152,6 +153,10 @@ export default {
         this.comments = response.data.comments;
         this.loadingReplies = false;
         this.loading = false;
+
+        // make mountableChapters be all those that its parent_id equal to the id of the last mountedChapter object
+        const lastChapterId = this.mountedChapters[this.mountedChapters.length - 1]._id.$oid;
+        this.mountableChapters = this.chapters.filter(chapter => chapter.parent_id.$oid === lastChapterId);
     })
   },
   computed: {
