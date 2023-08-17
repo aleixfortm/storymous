@@ -3,7 +3,7 @@
       <template v-if="!showEnv">
         <info-message></info-message>
 
-        <post-info :data="infoData"></post-info>
+        <post-info :data="storylineData"></post-info>
 
         <TransitionGroup name="list" tag="ul">
           <post-section 
@@ -15,7 +15,15 @@
         </TransitionGroup>
 
         <div class="buttons-container">
-          <unmount-button v-if="mountedChapters.length > 1" @click="unmountChapter" :text="unmountButtonText" class="unmount-button"></unmount-button>
+          <writechapter-button @click="writeChapter" :text="'Write chapter'" class="mount-button">
+            <span class="material-symbols-outlined small-font">edit</span>
+          </writechapter-button>
+          <mount-button :disabledButton="mountableChapters.length > 0" @click="mountRandomChapter" :text="mountButtonText" class="mount-button">
+            <span class="material-symbols-outlined small-font">shuffle</span>
+          </mount-button>
+          <unmount-button :disabledButton="mountedChapters.length > 1" @click="unmountChapter" :text="unmountButtonText" class="unmount-button">
+            <span class="material-symbols-outlined small-font">switch_access_shortcut</span>
+          </unmount-button>
         </div>
 
         <login-message v-if="!isLoggedIn" :text="'to add comments and continue storylines'"></login-message>
@@ -59,6 +67,8 @@ import PostInfo from "./PostInfo.vue";
 import LoaderComponent from "@/components/UIcomponents/LoaderComponent.vue";
 import DraggableEnvironment from "@/components/UIcomponents/DraggableEnvironment.vue";
 import UnmountButton from "@/components/UIcomponents/buttons/UnmountButton.vue";
+import MountButton from "@/components/UIcomponents/buttons/MountButton.vue";
+import WritechapterButton from "@/components/UIcomponents/buttons/WritechapterButton.vue";
 
 export default {
   components: {
@@ -78,7 +88,9 @@ export default {
     PostInfo,
     LoaderComponent,
     DraggableEnvironment,
-    UnmountButton
+    UnmountButton,
+    MountButton,
+    WritechapterButton
   },
   data() {
     return {
@@ -90,13 +102,6 @@ export default {
       comments: [],
       showEnv: false,
       selectedTab: 'comments-feed',
-      infoData: {
-        title: "THE QUEST OF CSGO",
-        tags: ["chill"],
-        leaves: ["stoupeaks", "benetti"],
-        views: 230,
-        user_comments: []
-      },
       landscape: [],
       treeData: {
           name: '@benetti Prologue',
@@ -172,9 +177,29 @@ export default {
     imgSource() {
        return require("@/assets/img/" + this.userFetchedPicture);
     },
+    mountButtonText() {
+      return "Mount random"
+    },
     unmountButtonText() {
-      return "Unmount"
-      //return "Unmount chapter " + (this.mountedChapters.length - 1)
+      return "Unmount last"
+    },
+    storylineData() {
+      const chapterWithHighestViews = this.mountedChapters.reduce((maxChapter, chapter) => {
+        if (chapter.views > maxChapter.views) {
+          return chapter;
+        }
+        return maxChapter;
+      }, this.mountedChapters[0]);
+
+      const storyData = {
+        title: this.mountedChapters[0].title,
+        tags: this.mountedChapters[0].tags,
+        leaves: this.mountedChapters.reduce((sum, chapter) => sum + chapter.leaves, 0),
+        views: chapterWithHighestViews.views,
+        user_comments: this.comments,
+        mountedChapters: this.mountableChapters.length
+      };
+      return storyData
     }
   },
   methods: {
@@ -196,6 +221,16 @@ export default {
         console.log("Chapter not found");
       }
     },
+    mountRandomChapter() {
+      if (this.mountableChapters.length > 0) {
+        const randomIndex = Math.floor(Math.random() * this.mountableChapters.length);
+        const randomChapter = this.mountableChapters[randomIndex];
+        // Use the randomly selected chapter as needed
+        this.handleSelectedChapter(randomChapter._id)
+      } else {
+        console.log("No mountable chapters available.");
+      }
+    },
     unmountChapter() {
       if (this.mountedChapters.length > 1) {
         this.mountedChapters.pop()
@@ -209,13 +244,29 @@ export default {
 </script>
 
 <style scoped>
+.small-font {
+  font-size: 20px;
+}
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 500,
+  'GRAD' -25,
+  'opsz' 0
+}
+
 .buttons-container {
   display: flex;
   justify-content: flex-end;
+  margin: 5px 0px 5px 5px;
 }
 
+.mount-button {
+  margin: 0 5px 0 0;
+}
 .unmount-button {
-  margin: 5px 0 0 0;
+  margin: 0px 0 0 0;
 }
 
 ul {
@@ -246,8 +297,8 @@ ul {
 }
 
 @media (max-width: 700px) {
-  .unmount-button {
-    margin: 5px 5px 0 0;
+  .buttons-container {
+    margin-right: 5px;
   }
 }
 </style>

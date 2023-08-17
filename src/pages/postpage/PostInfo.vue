@@ -22,8 +22,8 @@
             </div>
             <div class="story-stats-section" @mouseover="showChaptersTooltip = true" @mouseout="showChaptersTooltip = false">
               <span class="material-symbols-outlined margin1">call_split</span>
-              <span>0</span>
-              <small-tooltip :condition="showChaptersTooltip" :text="'Mounted chapters'" :top="'35px'"></small-tooltip>
+              <span>{{ data.mountedChapters }}</span>
+              <small-tooltip :condition="showChaptersTooltip" :text="'Possible paths'" :top="'35px'"></small-tooltip>
             </div>
             <div class="story-stats-section" @mouseover="showCommentsTooltip = true" @mouseout="showCommentsTooltip = false">
               <span class="material-symbols-outlined margin1">chat</span>

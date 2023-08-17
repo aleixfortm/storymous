@@ -28,7 +28,7 @@ export default {
     padding: 0px 5px;
     font-weight: bold;
     text-shadow: 0px 0px 1px rgba(0, 0, 0, 0.3);
-    background-color: rgb(223, 45, 0);
+    background-color: rgb(174, 0, 255);
     justify-content: center;
     height: fit-content;
     min-height: 15px;
@@ -37,7 +37,7 @@ export default {
 }
 
 .button:hover {
-    background-color: rgba(196, 39, 0, 0.808);
+    background-color: rgba(141, 0, 206, 0.795);
 }
 
 .custom-margin {
