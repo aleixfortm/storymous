@@ -30,7 +30,8 @@ export default {
     text-shadow: 0px 0px 1px rgba(0, 0, 0, 0.3);
     background-color: rgb(0, 172, 77);
     justify-content: center;
-    height: 25px;
+    min-height: 25px;
+    height: fit-content;
     cursor: pointer;
     transition: 0.2s all;
 }

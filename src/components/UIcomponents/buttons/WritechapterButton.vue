@@ -3,7 +3,7 @@
         <slot></slot>
         {{ text }}
     </button>
-    <button v-else class="button d-flex align-items-center" :class="{ 'disabled': buttonLoading, 'custom-margin': margin, 'disabled': disabledButton }" :disabled="buttonLoading || disabledButton" type="submit">
+    <button v-else class="button d-flex align-items-center" :class="{ 'disabled': buttonLoading, 'custom-margin': margin, 'disabled': disabledButton }" :disabled="disabledButton" type="submit">
         <div class="spinner-border spinner-border-sm" role="status">
             <span class="visually-hidden">Loading...</span>
         </div>
@@ -50,7 +50,7 @@ export default {
     color: rgb(255, 255, 255);
     cursor: default;
     margin: 10px 10px 10px 0;
-    background-color: rgba(172, 49, 0, 0.65);
+    background-color: rgba(141, 0, 206, 0.493);
 }
 
 .submit {

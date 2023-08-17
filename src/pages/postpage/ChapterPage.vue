@@ -15,17 +15,25 @@
         </TransitionGroup>
 
         <div class="buttons-container">
-          <writechapter-button @click="writeChapter" :text="'Write chapter'" class="mount-button">
+          <writechapter-button v-if="!isSelectedWriteChapter" @click="writeChapter" :text="'Write chapter'" class="mount-button buttons-group-1">
             <span class="material-symbols-outlined small-font">edit</span>
           </writechapter-button>
-          <mount-button :disabledButton="mountableChapters.length > 0" @click="mountRandomChapter" :text="mountButtonText" class="mount-button">
-            <span class="material-symbols-outlined small-font">shuffle</span>
-          </mount-button>
-          <unmount-button :disabledButton="mountedChapters.length > 1" @click="unmountChapter" :text="unmountButtonText" class="unmount-button">
-            <span class="material-symbols-outlined small-font">switch_access_shortcut</span>
-          </unmount-button>
+          <div v-if="!isSelectedWriteChapter" class="buttons-group-2">
+            <mount-button :disabledButton="mountableChapters.length > 0" @click="mountRandomChapter" :text="mountButtonText" class="mount-button">
+              <span class="material-symbols-outlined small-font">shuffle</span>
+            </mount-button>
+            <unmount-button :disabledButton="mountedChapters.length > 1" @click="unmountChapter" :text="unmountButtonText" class="unmount-button">
+              <span class="material-symbols-outlined small-font">switch_access_shortcut</span>
+            </unmount-button>
+          </div>
         </div>
-
+        <writechapter-container
+          v-if="isSelectedWriteChapter && isLoggedIn"
+          :last_chapter="mountedChapters[mountedChapters.length - 1]"
+          @written-chapter="handleWrittenChapter"
+        >
+          <div class="close-container"><span @click="writeChapter" class="material-symbols-outlined bigger-font">close</span></div>
+        </writechapter-container>
         <login-message v-if="!isLoggedIn" :text="'to add comments and continue storylines'"></login-message>
         
         <buttonblock-selector :homePage="false" @selected-tab="handleSelectedTab"></buttonblock-selector>
@@ -49,6 +57,7 @@
 import axios from "axios";
 import { API_BASE_URL } from '../../config';
 import { mapGetters } from 'vuex';
+import { mapActions } from "vuex";
 
 import PostSection from "./PostSection.vue";
 import FeedContainer from '@/components/frames/FeedContainer.vue';
@@ -90,7 +99,7 @@ export default {
     DraggableEnvironment,
     UnmountButton,
     MountButton,
-    WritechapterButton
+    WritechapterButton,
   },
   data() {
     return {
@@ -100,6 +109,7 @@ export default {
       mountableChapters: [],
       chapters: [],
       comments: [],
+      isSelectedWriteChapter: false,
       showEnv: false,
       selectedTab: 'comments-feed',
       landscape: [],
@@ -203,12 +213,18 @@ export default {
     }
   },
   methods: {
+    ...mapActions('message', ['setLoginError']),
     handleSelectedTab(tab) {
       if (tab === "chapters") {
         this.selectedTab = "chapters-feed"
       } else {
         this.selectedTab = "comments-feed"
       }           
+    },
+    handleWrittenChapter(data) {
+      this.mountedChapters.push(data)
+      this.chapters.push(data)
+      this.isSelectedWriteChapter = false
     },
     handleSelectedChapter(data) {
       // find chapter in chapters that contains the emitted _id
@@ -219,6 +235,13 @@ export default {
         this.mountableChapters = this.chapters.filter(chapter => chapter.parent_id.$oid === lastChapterId);
       } else {
         console.log("Chapter not found");
+      }
+    },
+    writeChapter() {
+      if (this.isLoggedIn) {
+        this.isSelectedWriteChapter = !this.isSelectedWriteChapter
+      } else {
+        this.setLoginError()
       }
     },
     mountRandomChapter() {
@@ -248,6 +271,33 @@ feed-container {
   position: relative;
 }
 
+.bigger-font {
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.bigger-font:hover {
+  color: rgba(255, 255, 255, 0.849);
+}
+
+.close-container {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+  margin: 0 auto -6px auto;
+  padding: 2px 5px 0 5px;
+  color: rgba(255, 255, 255, 0.562);
+}
+
+.buttons-group-1 {
+  order: 1;
+}
+
+.buttons-group-2 {
+  display: flex;
+  order: 2;
+}
+
 .small-font {
   font-size: 20px;
 }
@@ -262,8 +312,8 @@ feed-container {
 
 .buttons-container {
   display: flex;
-  justify-content: flex-end;
-  margin: 5px 0px 5px 5px;
+  justify-content: space-between;
+  margin: 5px 0px 5px 0px;
 }
 
 .mount-button {
@@ -303,11 +353,5 @@ ul {
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0.1;
-}
-
-@media (max-width: 700px) {
-  .buttons-container {
-    margin-right: 5px;
-  }
 }
 </style>

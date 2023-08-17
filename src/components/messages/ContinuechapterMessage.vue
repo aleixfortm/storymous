@@ -1,7 +1,7 @@
 <template>
     <div class="boxy" role="alert">
-        <strong>How to <u>mount</u> and <u>unmount</u> chapters</strong> 
-        <div class="text">Look for a chapter in the chapters section (bottom) and click one to mount it. To unmount, click on "Unmount last" button.</div>
+        <strong>About continuing chapters</strong> 
+        <div class="text">This chapter will be a continuation of the last mounted chapter above. It will open a new storyline for others to continue.</div>
     </div>
 </template>
 
@@ -13,7 +13,7 @@
     border-radius: 3px;
     opacity: 0.9;
     padding: 5px;
-    margin: 0 1px 8px 0px;
+    margin: 10px;
 }
 
 .text {
