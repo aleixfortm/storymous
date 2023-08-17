@@ -1,5 +1,6 @@
 <template>
     <feed-container v-if="!loading">
+        <new-comment></new-comment>
         <div v-for="comment in comments" :key="comment._id">
             <comment-container
                 :_id="comment._id"
@@ -24,6 +25,7 @@ import CommentContainer from '@/components/postreplies/CommentContainer.vue';
 import AstronautMessage from '@/components/messages/AstronautMessage.vue';
 import FeedContainer from '@/components/frames/FeedContainer.vue';
 import LoaderComponent from '@/components/UIcomponents/LoaderComponent.vue';
+import NewComment from "@/pages/postpage/NewComment.vue";
 
 export default {
     props: ["comments", "loading"],
@@ -31,7 +33,8 @@ export default {
         CommentContainer,
         AstronautMessage,
         FeedContainer,
-        LoaderComponent
+        LoaderComponent,
+        NewComment
     }
 }
 </script>

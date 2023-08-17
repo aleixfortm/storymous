@@ -31,7 +31,7 @@ export default {
     background-color: rgb(174, 0, 255);
     justify-content: center;
     height: fit-content;
-    min-height: 15px;
+    min-height: 25px;
     cursor: pointer;
     transition: 0.1s all;
 }

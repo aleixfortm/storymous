@@ -244,6 +244,10 @@ export default {
 </script>
 
 <style scoped>
+feed-container {
+  position: relative;
+}
+
 .small-font {
   font-size: 20px;
 }
@@ -274,15 +278,20 @@ ul {
   margin: 0;
 }
 
+.list-move, /* apply transition to moving elements */
 .list-enter-active,
 .list-leave-active {
   transition: all 0.4s ease;
 }
+
 .list-enter-from,
 .list-leave-to {
   opacity: 0;
-  transform: translateX(30px);
+  transform: translateY(-30px);
 }
+
+/* ensure leaving items are taken out of layout flow so that moving
+   animations can be calculated correctly. */
 
 .tree {
   margin-top: 25px;
