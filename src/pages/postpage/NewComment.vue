@@ -9,7 +9,7 @@
                 <textarea id="comment" v-model="formcomment" placeholder="Add a comment..." rows="1" :style="{ height: textareaHeight }" required></textarea>
             </div>
           </div>
-          <div class="buttonbox">
+          <div class="buttonbox" v-if="writtenSomething">
             <newcomment-button :text="'Comment'" :buttonLoading="buttonLoading" :margin="true">
               <span class="material-symbols-outlined">chat_bubble</span>
             </newcomment-button>
@@ -73,6 +73,9 @@ export default {
       ...mapGetters('auth', ['isLoggedIn', 'currentUser', "userFetchedPicture", "colorFetched"]),
       imgSource() {
         return require("@/assets/img/" + this.userFetchedPicture)
+      },
+      writtenSomething() {
+        return this.formcomment.length > 0
       }
     }
 }
