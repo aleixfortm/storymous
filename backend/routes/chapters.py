@@ -159,7 +159,7 @@ def chapter(chapterId):
     data_packet = {
         "mountedChapters": storyline,
         "allChapters": all_chapters,
-        "comments": comments
+        "comments": comments[::-1]
     }
 
     return json_util.dumps(data_packet)
@@ -202,3 +202,34 @@ def remove_leaves_chapter():
     User.decrease_leaves(data["username_receiver"])
 
     return json_util.dumps({"status": "Success"})
+
+
+# create new comment sequence
+@bp_chapters.route('/new_comment', methods=['POST'])
+@jwt_required()
+def new_comment():
+    comment = request.json
+    comment_req_data = {
+        "comment": comment.get("comment"),
+        "username": comment.get("username"),
+        "story_id": comment.get("story_id")
+    }
+    
+    comment_object = Comment(**comment_req_data)
+    comment_object.quicksave_to_db()
+
+    Comment.add_to_story(comment.get("story_id"), comment_object._id)
+
+    # convert object to dict
+    comment_dict = comment_object.__dict__
+    comment_dict["date"] = Chapter.format_date_data(comment_dict["date"])
+    query = {"username": comment["username"]}
+    user_data = db_users.find_one(query)
+    comment_dict["picture"] = user_data["picture"]
+
+    data_payload = {
+        "status": "Success",
+        "comment_data": comment_dict
+    }
+
+    return json_util.dumps(data_payload)

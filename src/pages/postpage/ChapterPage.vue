@@ -31,7 +31,7 @@
         <buttonblock-selector :homePage="false" @selected-tab="handleSelectedTab"></buttonblock-selector>
 
         <transition name="fade" mode="out-in">
-          <component :is="selectedTab" :loading="loading" :comments="comments" :chapters="mountableChapters" @selected-chapter="handleSelectedChapter"></component>
+          <component :is="selectedTab" :loading="loading" :comments="comments" :chapters="mountableChapters" :story_id="mountedChapters[0].story_id" @selected-chapter="handleSelectedChapter"></component>
         </transition>
       </template>
       <template v-else>

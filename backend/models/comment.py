@@ -5,8 +5,9 @@ from typing import List
 import datetime
 
 class Comment:
-    def __init__(self, username, comment, status=None, _id=None, date=None):
+    def __init__(self, username, comment, story_id, status=None, _id=None, date=None):
         self._id = ObjectId(_id) if _id else ObjectId()
+        self.story_id = ObjectId(story_id)
         self.username = username
         self.status = status or "active"
         self.comment = comment
@@ -17,9 +18,9 @@ class Comment:
         db_comments.insert_one(self.__dict__)
     
     @staticmethod
-    def add_to_parent(story_id, comment_id):
+    def add_to_story(story_id, comment_id):
         story_query = {"_id": ObjectId(story_id)}
-        db_stories.update_one(story_query, {"$addToSet": {"comments": ObjectId(comment_id["_id"])}})
+        db_stories.update_one(story_query, {"$addToSet": {"comments": ObjectId(comment_id)}})
     
     @staticmethod
     def add_pic_to_comments(comments: List) -> List:

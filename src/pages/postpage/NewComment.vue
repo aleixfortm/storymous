@@ -21,7 +21,7 @@
 <script>
 import axios from "axios";
 import { API_BASE_URL } from '../../config';
-import { mapGetters } from 'vuex'
+import { mapGetters } from 'vuex';
 import NewcommentButton from '@/components/UIcomponents/buttons/NewcommentButton.vue';
 
 export default {
@@ -47,7 +47,7 @@ export default {
           const data_packet = {
             username: this.currentUser,
             comment: this.formcomment,
-            story_id: this.story_id,
+            story_id: this.story_id.$oid,
           }
           this.buttonLoading = true;
           axios
@@ -55,8 +55,9 @@ export default {
             .then(response => {
               this.buttonLoading = false;
               const dataPayload = response.data;
-              this.replies.unshift(dataPayload.comment_data);
               this.formcomment = '';
+              this.$emit('received-comment', dataPayload.comment_data);
+              
             })
             .catch(error => {
               console.log(error);
