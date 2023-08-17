@@ -1,23 +1,30 @@
 <template>
     <div class="write-container">
+        <slot></slot>
         <form @submit.prevent="submitForm">
+            <continuechapter-message></continuechapter-message>
             <div class="newstory_comment">
                 <div class="image_box">
                     <img class="postimage" v-if="userFetchedPicture" :src="imgSource" alt="profilepic">
                 </div>
                 <div class="extended-container">
-                    <textarea id="comment" v-model="formcomment" placeholder="Author comment" rows="1" :style="{ height: textareaHeight }" required></textarea>
-                    <span class="story__user-name3"><b>@{{ username }}</b> · Now</span>
+                    <textarea id="comment" v-model="formcomment" placeholder="Author comment e.g. My first chapter!" rows="1" :style="{ height: textareaHeight }" required></textarea>
+                    <span class="story__user-name3"><b>@{{ currentUser }}</b> · Now</span>
                 </div>
             </div>
+            <div class="chapternum">
+              <h2 class="story__title ">
+                <span class="story_title highlight">CHAPTER</span><span class="story_title highlight margin-minus">{{ last_chapter.chapter_num + 1 }}</span>
+              </h2>
+            </div>
             <div class="newstory_title marginated">
-                <input id="title" class="title-for-story" v-model="formtitle" type="text" placeholder="Chapter name" required>
+              <input id="title" class="title-for-story" v-model="formtitle" type="text" placeholder="Chapter name e.g. The lost island" required>
             </div>
             <div class="newstory_title">
                 <textarea id="body" v-model="formbody" placeholder="Chapter content" required></textarea>
             </div>
             <div class="buttonbox">
-              <submit-button :text="'SUBMIT'" :buttonLoading="loading" :margin="true">
+              <submit-button :text="'Submit'" :buttonLoading="loading" :margin="true">
                 <span class="material-symbols-outlined">outgoing_mail</span>
               </submit-button>
             </div>
@@ -28,15 +35,15 @@
 <script>
 import { mapGetters } from 'vuex';
 import axios, { API_BASE_URL } from '../../config';
-import router from '@/router';
 import SubmitButton from '../UIcomponents/buttons/SubmitButton.vue';
+import ContinuechapterMessage from '../messages/ContinuechapterMessage.vue';
 
   export default {
-    name: "NewPost",
     components: {
-      SubmitButton
+      SubmitButton,
+      ContinuechapterMessage
     },
-    props: ["chapterNum", "username", "postId", "postTitle", "parentChapterId", "tags"],
+    props: ["last_chapter"],
     data() {
       return {
         formtitle: "",
@@ -51,22 +58,16 @@ import SubmitButton from '../UIcomponents/buttons/SubmitButton.vue';
     methods: {
       submitForm() {
         this.loading = true;
-        let parentIdCheck;
-        if (this.parentChapterId !== null) {
-          parentIdCheck = this.parentChapterId.$oid;
-        } else {
-          parentIdCheck = null;
-        }
+
         const data_packet = {
           comment: this.formcomment,
           title: this.formtitle,
-          body: this.formbody,
+          content: this.formbody,
           username: this.currentUser,
-          storyId: this.postId.$oid,
-          chapterNum: this.chapterNum,
-          parentChapterId: parentIdCheck,
-          postTitle: this.postTitle,
-          tags: this.tags
+          story_id: this.last_chapter.story_id.$oid,
+          chapter_num: this.last_chapter.chapter_num + 1,
+          parent_id: this.last_chapter._id.$oid,
+          tags: this.last_chapter.tags
         }
 
         axios.post(`${API_BASE_URL}/new_chapter`, data_packet)
@@ -74,8 +75,9 @@ import SubmitButton from '../UIcomponents/buttons/SubmitButton.vue';
             this.loading = false;
             const data = response.data;
             if (data.status === "Success") {
-                this.isPostButtonDisabled = true;
-                router.push("/chapter/" + data.chapter_id.$oid)
+              data.chapter.picture = this.userFetchedPicture;
+              data.chapter.created_at = "Now"
+              this.$emit('written-chapter', data.chapter);
             }
           })
           .catch(error => {
@@ -127,6 +129,26 @@ import SubmitButton from '../UIcomponents/buttons/SubmitButton.vue';
 </script>
 
 <style scoped>
+.margin-minus {
+  margin-left: -7px;
+}
+
+.infomessage {
+  margin: 10px;
+}
+
+.chapternum {
+  margin: 2px 0 5px 10px;
+}
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 500,
+  'GRAD' -25,
+  'opsz' 0;
+  font-size: 20px;
+}
 .story__user-name3 {
     color: whitesmoke;
     text-decoration: none;
@@ -145,18 +167,17 @@ import SubmitButton from '../UIcomponents/buttons/SubmitButton.vue';
     font-size: 17px;
     align-self: center;
     justify-self: center;
-    margin: 0px 0px 0px 12px;
-    min-width: 100px;
-    background-color: rgb(0, 132, 255);
-    border-radius: 4px;
-    padding: 0 3px;
-    margin: 0 0px 0 0px;
-    font-size: 17px;
-    box-shadow: 0px 0px 5px 0px rgb(0, 132, 255);
-    align-items: center;
-    text-align: center;
+    margin: 0px 0px 0px 0px;
+    font-weight: bold;
 }
-
+.highlight {
+    background-color: bisque;
+    color: black;
+    border-radius: 2px;
+    padding: 0 3px;
+    margin-right: 10px;
+    font-size: 17px;
+}
 
 .section_title {
   padding-bottom: 2px;
@@ -170,8 +191,8 @@ import SubmitButton from '../UIcomponents/buttons/SubmitButton.vue';
 
 .write-container {
   padding: 1px 0 0 0;
-  background-color: rgb(43, 43, 46);
-  border-radius: 10px;
+  background-color: rgb(54, 54, 58);
+  border-radius: 5px;
 }
 
 .image_box {
@@ -194,8 +215,8 @@ import SubmitButton from '../UIcomponents/buttons/SubmitButton.vue';
 }
 
 .postimage {
-    height: 55px;
-    border-radius: 100%;
+    height: 45px;
+    border-radius: 500%;
     margin: 10px 8px 0 10px;
     border: 0px whitesmoke solid;
 }
@@ -221,7 +242,7 @@ textarea {
 #comment {
   background-color: #ffffff;
     border: none;
-    border-radius: 10px 10px 10px 0;
+    border-radius: 15px 15px 15px 0;
     font-size: 14px;
     font-weight: 500;
     outline: none;
@@ -242,7 +263,7 @@ textarea {
 #body {
   background-color: #1d252e;
     border: none;
-    border-radius: 5px;
+    border-radius: 2px;
     font-size: 14px;
     font-weight: 500;
     outline: none;
@@ -268,7 +289,7 @@ textarea {
 input[type="text"] {
     background-color: bisque;
     border: none;
-    border-radius: 5px;
+    border-radius: 2px;
     font-size: 14px;
     font-weight: 500;
     height: 28px;

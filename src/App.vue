@@ -3,7 +3,7 @@
   <the-header></the-header>
 
   <block-frame>
-    <error-message :message="'Log in to add a leaf to user posts'"></error-message>
+    <error-message :message="'You must be logged in to do that'"></error-message>
     <router-view :key="$route.params.id"></router-view>
   </block-frame>
 
