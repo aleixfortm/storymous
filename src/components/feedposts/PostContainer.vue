@@ -94,7 +94,7 @@ export default {
         increaseLeaves() {
             if (this.isLoggedIn) {
                 const data_packet = {
-                    post_id: this._id.$oid,
+                    chapter_id: this._id.$oid,
                     username: this.currentUser,
                     username_receiver: this.username
                 }
@@ -103,7 +103,7 @@ export default {
                         this.leavesMutable.push(this.currentUser)
                         
                         axios
-                            .post(`${API_BASE_URL}/add_leaves_chapter`, data_packet)
+                            .post(`${API_BASE_URL}/add_leaf_chapter`, data_packet)
                             .catch(error => {
                                 console.log(error);
                             });
@@ -113,7 +113,7 @@ export default {
                             this.leavesMutable.splice(index, 1);
                         }
                         axios
-                            .post(`${API_BASE_URL}/remove_leaves_chapter`, data_packet)
+                            .post(`${API_BASE_URL}/remove_leaf_chapter`, data_packet)
                             .catch(error => {
                                 console.log(error);
                             });

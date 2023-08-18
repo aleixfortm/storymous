@@ -23,10 +23,10 @@ def new_chapter():
     chapter_data = {
         "comment": chapter.get("comment"),
         "title": chapter.get("title"),
-        "content": chapter.get("body"),
+        "content": chapter.get("content"),
         "username": chapter.get("username"),
         "tags": chapter.get("tags"),
-        "chapter_num": chapter.get("chapterNum") or 0,
+        "chapter_num": chapter.get("chapter_num"),
         "leaves": [chapter.get("username")],
         "story_id": chapter.get("story_id"),
         "parent_id": chapter.get("parent_id")
@@ -50,10 +50,22 @@ def new_chapter():
         chapter_object.save_to_db()
         story_object.save_to_db()
 
-    else:
-        pass
+    else: # if there is story_id (chapter_num > 0) -> Continuation
+        # create chapter instance
+        chapter_object = Chapter(**chapter_data)
+        # increase user's number of written chapters
+        chapter_object.increase_user_written_stories()
+        # save chapter to db
+        chapter_object.save_to_db()
+        # add chapter id to respective story
+        chapter_object.save_to_stories()
 
-    return json_util.dumps({"status": "Success"})
+    data_packet = {
+        "status": "Success",
+        "chapter": chapter_object.__dict__
+    }
+
+    return json_util.dumps(data_packet)
 
 
 # get all chapters (LOGGED OUT)
@@ -168,7 +180,7 @@ def chapter(chapterId):
     data_packet = {
         "mountedChapters": storyline,
         "allChapters": all_chapters,
-        "comments": comments
+        "comments": comments[::-1]
     }
 
     return json_util.dumps(data_packet)
@@ -211,3 +223,34 @@ def remove_leaves_chapter():
     User.decrease_leaves(data["username_receiver"])
 
     return json_util.dumps({"status": "Success"})
+
+
+# create new comment sequence
+@bp_chapters.route('/new_comment', methods=['POST'])
+@jwt_required()
+def new_comment():
+    comment = request.json
+    comment_req_data = {
+        "comment": comment.get("comment"),
+        "username": comment.get("username"),
+        "story_id": comment.get("story_id")
+    }
+    
+    comment_object = Comment(**comment_req_data)
+    comment_object.quicksave_to_db()
+
+    Comment.add_to_story(comment.get("story_id"), comment_object._id)
+
+    # convert object to dict
+    comment_dict = comment_object.__dict__
+    comment_dict["date"] = Chapter.format_date_data(comment_dict["date"])
+    query = {"username": comment["username"]}
+    user_data = db_users.find_one(query)
+    comment_dict["picture"] = user_data["picture"]
+
+    data_payload = {
+        "status": "Success",
+        "comment_data": comment_dict
+    }
+
+    return json_util.dumps(data_payload)

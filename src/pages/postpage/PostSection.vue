@@ -115,11 +115,12 @@ export default {
     align-items: center;
     padding: 5px 10px;
     cursor: pointer;
+    background-color: rgb(50, 50, 53);
     transition: 0.3s all;
 }
 
 .story__expand-container:hover {
-    background-color: rgb(50, 50, 53);
+    background-color: rgb(64, 64, 68);
 } 
 
 .box {

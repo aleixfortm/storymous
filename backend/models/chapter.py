@@ -1,4 +1,4 @@
-from main import  db_chapters
+from main import db_chapters, db_stories
 from models.user import User
 from bson.objectid import ObjectId
 import datetime, random, math
@@ -28,6 +28,9 @@ class Chapter:
     
     def save_to_db(self) -> None:
         db_chapters.insert_one(self.__dict__)
+    
+    def save_to_stories(self):
+        db_stories.update_one({"_id": self.story_id}, {"$addToSet": {"chapters": self._id}})
     
     @staticmethod
     def increase_visits(chapter_id) -> None:

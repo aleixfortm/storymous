@@ -1,5 +1,6 @@
 <template>
     <feed-container v-if="!loading">
+        <showingchapters-message></showingchapters-message>
         <div v-for="chapter in chapters" :key="chapter._id">
             <continuestory-container
                 @selected-chapter="emitSelectedChapter"
@@ -21,6 +22,7 @@ import ContinuestoryContainer from '@/components/postreplies/ContinuestoryContai
 import AstronautMessage from '@/components/messages/AstronautMessage.vue';
 import FeedContainer from '@/components/frames/FeedContainer.vue';
 import LoaderComponent from '@/components/UIcomponents/LoaderComponent.vue';
+import ShowingchaptersMessage from '@/components/messages/ShowingchaptersMessage.vue';
 
 export default {
     props: ["loading", "chapters"],
@@ -28,7 +30,8 @@ export default {
         ContinuestoryContainer,
         AstronautMessage,
         FeedContainer,
-        LoaderComponent
+        LoaderComponent,
+        ShowingchaptersMessage
     },
     methods: {
         emitSelectedChapter(data) {

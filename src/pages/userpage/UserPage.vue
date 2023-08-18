@@ -66,10 +66,10 @@
                     <div class="bio-content">{{ userBio }}</div>
                 </div>
                 <div v-if="ownProfile() && isLoggedIn" class="miscbuttons">
-                    <settings-button :text="'SETTINGS'" @click="goToSettings">
+                    <settings-button :text="'Settings'" @click="goToSettings">
                         <span class="material-symbols-outlined margin1">settings</span>
                     </settings-button>
-                    <logout-button :text="'LOG OUT'" @click="logout()">
+                    <logout-button :text="'Log out'" @click="logout()">
                         <span class="material-symbols-outlined margin1">logout</span>
                     </logout-button>
                 </div>
@@ -337,8 +337,8 @@ export default {
 
 .stats-container {
     width: 100%;
-    padding: 0 35px;
-
+    padding: 0 35px 10px 35px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.356);
 }
 
 .centered {
@@ -381,12 +381,13 @@ export default {
 .miscbuttons {
     display: flex;
     flex-direction: row;
-    margin: 10px 0 5px 0;
-    height: 30px;
+    margin: 0px 0 0px 0;
+    height: fit-content;
     align-items: center;
     justify-content: flex-end;
     width: 240px;
-    align-self: end;
+    align-self: flex-end;
+    justify-self: flex-end;
     justify-content: space-around;
 }
 
@@ -496,7 +497,7 @@ export default {
     width: 100%;
     justify-content: center;
     align-items: center;
-    margin: 0px 0 0 0;
+    margin: 10px 0 0 0;
 }
 
 

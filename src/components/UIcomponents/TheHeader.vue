@@ -10,16 +10,9 @@
           
           <div v-if="isLoggedIn === false" class="login-div">
             <div class="material-symbols-outlined user-select-none icon" @click="goHome">home</div>
-            <!--
-            <div class="material-symbols-outlined user-select-none icon" @click="showNotifications">search</div>
-            -->
             <button class="loginButton" @click="toggleDialog(); changeDialog('signin')">Log In</button>
           </div>
           <div v-else class="options">
-            <!--
-            <div class="material-symbols-outlined user-select-none icon" @click="goHome">home</div>
-            <div class="material-symbols-outlined user-select-none icon" @click="newstoryShown = !newstoryShown">search</div>
-            -->
             <div class="icon-container-t" @mouseover="showSoonTooltip = true" @mouseout="showSoonTooltip = false">
               <div class="material-symbols-outlined user-select-none icon" @click="showNotifications">notifications</div>
               <small-tooltip :condition="showSoonTooltip" :text="'Coming soon!'" :top="'35px'" :transform="'translateX(10%)'"></small-tooltip>
