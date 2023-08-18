@@ -1,7 +1,7 @@
 from flask import jsonify, request
 from bson import json_util
 from flask import Blueprint, jsonify
-from main import db_users, db_chapters
+from main import db_users, db_chapters, db_stories
 from models.chapter import Chapter
 from models.user import User
 from flask_jwt_extended import jwt_required, get_jwt_identity, create_access_token
@@ -83,6 +83,9 @@ def user(user):
         chapter["created_at"] = Chapter.format_date_data(chapter["created_at"])
         user_data = db_users.find_one({"username": chapter["username"]})
         chapter["picture"] = user_data["picture"]
+        story = db_stories.find_one({"_id": chapter["story_id"]})
+        chapter["story_name"] = story["title"]
+        chapter["comments"] = story["comments"]
     
     user_data = db_users.find_one({"username": user})
     

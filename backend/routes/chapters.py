@@ -1,14 +1,12 @@
-from flask import jsonify, request
 from bson import json_util
 from flask_pymongo import ObjectId
-from flask import Blueprint, jsonify
+from flask import Blueprint, request
 from main import db_users, db_comments, db_chapters, db_stories
 from models.chapter import Chapter
 from models.user import User
 from models.comment import Comment
 from models.story import Story
-from flask_jwt_extended import jwt_required, get_jwt_identity, create_access_token
-from pprint import pprint
+from flask_jwt_extended import jwt_required
 
 
 # create blueprint
@@ -68,7 +66,7 @@ def new_chapter():
     return json_util.dumps(data_packet)
 
 
-# get all chapters (LOGGED OUT)
+# get all chapters
 @bp_chapters.route('/chapters', methods=["GET"])
 def chapters():
 
@@ -83,55 +81,7 @@ def chapters():
         chapter["story_name"] = story["title"]
         chapter["comments"] = story["comments"]
 
-    chapter_dict = {}
-    chapter_dict["latest"] = sorted_chapters[::-1]
-    chapter_dict["following"] = []
-
-    return json_util.dumps(chapter_dict)
-
-
-# get all chapters (LOGGED IN)
-@bp_chapters.route('/homepage_chapters/<requested_user>', methods=["GET"])
-def posts_logged_in(requested_user):
-
-    chapter_list = list(db_chapters.find())
-    sorted_chapters = sorted(chapter_list, key=lambda x: x["created_at"])
-
-    for chapter in sorted_chapters:
-        chapter["created_at"] = Chapter.format_date_data(chapter["created_at"])
-        user = db_users.find_one({"username": chapter["username"]})
-        chapter["picture"] = user["picture"]
-        story = db_stories.find_one({"_id": chapter["story_id"]})
-        chapter["story_name"] = story["title"]
-        chapter["comments"] = story["comments"]
-    
-    chapter_dict = {}
-    chapter_dict["latest"] = sorted_chapters[::-1]
-
-    user_query = {"username": requested_user}
-    user = db_users.find_one(user_query)
-
-    # if user does not follow anyone, return empty list
-    if not user["following"]:
-        chapter_dict["following"] = []
-        return json_util.dumps(chapter_dict)
-
-    # if the user follows other users
-    following_query = {"username": {"$in": user["following"]}}
-    chapter_list = list(db_chapters.find(following_query))
-    sorted_chapters = sorted(chapter_list, key=lambda x: x["created_at"])
-
-    for chapter in sorted_chapters:
-        chapter["created_at"] = Chapter.format_date_data(chapter["created_at"])
-        user = User.find_by_username(chapter["username"])
-        chapter["picture"] = user["picture"]
-        story = db_stories.find_one({"_id": chapter["story_id"]})
-        chapter["story_name"] = story["title"]
-        chapter["comments"] = story["comments"]
-
-    chapter_dict["following"] = sorted_chapters[::-1]
-
-    return json_util.dumps(chapter_dict)
+    return json_util.dumps(sorted_chapters[::-1])
 
 
 # get chapter by id

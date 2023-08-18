@@ -47,6 +47,7 @@
                         {{ leavesMutable.length }}
                     </div>
                     <div class="story-stats-section view"><span class="material-symbols-outlined margin1 view-icon">bar_chart</span>{{ views }}</div>
+                    <div class="story-stats-section comment"><span class="material-symbols-outlined margin1 comment-icon">chat</span>{{ comments.length }}</div>
                 </div>
             </span>
         </div>
@@ -76,7 +77,7 @@ export default {
         const router = useRouter();
         return { router: router };
     },
-    props: ["_id", "title", "content", "username", "postComment", "date", "picture", "color", "views", "feedMode", "tags", "leaves", "chapterNum", "story_name"],
+    props: ["_id", "title", "content", "username", "postComment", "date", "picture", "color", "views", "feedMode", "tags", "leaves", "chapterNum", "story_name", "comments"],
     methods: {
         ...mapActions('message', ['setLoginError']),
         formatStory(story) {
@@ -193,8 +194,12 @@ export default {
     transition: all 0.1s;
 }
 
+.comment-icon {
+    font-size: 22px;
+}
+
 .view:hover .view-icon{
-    color: rgb(131, 189, 255);
+    color: rgb(0, 183, 255);
 }
 
 .comment {

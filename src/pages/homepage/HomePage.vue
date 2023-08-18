@@ -15,7 +15,7 @@
     <buttonblock-selector :homePage="true" @selected-tab="handleSelectedTab"></buttonblock-selector>
     
     <transition name="fade" mode="out-in">
-        <component :is="selectedTab" :posts="posts" :loading="loading" :key="selectedTab"></component>
+        <component :is="selectedTab" :posts="chapters" :loading="loading" :key="selectedTab"></component>
     </transition>
 </template>
 
@@ -50,7 +50,7 @@ export default {
     },
     data() {
         return {
-            posts: {},
+            chapters: [],
             openDialog: true,
             userLogged: true,
             text: " ",
@@ -66,11 +66,11 @@ export default {
             this.router.push('/');
         } else {
             axios
-                .get(`${API_BASE_URL}/homepage_chapters/${this.currentUser}`)
+                .get(`${API_BASE_URL}/chapters`)
                 .then(response => {
-                    this.posts = response.data;
+                    this.chapters = response.data;
                     this.loading = false;
-                    this.loggedOutLoading = false;
+                    console.log(this.chapters)
                 })
                 .catch(error => {
                     console.log(error);

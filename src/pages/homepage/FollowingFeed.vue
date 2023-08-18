@@ -1,8 +1,8 @@
 <template>
     <feed-container>
         <span v-if="!loading">
-          <div v-if="posts.following.length >= 1">
-            <div v-for="post in posts.following" :key="post._id">
+          <div v-if="handleFollowingPosts.length >= 1">
+            <div v-for="post in handleFollowingPosts" :key="post._id">
               <post-container
                   :_id="post._id"
                   :title="post.title"
@@ -15,6 +15,8 @@
                   :views="post.views"
                   :tags="post.tags"
                   :leaves="post.leaves"
+                  :story_name="post.story_name"
+                  :comments="post.comments"
                   :feedMode="true">
               </post-container>
             </div>
@@ -35,6 +37,7 @@ import PostContainer from "@/components/feedposts/PostContainer.vue";
 import FeedContainer from "@/components/frames/FeedContainer.vue";
 import AstronautMessage from "@/components/messages/AstronautMessage.vue";
 import LoaderComponent from "@/components/UIcomponents/LoaderComponent.vue";
+import { mapGetters } from 'vuex';
 
 export default {
     props: ["posts", "loading"],
@@ -48,6 +51,13 @@ export default {
         formatContent(text) {
             return text.replace(/<br>/g, '\n');
         }
-    }
+    },
+    computed: {
+      ...mapGetters('auth', ['isLoggedIn', 'currentUser', "userFetchedPicture", "colorFetched", "userFetchedBio", "nFetchedPosts", "nFetchedFollowers", "nFetchedFollowing", "nFetchedLeaves"]),
+      handleFollowingPosts() {
+        const filteredPosts = this.posts.filter(post => this.nFetchedFollowing.includes(post.username));
+        return filteredPosts
+      }
+    },
 }
 </script>

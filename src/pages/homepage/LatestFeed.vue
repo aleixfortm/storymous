@@ -1,7 +1,7 @@
 <template>
   <feed-container>
     <loader-component v-if="loading" :text="'Loading stories'"></loader-component>
-    <div v-else v-for="post in posts.latest" :key="post._id">
+    <div v-else v-for="post in posts" :key="post._id">
         <post-container
             :_id="post._id"
             :title="post.title"

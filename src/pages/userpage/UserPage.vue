@@ -102,6 +102,8 @@
                     :views="post.views"
                     :tags="post.tags"
                     :leaves="post.leaves"
+                    :story_name="post.story_name"
+                    :comments="post.comments"
                     :feedMode="true">
                 </post-container>
             </div>
