@@ -54,7 +54,6 @@ export default {
     },
     methods: {
         setSelectedTab1(tab) {
-            console.log("poll")
             this.selectedTab1 = tab
             this.$emit('selected-tab', tab);
         },

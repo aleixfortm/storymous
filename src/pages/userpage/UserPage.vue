@@ -172,7 +172,7 @@ export default {
     computed: {
         ...mapGetters('auth', ['isLoggedIn', 'currentUser', "userFetchedPicture", "colorFetched", "userFetchedBio", "nFetchedPosts", "nFetchedFollowers", "nFetchedFollowing", "nFetchedLeaves"]),
         currentParameter() {
-            return this.$route.params.id; // Replace "parameter" with the actual name of your URL parameter
+            return this.$route.params.id;
         },
         imgSource() {
             return require('@/assets/img/' + this.userColor);
@@ -248,11 +248,10 @@ export default {
                 this.nLeaves = this.nFetchedLeaves;
 
             axios
-                .get(`${API_BASE_URL}/chapters/${this.profileUsername}`)
+                .get(`${API_BASE_URL}/user/${this.profileUsername}`)
                 .then(response => {
                     const data = response.data;
-                    console.log(data)
-                    this.posts = data;
+                    this.posts = data.posts;
                     this.loading = false;
                 })
                 .catch(error => {

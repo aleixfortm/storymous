@@ -39,7 +39,7 @@ def signup():
     # generate password hash from user password
     hashed_password = generate_password_hash(password)
     # generate user object
-    user_object = UserModel(username=username, password_hash=hashed_password, email=email)
+    user_object = User(username=username, password_hash=hashed_password, email=email)
     user_object.quicksave_to_db()
 
     data_packet["status"] = "Success"
