@@ -5,7 +5,8 @@
         <div :class="outlineClass">
             <span>
                 <div class="origin-container" @click="navigateToPost">
-                    <div class="origin">Started "<span style="font-weight: bold;">{{ title }}</span>"</div>
+                    <div v-if="chapterNum > 0" class="origin">Started "<span style="font-weight: bold;">{{ story_name }}</span>"</div>
+                    <div v-else class="origin">Continued "<span style="font-weight: bold;">{{ story_name }}</span>"</div>
                 </div>
                 <div class="story__user-container" @click="navigateToPost">
                     <div class="story__user-img-container">
@@ -74,7 +75,7 @@ export default {
         const router = useRouter();
         return { router: router };
     },
-    props: ["_id", "title", "content", "username", "postComment", "date", "picture", "color", "views", "feedMode", "tags", "leaves", "chapterNum"],
+    props: ["_id", "title", "content", "username", "postComment", "date", "picture", "color", "views", "feedMode", "tags", "leaves", "chapterNum", "story_name"],
     methods: {
         ...mapActions('message', ['setLoginError']),
         formatStory(story) {

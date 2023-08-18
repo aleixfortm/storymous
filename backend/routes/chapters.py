@@ -67,6 +67,9 @@ def chapters():
         chapter["created_at"] = Chapter.format_date_data(chapter["created_at"])
         user = db_users.find_one({"username": chapter["username"]})
         chapter["picture"] = user["picture"]
+        story = db_stories.find_one({"_id": chapter["story_id"]})
+        chapter["story_name"] = story["title"]
+        chapter["comments"] = story["comments"]
 
     chapter_dict = {}
     chapter_dict["latest"] = sorted_chapters[::-1]
@@ -86,6 +89,9 @@ def posts_logged_in(requested_user):
         chapter["created_at"] = Chapter.format_date_data(chapter["created_at"])
         user = db_users.find_one({"username": chapter["username"]})
         chapter["picture"] = user["picture"]
+        story = db_stories.find_one({"_id": chapter["story_id"]})
+        chapter["story_name"] = story["title"]
+        chapter["comments"] = story["comments"]
     
     chapter_dict = {}
     chapter_dict["latest"] = sorted_chapters[::-1]
@@ -107,6 +113,9 @@ def posts_logged_in(requested_user):
         chapter["created_at"] = Chapter.format_date_data(chapter["created_at"])
         user = User.find_by_username(chapter["username"])
         chapter["picture"] = user["picture"]
+        story = db_stories.find_one({"_id": chapter["story_id"]})
+        chapter["story_name"] = story["title"]
+        chapter["comments"] = story["comments"]
 
     chapter_dict["following"] = sorted_chapters[::-1]
 
