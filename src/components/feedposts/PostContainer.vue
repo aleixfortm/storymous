@@ -5,7 +5,7 @@
         <div :class="outlineClass">
             <span>
                 <div class="origin-container" @click="navigateToPost">
-                    <div v-if="chapterNum > 0" class="origin">Started "<span style="font-weight: bold;">{{ story_name }}</span>"</div>
+                    <div v-if="chapterNum === 0" class="origin">Started "<span style="font-weight: bold;">{{ story_name }}</span>"</div>
                     <div v-else class="origin">Continued "<span style="font-weight: bold;">{{ story_name }}</span>"</div>
                 </div>
                 <div class="story__user-container" @click="navigateToPost">
@@ -27,7 +27,8 @@
                 <div class="separator"></div>
                 <article class="story__article" @click="navigateToPost">
                     <div class="story__upper">
-                        <h2 class="story__title "><span class="story_title highlight">CHAPTER</span><span class="story_title highlight margin-minus">{{ chapterNum }}</span>{{ title.toUpperCase() }}</h2>
+                        <h2 v-if="chapterNum > 0" class="story__title "><span class="story_title highlight">CHAPTER</span><span class="story_title highlight margin-minus">{{ chapterNum }}</span>{{ title.toUpperCase() }}</h2>
+                        <h2 v-else class="story__title "><span class="story_title highlight">PROLOGUE</span>{{ title.toUpperCase() }}</h2>
                     </div>
                     <div class="tag-section">
                         <post-tag v-for="tag in tags" :key="tag" :clickable="false" :tag="tag"></post-tag>
@@ -325,7 +326,7 @@ export default {
 }
 
 .story__user-container {
-    padding: 10px 5px 3px 5px;
+    padding: 6px 5px 3px 5px;
     display: flex;
     flex-direction: row;
 }

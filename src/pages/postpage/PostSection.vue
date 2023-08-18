@@ -3,21 +3,27 @@
         <div @click="expandInfo" class="story__expand-container user-select-none">
             <div v-if="!isExpandedInfo" class="story__user-container align-items-center">
                 <div class="story__upper">
-                    <h2 class="story__title "><span class="story_title highlight">CHAPTER</span><span class="story_title highlight margin-minus">{{ chapter.chapter_num }}</span></h2>
-                </div> 
-                <div class="story__user-img-container">
-                    <span @click="navigateToUser" style="color: inherit; text-decoration: none;">
-                        <img :src="imgSource" v-if="chapter.picture" alt="pic" class="story__user-img">
-                    </span>
-                </div> 
-                <div class="story__user-info-container">
-                    <div class="story__username cur-pnt"> 
-                        <span @click.stop="navigateToUser" style="color: inherit; text-decoration: none;">
-                            <span class="lower" style="color: whitesmoke;"><b>@</b></span><b class="story__user-name">{{ chapter.username }}</b>
+                    <h2 v-if="chapter.chapter_num > 0" class="story__title "><span class="story_title highlight">CHAPTER</span><span class="story_title highlight margin-minus">{{ chapter.chapter_num }}</span>{{ chapter.title.toUpperCase() }}</h2>
+                    <h2 v-else class="story__title "><span class="story_title highlight">PROLOGUE</span>{{ chapter.title.toUpperCase() }}</h2>
+                </div>
+                <!--
+                <div class="userinfo-box">
+                    <div class="story__user-img-container">
+                        <span @click="navigateToUser" style="color: inherit; text-decoration: none;">
+                            <img :src="imgSource" v-if="chapter.picture" alt="pic" class="story__user-img">
                         </span>
-                            <span class="story__username-date lower cur-def">· {{ chapter.created_at }} </span>
+                    </div>
+                    
+                    <div class="story__user-info-container">
+                        <div class="story__username cur-pnt"> 
+                            <span @click.stop="navigateToUser" style="color: inherit; text-decoration: none;">
+                                <span class="lower" style="color: whitesmoke;"><b>@</b></span><b class="story__user-name">{{ chapter.username }}</b>
+                            </span>
+                                <span class="story__username-date lower cur-def">· {{ chapter.created_at }} </span>
+                        </div>
                     </div>
                 </div>
+                -->
             </div>
             <div v-else class="story__user-container">
                 <div class="story__user-img-container-extended">
@@ -40,7 +46,8 @@
         </div>
         <article v-if="isExpandedInfo" class="story__article" :class="{ 'expanded': isExpandedInfo }">
             <div class="story__upper">
-                <h2 class="story__title "><span class="story_title highlight">CHAPTER</span><span class="story_title highlight margin-minus">{{ chapter.chapter_num }}</span>{{ chapter.title.toUpperCase() }}</h2>
+                <h2 v-if="chapter.chapter_num > 0" class="story__title "><span class="story_title highlight">CHAPTER</span><span class="story_title highlight margin-minus">{{ chapter.chapter_num }}</span>{{ chapter.title.toUpperCase() }}</h2>
+                <h2 v-else class="story__title "><span class="story_title highlight">PROLOGUE</span>{{ chapter.title.toUpperCase() }}</h2>
             </div>      
             <p class="story__content">
                 {{ formatStory(chapter.content) }}
@@ -94,6 +101,12 @@ export default {
 </script>
 
 <style scoped>
+.userinfo-box {
+    display: flex;
+    flex-direction: row;
+    align-items: ;
+}
+
 .margin-minus {
     margin-left: -7px;
 }
@@ -215,7 +228,7 @@ export default {
 }
 
 .story__user-img {
-    width: 25px;
+    width: 20px;
     height: auto;
     border-radius: 100%;
     cursor: pointer;
