@@ -1,0 +1,80 @@
+<template>
+    <img :src="imgSrc" class="tree-image">
+    <div class="box">
+        
+        <div class="explanation">
+            <div class="data-section">
+                <div class="title">Species</div>
+                <div class="data">Storymous aarborea</div>
+            </div>
+            <div class="data-section">
+                <div class="title">Common name</div>
+                <div class="data">Storymous</div>
+            </div>
+            <div class="data-section">
+                <div class="title">Place</div>
+                <div class="data">Exoplanet Epstein-312b, <br> Epstein-312, <br> Andromeda</div>
+            </div>
+            <div class="data-section">
+                <div class="title">Total found (obs. universe)</div>
+                <div class="data">1</div>
+            </div>
+            <!--
+            <div class="extra">Storymous is a unique tree species found throughout the observable universe that possesses the exceptional ability to cultivate stories</div>
+            -->
+        </div>
+    </div>
+</template>
+
+<script>
+export default {
+    name: "DescriptionBox",
+    computed: {
+        imgSrc() {
+            return require("@/assets/img/storymous-forest-min.png")
+        }
+    }
+}
+</script>
+
+<style scoped>
+.extra {
+    padding: 2px 6px;
+    font-size: 14px;
+}
+
+.box {
+    height: fit-content;
+    width: 100%;
+    text-align: left;
+    padding: 8px;
+    border-radius: 0 0 5px 5px;
+    border: 1px rgba(255, 255, 255, 0.247) solid;
+    border-top: none;
+    background-color: rgba(43, 43, 46, 0.671);
+    transition: 0.2s all;
+}
+
+.title {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.data-section {
+    margin-top: 5px;
+    padding: 2px 6px;
+    background-color: rgba(92, 92, 92, 0.438);
+    border-radius: 5px;
+}
+
+.data {
+    font-size: 16px;
+}
+
+.tree-image {
+    width: 100%;
+    border-radius: 5px 5px 0 0;
+    border: 1px rgba(255, 255, 255, 0.247) solid;
+    border-bottom: none;
+}
+</style>
