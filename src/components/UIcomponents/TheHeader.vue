@@ -168,14 +168,19 @@ export default {
   margin: 0 5px 0 5px;
 }
 
-.header-title {
-  font-size: 26px;
-  margin: 0 0 0 5px;
-  color: rgb(0, 255, 149);
-}
 
-.header-title:hover {
-  text-decoration: underline;
+
+.header-title::before {
+  content: ''; /* Create the triangle using a pseudo-element */
+  position: absolute;
+  top: 50%; /* Position it vertically in the middle */
+  left: -8px; /* Position it on the left side */
+  transform: translateY(-50%); /* Adjust vertical position */
+  width: 0;
+  height: 0;
+  border-top: 8px solid transparent; /* Create the triangle shape */
+  border-bottom: 8px solid transparent;
+  border-right: 8px solid rgb(255, 255, 255); /* Match background color */
 }
 
 .logoimgcontainer {
@@ -183,6 +188,7 @@ export default {
   justify-content: center;
   margin: auto;
   height: 45px;
+  margin-right: 5px;
   border-radius: 500%;
 }
 
@@ -194,6 +200,26 @@ export default {
 
 .logoimg:hover {
   filter: brightness(85%);
+}
+
+
+
+.header-title {
+  position: relative; /* Make sure the parent container has a position */
+  font-size: 24px;
+  margin: 0 0 0 5px;
+  color: rgb(0, 0, 0);
+  transition: 0.3s all;
+  padding: 3px 10px; /* Adjust padding to make space for triangle */
+  background-color: rgb(255, 255, 255);
+  border-radius: 15px;
+  font-weight: bold;
+  opacity: 1;
+  transition: all 0.3s;
+}
+
+.logoimg:hover .header-title {
+  opacity: 1;
 }
 
 .userdata {
