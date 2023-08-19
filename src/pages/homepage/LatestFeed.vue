@@ -1,8 +1,5 @@
 <template>
   <feed-container>
-    <!--
-    <loader-component v-if="loading" :text="'Loading stories'"></loader-component>
-    -->
     <template v-if="loading">
         <load-container v-for="i in 6" :key="i"></load-container>
     </template>
