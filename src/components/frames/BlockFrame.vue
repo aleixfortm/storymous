@@ -52,6 +52,7 @@ export default {
 .section {
     height: fit-content;
     max-width: 700px;
+    width: 100%;
 }
 
 .section2 {
