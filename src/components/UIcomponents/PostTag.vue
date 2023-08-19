@@ -127,8 +127,8 @@ export default {
 }
 
 .young-adults {
-  background-color: rgba(0, 255, 55, 0.274);
-  color: rgb(0, 255, 21);
+  background-color: rgba(136, 255, 0, 0.274);
+  color: rgb(166, 255, 0);
 }
 
 .humor {

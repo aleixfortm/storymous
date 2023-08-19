@@ -13,9 +13,10 @@
                     <div class="data">Storymous</div>
                 </div>
                 <div class="data-section">
-                    <div class="title">Place</div>
+                    <div class="title">Location</div>
                     <div class="data">Exoplanet Epstein-312b, <br> Epstein-312, <br> Andromeda</div>
                 </div>
+                <!--
                 <div class="data-section">
                     <div class="title">Destinctive traits</div>
                     <div class="data">
@@ -24,6 +25,7 @@
                         <div class="marginated">The quantity of leaves appears to correlate with the narrative maturity</div>
                     </div>
                 </div>
+                -->
                 <!--
                 <div class="extra">Storymous is a unique tree species found throughout the observable universe that possesses the exceptional ability to cultivate stories</div>
                 -->

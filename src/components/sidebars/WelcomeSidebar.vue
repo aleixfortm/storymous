@@ -1,9 +1,13 @@
 <template>
-    <feed-container>       
-        <description-box></description-box>
-        <topauthors-box></topauthors-box>
-        <topstories-box></topstories-box>
-        
+    <feed-container>
+        <template v-if="!loading">
+            <description-box></description-box>
+            <topauthors-box></topauthors-box>
+            <topstories-box></topstories-box>
+        </template>       
+        <template v-else>
+            <empty-box v-for="i in 3" :key="i"></empty-box>
+        </template>
     </feed-container>
 </template>
 
@@ -12,6 +16,7 @@ import FeedContainer from '../frames/FeedContainer.vue';
 import DescriptionBox from "./welcome/DescriptionBox.vue";
 import TopauthorsBox from './welcome/TopauthorsBox.vue';
 import TopstoriesBox from './welcome/TopstoriesBox.vue';
+import EmptyBox from "./boxes/EmptyBox.vue"
 
 export default {
     name: "WelcomeSidebar",
@@ -19,8 +24,14 @@ export default {
         FeedContainer,
         DescriptionBox,
         TopauthorsBox,
-        TopstoriesBox
+        TopstoriesBox,
+        EmptyBox
     },
+    data() {
+        return {
+            loading: true
+        }
+    }
     
 
 }

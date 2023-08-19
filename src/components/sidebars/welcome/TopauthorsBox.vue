@@ -67,7 +67,7 @@ export default {
     width: 100%;
     text-align: left;
     padding: 8px;
-    border-radius: 5px;
+    border-radius: 4px;
     border: 1px rgba(255, 255, 255, 0.247) solid;
     background-color: rgba(43, 43, 46, 0.671);
     transition: 0.2s all;

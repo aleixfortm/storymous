@@ -310,7 +310,6 @@ export default {
     border-radius: 2px;
     cursor: pointer;
     transition: all 0s;
-    background-color: rgb(43, 43, 46);
     color: #d3d3d3
 }
 
@@ -321,7 +320,7 @@ export default {
     width: 100%;
     border-radius: 1px;
     border: 1px rgba(255, 255, 255, 0.247) solid;
-    background-color: rgb(43, 43, 46);
+    background-color: rgba(43, 43, 46, 0.671);
     transition: 0.2s all;
 }
 
@@ -482,7 +481,7 @@ export default {
     height: fit-content;
     padding: 0 4px;
     display: flex;
-    background-color: rgba(240, 248, 255, 0);
+    background-color: rgba(43, 43, 46, 0.671);
     border-radius: 10px;
     opacity: 1;
 }
@@ -490,13 +489,13 @@ export default {
 .post-icon-bg:hover {
     cursor: pointer;
     display: flex;
-    background-color: rgba(240, 248, 255, 0.219);
+    background-color: rgba(43, 43, 46, 0.671);
     border-radius: 12px;
 }
 
 
 .post-icons {
-    background-color: #31394600;
+    background-color: rgba(43, 43, 46, 0.671);
     margin: 5px 0 0px 0;
     padding: 2px 4px 0px 5px;
     /*border-radius: 5px;*/
