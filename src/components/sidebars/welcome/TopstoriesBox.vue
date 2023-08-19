@@ -2,8 +2,8 @@
     <div class="entirebox">
         <div class="box">
             <div class="explanation">
-                <div class="title">Most read stories</div>
-                <story-data v-for="story in topStories" :story="story" :key="story"></story-data>
+                <div class="title">Most read chapters</div>
+                <story-data v-for="story in stories" :story="story" :key="story"></story-data>
             </div>
         </div>
     </div>
@@ -13,39 +13,11 @@
 import StoryData from './StoryData.vue';
 
 export default {
-    name: "DescriptionBox",
+    name: "TopstoriesBox",
     components: {
         StoryData
     },
-    data() {
-        return {
-            topStories: [
-                {
-                    username: "benetti",
-                    picture: "astronaut_saloon.jpeg",
-                    story_title: "The quest of CSGO",
-                    views: 821
-                },
-                {
-                    username: "Lil_metro",
-                    picture: "default_orange.png",
-                    story_title: "Albertitou Gilipollitou Series",
-                    views: 720
-                },
-                {
-                    username: "Alverd",
-                    picture: "astronaut_reading.jpeg",
-                    story_title: "Road to Grandmaster",
-                    views: 543
-                },
-            ]
-        }
-    },
-    computed: {
-        imgSrc() {
-            return require("@/assets/img/storymous-forest-min.png")
-        }
-    }
+    props: ["stories"]
 }
 </script>
 

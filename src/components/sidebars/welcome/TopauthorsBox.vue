@@ -3,7 +3,7 @@
         <div class="box">
             <div class="explanation">
                 <div class="title">Most popular authors</div>
-                <user-data v-for="user in topUsers" :user="user" :key="user"></user-data>
+                <user-data v-for="author in authors" :user="author" :key="author"></user-data>
             </div>
         </div>
     </div>
@@ -13,10 +13,11 @@
 import UserData from "./UserData.vue"
 
 export default {
-    name: "DescriptionBox",
+    name: "TopauthorsBox",
     components: {
         UserData
     },
+    props: ["authors"],
     data() {
         return {
             topUsers: [

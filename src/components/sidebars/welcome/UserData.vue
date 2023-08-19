@@ -1,10 +1,10 @@
 <template>
-    <div class="userdata">
+    <div @click="redirectToUser" class="userdata">
         <img class="userimg" v-if="user.picture" :src="imgSource" alt="astronaut">
         <img class="userimg" v-else src="@/assets/img/moon_default_avatar-min.png" alt="default avatar">
         <div class="user-data-container">
             <div class="name-container">
-                <div class="username">{{ user.username }}</div>
+                <div class="username">@{{ user.username }}</div>
             </div>
             <div class="leave-container">
                 <div class="leave-data">
@@ -17,12 +17,23 @@
 </template>
 
 <script>
+import { useRouter } from 'vue-router';
+
 export default {
     props: ["user"],
+    setup() {
+        const router = useRouter();
+        return { router: router };
+    },
     computed: {
         imgSource() {
             return require("@/assets/img/" + this.user.picture)
         }
+    },
+    methods: {
+      redirectToUser() {
+        this.router.push(`/user/${this.user.username}`);
+      }
     }
 }
 </script>

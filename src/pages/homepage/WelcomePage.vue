@@ -22,6 +22,7 @@
 
 <script>
 import { mapGetters } from 'vuex';
+import { mapActions } from 'vuex';
 import { useRouter } from 'vue-router';
 import { API_BASE_URL } from '../../config';
 import axios from 'axios';
@@ -55,11 +56,14 @@ export default {
             this.router.push("/home")
         } else {
             axios
-            .get(`${API_BASE_URL}/chapters`)
+            .get(`${API_BASE_URL}/chapters/additional`)
             .then(response => {
-                this.chapters = response.data;
+                this.chapters = response.data.chapters;
+                const topAuthors = response.data.top_authors;
+                const topStories = response.data.top_stories;
+                this.saveTopData({ topAuthors, topStories });
+                console.log(topStories)
                 this.loading = false;
-                console.log(this.chapters)
             })
             .catch(error => {
                 console.log(error);
@@ -69,6 +73,9 @@ export default {
     computed: {
         ...mapGetters('auth', ['isLoggedIn']),
     },
+    methods: {
+        ...mapActions('topData', ['saveTopData']),
+    }
 }
 
 </script>
