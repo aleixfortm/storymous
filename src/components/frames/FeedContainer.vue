@@ -9,12 +9,9 @@
 
 div {
     margin-top: 8px;
+    padding: 0 0px;
     height: fit-content;
     width: 100%;
-
-    background-color: rgb(185, 121, 0);
-    background-color: rgb(226, 87, 71);
-    background-color: rgb(64, 167, 98);
     background-color: rgba(64, 167, 98, 0);
     border-radius: 5px;
 }

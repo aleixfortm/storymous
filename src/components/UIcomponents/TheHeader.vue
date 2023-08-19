@@ -294,7 +294,7 @@ header a {
 
 
 header nav {
-  width: 800px;
+  width: 1045px;
   height: 100%;
   margin: auto;
   display: flex;

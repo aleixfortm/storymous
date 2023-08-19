@@ -11,14 +11,14 @@ import WelcomePage from "@/pages/homepage/WelcomePage.vue"
 const router = createRouter({
     history: createWebHistory(),
     routes: [
-        { path: "/", component: WelcomePage },
-        { path: "/home", component: HomePage },
-        { path: "/newpost", component: NewPost },
-        { path: "/user/:id", component: UserPage },
-        { path: "/chapter/:id", component: ChapterPage },
-        { path: "/settings", component: SettingsPage },
-        { path: "/:catchAll(.*)", component: NotfoundPage } // named redirect route for any undefined route
+      { path: "/", component: WelcomePage, name: "WelcomePage" },
+      { path: "/home", component: HomePage, name: "HomePage" },
+      { path: "/newpost", component: NewPost, name: "NewPost" },
+      { path: "/user/:id", component: UserPage, name: "UserPage" },
+      { path: "/chapter/:id", component: ChapterPage, name: "ChapterPage" },
+      { path: "/settings", component: SettingsPage, name: "SettingsPage" },
+      { path: "/:catchAll(.*)", component: NotfoundPage, name: "NotfoundPage" }
     ],
-});
+  });
 
 export default router;

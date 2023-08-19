@@ -28,7 +28,9 @@
             ></astronaut-message>
           </div>
         </span>
-        <loader-component v-else :text="'Looking for your friends...'"></loader-component>
+        <template v-else>
+          <load-container v-for="i in 6" :key="i"></load-container>
+        </template>
     </feed-container>
 </template>
 
@@ -36,7 +38,7 @@
 import PostContainer from "@/components/feedposts/PostContainer.vue";
 import FeedContainer from "@/components/frames/FeedContainer.vue";
 import AstronautMessage from "@/components/messages/AstronautMessage.vue";
-import LoaderComponent from "@/components/UIcomponents/LoaderComponent.vue";
+import LoadContainer from "@/components/feedposts/LoadContainer.vue";
 import { mapGetters } from 'vuex';
 
 export default {
@@ -45,7 +47,7 @@ export default {
         PostContainer,
         FeedContainer,
         AstronautMessage,
-        LoaderComponent
+        LoadContainer
     },
     methods: {
         formatContent(text) {

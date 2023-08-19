@@ -8,7 +8,7 @@
         <section v-else class="section_title">
             {{ profileUsername }}'s profile
         </section>
-        <section :class="profileBoxClass" v-if="userPicture">
+        <section :class="profileBoxClass" v-if="!loading">
             <profile-picture
                 v-if="userPicture"
                 :picture="userPicture">
@@ -75,8 +75,8 @@
                 </div>
             </div>
         </section>
-        <section class="profile-box centered" v-else>
-            <loader-component v-if="loading" :text="'Spotting authors nearby...'"></loader-component>
+        <section v-else class="profile-box">
+            <loadprofile-container></loadprofile-container>
         </section>
 
         <section v-if="ownProfile()" class="section_title">
@@ -86,7 +86,9 @@
             {{ profileUsername }}'s posts
         </section>
 
-        <loader-component v-if="loading" :text="'Fetching user stories'"></loader-component>
+        <template v-if="loading">
+          <load-container v-for="i in 6" :key="i"></load-container>
+        </template>
         
         <div v-else-if="posts.length > 0">
             <div v-for="post in posts" :key="post._id.$oid">
@@ -130,7 +132,8 @@ import SettingsButton from '@/components/UIcomponents/buttons/SettingsButton.vue
 import LogoutButton from '@/components/UIcomponents/buttons/LogoutButton.vue';
 import SmallTooltip from '@/components/UIcomponents/SmallTooltip.vue';
 import LoginMessage from "@/components/messages/LoginMessage.vue"
-import LoaderComponent from '@/components/UIcomponents/LoaderComponent.vue';
+import LoadContainer from '@/components/feedposts/LoadContainer.vue';
+import LoadprofileContainer from '@/components/feedposts/LoadprofileContainer.vue';
 
 export default {
     components: {
@@ -142,7 +145,8 @@ export default {
         LogoutButton,
         SmallTooltip,
         LoginMessage,
-        LoaderComponent
+        LoadContainer,
+        LoadprofileContainer
     },
     setup() {
         const router = useRouter();

@@ -1,6 +1,8 @@
 <template>
   <feed-container>
-    <loader-component v-if="loading" :text="'Loading stories'"></loader-component>
+    <template v-if="loading">
+        <load-container v-for="i in 6" :key="i"></load-container>
+    </template>
     <div v-else v-for="post in posts" :key="post._id">
         <post-container
             :_id="post._id"
@@ -26,14 +28,15 @@
 <script>
 import PostContainer from "@/components/feedposts/PostContainer.vue";
 import FeedContainer from "@/components/frames/FeedContainer.vue";
-import LoaderComponent from "@/components/UIcomponents/LoaderComponent.vue";
+//import LoaderComponent from "@/components/UIcomponents/LoaderComponent.vue";
+import LoadContainer from "@/components/feedposts/LoadContainer.vue";
 
 export default {
     props: ["posts", "loading"],
     components: {
         PostContainer,
         FeedContainer,
-        LoaderComponent
+        LoadContainer
     },
     methods: {
         formatContent(text) {
