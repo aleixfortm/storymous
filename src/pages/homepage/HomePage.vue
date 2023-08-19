@@ -122,7 +122,7 @@ export default {
     width: 100%;
     border-radius: 10px;
     opacity: 1;
-    margin: 0px 0 0 0;
+    margin: 12px 0 0 0;
 }
 
 .statstop {
