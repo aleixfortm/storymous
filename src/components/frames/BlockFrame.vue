@@ -4,7 +4,7 @@
         <div class="section">
             <slot></slot>
         </div>
-        <div class="section2">
+        <div class="section2" v-if="applicableRoute">
             <component :is="sidebarComponent"></component>
         </div>
         </div>
@@ -23,6 +23,7 @@ export default {
     data() {
         return {
             sidebarComponent: WelcomeSidebar, // Default component
+            applicableRoutes: ["WelcomePage", "HomePage"]
         };
     },
     watch: {
@@ -31,13 +32,17 @@ export default {
     methods: {
         updateSidebarComponent(routeName) {
             // Use routeName to determine which sidebar component to display
-            if (routeName === 'WelcomePage') {
-                this.sidebarComponent = WelcomeSidebar;
-            } else {
+            if (routeName === 'WelcomePage' || routeName === 'HomePage') {
                 this.sidebarComponent = WelcomeSidebar;
             }
         },
     },
+    computed: {
+        applicableRoute() {
+            const routeName = this.$route.name;
+            return this.applicableRoutes.includes(routeName);
+        }
+    }
 };
 </script>
 
