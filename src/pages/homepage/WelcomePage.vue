@@ -55,15 +55,17 @@ export default {
         if (this.isLoggedIn) {
             this.router.push("/home")
         } else {
-            if (this.areThereSavedPosts()) {
-                this.loading = false
+
+            if (this.latestPosts.latestChapters && Array.isArray(this.latestPosts.latestChapters)) {
+                this.loading = this.latestPosts.latestChapters.length === 0;
             }
+
             axios
             .get(`${API_BASE_URL}/chapters/additional`)
             .then(response => {
                 const latestChapters = response.data.chapters
                 this.setLatestPosts({latestChapters})
-                
+
                 const topAuthors = response.data.top_authors;
                 const topStories = response.data.top_stories;
                 this.saveTopData({ topAuthors, topStories });
@@ -82,9 +84,6 @@ export default {
     methods: {
         ...mapActions('topData', ['saveTopData']),
         ...mapActions('feedData', ['setLatestPosts']),
-        areThereSavedPosts() {
-            return this.latestPosts.latestChapters > 0
-        }
     }
 }
 

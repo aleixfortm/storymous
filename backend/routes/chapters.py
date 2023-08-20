@@ -84,8 +84,8 @@ def chapters(additional_requested_data):
     top_authors_list = []
     top_stories_list = []
     if additional_requested_data:
-        top_authors_list = list(db_users.find().sort([("leaves", -1)]).limit(3))
-        top_stories_list = list(db_chapters.find().sort([("views", -1)]).limit(3))
+        top_authors_list = list(db_users.find().sort([("leaves", -1)]).limit(5))
+        top_stories_list = list(db_chapters.find().sort([("views", -1)]).limit(5))
         for chapter in top_stories_list:
             user = db_users.find_one({"username": chapter["username"]})
             chapter["picture"] = user["picture"]

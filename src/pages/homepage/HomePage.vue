@@ -56,7 +56,7 @@ export default {
             userLogged: true,
             text: " ",
             showCharacter: true,
-            loading: false,
+            loading: true,
             loggedOutLoading: false,
             loggedOutImageLoaded: false,
             selectedTab: 'latest-feed',
@@ -66,8 +66,8 @@ export default {
         if (!this.isLoggedIn) {
             this.router.push('/');
         } else {
-            if (this.areThereSavedPosts()) {
-                this.loading = false
+            if (this.latestPosts.latestChapters && Array.isArray(this.latestPosts.latestChapters)) {
+                this.loading = this.latestPosts.latestChapters.length === 0;
             }
             axios
                 .get(`${API_BASE_URL}/chapters/data`)
@@ -97,10 +97,6 @@ export default {
         },
         handleSelectedTab(tab) {
             this.selectedTab = tab;
-        },
-        areThereSavedPosts() {
-            console.log(this.latestPosts)
-            return this.latestPosts.latestChapters > 0
         }
     },
     computed: {
