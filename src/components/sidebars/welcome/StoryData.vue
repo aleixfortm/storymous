@@ -1,11 +1,8 @@
 <template>
-    <div class="userdata">
-      <!--
-        
-        -->
+    <div @click="redirectToChapter" class="userdata">
         <div class="whote-data-container">
             <div class="name-container">
-                <div class="title">{{ story.story_title }}</div>
+                <div class="title">{{ story.title }}</div>
             </div>
             <div class="stats-data-container">
               
@@ -24,12 +21,23 @@
 </template>
 
 <script>
+import { useRouter } from 'vue-router';
+
 export default {
     props: ["story"],
+    setup() {
+        const router = useRouter();
+        return { router: router };
+    },
     computed: {
         imgSource() {
             return require("@/assets/img/" + this.story.picture)
         }
+    },
+    methods: {
+      redirectToChapter() {
+        this.router.push(`/chapter/${this.story._id.$oid}`);
+      }
     }
 }
 </script>

@@ -15,13 +15,14 @@
     <buttonblock-selector :homePage="true" @selected-tab="handleSelectedTab"></buttonblock-selector>
     
     <transition name="fade" mode="out-in">
-        <component :is="selectedTab" :posts="chapters" :loading="loading" :key="selectedTab"></component>
+        <component :is="selectedTab" :posts="latestPosts.latestChapters" :loading="loading" :key="selectedTab"></component>
     </transition>
 </template>
 
 
 <script>
 import { mapGetters } from 'vuex';
+import { mapActions } from 'vuex';
 import { useRouter } from 'vue-router';
 import { API_BASE_URL } from '../../config';
 
@@ -65,12 +66,20 @@ export default {
         if (!this.isLoggedIn) {
             this.router.push('/');
         } else {
+            if (this.latestPosts.latestChapters && Array.isArray(this.latestPosts.latestChapters)) {
+                this.loading = this.latestPosts.latestChapters.length === 0;
+            }
             axios
-                .get(`${API_BASE_URL}/chapters`)
+                .get(`${API_BASE_URL}/chapters/data`)
                 .then(response => {
-                    this.chapters = response.data;
+                    const latestChapters = response.data.chapters
+                    this.setLatestPosts({latestChapters})
+
+                    const topAuthors = response.data.top_authors;
+                    const topStories = response.data.top_stories;
+                    this.saveTopData({ topAuthors, topStories });
+
                     this.loading = false;
-                    console.log(this.chapters)
                 })
                 .catch(error => {
                     console.log(error);
@@ -78,6 +87,8 @@ export default {
         }
     },
     methods: {
+        ...mapActions('topData', ['saveTopData']),
+        ...mapActions('feedData', ['setLatestPosts']),
         navigateToNewPost() {
             this.router.push('/newpost');
         },
@@ -90,6 +101,8 @@ export default {
     },
     computed: {
         ...mapGetters('auth', ['isLoggedIn', 'currentUser', "userFetchedPicture", "colorFetched"]),
+        ...mapGetters('topData', ['topAuthors', 'topStories']),
+        ...mapGetters('feedData', ['latestPosts']),
         imgSource() {
             return require("@/assets/img/" + this.userFetchedPicture);
         },

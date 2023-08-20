@@ -3,9 +3,7 @@
         <div class="box">
             <div class="explanation">
                 <div class="title"></div>
-                <div class="content"></div>
-                <div class="content"></div>
-                <div class="content"></div>
+                <div v-for="i in 5" :key="i" class="content"></div>
             </div>
         </div>
     </div>
@@ -46,7 +44,7 @@ export default {
 }
 
 .content {
-    height: 50px;
+    height: 40px;
     width: 100%;
     background-color: #ffffff09;
     margin-top: 8px;

@@ -66,9 +66,9 @@ def new_chapter():
     return json_util.dumps(data_packet)
 
 
-# get all chapters
-@bp_chapters.route('/chapters', methods=["GET"])
-def chapters():
+# get all chapters --> location 
+@bp_chapters.route('/chapters/<additional_requested_data>', methods=["GET"])
+def chapters(additional_requested_data):
 
     chapter_list = list(db_chapters.find())
     sorted_chapters = sorted(chapter_list, key=lambda x: x["created_at"])
@@ -81,7 +81,22 @@ def chapters():
         chapter["story_name"] = story["title"]
         chapter["comments"] = story["comments"]
 
-    return json_util.dumps(sorted_chapters[::-1])
+    top_authors_list = []
+    top_stories_list = []
+    if additional_requested_data:
+        top_authors_list = list(db_users.find().sort([("leaves", -1)]).limit(5))
+        top_stories_list = list(db_chapters.find().sort([("views", -1)]).limit(5))
+        for chapter in top_stories_list:
+            user = db_users.find_one({"username": chapter["username"]})
+            chapter["picture"] = user["picture"]
+
+    data_packet = {
+        "chapters": sorted_chapters[::-1],
+        "top_authors": top_authors_list,
+        "top_stories": top_stories_list
+    }
+
+    return json_util.dumps(data_packet)
 
 
 # get chapter by id

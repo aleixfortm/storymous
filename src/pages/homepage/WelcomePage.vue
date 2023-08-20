@@ -17,11 +17,12 @@
         </div>
     </div>
 
-    <latest-feed :posts="chapters" :loading="loading"></latest-feed>
+    <latest-feed :posts="latestPosts.latestChapters" :loading="loading"></latest-feed>
 </template>
 
 <script>
 import { mapGetters } from 'vuex';
+import { mapActions } from 'vuex';
 import { useRouter } from 'vue-router';
 import { API_BASE_URL } from '../../config';
 import axios from 'axios';
@@ -54,12 +55,22 @@ export default {
         if (this.isLoggedIn) {
             this.router.push("/home")
         } else {
+
+            if (this.latestPosts.latestChapters && Array.isArray(this.latestPosts.latestChapters)) {
+                this.loading = this.latestPosts.latestChapters.length === 0;
+            }
+
             axios
-            .get(`${API_BASE_URL}/chapters`)
+            .get(`${API_BASE_URL}/chapters/additional`)
             .then(response => {
-                this.chapters = response.data;
+                const latestChapters = response.data.chapters
+                this.setLatestPosts({latestChapters})
+
+                const topAuthors = response.data.top_authors;
+                const topStories = response.data.top_stories;
+                this.saveTopData({ topAuthors, topStories });
+
                 this.loading = false;
-                console.log(this.chapters)
             })
             .catch(error => {
                 console.log(error);
@@ -68,7 +79,12 @@ export default {
     },
     computed: {
         ...mapGetters('auth', ['isLoggedIn']),
+        ...mapGetters('feedData', ['latestPosts']),
     },
+    methods: {
+        ...mapActions('topData', ['saveTopData']),
+        ...mapActions('feedData', ['setLatestPosts']),
+    }
 }
 
 </script>
