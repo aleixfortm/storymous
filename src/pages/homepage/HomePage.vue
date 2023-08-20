@@ -15,7 +15,7 @@
     <buttonblock-selector :homePage="true" @selected-tab="handleSelectedTab"></buttonblock-selector>
     
     <transition name="fade" mode="out-in">
-        <component :is="selectedTab" :posts="chapters" :loading="loading" :key="selectedTab"></component>
+        <component :is="selectedTab" :posts="latestPosts.latestChapters" :loading="loading" :key="selectedTab"></component>
     </transition>
 </template>
 
@@ -56,7 +56,7 @@ export default {
             userLogged: true,
             text: " ",
             showCharacter: true,
-            loading: true,
+            loading: false,
             loggedOutLoading: false,
             loggedOutImageLoaded: false,
             selectedTab: 'latest-feed',
@@ -66,14 +66,19 @@ export default {
         if (!this.isLoggedIn) {
             this.router.push('/');
         } else {
+            if (this.areThereSavedPosts()) {
+                this.loading = false
+            }
             axios
                 .get(`${API_BASE_URL}/chapters/data`)
                 .then(response => {
-                    this.chapters = response.data.chapters;
+                    const latestChapters = response.data.chapters
+                    this.setLatestPosts({latestChapters})
+
                     const topAuthors = response.data.top_authors;
                     const topStories = response.data.top_stories;
-
                     this.saveTopData({ topAuthors, topStories });
+
                     this.loading = false;
                 })
                 .catch(error => {
@@ -83,6 +88,7 @@ export default {
     },
     methods: {
         ...mapActions('topData', ['saveTopData']),
+        ...mapActions('feedData', ['setLatestPosts']),
         navigateToNewPost() {
             this.router.push('/newpost');
         },
@@ -91,11 +97,16 @@ export default {
         },
         handleSelectedTab(tab) {
             this.selectedTab = tab;
+        },
+        areThereSavedPosts() {
+            console.log(this.latestPosts)
+            return this.latestPosts.latestChapters > 0
         }
     },
     computed: {
         ...mapGetters('auth', ['isLoggedIn', 'currentUser', "userFetchedPicture", "colorFetched"]),
         ...mapGetters('topData', ['topAuthors', 'topStories']),
+        ...mapGetters('feedData', ['latestPosts']),
         imgSource() {
             return require("@/assets/img/" + this.userFetchedPicture);
         },

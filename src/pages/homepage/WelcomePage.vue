@@ -17,7 +17,7 @@
         </div>
     </div>
 
-    <latest-feed :posts="chapters" :loading="loading"></latest-feed>
+    <latest-feed :posts="latestPosts.latestChapters" :loading="loading"></latest-feed>
 </template>
 
 <script>
@@ -55,14 +55,19 @@ export default {
         if (this.isLoggedIn) {
             this.router.push("/home")
         } else {
+            if (this.areThereSavedPosts()) {
+                this.loading = false
+            }
             axios
             .get(`${API_BASE_URL}/chapters/additional`)
             .then(response => {
-                this.chapters = response.data.chapters;
+                const latestChapters = response.data.chapters
+                this.setLatestPosts({latestChapters})
+                
                 const topAuthors = response.data.top_authors;
                 const topStories = response.data.top_stories;
                 this.saveTopData({ topAuthors, topStories });
-                console.log(topStories)
+
                 this.loading = false;
             })
             .catch(error => {
@@ -72,9 +77,14 @@ export default {
     },
     computed: {
         ...mapGetters('auth', ['isLoggedIn']),
+        ...mapGetters('feedData', ['latestPosts']),
     },
     methods: {
         ...mapActions('topData', ['saveTopData']),
+        ...mapActions('feedData', ['setLatestPosts']),
+        areThereSavedPosts() {
+            return this.latestPosts.latestChapters > 0
+        }
     }
 }
 
