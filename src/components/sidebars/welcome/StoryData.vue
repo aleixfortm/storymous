@@ -12,7 +12,7 @@
               </div>
               <img class="userimg" v-if="story.picture" :src="imgSource" alt="astronaut">
               <img class="userimg" v-else src="@/assets/img/moon_default_avatar-min.png" alt="default avatar">
-              <div class="username">
+              <div @click.stop="redirectToUser" class="username">
                  @{{ story.username }}
               </div>
             </div>
@@ -37,6 +37,9 @@ export default {
     methods: {
       redirectToChapter() {
         this.router.push(`/chapter/${this.story._id.$oid}`);
+      },
+      redirectToUser() {
+        this.router.push(`/user/${this.story.username}`);
       }
     }
 }
@@ -48,6 +51,9 @@ export default {
   font-weight: bold;
   font-size: 13px;
   margin: 0 0 0 3px;
+}
+.username:hover {
+  text-decoration: underline;
 }
 .views-num {
   margin: 2px 0 0 -2px;

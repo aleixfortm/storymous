@@ -195,13 +195,12 @@ export default {
 
     },
     methods: {
-        ...mapActions('auth', ['logout']),
+        ...mapActions('auth', ['logout', 'followUser', 'unfollowUser']),
         ownProfile() {
             if (this.profileUsername === this.currentUser) {
                 return true;
-            } else {
-                return false;
             }
+            return false;
         },
         followAction() {
 
@@ -222,8 +221,10 @@ export default {
                     }
                     this.isFollowButtonDisabled = false;
                     if (this.isFollowing) {
+                        this.followUser(this.profileUsername)
                         this.userFollowers.push(this.currentUser)
                     } else {
+                        this.unfollowUser(this.profileUsername)
                         const index = this.userFollowers.indexOf(this.currentUser);
                         if (index !== -1) {
                             this.userFollowers.splice(index, 1);

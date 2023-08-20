@@ -69,6 +69,21 @@ export default {
 
           router.push('/');
         },
+        async followUser({ commit }, userToFollow) {
+          try {
+            commit('ADD_USER_TO_FOLLOWING', userToFollow);
+          } catch (error) {
+            console.error('Error unfollowing user:', error);
+          }
+        },
+        async unfollowUser({ commit }, userToUnfollow) {
+          try {
+            commit('REMOVE_USER_FROM_FOLLOWING', userToUnfollow);
+          } catch (error) {
+            console.error('Error unfollowing user:', error);
+          }
+        },
+        
     },
 
     mutations: {
@@ -80,7 +95,17 @@ export default {
         },
         SET_USER_DATA(state, userFetchedData) {
           state.userData = userFetchedData;
-        }
+        },
+        ADD_USER_TO_FOLLOWING(state, user) {
+          state.userData.following.push(user);
+        },
+        REMOVE_USER_FROM_FOLLOWING(state, user) {
+          const userIndex = state.userData.following.indexOf(user);
+          if (userIndex !== -1) {
+            state.userData.following.splice(userIndex, 1);
+          }
+        },
+        
     },
 
     getters: {
