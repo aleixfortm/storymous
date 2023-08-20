@@ -32,8 +32,10 @@ export default {
     methods: {
         updateSidebarComponent(routeName) {
             // Use routeName to determine which sidebar component to display
-            if (routeName === 'WelcomePage' || routeName === 'HomePage') {
+            if (routeName === 'WelcomePage') {
                 this.sidebarComponent = WelcomeSidebar;
+            } else if (routeName === 'HomePage') {
+                this.sidebarComponent = HomeSidebar
             }
         },
     },
