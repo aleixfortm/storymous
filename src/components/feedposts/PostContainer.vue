@@ -342,7 +342,7 @@ export default {
 }
 
 .story__user-comment-container {
-    max-width: fit-content;
+    max-width: 100%;
     word-wrap: break-word;
 }
 
