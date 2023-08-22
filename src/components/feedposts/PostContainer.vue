@@ -342,7 +342,7 @@ export default {
 }
 
 .story__user-comment-container {
-    max-width: 100%;
+    max-width: fit-content;
     word-wrap: break-word;
 }
 
@@ -351,7 +351,7 @@ export default {
     display: flex;
     flex-direction: column;
     margin: 0 0 0 5px;
-    width: fit-content;
+    width: 100%;
     hyphens: auto;
     justify-content: space-between;
 }
