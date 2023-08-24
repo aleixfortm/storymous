@@ -126,6 +126,7 @@ def chapter(chapterId):
             if chapter_data["parent_id"] == None:
                 break
     
+    contributors_list = []
     # query all chapters present in chapters list of story instance, but exclude those whose parent_id is None (chapter 0)
     all_chapters = list(db_chapters.find(
         {"_id": {"$in": story_data["chapters"]},
@@ -133,6 +134,8 @@ def chapter(chapterId):
     }))
     for chapter in all_chapters:
         user_data = User.find_by_username(chapter["username"])
+        if user_data not in contributors_list:
+            contributors_list.append(user_data)
         chapter["picture"] = user_data["picture"]
         chapter["created_at"] = Chapter.format_date_data(chapter["created_at"])
 
@@ -145,7 +148,8 @@ def chapter(chapterId):
     data_packet = {
         "mountedChapters": storyline,
         "allChapters": all_chapters,
-        "comments": comments[::-1]
+        "comments": comments[::-1],
+        "contributors": contributors_list
     }
 
     return json_util.dumps(data_packet)

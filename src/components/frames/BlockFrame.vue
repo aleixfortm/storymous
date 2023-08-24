@@ -14,16 +14,18 @@
 <script>
 import WelcomeSidebar from "@/components/sidebars/WelcomeSidebar.vue"
 import HomeSidebar from "@/components/sidebars/HomeSidebar.vue"
+import StorySidebar from "@/components/sidebars/StorySidebar.vue"
 
 export default {
     components: {
         WelcomeSidebar,
-        HomeSidebar
+        HomeSidebar,
+        StorySidebar
     },
     data() {
         return {
             sidebarComponent: WelcomeSidebar, // Default component
-            applicableRoutes: ["WelcomePage", "HomePage"]
+            applicableRoutes: ["WelcomePage", "HomePage", "ChapterPage"]
         };
     },
     watch: {
@@ -36,6 +38,8 @@ export default {
                 this.sidebarComponent = WelcomeSidebar;
             } else if (routeName === 'HomePage') {
                 this.sidebarComponent = HomeSidebar
+            } else if (routeName === 'ChapterPage') {
+                this.sidebarComponent = StorySidebar
             }
         },
     },

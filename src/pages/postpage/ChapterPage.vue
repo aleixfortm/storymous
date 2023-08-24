@@ -49,7 +49,7 @@
       </template>
     </feed-container>
     <feed-container v-else>
-      <loader-component :text="'Harvesting story from story tree'"></loader-component>
+      <loader-component :text="'Mounting chapters to story'"></loader-component>
     </feed-container>
 </template>
 
@@ -168,6 +168,7 @@ export default {
     }
   },
   mounted() {
+    window.scrollTo(0, 0);
     const chapterId = this.$route.params.id;
     axios
       .get(`${API_BASE_URL}/chapter/${chapterId}`)
@@ -175,6 +176,8 @@ export default {
         this.mountedChapters = response.data.mountedChapters;
         this.chapters = response.data.allChapters;
         this.comments = response.data.comments;
+        this.setContributors(response.data.contributors)
+        this.setNewStatus(true)
         this.loadingReplies = false;
         this.loading = false;
         // make mountableChapters be all those that its parent_id equal to the id of the last mountedChapter object
@@ -214,6 +217,7 @@ export default {
   },
   methods: {
     ...mapActions('message', ['setLoginError']),
+    ...mapActions('chapterData', ['setContributors', 'setNewStatus']),
     handleSelectedTab(tab) {
       if (tab === "chapters") {
         this.selectedTab = "chapters-feed"
