@@ -66,6 +66,7 @@ export default {
         if (!this.isLoggedIn) {
             this.router.push('/');
         } else {
+            //check if store already has chapters saved
             if (this.latestPosts.latestChapters && Array.isArray(this.latestPosts.latestChapters)) {
                 this.loading = this.latestPosts.latestChapters.length === 0;
             }

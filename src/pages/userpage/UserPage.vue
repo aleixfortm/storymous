@@ -187,6 +187,7 @@ export default {
     },
     mounted() {
         this.fetchDataComponent();
+        document.documentElement.scrollTop = 0;
     },
     watch: {
         currentParameter() {
