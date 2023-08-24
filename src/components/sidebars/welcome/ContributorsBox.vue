@@ -4,7 +4,7 @@
             <div class="explanation">
                 <div class="title-num-container">
                     <div class="title">Contributors</div>
-                    <div class="number">1</div>
+                    <div class="number">{{ contributors.length }}</div>
                 </div>
                 <user-data v-for="author in contributors" :user="author" :key="author"></user-data>
             </div>
