@@ -111,7 +111,7 @@
   - [x] Option to write new chapter on current storyline
   - [x] Option to write comment on story post
   - [x] Comments and continued chapters feed
-  - [ ] Option for filtering comments / continued stories
+  - [x] Option for filtering comments / continued stories
   
 ## Database structure
 <p align="center">
