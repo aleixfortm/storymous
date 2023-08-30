@@ -24,7 +24,6 @@
                         </div>
                     </div>
                 </div>
-                <div class="separator"></div>
                 <article class="story__article" @click="navigateToPost">
                     <div class="story__upper">
                         <h2 v-if="chapterNum > 0" class="story__title "><span class="story_title highlight">CHAPTER</span><span class="story_title highlight margin-minus">{{ chapterNum }}</span>{{ title.toUpperCase() }}</h2>
@@ -38,7 +37,7 @@
                         <b v-if="feedMode && checkLength" class="readmore-button"><em>Read more</em></b>
                     </p>
                 </article>
-                <div class="separator"></div>
+    
                 <div class="story-stats user-select-none">
                     <div class="story-stats-section leaf" :class="[leavesMutable.includes(currentUser) ? 'includes-leaf' : '']" @click.prevent="increaseLeaves">
                         <span class="material-symbols-outlined margin1 leaf-icon" :class="[leavesMutable.includes(currentUser) ? 'includes-leaf-icon' : '']">
@@ -161,6 +160,7 @@ export default {
 }
 
 .material-symbols-outlined {
+  font-size: 20px;
   font-variation-settings:
   'FILL' 1,
   'wght' 400,
@@ -192,10 +192,6 @@ export default {
 .view {
     color: white;
     transition: all 0.1s;
-}
-
-.comment-icon {
-    font-size: 22px;
 }
 
 .view:hover .view-icon{
@@ -242,14 +238,22 @@ export default {
 .story-stats {
     display: flex;
     color: whitesmoke;
-    margin: 5px 0 2px 5px;
-    justify-content: center;
+    margin: -2px 0px 1px 2px;
+    justify-content: flex-start;
+    width: fit-content;
+    border-radius: 10px;
+    transition: 0.3s all;
+}
+
+.story-stats:hover {
+    background-color: rgba(151, 151, 151, 0.055);
 }
 
 .story-stats-section {
     display: flex;
     align-items: center;
-    margin: 0 12px;
+    font-size: 14px;
+    margin: 0 6px;
     padding: 1px 6px 1px 1px;
 }
 
@@ -306,10 +310,11 @@ export default {
 }
 
 .story__article {
-    padding: 5px 10px 5px 10px;
+    padding: 0px 10px 5px 10px;
     border-radius: 2px;
     cursor: pointer;
     transition: all 0s;
+
     color: #d3d3d3
 }
 
@@ -319,8 +324,9 @@ export default {
     height: fit-content;
     width: 100%;
     border-radius: 1px;
-    border: 1px rgba(255, 255, 255, 0.247) solid;
-    background-color: rgba(43, 43, 46, 0.671);
+    border: 1px rgba(255, 255, 255, 0.151) solid;
+    background-color: rgba(60, 60, 63, 0.425);
+    font-family: inherit;
     transition: 0.2s all;
 }
 
@@ -371,6 +377,7 @@ export default {
 .story__content {
     text-align: left;
     margin: 2px 0;
+    font-family: monospace;
     white-space: pre-wrap;
 }
 

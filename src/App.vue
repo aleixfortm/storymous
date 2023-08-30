@@ -46,13 +46,12 @@ export default {
 
 html {
   font-family: "IBM Plex Mono", monospace;
-  background-color: rgb(28, 33, 41);
+  background-color: rgb(31, 34, 36);
 }
 
 body {
   margin: 0;
   background-color: rgb(31, 34, 36);
-  background-color: rgb(28, 33, 41);
 }
 
 .cur-def {
