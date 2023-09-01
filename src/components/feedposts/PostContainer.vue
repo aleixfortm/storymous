@@ -43,10 +43,10 @@
                         <span class="material-symbols-outlined margin1 leaf-icon" :class="[leavesMutable.includes(currentUser) ? 'includes-leaf-icon' : '']">
                             nest_eco_leaf
                         </span>
-                        {{ leavesMutable.length }}
+                        <span class="icon-text-icon-s">{{ leavesMutable.length }}&nbsp;</span><span class="icon-text-icon">Leaves</span>
                     </div>
-                    <div class="story-stats-section view"><span class="material-symbols-outlined margin1 view-icon">bar_chart</span>{{ views }}</div>
-                    <div class="story-stats-section comment"><span class="material-symbols-outlined margin1 comment-icon">chat</span>{{ comments.length }}</div>
+                    <div class="story-stats-section view"><span class="material-symbols-outlined margin1 view-icon">bar_chart</span><span class="icon-text-icon">{{ views }} Views</span></div>
+                    <div class="story-stats-section comment"><span class="material-symbols-outlined margin1 comment-icon">chat</span><span class="icon-text-icon">{{ comments.length }} Comments</span></div>
                 </div>
             </span>
         </div>
@@ -155,6 +155,15 @@ export default {
 </script>
 
 <style scoped>
+.icon-text-icon {
+    font-size: 15px;
+    color: rgb(187, 187, 187);
+}
+
+.icon-text-icon-s {
+    font-size: 15px;
+}
+
 .margin-minus {
     margin-left: -7px;
 }
@@ -174,7 +183,7 @@ export default {
 }
 
 .leaf-icon {
-    color: white;
+    color: rgb(187, 187, 187);
 }
 
 .leaf:hover .leaf-icon{
@@ -190,7 +199,7 @@ export default {
 }
 
 .view {
-    color: white;
+    color: rgb(187, 187, 187);
     transition: all 0.1s;
 }
 
@@ -199,8 +208,13 @@ export default {
 }
 
 .comment {
-    color: white;
+    color: rgb(187, 187, 187);
     transition: all 0.1s;
+
+}
+
+.comment-icon {
+    font-size: 17px;
 }
 
 .comment:hover .comment-icon {
@@ -240,26 +254,22 @@ export default {
     color: whitesmoke;
     margin: -2px 0px 1px 2px;
     justify-content: flex-start;
-    width: fit-content;
-    border-radius: 10px;
+    width: 100%;
     transition: 0.3s all;
-}
-
-.story-stats:hover {
-    background-color: rgba(151, 151, 151, 0.055);
 }
 
 .story-stats-section {
     display: flex;
     align-items: center;
-    font-size: 14px;
+    font-size: 13px;
     margin: 0 6px;
+    font-family: monospace;
     padding: 1px 6px 1px 1px;
 }
 
 .story-stats-section:hover {
     background-color: rgba(194, 194, 194, 0.137);
-    border-radius: 10px;
+    border-radius: 1px;
 }
 
 .tag-section {
@@ -323,7 +333,7 @@ export default {
     padding: 5px 4px 4px 4px;
     height: fit-content;
     width: 100%;
-    border-radius: 1px;
+    border-radius: 5px;
     border: 1px rgba(255, 255, 255, 0.151) solid;
     background-color: rgba(60, 60, 63, 0.425);
     font-family: inherit;
