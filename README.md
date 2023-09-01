@@ -51,16 +51,6 @@
   <img src="https://github.com/aleixfortm/storymous/assets/95043218/ad629717-ea9a-4008-b40e-33c1c19d789e" alt="storymous_tree" width="600" height="auto">
 </p>
 
-###  **<p align="center">Start new stories and customize your post with tags and comments</p>**
-<p align="center">
-  <img src="https://github.com/aleixfortm/storymous/assets/95043218/2153bee4-a768-44ba-ad30-17707a9ff5b6" alt="storymous_tree" width="600" height="auto">
-</p>
-
-###  **<p align="center">Read stories, mount and write chapters, and create storylines</p>**
-<p align="center">
-  <img src="https://github.com/aleixfortm/storymous/assets/95043218/8e6e87fc-3f10-4b92-983b-be048518422c" alt="storymous_tree" width="600" height="auto">
-</p>
-
 
 
 ## Features 
