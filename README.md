@@ -25,8 +25,6 @@
 <p align="center"><strong>Time for a coffee? Help me maintain the infrastructure cost of this project!</strong></p>
 
 ## Preview 
-![msedge_0ktvfzOM8o](https://github.com/aleixfortm/storymous/assets/95043218/8c955ed8-d1bc-49e9-be58-32926fdbd91b)
-
 
 ###  **<p align="center">Explore stories form the community</p>**
 <p align="center">
@@ -38,7 +36,17 @@
   <img src="https://github.com/aleixfortm/storymous/assets/95043218/3038c64c-6fe9-4a9f-af7b-00cd76300acc" alt="storymous_tree" width="600" height="auto">
 </p>
 
-###  **<p align="center">Keep track of your stats and posts on your profile page</p>**
+###  **<p align="center">Check out user profiles</p>**
+<p align="center">
+  <img src="https://github.com/aleixfortm/storymous/assets/95043218/f918dc52-d4dd-42bb-99ea-92cbd6a52761" alt="storymous_tree" width="600" height="auto">
+</p>
+
+###  **<p align="center">Start a new story yourself</p>**
+<p align="center">
+  <img src="https://github.com/aleixfortm/storymous/assets/95043218/309d5406-f33e-4f4c-825d-2131d1f4d362" alt="storymous_tree" width="600" height="auto">
+</p>
+
+###  **<p align="center">Mount and unmount chapters to create your own story</p>**
 <p align="center">
   <img src="https://github.com/aleixfortm/storymous/assets/95043218/8c955ed8-d1bc-49e9-be58-32926fdbd91b" alt="storymous_tree" width="600" height="auto">
 </p>
