@@ -79,13 +79,6 @@ export default {
     font-size: 14px;
 }
 
-.data-section {
-    margin-top: 5px;
-    padding: 2px 6px;
-    background-color: rgba(92, 92, 92, 0.438);
-    border-radius: 5px;
-}
-
 .data {
     font-size: 14px;
     line-height: 1.05 !important;

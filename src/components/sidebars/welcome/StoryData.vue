@@ -119,7 +119,7 @@ export default {
   font-size: 15px;
   width: fit-content;
   justify-content: flex-start;
-  background-color: #ffffff09;
+  background-color: #5e5e5e15;
   width: 100%;
   border-radius: 4px;
   align-items: center;

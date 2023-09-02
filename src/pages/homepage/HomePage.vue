@@ -392,7 +392,7 @@ form {
 }
 
 input[type="text"] {
-  background-color: #1d252e;
+  background-color: #1b1d21;
   border: none;
   border-radius: 50px;
   font-size: 14px;
