@@ -153,16 +153,7 @@ export default {
 </script>
 
 <style scoped>
-.post-top-data-container {
-    padding: 5px 10px 0 10px;
-    background-color: rgba(148, 148, 148, 0.103);
-    transition: 0.3s all;
-}
 
-.post-top-data-container:hover {
-    
-    background-color: rgba(143, 143, 143, 0.062);
-}
 .icon-text-icon {
     font-size: 15px;
     color: rgb(187, 187, 187);
@@ -333,6 +324,61 @@ export default {
 
     color: #d3d3d3
 }
+
+.post-top-data-container {
+    padding: 5px 10px 0 10px;
+    background-color: rgba(148, 148, 148, 0.103);
+    border-radius: 3px 3px 0 0;
+    transition: 0.3s all;
+}
+
+.post-top-data-container:hover {
+    background-color: rgba(143, 143, 143, 0.062);
+}
+
+.post-top-data-container.salmon {
+    background-color: rgba(112, 47, 40, 0.863);
+}
+
+.post-top-data-container.red {
+    border: 4px rgb(255, 25, 0) solid;
+    box-shadow: 0px 0px 5px 2px rgb(255, 25, 0);
+}
+
+.post-top-data-container.blue {
+    background-color: rgba(0, 123, 206, 0.377);
+}
+
+.post-top-data-container.green {
+    border: 4px rgb(55, 182, 97) solid;
+    box-shadow: 0px 0px 5px 2px rgb(55, 182, 97);
+}
+
+.post-top-data-container.yellow {
+    border: 4px rgb(255, 217, 0) solid;
+    box-shadow: 0px 0px 5px 2px rgb(255, 217, 0);
+}
+
+.post-top-data-container.white {
+    border: 4px rgb(255, 255, 255) solid;
+    box-shadow: 0px 0px 5px 2px rgb(255, 255, 255);
+}
+
+.post-top-data-container.purple {
+    border: 4px rgb(183, 0, 255) solid;
+    box-shadow: 0px 0px 5px 2px rgb(183, 0, 255);
+}
+
+.post-top-data-container.pink {
+    border: 4px rgb(255, 0, 179) solid;
+    box-shadow: 0px 0px 5px 2px rgb(255, 0, 179);
+}
+
+.post-top-data-container.orange {
+    border: 4px rgb(255, 145, 0) solid;
+    box-shadow: 0px 0px 5px 2px rgb(255, 145, 0);
+}
+
 
 .outline {
     margin-top: 12px;
