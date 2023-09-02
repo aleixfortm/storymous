@@ -46,7 +46,7 @@
   <img src="https://github.com/aleixfortm/storymous/assets/95043218/309d5406-f33e-4f4c-825d-2131d1f4d362" alt="storymous_tree" width="600" height="auto">
 </p>
 
-###  **<p align="center">Mount and unmount chapters to create your own story</p>**
+###  **<p align="center">Mount and unmount chapters to shape a storyline</p>**
 <p align="center">
   <img src="https://github.com/aleixfortm/storymous/assets/95043218/8c955ed8-d1bc-49e9-be58-32926fdbd91b" alt="storymous_tree" width="600" height="auto">
 </p>
