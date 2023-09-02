@@ -394,8 +394,7 @@ export default {
 
 
 .story__content {
-  position: relative;
-  display: inline-block;
+    -webkit-mask-image: linear-gradient(0deg, transparent, white 80%);
 }
 
 .story__content-text {
@@ -404,10 +403,7 @@ export default {
   font-family: monospace;
   font-size: 15px;
   white-space: pre-wrap;
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 55%, transparent);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent; /* Make the text transparent */
+
 }
 
 .readmore-button {
