@@ -1,11 +1,12 @@
 <template>
+    <!--
     <astronaut-message 
         class="astro"
         :onomatopoeia="''" 
         :text="'In the depths of our galaxy lies a distant planet, where a mesmerizing forest thrives— a place where the ethereal story tree whispers secrets of cosmic wonders...'"
         :flipped="false">
     </astronaut-message>
-
+    -->
     <div class="block">
         <div class="rectangle">
             <select-button 
@@ -29,13 +30,13 @@ import axios from 'axios';
 
 import SelectButton from '@/components/UIcomponents/buttons/SelectButton.vue';
 import LatestFeed from './LatestFeed.vue';
-import AstronautMessage from '@/components/messages/AstronautMessage.vue';
+//import AstronautMessage from '@/components/messages/AstronautMessage.vue';
 
 export default {
     components: {
         SelectButton,
         LatestFeed,
-        AstronautMessage
+        //AstronautMessage
     },
     setup() {
         const router = useRouter();

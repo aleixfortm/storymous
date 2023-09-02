@@ -4,23 +4,22 @@
     <div>
         <div :class="outlineClass">
             <span>
-                <div class="origin-container" @click="navigateToPost">
-                    <div v-if="chapterNum === 0" class="origin">Started "<span style="font-weight: bold;">{{ story_name }}</span>"</div>
-                    <div v-else class="origin">Continued "<span style="font-weight: bold;">{{ story_name }}</span>"</div>
-                </div>
-                <div class="story__user-container" @click="navigateToPost">
-                    <div class="story__user-img-container">
-                        <span @click.stop="navigateToUser">
-                            <img :src="imgSource" v-if="picture" alt="pic" class="story__user-img">
-                        </span>
-                    </div> 
-                    <div class="story__user-info-container">
-                        <div class="story__user-comment-container"><div class="story__user-comment cur-def"> {{ postComment }} </div></div>
-                        <div class="story__username cur-pnt"> 
+                <div class="post-top-data-container">
+
+                    <div class="story__user-container" @click="navigateToPost">
+                        <div class="story__user-img-container">
                             <span @click.stop="navigateToUser">
-                                <span class="lower" style="color: whitesmoke;"><b>@</b></span><b class="story__user-name">{{ username }}</b>
+                                <img :src="imgSource" v-if="picture" alt="pic" class="story__user-img">
                             </span>
-                                <span class="story__username-date lower cur-def">· {{ date }} </span>
+                        </div> 
+                        <div class="story__user-info-container">
+                            <div class="story__user-comment-container"><div class="story__user-comment cur-def"> {{ postComment }} </div></div>
+                            <div class="story__username cur-pnt"> 
+                                <span @click.stop="navigateToUser">
+                                    <span class="lower" style="color: whitesmoke;"><b>@</b></span><b class="story__user-name">{{ username }}</b>
+                                </span>
+                                    <span class="story__username-date lower cur-def">· {{ date }} </span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -32,10 +31,9 @@
                     <div class="tag-section">
                         <post-tag v-for="tag in tags" :key="tag" :clickable="false" :tag="tag"></post-tag>
                     </div>
-                    <p class="story__content">
-                        {{ formatStory(content) }}
-                        <b v-if="feedMode && checkLength" class="readmore-button"><em>Read more</em></b>
-                    </p>
+                    <div class="story__content">
+                        <div class="story__content-text">{{ formatStory(content) }}</div>
+                    </div>
                 </article>
     
                 <div class="story-stats user-select-none">
@@ -82,7 +80,7 @@ export default {
         formatStory(story) {
             const formattedStory = story.replace(/<br>/g, '\n')
             if (formattedStory.length > 700 && this.feedMode) {
-                return formattedStory.substring(0, 700) + '...';
+                return formattedStory.substring(0, 700);
             }
             return formattedStory
         },
@@ -155,6 +153,16 @@ export default {
 </script>
 
 <style scoped>
+.post-top-data-container {
+    padding: 5px 10px 0 10px;
+    background-color: rgba(148, 148, 148, 0.103);
+    transition: 0.3s all;
+}
+
+.post-top-data-container:hover {
+    
+    background-color: rgba(143, 143, 143, 0.062);
+}
 .icon-text-icon {
     font-size: 15px;
     color: rgb(187, 187, 187);
@@ -252,19 +260,19 @@ export default {
 .story-stats {
     display: flex;
     color: whitesmoke;
-    margin: -2px 0px 1px 2px;
+    margin: 0px;
     justify-content: flex-start;
+    height: 30px;
     width: 100%;
-    transition: 0.3s all;
+    transition: 0.1s all;
 }
 
 .story-stats-section {
     display: flex;
     align-items: center;
     font-size: 13px;
-    margin: 0 6px;
     font-family: monospace;
-    padding: 1px 6px 1px 1px;
+    padding: 2px 12px 2px 6px;
 }
 
 .story-stats-section:hover {
@@ -283,9 +291,9 @@ export default {
     background-color: bisque;
     color: black;
     border-radius: 2px;
-    padding: 0 3px;
+    padding: 0px 2px;
     margin-right: 10px;
-    font-size: 17px;
+    font-size: 16px;
 }
 
 .story__upper {
@@ -296,7 +304,7 @@ export default {
 
 .story__title {
     color: bisque;
-    font-size: 17px;
+    font-size: 16px;
     align-self: center;
     justify-self: center;
     margin: 0px 0px 0px 0px;
@@ -304,23 +312,21 @@ export default {
 }
 
 .origin {
-    background-color: rgba(160, 160, 160, 0.247);
+    background-color: rgba(215, 215, 215, 0.062);
     color: rgb(255, 255, 255);
-    font-size: 14px;
+    font-size: 13px;
     padding: 0px 3px;
     border-radius: 1px;
     width: fit-content;
-    box-shadow: 0px 0px 2px rgba(128, 128, 128, 0.568);
 }
 
 .origin-container {
     display: flex;
     justify-content: flex-start;
-    margin: 2px 5px 0 5px;
 }
 
 .story__article {
-    padding: 0px 10px 5px 10px;
+    padding: 4px 10px 5px 10px;
     border-radius: 2px;
     cursor: pointer;
     transition: all 0s;
@@ -330,12 +336,15 @@ export default {
 
 .outline {
     margin-top: 12px;
-    padding: 5px 4px 4px 4px;
+    /*padding: 5px 4px 4px 4px;*/
     height: fit-content;
     width: 100%;
     border-radius: 5px;
     border: 1px rgba(255, 255, 255, 0.151) solid;
     background-color: rgba(60, 60, 63, 0.425);
+    background-color: rgba(37, 37, 39, 0.425);
+    background-color: rgba(52, 52, 54, 0.425);
+    background-color: rgba(39, 39, 39, 0.788);
     font-family: inherit;
     transition: 0.2s all;
 }
@@ -346,9 +355,9 @@ export default {
 }
 
 .story__user-container {
-    padding: 6px 5px 3px 5px;
     display: flex;
     flex-direction: row;
+    padding: 2px 0px 0px 0;
 }
 
 .story__user-img-container {
@@ -385,10 +394,20 @@ export default {
 
 
 .story__content {
-    text-align: left;
-    margin: 2px 0;
-    font-family: monospace;
-    white-space: pre-wrap;
+  position: relative;
+  display: inline-block;
+}
+
+.story__content-text {
+  text-align: left;
+  margin: 2px 0;
+  font-family: monospace;
+  font-size: 15px;
+  white-space: pre-wrap;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 55%, transparent);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent; /* Make the text transparent */
 }
 
 .readmore-button {
@@ -403,8 +422,8 @@ export default {
 
 .story__username-date {
     margin: 0 0 0 5px;
-    font-size: 14px;
-    color: whitesmoke;
+    font-size: 13px;
+    color: rgba(245, 245, 245, 0.774);
     font-weight: normal;
 }
 
@@ -420,6 +439,7 @@ export default {
 
 .story__username {
     margin: 5px 0px;
+    font-size: 14px;
 }
 
 .story__user-img {

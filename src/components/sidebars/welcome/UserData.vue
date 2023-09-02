@@ -89,6 +89,11 @@ export default {
   height: 35px;
   width: auto;
   border-radius: 100%;
+  transition: 0.2s all;
+}
+
+.userimg:hover {
+  filter: brightness(80%);
 }
 
 .userdata {

@@ -70,7 +70,7 @@ export default {
     padding: 8px;
     border-radius: 4px;
     border: 1px rgba(255, 255, 255, 0.247) solid;
-    background-color: rgba(43, 43, 46, 0.671);
+    background-color: rgba(39, 39, 39, 0.788);
     transition: 0.2s all;
 }
 
