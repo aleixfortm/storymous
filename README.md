@@ -68,14 +68,13 @@
 - [x] Welcome page (logged out)
   - [x] Explore feed
   - [x] Welcome message  
-- [ ] Home page
+- [x] Home page
   - [x] Latest / Following feed selector
-  - [ ] Top section
+  - [x] Top section
     - [x] Top image
-    - [ ] General stats section
-      - [ ] Most active authors
-      - [ ] Most visited / liked stories
-      - [ ] Longest storyline
+    - [x] General stats section
+      - [x] Most visited stories
+      - [x] Most popular authors
   - [x] Start new story option
 - [x] Theme
   - [x] Huge amount of cool astronauts
@@ -95,18 +94,13 @@
   - [x] User posts feed
   - [x] Responsive user profile box
   - [x] Specific data visualization upon stat hover (e.g. show name of followers)
-- [ ] Story page
+- [x] Story page
   - [x] Includes prologue
   - [x] Option to mount chapters on current storyline
   - [x] Option to write new chapter on current storyline
   - [x] Option to write comment on story post
   - [x] Comments and continued chapters feed
   - [x] Option for filtering comments / continued stories
-  
-## Database structure
-<p align="center">
-  <img src="https://github.com/aleixfortm/storymous/assets/95043218/e68b8a81-e2aa-419a-8f48-18f271c51a59" alt="database" width="600" height="auto">
-</p>
 
 
 ## Known bugs 
@@ -119,33 +113,6 @@
 - [x] <code>Solved!</code> If JWT token expires, user will still be able to be logged in, but requests to API won't work. Solve by checking expiration status of JWT on every request and log out if expired.
 - [x] <code>Solved!</code> User profile box is not fully responsive, and screens smaller than 400px display a bit eerie. Not urgent fix.
 
-
-
-
-
-
-## Project setup
-```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ## License
 This project is licensed under the Apache License - read the [LICENSE](https://www.apache.org/licenses/LICENSE-2.0) file for details.
