@@ -29,7 +29,7 @@
           </div>
         </span>
         <template v-else>
-          <load-container v-for="i in 6" :key="i"></load-container>
+          <load-container v-for="i in 7" :key="i"></load-container>
         </template>
     </feed-container>
 </template>
