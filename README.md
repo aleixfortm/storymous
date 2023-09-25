@@ -65,7 +65,7 @@
 - 🔥 More to come!
 
 ## Roadmap 
-- [x] Welcome page (logged out)
+- [x] Welcome page
   - [x] Explore feed
   - [x] Welcome message  
 - [x] Home page
