@@ -14,15 +14,6 @@
 </p>
 <br>
 
-
-<div align="center">
-  <a href="https://ko-fi.com/G2G7NPEM9" target="_blank">
-    <img src="https://ko-fi.com/img/githubbutton_sm.svg" alt="ko-fi" />
-  </a>
-</div>
-
-<p align="center"><strong>Time for a coffee? Help me maintain the infrastructure cost of this project!</strong></p>
-
 ## Preview 
 
 ###  **<p align="center">Explore stories form the community</p>**
